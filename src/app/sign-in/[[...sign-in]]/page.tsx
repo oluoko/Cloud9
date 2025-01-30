@@ -8,7 +8,7 @@ const SignInPage = () => {
         <SignIn />
       </div>
       <div className="hidden md:flex w-2/3">
-        <AuthImage textColor="slate-300" />
+        <AuthImage />
       </div>
     </div>
   );

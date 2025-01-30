@@ -1,6 +1,6 @@
 import { BrandLogo } from "./BrandLogo";
 
-export function AuthImage({ textColor }) {
+export function AuthImage() {
   return (
     <div className={""}>
       <BrandLogo />
