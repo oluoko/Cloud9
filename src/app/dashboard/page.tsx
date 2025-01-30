@@ -1,3 +1,3 @@
-export default function DashboardHome() {
-  return <div className="">Dashboard Home</div>;
+export default function Home() {
+  return <div className="">Home</div>;
 }

@@ -1,12 +1,13 @@
-import { ModeToggle } from "@/components/dark-mode-toggel";
+import { Hero } from "@/components/Hero";
+import { NavBar } from "@/components/NavBar";
 
 export default function Home() {
   return (
-    <div className="">
-      <div className="">
-        <ModeToggle />
+    <>
+      <NavBar />
+      <div className="w-screen">
+        <Hero />
       </div>
-      Home
-    </div>
+    </>
   );
 }
