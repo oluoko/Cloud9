@@ -58,3 +58,22 @@
     --chart-5: 340 75% 55%;
   }
 }
+
+/* scrollbar*/
+*::-webkit-scrollbar {
+  width: 7px;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 15px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-foreground);
+}
