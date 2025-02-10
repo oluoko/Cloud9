@@ -61,19 +61,18 @@
 
 /* scrollbar*/
 *::-webkit-scrollbar {
-  width: 7px;
-  background: transparent;
+  width: 4px;
 }
 
 *::-webkit-scrollbar-track {
-  background: transparent;
+  background: inherit;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
+  background-color: #22c55e;
   border-radius: 15px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-foreground);
+  background: #00ff5e;
 }
