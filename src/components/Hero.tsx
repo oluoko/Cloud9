@@ -24,7 +24,7 @@ export function Hero() {
       </SignedIn>
       <SignedOut>
         <SignInButton>
-          <Button className="text-lg p-6 rounded-xl flex gap-2">
+          <Button className="text-lg p-6 rounded-xl flex gap-2 w-[80vw] md:w-auto">
             Get Started
             <ArrowRightIcon className="size-5" />
           </Button>
