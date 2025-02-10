@@ -76,3 +76,10 @@
 *::-webkit-scrollbar-thumb:hover {
   background: #00ff5e;
 }
+
+.unselectable, img, Image {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
