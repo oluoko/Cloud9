@@ -1,9 +1,10 @@
 import { AuthImage } from "@/components/AuthImage";
+import { BrandLogo } from "@/components/BrandLogo";
 import { SignUp } from "@clerk/nextjs";
 
 const SignUpPage = () => {
   return (
-    <div className="flex justify-between h-screen w-screen ">
+    <div className="flex justify-between h-screen w-screen overflow-x-hidden">
       <div className="hidden md:flex w-3/5 flex-col items-center justify-center">
         <AuthImage
           containerStyling=""
@@ -14,6 +15,7 @@ const SignUpPage = () => {
         />
       </div>
       <div className="flex flex-col justify-center items-center w-full md:w-2/5">
+        <BrandLogo styling="md:hidden h-[45px] md:h-[70px] w-[90px] md:w-[140px]" />
         <SignUp afterSignUpUrl="/new-user" redirectUrl="/new-user" />
       </div>
     </div>
