@@ -55,22 +55,25 @@ const Footer = () => {
     { href: "https://x.com/@oluoko_", label: "Twitter", icon: FaXTwitter },
   ];
   return (
-    <div className="w-full h-[270px] md:h-[350px] bg-black text-slate-400/80 p-2 md:px-10 flex flex-col justify-center items-center">
-      <div className="grid grid-cols-2 lg:grid-cols-4 w-full h-10/12">
+    <div className="w-full py-5 md:py-[120px] bg-black text-slate-400/80 p-2 md:px-10 flex flex-col justify-center items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-4 w-full h-10/12">
         <div className="grid my-4 md:my-2 mx-3 md:mx-6 content-start h-full">
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 grid ">
             <span>
-              <Image src={logoImage} alt="logo image" className="size-[70px]" />
-            </span>
-            <span className="text-sm md:text-base text-white/60">
-              Beyond Expectations.
+              <Image
+                src={logoImage}
+                alt="logo image"
+                className="size-[40vw] md:size-[150px]"
+              />
             </span>
           </h3>
 
           <span className=" text-xs">
             Copyrights © 2024 Cloud
-            <span className="text-primary text-xl font-black">9</span>. All
-            Rights Reserved
+            <span className="text-primary text-lg md:text-xl font-black">
+              9
+            </span>
+            . All Rights Reserved
           </span>
         </div>
 
@@ -97,12 +100,15 @@ const Footer = () => {
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 ">
             Write to our email:
           </h3>
-          <p className="mb-2">For any inquiries or feedback write to us at:</p>
-          <a href="mailto:brianotieno586@gmail.com" className="mb-2">
-            <span className="text-white hover:text-primary">
-              cloudnine@gmail.com
-            </span>
-          </a>
+          <p className="mb-2">
+            For any inquiries or feedback write to us at:{" "}
+            <a href="mailto:brianotieno586@gmail.com" className="mb-2">
+              <span className="text-white hover:text-primary">
+                cloudnine@gmail.com
+              </span>
+            </a>
+          </p>
+
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 ">
             Quick Access
           </h3>
@@ -123,7 +129,7 @@ const Footer = () => {
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 ">
             Created by:
           </h3>
-          <p className="mb-2">
+          <p className="mb-2 ">
             Reach out to the developer of this site for any queries or
             suggestions.
           </p>
