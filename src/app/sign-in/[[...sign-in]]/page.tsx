@@ -9,7 +9,7 @@ const SignInPage = () => {
         <BrandLogo styling="md:hidden h-[45px] md:h-[70px] w-[90px] md:w-[140px]" />
         <SignIn />
       </div>
-      <div className="hidden md:flex flex-col items-center justify-centerw-2/3">
+      <div className="hidden md:flex flex-col items-center justify-center w-2/3">
         <AuthImage
           containerStyling=""
           heading="Welcome Back to Cloud9"
