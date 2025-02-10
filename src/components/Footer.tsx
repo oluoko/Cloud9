@@ -8,7 +8,7 @@ import {
   FaGithub,
   FaLinkedin,
 } from "react-icons/fa6";
-import logoImage from "../../public/assets/logo gif black text.gif";
+import logoImage from "../../public/assets/logo gif white text.gif";
 
 const Footer = () => {
   const socials = [
