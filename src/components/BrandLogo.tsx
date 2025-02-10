@@ -11,7 +11,7 @@ interface BrandLogoProps {
 }
 
 export function BrandLogo({ styling }: BrandLogoProps) {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   // useEffect only runs on the client, so now we can safely show the UI
@@ -26,7 +26,7 @@ export function BrandLogo({ styling }: BrandLogoProps) {
 
   return (
     <div className={`${styling}`}>
-      {theme === "dark" ? (
+      {resolvedTheme === "dark" ? (
         <Image
           src={logoWhiteText}
           className="size-full"
