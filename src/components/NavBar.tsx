@@ -4,6 +4,13 @@ import { BrandLogo } from "./BrandLogo";
 import { ModeToggle } from "./dark-mode-toggel";
 import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import { isAdmin } from "@/lib/isAdmin";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu } from "lucide-react";
 
 export function NavBar() {
   const { user } = useUser();
@@ -15,21 +22,31 @@ export function NavBar() {
         </Link>
         <div className="flex items-center justify-between  gap-5">
           <SignedIn>
-            <Link
-              href="/dashboard"
-              className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1"
-            >
-              Dashboard
-            </Link>
-
-            {isAdmin(user) && (
-              <Link
-                href="/admin-dashboard"
-                className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1"
-              >
-                Admin
-              </Link>
-            )}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="focus:outline-none">
+                <Menu className="size-6" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/dashboard"
+                    className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1"
+                  >
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  {isAdmin(user) && (
+                    <Link
+                      href="/admin-dashboard"
+                      className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1"
+                    >
+                      Admin
+                    </Link>
+                  )}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             <UserButton />
           </SignedIn>
