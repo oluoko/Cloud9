@@ -4,7 +4,7 @@
 //   user: UserResource | null | undefined;
 // };
 import type { User } from "@clerk/nextjs/server";
-export function isAdmin(user: User) {
+export function isAdmin(user: User | null | undefined) {
   if (
     user?.publicMetadata?.role === "admin" ||
     user?.publicMetadata?.role === "main_admin"
@@ -13,8 +13,8 @@ export function isAdmin(user: User) {
   }
 }
 
-export function isMainAdmin(user: User) {
-  if (user.publicMetadata.role === "main_admin") {
+export function isMainAdmin(user: User | null | undefined) {
+  if (user?.publicMetadata.role === "main_admin") {
     return true;
   }
 }
