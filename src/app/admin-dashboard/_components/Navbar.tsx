@@ -7,6 +7,7 @@ import { ModeToggle } from "@/components/dark-mode-toggel";
 
 export function NavBar() {
   const navbarLinks = [
+    { id: 0, name: "Dashboard", href: "/admin-dashboard" },
     { id: 0, name: "Bookings", href: "/admin-dashboard/bookings" },
     { id: 1, name: "Flights", href: "/admin-dashboard/flights" },
     { id: 3, name: "Users", href: "/admin-dashboard/users" },
