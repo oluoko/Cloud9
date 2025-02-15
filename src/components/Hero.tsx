@@ -16,7 +16,7 @@ export function Hero() {
       </p>
       <SignedIn>
         <Link href="/dashboard">
-          <Button className="text-xl md:text-3xl w-[90vw] md:w-[70vw] p-6 rounded-xl flex gap-2">
+          <Button className="text-xl md:text-3xl w-[90vw] md:w-auto p-6 rounded-xl flex gap-2">
             Book a Flight
             <ArrowRightIcon className="size-10 mr-4" />
           </Button>
