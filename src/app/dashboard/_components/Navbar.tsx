@@ -9,8 +9,10 @@ import { isAdmin } from "@/lib/isAdmin";
 export function NavBar() {
   const { user } = useUser();
   const navbarLinks = [
-    { id: 0, name: "Dashboard", href: "/dashboard" },
-    { id: 1, name: "Profile", href: "/profile" },
+    { id: 0, name: "Home", href: "/dashboard" },
+    { id: 1, name: "Profile", href: "/dashboard/profile" },
+    { id: 2, name: "Bookings", href: "/dashboard/bookings" },
+    { id: 3, name: "Checkout", href: "/dashboard/check-out" },
   ];
   return (
     <header className="flex items-center justify-center py-1 fixed shadow-xl top-0 w-screen z-99 bg-background/90">
