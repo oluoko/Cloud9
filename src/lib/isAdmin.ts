@@ -1,4 +1,10 @@
-export function isAdmin(user) {
+// import { UserResource } from "@clerk/types";
+
+// type Props = {
+//   user: UserResource | null | undefined;
+// };
+import type { User } from "@clerk/nextjs/server";
+export function isAdmin(user: User) {
   if (
     user?.publicMetadata?.role === "admin" ||
     user?.publicMetadata?.role === "main_admin"
@@ -7,7 +13,7 @@ export function isAdmin(user) {
   }
 }
 
-export function isMainAdmin(user) {
+export function isMainAdmin(user: User) {
   if (user.publicMetadata.role === "main_admin") {
     return true;
   }
