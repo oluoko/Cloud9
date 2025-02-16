@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Plane, Send, Loader2, Cloud, MapPin } from "lucide-react";
+import { Loader2, Cloud, MapPin } from "lucide-react";
 import { FaPlane, FaCloud } from "react-icons/fa";
 
 interface AirlineLoaderProps {
