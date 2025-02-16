@@ -64,7 +64,12 @@ export function NavBar() {
               <DropdownMenuContent align="end">
                 {navbarLinks.map((link) => (
                   <DropdownMenuItem key={link.id} asChild>
-                    <Link href={link.href}>{link.name}</Link>
+                    <Link
+                      href={link.href}
+                      className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1 my-1 md:my-0"
+                    >
+                      {link.name}
+                    </Link>
                   </DropdownMenuItem>
                 ))}
                 {isAdmin(user) && (
