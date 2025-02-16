@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <div className="">
+      <div className="overflow-hidden">
         <Hero />
         <Footer />
       </div>

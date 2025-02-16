@@ -55,7 +55,7 @@ const Footer = () => {
     { href: "https://x.com/@oluoko_", label: "Twitter", icon: FaXTwitter },
   ];
   return (
-    <div className="w-full py-5 md:py-[120px] bg-black text-slate-400/80 p-2 md:px-10 flex flex-col justify-center items-center">
+    <div className="w-screen overflow-hidden py-5 md:py-[120px] bg-black text-slate-400/80 p-2 md:px-10 flex flex-col justify-center items-center">
       <div className="grid grid-cols-1 lg:grid-cols-4 w-full h-10/12">
         <div className="grid my-4 md:my-2 mx-3 md:mx-6 content-start h-full">
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 grid ">
