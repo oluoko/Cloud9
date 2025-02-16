@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader";
 import { prisma } from "@/utils/db";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -32,7 +33,12 @@ const createNewUser = async () => {
 
 const NewUser = async () => {
   await createNewUser();
-  return <div className="text-3xl flex">...loading</div>;
+  return (
+    <Loader
+      mainText="We are adding your information to our database"
+      subText="Please wait"
+    />
+  );
 };
 
 export default NewUser;
