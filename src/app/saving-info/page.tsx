@@ -21,9 +21,9 @@ const createNewUser = async () => {
         id: user.id,
         clerkUserId: user.id,
         email: user?.emailAddresses[0].emailAddress,
-        firstName: user.firstName ?? "",
-        lastName: user.lastName ?? "",
-        profileImage: user.imageUrl,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        profileImage: user?.imageUrl,
       },
     });
   }

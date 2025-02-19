@@ -51,7 +51,7 @@ export function NavBar() {
             <UserButton />
           </SignedIn>
           <SignedOut>
-            <Link href="/new-user">
+            <Link href="/sign-up">
               <span className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1">
                 Get Started
               </span>
