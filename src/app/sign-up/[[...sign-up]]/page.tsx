@@ -31,7 +31,7 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<ClerkAPIError[]>();
   const [authStage, setAuthStage] = useState<
-    "initial" | "registering" | "verifying" | "redirecting"
+    "initial" | "redirecting" | "registering" | "verifying"
   >("initial");
 
   const router = useRouter();
@@ -106,9 +106,7 @@ export default function SignUpPage() {
       console.error(JSON.stringify(err, null, 2));
       setAuthStage("initial");
     } finally {
-      if (authStage !== "redirecting") {
-        setIsLoading(false);
-      }
+      setIsLoading(false);
     }
   };
 
