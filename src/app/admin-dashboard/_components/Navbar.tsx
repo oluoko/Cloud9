@@ -50,7 +50,7 @@ export function NavBar() {
                     <DropdownMenuItem key={link.id} asChild>
                       <Link
                         href={link.href}
-                        className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1"
+                        className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1 my-1"
                       >
                         {link.name}
                       </Link>
