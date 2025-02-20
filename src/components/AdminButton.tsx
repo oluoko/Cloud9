@@ -10,6 +10,8 @@ export default function AdminButton() {
   const { user } = useUser();
   const [textState, setTextState] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [displayText, setDisplayText] = useState("");
 
   const textStates = [
     "Go to the Administration Dashboard",
@@ -26,6 +28,16 @@ export default function AdminButton() {
       return () => clearInterval(interval);
     }
   }, [isHovered]);
+
+  useEffect(() => {
+    setIsTransitioning(true);
+    const timer = setTimeout(() => {
+      setDisplayText(isHovered ? textStates[0] : textStates[textState]);
+      setIsTransitioning(false);
+    }, 500); // This should match the transition duration
+
+    return () => clearTimeout(timer);
+  }, [textState, isHovered]);
 
   const getButtonWidth = () => {
     switch (textState) {
@@ -57,12 +69,14 @@ export default function AdminButton() {
     <div className="fixed bottom-10 left-10 z-50">
       <Link href="/admin-dashboard" className="block">
         <Button
-          className={`transition-all duration-500 ease-in-out origin-left  font-bold ${getButtonWidth()}`}
+          className={`transition-all duration-500 ease-in-out origin-left font-bold ${getButtonWidth()} ${
+            isTransitioning ? "text-transparent" : "text-white"
+          }`}
           onMouseEnter={handleHover}
           onMouseLeave={handleMouseLeave}
           onClick={handleHover}
         >
-          {isHovered ? textStates[0] : textStates[textState]}
+          {displayText}
         </Button>
       </Link>
     </div>
