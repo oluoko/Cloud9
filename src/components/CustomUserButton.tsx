@@ -46,7 +46,7 @@ const CustomUserButton = async () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuLabel className="flex flex-col space-y-1">
+        <DropdownMenuLabel className="flex flex-col space-y-1 p-3">
           <p className="text-sm font-medium leading-none">
             {dbUser?.firstName
               ? `${dbUser?.firstName} ${dbUser?.lastName}`
@@ -58,13 +58,10 @@ const CustomUserButton = async () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/profile">
-            <p className="text-sm font-medium leading-none">
-              {dbUser?.firstName ? `${dbUser?.firstName}'s Profile` : "Profile"}
-            </p>
+          <Link href="/profile" className="text-sm font-medium leading-none">
+            {dbUser?.firstName ? `${dbUser?.firstName}'s Profile` : "Profile"}
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuItem asChild>
           <SignOutButton>
             <div className="w-full">Logout</div>
