@@ -53,7 +53,7 @@ export function NavBar() {
           </SignedIn>
           <SignedOut>
             <Link href="/sign-up">
-              <span className="bg-primary border border-secondary rounded-[10px] px-2 py-1">
+              <span className="bg-primary hover:bg-primary/80 text-background border border-secondary rounded-[10px] px-2 py-1">
                 Get Started
               </span>
             </Link>
