@@ -66,7 +66,7 @@ export default function AdminButton() {
   }
 
   return (
-    <div className="fixed bottom-10 left-10 z-50">
+    <div className="fixed bottom-5 md:bottom-10 left-5 md:left-10 z-50">
       <Link href="/admin-dashboard" className="block">
         <Button
           className={`transition-all duration-500 ease-in-out origin-left font-bold ${getButtonWidth()} ${
