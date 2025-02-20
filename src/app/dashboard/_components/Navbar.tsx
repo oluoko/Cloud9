@@ -1,10 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { UserButton, useUser } from "@clerk/nextjs";
 import { BrandLogo } from "@/components/BrandLogo";
 import { ModeToggle } from "@/components/dark-mode-toggel";
-import { isAdmin } from "@/lib/isAdmin";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +8,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
+import CustomUserButton from "@/components/CustomUserButton";
 
 export function NavBar() {
-  const { user } = useUser();
   const navbarLinks = [
     { id: 0, name: "Home", href: "/dashboard" },
     { id: 1, name: "Profile", href: "/dashboard/profile" },
@@ -38,19 +34,10 @@ export function NavBar() {
                 {link.name}
               </Link>
             ))}
-
-            {isAdmin(user) && (
-              <Link
-                href="/admin-dashboard"
-                className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1"
-              >
-                Admin
-              </Link>
-            )}
           </div>
 
           <div className="flex items-center gap-4">
-            <UserButton />
+            <CustomUserButton />
 
             <div className="">
               <ModeToggle />
@@ -72,11 +59,6 @@ export function NavBar() {
                     </Link>
                   </DropdownMenuItem>
                 ))}
-                {isAdmin(user) && (
-                  <DropdownMenuItem asChild>
-                    <Link href="/admin-dashboard">Admin</Link>
-                  </DropdownMenuItem>
-                )}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
