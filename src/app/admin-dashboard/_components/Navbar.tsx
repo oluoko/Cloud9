@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
 import CustomUserButton from "@/components/CustomUserButton";
-import CustomUserButtonWrapper from "@/components/CustomButtonWrapper";
 
 export function NavBar() {
   const navbarLinks = [
@@ -39,7 +38,7 @@ export function NavBar() {
             ))}
           </div>
           <div className="flex items-center gap-4">
-            <CustomUserButtonWrapper />
+            <CustomUserButton />
 
             <div className="">
               <ModeToggle />
