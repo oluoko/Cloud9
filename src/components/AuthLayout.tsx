@@ -60,16 +60,7 @@ const AuthLayout = ({ children, mode }: AuthLayoutProps) => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className={`text-2xl font-bold mb-4
-              ${
-                resolvedTheme === "dark"
-                  ? isSignIn
-                    ? "text-background"
-                    : "text-primary"
-                  : isSignIn
-                  ? "text-primary"
-                  : "text-background"
-              }`}
+            className={`text-2xl font-bold mb-4 text-background`}
           >
             {isSignIn ? "Welcome Back!" : "Join Our Community"}
           </motion.div>
@@ -78,16 +69,7 @@ const AuthLayout = ({ children, mode }: AuthLayoutProps) => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className={`text-lg max-w-md
-              ${
-                resolvedTheme === "dark"
-                  ? isSignIn
-                    ? "text-background/90"
-                    : "text-primary/90"
-                  : isSignIn
-                  ? "text-primary/90"
-                  : "text-background/90"
-              }`}
+            className={`text-lg max-w-md text-background/85`}
           >
             {isSignIn
               ? "Secure access to your Cloud9 account. Let's continue your journey together."

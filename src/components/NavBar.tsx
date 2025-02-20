@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import CustomUserButton from "./CustomUserButton";
 
@@ -33,9 +34,12 @@ export function NavBar() {
           </SignedIn>
           <SignedOut>
             <Link href="/sign-up">
-              <span className="bg-secondary/50 border border-secondary rounded-[10px] px-2 py-1">
+              <span className="bg-primary hover:bg-primary/80 text-background border border-secondary rounded-[10px] px-2 py-1">
                 Get Started
               </span>
+            </Link>
+            <Link href="/sign-in">
+              <Button variant="outline" className="rounded-[10px] px-2 py-1">Sign In</Button>
             </Link>
           </SignedOut>
           <div className="">
