@@ -58,7 +58,7 @@ export function NavBar() {
               </span>
             </Link>
             <Link href="/sign-in">
-              <Button asChild variant="outline">Sign In</Button>
+              <Button variant="outline" className="rounded-[10px] px-2 py-1">Sign In</Button>
             </Link>
           </SignedOut>
           <div className="">
