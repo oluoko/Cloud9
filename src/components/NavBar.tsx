@@ -21,6 +21,9 @@ export function NavBar() {
               Dashboard
             </Link>
             <CustomUserButton />
+            <div className="">
+              <ModeToggle />
+            </div>
           </SignedIn>
           <SignedOut>
             <Link href="/sign-up">
@@ -32,9 +35,6 @@ export function NavBar() {
               </Button>
             </Link>
           </SignedOut>
-          <div className="">
-            <ModeToggle />
-          </div>
         </div>
       </nav>
     </header>
