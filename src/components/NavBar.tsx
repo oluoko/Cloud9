@@ -24,9 +24,7 @@ export function NavBar() {
           </SignedIn>
           <SignedOut>
             <Link href="/sign-up">
-              <span className="bg-primary hover:bg-primary/80 text-background border border-secondary rounded-[10px] px-2 py-1">
-                Get Started
-              </span>
+              <Button className=" rounded-[10px] px-2 py-1">Get Started</Button>
             </Link>
             <Link href="/sign-in">
               <Button variant="outline" className="rounded-[10px] px-2 py-1">
