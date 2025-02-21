@@ -10,8 +10,9 @@ export default function AdminButton() {
   const { user } = useUser();
   const [textState, setTextState] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isTextVisible, setIsTextVisible] = useState(true);
   const [displayText, setDisplayText] = useState("");
+  const [isWidthTransitioning, setIsWidthTransitioning] = useState(false);
 
   const textStates = [
     "Go to the Administration Dashboard",
@@ -30,13 +31,26 @@ export default function AdminButton() {
   }, [isHovered]);
 
   useEffect(() => {
-    setIsTransitioning(true);
-    const timer = setTimeout(() => {
-      setDisplayText(isHovered ? textStates[0] : textStates[textState]);
-      setIsTransitioning(false);
-    }, 500); // This should match the transition duration
+    const handleTextTransition = async () => {
+      // Phase 1: Fade out text
+      setIsTextVisible(false);
 
-    return () => clearTimeout(timer);
+      // Wait for text to fade out
+      await new Promise((resolve) => setTimeout(resolve, 150));
+
+      // Phase 2: Start width transition
+      setIsWidthTransitioning(true);
+      setDisplayText(isHovered ? textStates[0] : textStates[textState]);
+
+      // Wait for width transition
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Phase 3: Show new text
+      setIsWidthTransitioning(false);
+      setIsTextVisible(true);
+    };
+
+    handleTextTransition();
   }, [textState, isHovered]);
 
   const getButtonWidth = () => {
@@ -69,14 +83,23 @@ export default function AdminButton() {
     <div className="fixed bottom-10 left-10 z-50">
       <Link href="/admin-dashboard" className="block">
         <Button
-          className={`transition-all duration-500 ease-in-out origin-left font-bold ${getButtonWidth()} ${
-            isTransitioning ? "text-transparent" : "text-white"
-          }`}
+          className={`
+            transition-all duration-500 ease-in-out origin-left font-bold
+            ${getButtonWidth()}
+            ${isWidthTransitioning ? "overflow-hidden" : ""}
+          `}
           onMouseEnter={handleHover}
           onMouseLeave={handleMouseLeave}
           onClick={handleHover}
         >
-          {displayText}
+          <span
+            className={`
+              transition-opacity duration-150 ease-in-out block
+              ${isTextVisible ? "opacity-100" : "opacity-0"}
+            `}
+          >
+            {displayText}
+          </span>
         </Button>
       </Link>
     </div>
