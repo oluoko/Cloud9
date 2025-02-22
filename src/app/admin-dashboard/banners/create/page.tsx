@@ -112,7 +112,7 @@ export default function CreateBanner() {
                 />
                 <p className="text-red-500">{fields.description.errors}</p>
               </div>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="md:grid md:grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2 border-dashed border-2 border-gray-300 p-2 md:p-4 rounded-lg">
                   <Label className="text-xl font-bold">
                     Large Screen Image
