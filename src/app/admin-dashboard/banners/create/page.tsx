@@ -112,9 +112,11 @@ export default function CreateBanner() {
                 />
                 <p className="text-red-500">{fields.description.errors}</p>
               </div>
-              <div className="md:grid md:grid-cols-2 gap-2">
-                <div className="flex flex-col gap-2">
-                  <Label>Large Screen Image</Label>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex flex-col gap-2 border-dashed border-2 border-gray-300 p-2 md:p-4 rounded-lg">
+                  <Label className="text-xl font-bold">
+                    Large Screen Image
+                  </Label>
                   <input
                     type="hidden"
                     value={largeImage}
@@ -142,7 +144,7 @@ export default function CreateBanner() {
                       </button>
                     </div>
                   ) : (
-                    <UploadDropzone
+                    <UploadButton
                       endpoint="bannerImageRoute"
                       onClientUploadComplete={(res) => {
                         setLargeImage(res[0].url);
@@ -163,8 +165,10 @@ export default function CreateBanner() {
                   )}
                   <p className="text-red-500">{fields.largeImageUrl.errors}</p>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Small Screen Image</Label>
+                <div className="flex flex-col gap-2 border-dashed border-2 border-gray-300 p-2 md:p-4 rounded-lg">
+                  <Label className="text-xl font-bold">
+                    Small Screen Image
+                  </Label>
                   <input
                     type="hidden"
                     value={smallImage}
