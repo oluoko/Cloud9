@@ -1,6 +1,7 @@
 "use client";
 
 import { createBanner } from "@/app/actions";
+import { SubmitButton } from "@/components/CustomButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { bannerSchema } from "@/lib/zodSchemas";
-import { UploadDropzone } from "@/utils/uploadthing";
+import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { ChevronLeft, XIcon } from "lucide-react";
@@ -122,7 +123,7 @@ export default function CreateBanner() {
                     defaultValue={fields.largeImageUrl.initialValue}
                   />
                   {largeImage !== undefined ? (
-                    <div className="relative size-[140px] md:size-[200px]">
+                    <div className="relative w-[170px] h-[95px] md:w-[200px] md:h-[120px]">
                       <Image
                         src={largeImage}
                         alt="Banner
@@ -151,12 +152,11 @@ export default function CreateBanner() {
                             "The selected banner image has been uploaded successfully",
                         });
                       }}
-                      onUploadError={() => {
+                      onUploadError={(error: Error) => {
                         toast({
-                          title: "Error Uploading Banner Image",
-                          description:
-                            "There was an error uploading the banner image",
                           variant: "destructive",
+                          title: "Error Uploading Banner Image",
+                          description: `Error! : ${error.message}`,
                         });
                       }}
                     />
@@ -173,13 +173,13 @@ export default function CreateBanner() {
                     defaultValue={fields.smallImageUrl.initialValue}
                   />
                   {smallImage !== undefined ? (
-                    <div className="relative size-[140px] md:size-[200px]">
+                    <div className="relative h-[170px] w-[95px] md:h-[200px] md:w-[120px]">
                       <Image
                         src={smallImage}
                         alt="Banner
                    Image"
-                        height={200}
-                        width={200}
+                        height={350}
+                        width={170}
                         className="w-full h-full object-cover rounded-lg border"
                       />
                       <button
@@ -192,22 +192,21 @@ export default function CreateBanner() {
                       </button>
                     </div>
                   ) : (
-                    <UploadDropzone
+                    <UploadButton
                       endpoint="bannerImageRoute"
                       onClientUploadComplete={(res) => {
-                        setLargeImage(res[0].url);
+                        setSmallImage(res[0].url);
                         toast({
                           title: "Image Uploaded",
                           description:
                             "The selected banner image has been uploaded successfully",
                         });
                       }}
-                      onUploadError={() => {
+                      onUploadError={(error: Error) => {
                         toast({
-                          title: "Error Uploading Banner Image",
-                          description:
-                            "There was an error uploading the banner image",
                           variant: "destructive",
+                          title: "Error Uploading Banner Image",
+                          description: `Error! : ${error.message}`,
                         });
                       }}
                     />
@@ -218,9 +217,7 @@ export default function CreateBanner() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button className="rounded-xl bg-primary border border-gray-800/30 p-2">
-              Create Banner
-            </Button>
+            <SubmitButton text="Create Banner" />
           </CardFooter>
         </Card>
       </form>
