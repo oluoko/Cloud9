@@ -15,31 +15,55 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { bannerSchema } from "@/lib/zodSchemas";
-import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
+import { UploadButton } from "@/utils/uploadthing";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { ChevronLeft, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useFormState } from "react-dom";
 
 export default function CreateBanner() {
   const { toast } = useToast();
-
   const [smallImage, setSmallImage] = useState<string | undefined>(undefined);
   const [largeImage, setLargeImage] = useState<string | undefined>(undefined);
-  const [lastResult, action] = useFormState(createBanner, undefined);
 
+  // Simplified form handling using just Conform
   const [form, fields] = useForm({
-    lastResult,
+    onSubmit: async (event) => {
+      event.preventDefault();
+
+      try {
+        const formData = new FormData(event.currentTarget);
+        const result = await createBanner(formData);
+
+        if (result.success) {
+          toast({
+            title: "Success",
+            description: "Banner created successfully",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            title: "Error",
+            description: result.error || "Failed to create banner",
+          });
+        }
+      } catch (error) {
+        console.error("Form submission error:", error);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "An unexpected error occurred",
+        });
+      }
+    },
     onValidate({ formData }) {
       return parseWithZod(formData, {
         schema: bannerSchema,
       });
     },
     shouldValidate: "onBlur",
-    shouldRevalidate: "onInput",
   });
 
   const handleDeleteImage = (image: "small" | "large") => {
@@ -49,9 +73,10 @@ export default function CreateBanner() {
       setLargeImage(undefined);
     }
   };
+
   return (
     <>
-      <form id={form.id} onSubmit={form.onSubmit} action={action}>
+      <form id={form.id} onSubmit={form.onSubmit}>
         <div className="flex justify-between items-center w-[95vw] md:w-[60vw] mb-4">
           <Link
             href="/admin-dashboard/banners"
@@ -70,7 +95,7 @@ export default function CreateBanner() {
             <CardTitle>Banner Details</CardTitle>
             <CardDescription>
               Create your banner right here. We need two images: one for small
-              screens(phones) and another for large screens(laptops and PCs ).
+              screens(phones) and another for large screens(laptops and PCs).
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -105,7 +130,7 @@ export default function CreateBanner() {
                 <Label>Description</Label>
                 <Input
                   type="text"
-                  name={largeImage}
+                  name={fields.description.name}
                   key={fields.description.key}
                   defaultValue={fields.description.value}
                   placeholder="Enter the description of the banner"
@@ -119,17 +144,15 @@ export default function CreateBanner() {
                   </Label>
                   <input
                     type="hidden"
-                    value={largeImage}
-                    key={fields.largeImageUrl.key}
+                    value={largeImage || ""}
                     name={fields.largeImageUrl.name}
-                    defaultValue={fields.largeImageUrl.initialValue}
+                    key={fields.largeImageUrl.key}
                   />
-                  {largeImage !== undefined ? (
+                  {largeImage ? (
                     <div className="relative w-[170px] h-[95px] md:w-[200px] md:h-[120px]">
                       <Image
                         src={largeImage}
-                        alt="Banner
-                   Image"
+                        alt="Banner Image"
                         height={200}
                         width={200}
                         className="w-full h-full object-cover rounded-lg border"
@@ -171,17 +194,15 @@ export default function CreateBanner() {
                   </Label>
                   <input
                     type="hidden"
-                    value={smallImage}
-                    key={fields.smallImageUrl.key}
+                    value={smallImage || ""}
                     name={fields.smallImageUrl.name}
-                    defaultValue={fields.smallImageUrl.initialValue}
+                    key={fields.smallImageUrl.key}
                   />
-                  {smallImage !== undefined ? (
+                  {smallImage ? (
                     <div className="relative h-[170px] w-[95px] md:h-[200px] md:w-[120px]">
                       <Image
                         src={smallImage}
-                        alt="Banner
-                   Image"
+                        alt="Banner Image"
                         height={350}
                         width={170}
                         className="w-full h-full object-cover rounded-lg border"
@@ -215,13 +236,15 @@ export default function CreateBanner() {
                       }}
                     />
                   )}
-                  <p className="text-red-500">{fields.largeImageUrl.errors}</p>
+                  <p className="text-red-500">{fields.smallImageUrl.errors}</p>
                 </div>
               </div>
             </div>
           </CardContent>
           <CardFooter>
-            <SubmitButton text="Create Banner" />
+            <Button type="submit" className="w-full md:w-auto text-lg">
+              Create Banner
+            </Button>
           </CardFooter>
         </Card>
       </form>
