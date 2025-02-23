@@ -1,5 +1,5 @@
 import Loader from "@/components/Loader";
-import { prisma } from "@/utils/db";
+import prisma from "@/utils/db";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 

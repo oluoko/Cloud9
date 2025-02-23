@@ -1,7 +1,6 @@
 "use client";
 
 import { createBanner } from "@/app/actions";
-import { SubmitButton } from "@/components/CustomButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,48 +21,21 @@ import { ChevronLeft, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useFormState } from "react-dom";
 
 export default function CreateBanner() {
   const { toast } = useToast();
   const [smallImage, setSmallImage] = useState<string | undefined>(undefined);
   const [largeImage, setLargeImage] = useState<string | undefined>(undefined);
+  const [lastResult, action] = useFormState(createBanner, undefined);
 
-  // Simplified form handling using just Conform
   const [form, fields] = useForm({
-    onSubmit: async (event) => {
-      event.preventDefault();
-
-      try {
-        const formData = new FormData(event.currentTarget);
-        const result = await createBanner(formData);
-
-        if (result.success) {
-          toast({
-            title: "Success",
-            description: "Banner created successfully",
-          });
-        } else {
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: result.error || "Failed to create banner",
-          });
-        }
-      } catch (error) {
-        console.error("Form submission error:", error);
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "An unexpected error occurred",
-        });
-      }
-    },
+    lastResult,
     onValidate({ formData }) {
-      return parseWithZod(formData, {
-        schema: bannerSchema,
-      });
+      return parseWithZod(formData, { schema: bannerSchema });
     },
     shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
   });
 
   const handleDeleteImage = (image: "small" | "large") => {
@@ -76,7 +48,7 @@ export default function CreateBanner() {
 
   return (
     <>
-      <form id={form.id} onSubmit={form.onSubmit}>
+      <form id={form.id} onSubmit={form.onSubmit} action={action}>
         <div className="flex justify-between items-center w-[95vw] md:w-[60vw] mb-4">
           <Link
             href="/admin-dashboard/banners"
@@ -142,11 +114,12 @@ export default function CreateBanner() {
                   <Label className="text-xl font-bold">
                     Large Screen Image
                   </Label>
-                  <input
+                  <Input
                     type="hidden"
                     value={largeImage || ""}
                     name={fields.largeImageUrl.name}
                     key={fields.largeImageUrl.key}
+                    defaultValue={fields.largeImageUrl.initialValue}
                   />
                   {largeImage ? (
                     <div className="relative w-[170px] h-[95px] md:w-[200px] md:h-[120px]">
@@ -174,7 +147,7 @@ export default function CreateBanner() {
                         toast({
                           title: "Image Uploaded",
                           description:
-                            "The selected banner image has been uploaded successfully",
+                            "The selected image, for the large screen banner, has been uploaded successfully",
                         });
                       }}
                       onUploadError={(error: Error) => {
@@ -192,11 +165,12 @@ export default function CreateBanner() {
                   <Label className="text-xl font-bold">
                     Small Screen Image
                   </Label>
-                  <input
+                  <Input
                     type="hidden"
                     value={smallImage || ""}
                     name={fields.smallImageUrl.name}
                     key={fields.smallImageUrl.key}
+                    defaultValue={fields.smallImageUrl.initialValue}
                   />
                   {smallImage ? (
                     <div className="relative h-[170px] w-[95px] md:h-[200px] md:w-[120px]">
@@ -224,7 +198,7 @@ export default function CreateBanner() {
                         toast({
                           title: "Image Uploaded",
                           description:
-                            "The selected banner image has been uploaded successfully",
+                            "The selected image, for the small screen banner, has been uploaded successfully",
                         });
                       }}
                       onUploadError={(error: Error) => {

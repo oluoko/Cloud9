@@ -1,4 +1,3 @@
-import { prisma } from "@/utils/db";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +13,7 @@ import { getInitials } from "@/utils/utils";
 import { currentUser } from "@clerk/nextjs/server";
 import userImage from "../../public/assets/userProfile.png";
 import { Link } from "lucide-react";
+import prisma from "@/utils/db";
 
 const CustomUserButton = async () => {
   const user = await currentUser();

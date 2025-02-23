@@ -3,9 +3,10 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
-import { prisma } from "@/utils/db";
+
 import { revalidatePath } from "next/cache";
 import { flightSchema, bannerSchema } from "@/lib/zodSchemas";
+import prisma from "@/utils/db";
 
 export async function createFlight(preveState: unknown, formData: FormData) {
   const user = await currentUser();
@@ -108,7 +109,7 @@ export async function createBanner(preveState: unknown, formData: FormData) {
     return submission.reply();
   }
 
-  const newBanner = await prisma.banner.create({
+  await prisma.banner.create({
     data: {
       title: submission.value.title,
       description: submission.value.description,
