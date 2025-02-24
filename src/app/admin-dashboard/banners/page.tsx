@@ -39,7 +39,6 @@ async function getData() {
 
 export default async function Banners() {
   const banners = await getData();
-  console.log("Banners:::", banners);
 
   //format date
   const formatDate = (date: string | number | Date) => {
