@@ -22,19 +22,27 @@ export async function createFlight(preveState: unknown, formData: FormData) {
     return submission.reply();
   }
 
+  const flattenUrls = submission.value.flightImages.flatMap((urlString) =>
+    urlString.split(",").map((url) => url.trim())
+  );
+
   const newFlight = await prisma.flight.create({
     data: {
-      flightId: submission.value.flightId,
       flightName: submission.value.flightName,
       flightDate: submission.value.flightDate,
       flightTime: submission.value.flightTime,
+      flightImages: flattenUrls,
       airlineName: submission.value.airlineName,
-      numberOfPassengers: submission.value.numberOfPassengers,
+      economySeats: submission.value.economySeats,
+      businessSeats: submission.value.businessSeats,
+      firstClassSeats: submission.value.firstClassSeats,
+      economyPrice: submission.value.economyPrice,
+      businessPrice: submission.value.businessPrice,
+      firstClassPrice: submission.value.firstClassPrice,
       departure: submission.value.departure,
       departureAirport: submission.value.departureAirport,
       arrivalAirport: submission.value.arrivalAirport,
       arrival: submission.value.arrival,
-      bannerId: submission.value.bannerId,
     },
   });
   revalidatePath("/admin-dashboard/flights");
@@ -55,23 +63,31 @@ export async function editFlight(prevState: unknown, formData: FormData) {
     return submission.reply();
   }
 
+  const flattenUrls = submission.value.flightImages.flatMap((urlString) =>
+    urlString.split(",").map((url) => url.trim())
+  );
+
   const flightId = formData.get("flightId") as string;
   const flight = await prisma.flight.update({
     where: {
       id: flightId,
     },
     data: {
-      flightId: submission.value.flightId,
       flightName: submission.value.flightName,
       flightDate: submission.value.flightDate,
       flightTime: submission.value.flightTime,
+      flightImages: flattenUrls,
       airlineName: submission.value.airlineName,
-      numberOfPassengers: submission.value.numberOfPassengers,
+      economySeats: submission.value.economySeats,
+      businessSeats: submission.value.businessSeats,
+      firstClassSeats: submission.value.firstClassSeats,
+      economyPrice: submission.value.economyPrice,
+      businessPrice: submission.value.businessPrice,
+      firstClassPrice: submission.value.firstClassPrice,
       departure: submission.value.departure,
       departureAirport: submission.value.departureAirport,
       arrivalAirport: submission.value.arrivalAirport,
       arrival: submission.value.arrival,
-      bannerId: submission.value.bannerId,
     },
   });
 

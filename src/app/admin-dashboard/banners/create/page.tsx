@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { bannerSchema } from "@/lib/zodSchemas";
 import { UploadButton } from "@/utils/uploadthing";
@@ -108,6 +109,15 @@ export default function CreateBanner() {
                   placeholder="Enter the description of the banner"
                 />
                 <p className="text-red-500">{fields.description.errors}</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label>Is It Active</Label>
+                <Switch
+                  key={fields.isActive.key}
+                  name={fields.isActive.name}
+                  defaultValue={fields.isActive.initialValue}
+                />
+                <p className="text-red-500">{fields.isActive.errors}</p>
               </div>
               <div className="flex flex-col md:grid md:grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2 border-dashed border-2 border-gray-300 p-2 md:p-4 rounded-lg">

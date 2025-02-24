@@ -58,7 +58,7 @@ export default function CreateFlight() {
           <CardHeader>
             <CardTitle>Flight Details</CardTitle>
             <CardDescription>
-              Create your a flight right here. You can upload upto 8 images for
+              Create your a flight right here. You can upload upto 4 images for
               one flight.
             </CardDescription>
           </CardHeader>
@@ -72,20 +72,170 @@ export default function CreateFlight() {
                     name={fields.flightName.name}
                     key={fields.flightName.key}
                     defaultValue={fields.flightName.value}
-                    placeholder="Enter the title of the banner"
+                    placeholder="Enter the name of the flight"
                   />
                   <p className="text-red-500">{fields.flightName.errors}</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Destination City</Label>
+                  <Label>Name of the Airline</Label>
+                  <Input
+                    type="text"
+                    name={fields.airlineName.name}
+                    key={fields.airlineName.key}
+                    defaultValue={fields.airlineName.value}
+                    placeholder="Enter the name of the Airline"
+                  />
+                  <p className="text-red-500">{fields.airlineName.errors}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex flex-col gap-2">
+                  <Label>Flight Date</Label>
                   <Input
                     type="text"
                     name={fields.flightDate.name}
                     key={fields.flightDate.key}
                     defaultValue={fields.flightDate.value}
-                    placeholder="Enter the destination city"
+                    placeholder="Enter the date of the flight"
                   />
                   <p className="text-red-500">{fields.flightDate.errors}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label>Departure Time</Label>
+                  <Input
+                    type="text"
+                    name={fields.flightTime.name}
+                    key={fields.flightTime.key}
+                    defaultValue={fields.flightTime.value}
+                    placeholder="Enter the departure time of the flight"
+                  />
+                  <p className="text-red-500">{fields.flightTime.errors}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex flex-col gap-2">
+                  <Label>Economy Seats</Label>
+                  <Input
+                    type="text"
+                    name={fields.economySeats.name}
+                    key={fields.economySeats.key}
+                    defaultValue={fields.economySeats.value}
+                    placeholder="Enter the number of economy seats"
+                  />
+                  <p className="text-red-500">{fields.economySeats.errors}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label>Economy Seat Price</Label>
+                  <Input
+                    type="text"
+                    name={fields.economyPrice.name}
+                    key={fields.economyPrice.key}
+                    defaultValue={fields.economyPrice.value}
+                    placeholder="Enter the price per economy seat"
+                  />
+                  <p className="text-red-500">{fields.economyPrice.errors}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex flex-col gap-2">
+                  <Label>Business Seats</Label>
+                  <Input
+                    type="text"
+                    name={fields.businessSeats.name}
+                    key={fields.businessSeats.key}
+                    defaultValue={fields.businessSeats.value}
+                    placeholder="Enter the number of business seats"
+                  />
+                  <p className="text-red-500">{fields.businessSeats.errors}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label>Business Seat Price</Label>
+                  <Input
+                    type="text"
+                    name={fields.businessPrice.name}
+                    key={fields.businessPrice.key}
+                    defaultValue={fields.businessPrice.value}
+                    placeholder="Enter the price per business seat"
+                  />
+                  <p className="text-red-500">{fields.businessPrice.errors}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex flex-col gap-2">
+                  <Label>First Class Seats</Label>
+                  <Input
+                    type="text"
+                    name={fields.firstClassSeats.name}
+                    key={fields.firstClassSeats.key}
+                    defaultValue={fields.firstClassSeats.value}
+                    placeholder="Enter the number of first class seats"
+                  />
+                  <p className="text-red-500">
+                    {fields.firstClassSeats.errors}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label>First Class Seat Price</Label>
+                  <Input
+                    type="text"
+                    name={fields.firstClassPrice.name}
+                    key={fields.firstClassPrice.key}
+                    defaultValue={fields.firstClassPrice.value}
+                    placeholder="Enter the price per first class seat"
+                  />
+                  <p className="text-red-500">
+                    {fields.firstClassPrice.errors}
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex flex-col gap-2">
+                  <Label>Departure City</Label>
+                  <Input
+                    type="text"
+                    name={fields.departure.name}
+                    key={fields.departure.key}
+                    defaultValue={fields.departure.value}
+                    placeholder="Enter the departure City"
+                  />
+                  <p className="text-red-500">{fields.departure.errors}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label>Departure Airport</Label>
+                  <Input
+                    type="text"
+                    name={fields.departureAirport.name}
+                    key={fields.departureAirport.key}
+                    defaultValue={fields.departureAirport.value}
+                    placeholder="Enter the departure airport"
+                  />
+                  <p className="text-red-500">
+                    {fields.departureAirport.errors}
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex flex-col gap-2">
+                  <Label>Arrival City</Label>
+                  <Input
+                    type="text"
+                    name={fields.arrival.name}
+                    key={fields.arrival.key}
+                    defaultValue={fields.arrival.value}
+                    placeholder="Enter the arrival city"
+                  />
+                  <p className="text-red-500">{fields.arrival.errors}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label>Arrival Airport</Label>
+                  <Input
+                    type="text"
+                    name={fields.arrivalAirport.name}
+                    key={fields.arrivalAirport.key}
+                    defaultValue={fields.arrivalAirport.value}
+                    placeholder="Enter the arrival airport"
+                  />
+                  <p className="text-red-500">{fields.arrivalAirport.errors}</p>
                 </div>
               </div>
 
@@ -94,9 +244,9 @@ export default function CreateFlight() {
                 <Input
                   type="hidden"
                   value={images}
-                  // name={fields.largeImageUrl.name}
-                  // key={fields.largeImageUrl.key}
-                  // defaultValue={fields.largeImageUrl.initialValue}
+                  name={fields.flightImages.name}
+                  key={fields.flightImages.key}
+                  defaultValue={fields.flightImages.initialValue as string[]}
                 />
                 {images.length > 0 ? (
                   <div className="flex gap-2 md:gap-5">

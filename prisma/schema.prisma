@@ -20,22 +20,24 @@ model User {
 }
 
 model Flight {
-  id                 String   @id @unique
-  flightId           String   @unique
-  flightName         String
-  flightDate         DateTime
-  flightTime         DateTime
-  airlineName        String
-  numberOfPassengers Int
-  departure          String
-  departureAirport   String
-  arrivalAirport     String
-  arrival            String
-  flightPrice        Float
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  banner             Banner?  @relation(fields: [bannerId], references: [id])
-  bannerId           String?
+  id               String   @id @unique
+  flightName       String
+  flightDate       DateTime
+  flightTime       DateTime
+  flightImages     String[]
+  airlineName      String
+  economySeats     Int
+  businessSeats    Int
+  firstClassSeats  Int
+  economyPrice     Float
+  businessPrice    Float
+  firstClassPrice  Float
+  departure        String
+  departureAirport String
+  arrivalAirport   String
+  arrival          String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 model Banner {
@@ -50,5 +52,4 @@ model Banner {
   endDate         DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-  flights         Flight[]
 }
