@@ -20,6 +20,8 @@ import { ClerkAPIError } from "@clerk/types";
 import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
 import Loader from "@/components/Loader";
 import AuthLayout from "@/components/AuthLayout";
+import Separator from "@/components/CustomSeparator";
+import OauthSignIn from "@/components/Oauth";
 
 export default function SignUpPage() {
   const { isLoaded, setActive, signUp } = useSignUp();
@@ -224,6 +226,8 @@ export default function SignUpPage() {
                     "Verify Email"
                   )}
                 </Button>
+                <Separator text="Or Sign In with" />
+                <OauthSignIn />
               </form>
             )}
           </CardContent>

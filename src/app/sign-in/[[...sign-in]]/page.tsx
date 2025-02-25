@@ -21,6 +21,8 @@ import Link from "next/link";
 import { BrandLogo } from "@/components/BrandLogo";
 import Loader from "@/components/Loader";
 import AuthLayout from "@/components/AuthLayout";
+import Separator from "@/components/CustomSeparator";
+import OauthSignIn from "@/components/Oauth";
 
 export default function SignInForm() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -150,6 +152,7 @@ export default function SignInForm() {
                   ))}
                 </Alert>
               )}
+
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? (
                   <>
@@ -160,6 +163,8 @@ export default function SignInForm() {
                   "Log In"
                 )}
               </Button>
+              <Separator text="Or Sign In with" />
+              <OauthSignIn />
             </form>
           </CardContent>
           <CardFooter className="justify-center">
