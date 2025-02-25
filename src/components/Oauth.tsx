@@ -4,6 +4,9 @@ import * as React from "react";
 import { OAuthStrategy } from "@clerk/types";
 import { useSignIn } from "@clerk/nextjs";
 import { Button } from "./ui/button";
+import GoogleLogo from "../../public/assets/google.png";
+import AppleLogo from "../../public/assets/apple.png";
+import Image from "next/image";
 
 export default function OauthSignIn() {
   const { signIn } = useSignIn();
@@ -34,12 +37,17 @@ export default function OauthSignIn() {
     <div className="flex justify-between items-center w-full">
       <Button
         variant="outline"
-        className="w-[45%]"
+        className="w-[48%] flex items-center gap-2"
         onClick={() => signInWith("oauth_google")}
       >
+        <Image src={GoogleLogo} alt="google logo" className="size-5" />
         Google
       </Button>
-      <Button onClick={() => signInWith("oauth_apple")} className="w-[45%]">
+      <Button
+        onClick={() => signInWith("oauth_apple")}
+        className="w-[48%] flex gap-2 items-center"
+      >
+        <Image src={AppleLogo} alt="google logo" className="size-5" />
         Apple
       </Button>
     </div>

@@ -37,6 +37,8 @@ export default function SignInForm() {
   const router = useRouter();
 
   const { userId } = useAuth();
+
+  console.log("userId:: ", userId);
   if (userId) {
     router.push("/saving-info");
   }
@@ -167,7 +169,7 @@ export default function SignInForm() {
                   "Log In"
                 )}
               </Button>
-              <Separator text="Or Sign In with" />
+              <Separator text="Or" />
               <OauthSignIn />
             </form>
           </CardContent>

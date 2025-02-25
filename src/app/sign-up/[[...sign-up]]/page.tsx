@@ -39,6 +39,8 @@ export default function SignUpPage() {
   const router = useRouter();
 
   const { userId } = useAuth();
+  console.log("userId:: ", userId);
+
   if (userId) {
     router.push("/saving-info");
   }
@@ -196,6 +198,8 @@ export default function SignUpPage() {
                       "Sign Up"
                     )}
                   </Button>
+                  <Separator text="Or" />
+                  <OauthSignIn />
                 </form>
               </>
             ) : (
@@ -231,8 +235,6 @@ export default function SignUpPage() {
                     "Verify Email"
                   )}
                 </Button>
-                <Separator text="Or Sign In with" />
-                <OauthSignIn />
               </form>
             )}
           </CardContent>
