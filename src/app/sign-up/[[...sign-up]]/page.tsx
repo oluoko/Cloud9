@@ -1,7 +1,7 @@
 "use client";
 
 import React, { FormEvent, useState } from "react";
-import { useSignUp } from "@clerk/nextjs";
+import { useAuth, useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -37,6 +37,11 @@ export default function SignUpPage() {
   >("initial");
 
   const router = useRouter();
+
+  const { userId } = useAuth();
+  if (userId) {
+    router.push("/saving-info");
+  }
 
   if (!isLoaded) {
     return (

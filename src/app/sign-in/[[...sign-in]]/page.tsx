@@ -1,7 +1,7 @@
 "use client";
 
 import React, { FormEvent, useState } from "react";
-import { useSignIn } from "@clerk/nextjs";
+import { useAuth, useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { ClerkAPIError } from "@clerk/types";
 import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
@@ -34,8 +34,12 @@ export default function SignInForm() {
   const [authStage, setAuthStage] = useState<
     "initial" | "authenticating" | "redirecting"
   >("initial");
-
   const router = useRouter();
+
+  const { userId } = useAuth();
+  if (userId) {
+    router.push("/saving-info");
+  }
 
   if (!isLoaded) {
     return (
