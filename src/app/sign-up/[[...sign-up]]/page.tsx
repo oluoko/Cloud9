@@ -198,7 +198,7 @@ export default function SignUpPage() {
                       "Sign Up"
                     )}
                   </Button>
-                  <Separator text="Or" />
+                  <Separator text="Sign Up" />
                   <OauthSignIn />
                 </form>
               </>

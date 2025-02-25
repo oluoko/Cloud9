@@ -169,7 +169,7 @@ export default function SignInForm() {
                   "Log In"
                 )}
               </Button>
-              <Separator text="Or" />
+              <Separator text="Sign In" />
               <OauthSignIn />
             </form>
           </CardContent>
