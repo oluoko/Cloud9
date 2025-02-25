@@ -20,7 +20,7 @@ export default function OauthSignIn() {
       .then((res) => {
         console.log(res);
       })
-      .catch((err: any) => {
+      .catch((err: unknown) => {
         // See https://clerk.com/docs/custom-flows/error-handling
         // for more info on error handling
         console.log(err.errors);
