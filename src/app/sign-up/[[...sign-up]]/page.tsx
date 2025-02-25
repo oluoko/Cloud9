@@ -42,7 +42,7 @@ export default function SignUpPage() {
     return (
       <Loader
         mainText="Preparing Sign Up"
-        subText="Setting up secure registration..."
+        subText="Setting up secure registration"
       />
     );
   }
@@ -51,7 +51,7 @@ export default function SignUpPage() {
     return (
       <Loader
         mainText="Registration Complete"
-        subText="Redirecting you to your dashboard..."
+        subText="Redirecting you to your dashboard"
       />
     );
   }

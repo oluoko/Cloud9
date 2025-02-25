@@ -41,7 +41,7 @@ export default function SignInForm() {
     return (
       <Loader
         mainText="Preparing Sign In"
-        subText="Setting up secure authentication..."
+        subText="Setting up secure authentication"
       />
     );
   }
@@ -81,7 +81,7 @@ export default function SignInForm() {
     return (
       <Loader
         mainText="Sign In Successful"
-        subText="Redirecting you to your dashboard..."
+        subText="Redirecting you to your dashboard"
       />
     );
   }
