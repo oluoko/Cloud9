@@ -12,7 +12,7 @@ import { SignOutButton } from "@clerk/nextjs";
 import { getInitials } from "@/utils/utils";
 import { currentUser } from "@clerk/nextjs/server";
 import userImage from "../../public/assets/userProfile.png";
-import { Link } from "lucide-react";
+import Link from "next/link";
 import prisma from "@/utils/db";
 
 const CustomUserButton = async () => {
@@ -58,7 +58,10 @@ const CustomUserButton = async () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/profile" className="text-sm font-medium leading-none">
+          <Link
+            href="/dashboard/profile"
+            className="text-sm font-medium leading-none p-1"
+          >
             {dbUser?.firstName ? `${dbUser?.firstName}'s Profile` : "Profile"}
           </Link>
         </DropdownMenuItem>
