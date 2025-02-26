@@ -129,10 +129,12 @@ const BannerCarousel = () => {
               {/* Content */}
               <div className="absolute inset-0 z-20 flex items-center justify-self-stretch mr-2 md:mr-10">
                 <div className="text-center text-white p-6 max-w-2xl mx-auto mr-2 md:mr-10">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  <h2 className="text-3xl md:text-[40px] font-bold mb-4 [text-shadow:_0_2px_4px_rgb(0_0_0_/_0.8)]">
                     {slide.title}
                   </h2>
-                  <p className="text-lg md:text-xl mb-8">{slide.description}</p>
+                  <p className="text-lg md:text-[22px] mb-8 [text-shadow:_0_2px_4px_rgb(0_0_0_/_0.8)]">
+                    {slide.description}
+                  </p>
                   <a
                     href={slide.buttonLink}
                     className="inline-block px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-opacity-90 transition-colors duration-200 shadow-lg"
