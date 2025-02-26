@@ -5,6 +5,7 @@ import { FaPlaneDeparture } from "react-icons/fa";
 
 import DestinationsCombobox from "./DestinationsCombobox";
 import FlightTypeSelection from "./FlightTypeSelection";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function SearchFlights() {
   const flightType = [
@@ -37,15 +38,31 @@ export default function SearchFlights() {
         <h2 className="text-lg md:text-xl font-semibold">Flights</h2>
       </div>
 
-      <CardContent className="p-0 md:py-2 md:px-6 overflow-hidden">
-        <div className="flex  md:hidden items-center w-full h-full overflow-hidden bg-primary/45 rounded-xl">
-          <span className="text-3xl w-[85%] border-r border-primary/30 py-3 bg-primary/10">
-            Search Flights
-          </span>
-          <span className="w-[15%] h-full flex items-center justify-center">
-            <FaPlaneDeparture size={30} />
-          </span>
-        </div>
+      <CardContent className="p-0 md:py-2 md:px-6">
+        <Sheet>
+          <SheetTrigger className="flex  md:hidden items-center w-full h-full overflow-hidden bg-primary rounded-xl">
+            <span className="text-2xl w-[85%] border-r border-primary/50 py-3 bg-black/5">
+              Search Flights
+            </span>
+            <span className="w-[15%] h-full flex items-center justify-center">
+              <FaPlaneDeparture size={30} />
+            </span>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[97vw] px-0">
+            <div className="flex flex-col gap-2 items-center p-4">
+              <DestinationsCombobox destinations={destinations} />
+
+              <div className="flex justify-between gap-2 w-full">
+                <FlightTypeSelection flightType={flightType} />
+                <Button className="h-[70px] m-0 flex items-center justify-between gap-2">
+                  <FaPlaneDeparture size={32} />
+                  <span className="text-xl">Search Flights</span>
+                </Button>
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
+
         <div className="hidden md:flex justify-between items-center gap-2 my-[10px]">
           <FlightTypeSelection flightType={flightType} />
 

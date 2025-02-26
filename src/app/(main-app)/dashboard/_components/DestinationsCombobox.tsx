@@ -34,17 +34,13 @@ export default function DestinationsCombobox({
   const [arrivalValue, setArrivalValue] = useState("");
   return (
     <div className="flex justify-between w-full h-[70px] border-[0.5px] border-primary/60 rounded-xl overflow-hidden">
-      <Popover
-        open={openDeparture}
-        onOpenChange={setOpenDeparture}
-        className="w-[50%]"
-      >
+      <Popover open={openDeparture} onOpenChange={setOpenDeparture}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             role="combobox"
             aria-expanded={openDeparture}
-            className="w-[50%] bg-transparent rounded-none  shadow-none h-full border-r border-primary/60 text-2xl justify-start"
+            className="w-[50%] bg-transparent rounded-none  shadow-none h-full border-r border-primary/60 text-xl md:text-2xl justify-start"
           >
             {departureValue
               ? destinations.find(
@@ -92,7 +88,7 @@ export default function DestinationsCombobox({
             variant="outline"
             role="combobox"
             aria-expanded={openArrival}
-            className="w-[50%] bg-transparent rounded-none shadow-none h-full border-l border-primary/60 text-2xl justify-start"
+            className="w-[50%] bg-transparent rounded-none shadow-none h-full border-l border-primary/60 text-xl md:text-2xl justify-start"
           >
             {arrivalValue
               ? destinations.find(
