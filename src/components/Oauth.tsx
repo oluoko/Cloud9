@@ -39,6 +39,7 @@ export default function OauthSignIn() {
         variant="outline"
         className="w-[48%] flex items-center gap-2"
         onClick={() => signInWith("oauth_google")}
+        type="button"
       >
         <Image src={GoogleLogo} alt="google logo" className="size-5" />
         Google
@@ -46,6 +47,7 @@ export default function OauthSignIn() {
       <Button
         onClick={() => signInWith("oauth_apple")}
         className="w-[48%] flex gap-2 items-center"
+        type="button"
       >
         <Image src={AppleLogo} alt="google logo" className="size-5" />
         Apple
