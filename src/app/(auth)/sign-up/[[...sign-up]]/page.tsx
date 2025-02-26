@@ -124,15 +124,21 @@ export default function SignUpPage() {
       <div className="flex flex-col items-center justify-center">
         <Card className="w-[90vw] md:w-full max-w-md my-4">
           <CardHeader>
-            <CardTitle className="font-bold text-center text-2xl">
-              Welcome to
-              <span className="font-black text-3xl">
-                {" "}
-                Cloud
-                <span className="text-primary text-4xl">9</span>
-              </span>
-              . Sign up to get started.
-            </CardTitle>
+            {!pendingVerification ? (
+              <CardTitle className="font-bold text-center text-2xl">
+                Welcome to
+                <span className="font-black text-3xl">
+                  {" "}
+                  Cloud
+                  <span className="text-primary text-4xl">9</span>
+                </span>
+                . Sign up to get started.
+              </CardTitle>
+            ) : (
+              <CardTitle className="font-bold text-center text-2xl">
+                Verify your email
+              </CardTitle>
+            )}
           </CardHeader>
           <CardContent>
             {!pendingVerification ? (
@@ -239,15 +245,17 @@ export default function SignUpPage() {
             )}
           </CardContent>
           <CardFooter className="justify-center">
-            <p className="text-sm text-muted-foreground">
-              Already have an account?{" "}
-              <Link
-                href="/sign-in"
-                className="font-medium text-primary hover:underline"
-              >
-                Sign In
-              </Link>
-            </p>
+            {!pendingVerification && (
+              <p className="text-sm text-muted-foreground">
+                Already have an account?{" "}
+                <Link
+                  href="/sign-in"
+                  className="font-medium text-primary hover:underline"
+                >
+                  Sign In
+                </Link>
+              </p>
+            )}
           </CardFooter>
         </Card>
       </div>

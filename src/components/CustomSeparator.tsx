@@ -1,9 +1,8 @@
 interface SeparatorProps {
   text: string;
-  width: string;
 }
 
-export default function Separator({ text, width }: SeparatorProps) {
+export default function Separator({ text }: SeparatorProps) {
   return (
     <div className="flex items-center justify-between gap-2 w-full">
       <div
