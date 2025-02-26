@@ -15,7 +15,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { Check, ChevronsUpDown } from "lucide-react";
+import {
+  Check,
+  ChevronsUpDown,
+  PlaneLanding,
+  PlaneTakeoff,
+} from "lucide-react";
 import { useState } from "react";
 
 interface Destinations {
@@ -40,13 +45,16 @@ export default function DestinationsCombobox({
             variant="outline"
             role="combobox"
             aria-expanded={openDeparture}
-            className="w-[50%] bg-transparent rounded-none  shadow-none h-full border-r border-primary/60 text-xl md:text-2xl justify-start"
+            className="w-[50%] bg-transparent rounded-none  shadow-none h-full border-r border-primary/60 text-xl md:text-2xl justify-start flex gap-2"
           >
-            {departureValue
-              ? destinations.find(
-                  (destination) => destination.value === departureValue
-                )?.label
-              : "Where from?"}
+            <PlaneTakeoff size={24} />
+            <span>
+              {departureValue
+                ? destinations.find(
+                    (destination) => destination.value === departureValue
+                  )?.label
+                : "Where from?"}
+            </span>
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
@@ -88,13 +96,16 @@ export default function DestinationsCombobox({
             variant="outline"
             role="combobox"
             aria-expanded={openArrival}
-            className="w-[50%] bg-transparent rounded-none shadow-none h-full border-l border-primary/60 text-xl md:text-2xl justify-start"
+            className="w-[50%] bg-transparent rounded-none shadow-none h-full border-l border-primary/60 text-xl md:text-2xl justify-start flex gap-2"
           >
-            {arrivalValue
-              ? destinations.find(
-                  (destination) => destination.value === arrivalValue
-                )?.label
-              : "Where to?"}
+            <PlaneLanding size={24} />
+            <span>
+              {arrivalValue
+                ? destinations.find(
+                    (destination) => destination.value === arrivalValue
+                  )?.label
+                : "Where to?"}
+            </span>
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
