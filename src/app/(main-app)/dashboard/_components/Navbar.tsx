@@ -18,7 +18,7 @@ export function NavBar() {
     { id: 3, name: "Checkout", href: "/dashboard/check-out" },
   ];
   return (
-    <header className="flex items-center justify-center py-1 fixed shadow-xl top-0 w-screen z-99 bg-background">
+    <header className="flex items-center justify-center py-1 fixed shadow-xl top-0 w-screen z-99 bg-background z-50">
       <nav className="flex items-center justify-between container font-semibold w-11/12 ">
         <Link href="/">
           <BrandLogo styling="h-[45px] md:h-[60px] w-[90px] md:w-[120px]" />

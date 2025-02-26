@@ -9,6 +9,7 @@ import mombasaLaptopImage from "../../../../../public/images/Mombasa - laptopIma
 import nairobiLaptopImage from "../../../../../public/images/Nairobi - laptopImage.jpeg";
 import kisumuLaptopImage from "../../../../../public/images/Kisumu - laptopImage.jpeg";
 import Image from "next/image";
+import SearchFlights from "./SearchFlight";
 
 const BannerCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -23,7 +24,8 @@ const BannerCarousel = () => {
       title: "Nairobi. Kenya's Capital",
       description:
         "Discover amazing features and services tailored just for you.",
-      buttonText: "Learn More",
+      isActive: true,
+      destinationCity: "Learn More",
       buttonLink: "/features",
     },
     {
@@ -32,7 +34,8 @@ const BannerCarousel = () => {
       smallImage: kisumuPhoneImage,
       title: "Kisumu. The Lakeside City",
       description: "Limited time deals you won't want to miss. Act fast!",
-      buttonText: "View Offers",
+      isActive: true,
+      destinationCity: "View Offers",
       buttonLink: "/offers",
     },
     {
@@ -41,7 +44,8 @@ const BannerCarousel = () => {
       smallImage: mombasaPhoneImage,
       title: "Mombasa. The Kenyan Coastal Paradise",
       description: "Connect with like-minded individuals and grow together.",
-      buttonText: "Sign Up",
+      isActive: false,
+      destinationCity: "Sign Up",
       buttonLink: "/signup",
     },
   ];
@@ -94,8 +98,13 @@ const BannerCarousel = () => {
   };
 
   return (
-    <div className="relative w-full h-screen">
-      <div className="relative w-full h-3/4 lg:h-4/5">
+    <div className="relative w-full h-screen mt-5">
+      <SearchFlights />
+      <div
+        className="relative w-full h-3/4 lg:h-4/5"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
         {/* Slides */}
         <div className="relative w-full h-full overflow-hidden">
           {slides.map((slide, index) => (
@@ -118,8 +127,8 @@ const BannerCarousel = () => {
               </div>
 
               {/* Content */}
-              <div className="absolute inset-0 flex items-center justify-center z-20">
-                <div className="text-center text-white p-6 max-w-2xl mx-auto bg-black bg-opacity-30 rounded-lg backdrop-blur-sm">
+              <div className="absolute inset-0 z-20 flex items-center justify-self-start mr-2 md:mr-10">
+                <div className="text-center text-white p-6 max-w-2xl mx-auto mr-2 md:mr-10">
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">
                     {slide.title}
                   </h2>
@@ -128,7 +137,7 @@ const BannerCarousel = () => {
                     href={slide.buttonLink}
                     className="inline-block px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-opacity-90 transition-colors duration-200 shadow-lg"
                   >
-                    {slide.buttonText}
+                    {slide.destinationCity}
                   </a>
                 </div>
               </div>
@@ -151,18 +160,6 @@ const BannerCarousel = () => {
           aria-label="Next slide"
         >
           <ChevronRight className="w-6 h-6 text-white" />
-        </button>
-
-        {/* Autoplay Toggle Button */}
-        <button
-          onClick={toggleAutoplay}
-          className={`absolute bottom-4 right-4 z-30 px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 shadow-md ${
-            isAutoPlaying
-              ? "bg-white text-black"
-              : "bg-black bg-opacity-50 text-white"
-          }`}
-        >
-          {isAutoPlaying ? "Pause" : "Play"}
         </button>
 
         {/* Indicators */}
