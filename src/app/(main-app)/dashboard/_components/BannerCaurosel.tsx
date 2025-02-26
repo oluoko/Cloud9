@@ -101,7 +101,7 @@ const BannerCarousel = () => {
     <div className="relative w-full h-screen mt-5">
       <SearchFlights />
       <div
-        className="relative w-full h-3/4 lg:h-4/5"
+        className="relative w-full h-[90%]"
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
       >
@@ -127,7 +127,7 @@ const BannerCarousel = () => {
               </div>
 
               {/* Content */}
-              <div className="absolute inset-0 z-20 flex items-center justify-self-start mr-2 md:mr-10">
+              <div className="absolute inset-0 z-20 flex items-center justify-self-stretch mr-2 md:mr-10">
                 <div className="text-center text-white p-6 max-w-2xl mx-auto mr-2 md:mr-10">
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">
                     {slide.title}
