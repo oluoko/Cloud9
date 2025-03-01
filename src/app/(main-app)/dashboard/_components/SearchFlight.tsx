@@ -6,6 +6,7 @@ import { FaPlaneDeparture } from "react-icons/fa";
 import DestinationsCombobox from "./DestinationsCombobox";
 import FlightTypeSelection from "./FlightTypeSelection";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Link from "next/link";
 
 export default function SearchFlights() {
   const flightType = [
@@ -54,10 +55,13 @@ export default function SearchFlights() {
 
               <div className="flex justify-between gap-2 w-full">
                 <FlightTypeSelection flightType={flightType} />
-                <Button className="h-[70px] m-0 flex items-center justify-between gap-2">
-                  <FaPlaneDeparture size={32} />
-                  <span className="text-lg">Search Flights</span>
-                </Button>
+
+                <Link href="/dashboard/bookings/availability">
+                  <Button className="h-[70px] m-0 flex items-center justify-between gap-2">
+                    <FaPlaneDeparture size={32} />
+                    <span className="text-lg">Search Flights</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </SheetContent>
@@ -68,10 +72,12 @@ export default function SearchFlights() {
 
           <DestinationsCombobox destinations={destinations} />
 
-          <Button className="h-[70px] m-0 flex items-center justify-between gap-2">
-            <FaPlaneDeparture size={32} />
-            <span className="text-xl">Search Flights</span>
-          </Button>
+          <Link href="/dashboard/bookings/availability">
+            <Button className="h-[70px] m-0 flex items-center justify-between gap-2">
+              <FaPlaneDeparture size={32} />
+              <span className="text-xl">Search Flights</span>
+            </Button>
+          </Link>
         </div>
       </CardContent>
     </Card>
