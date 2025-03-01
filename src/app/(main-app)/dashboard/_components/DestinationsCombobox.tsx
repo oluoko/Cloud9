@@ -45,7 +45,7 @@ export default function DestinationsCombobox({
             variant="outline"
             role="combobox"
             aria-expanded={openDeparture}
-            className="w-[50%] bg-transparent rounded-none  shadow-none h-full border-r border-primary/60 text-xl md:text-2xl justify-start flex gap-2"
+            className="w-[50%] bg-transparent rounded-none  shadow-none h-full border-r border-primary/60 text-lg md:text-2xl justify-start flex gap-2"
           >
             <PlaneTakeoff size={24} />
             <span>
@@ -96,7 +96,7 @@ export default function DestinationsCombobox({
             variant="outline"
             role="combobox"
             aria-expanded={openArrival}
-            className="w-[50%] bg-transparent rounded-none shadow-none h-full border-l border-primary/60 text-xl md:text-2xl justify-start flex gap-2"
+            className="w-[50%] bg-transparent rounded-none shadow-none h-full border-l border-primary/60 text-lg md:text-2xl justify-start flex gap-2"
           >
             <PlaneLanding size={24} />
             <span>

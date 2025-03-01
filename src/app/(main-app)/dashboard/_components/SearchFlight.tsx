@@ -32,7 +32,7 @@ export default function SearchFlights() {
     },
   ];
   return (
-    <Card className="absolute z-40 top-[85%] md:top-[75%] -translate-x-1/2 -translate-y-1/2  left-[50%] w-[95vw] md:w-[70vw] bg-background/90">
+    <Card className="absolute z-40 top-[80%] md:top-[75%] -translate-x-1/2 -translate-y-1/2  left-[50%] w-[95vw] md:w-[70vw] bg-background/90">
       <div className="hidden md:flex gap-2 items-center border-b border-primary/30 py-2 px-6">
         <FaPlane className="size-4 md:size-6" />
         <h2 className="text-lg md:text-xl font-semibold">Flights</h2>
@@ -48,15 +48,15 @@ export default function SearchFlights() {
               <FaPlaneDeparture size={30} />
             </span>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[97vw] px-0">
-            <div className="flex flex-col gap-2 items-center p-4">
+          <SheetContent side="bottom" className="w-screen h-[50vh] px-0">
+            <div className="flex flex-col gap-2 items-center p-4 mt-4">
               <DestinationsCombobox destinations={destinations} />
 
               <div className="flex justify-between gap-2 w-full">
                 <FlightTypeSelection flightType={flightType} />
                 <Button className="h-[70px] m-0 flex items-center justify-between gap-2">
                   <FaPlaneDeparture size={32} />
-                  <span className="text-xl">Search Flights</span>
+                  <span className="text-lg">Search Flights</span>
                 </Button>
               </div>
             </div>
