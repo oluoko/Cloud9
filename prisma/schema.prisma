@@ -23,7 +23,7 @@ model Flight {
   id               String   @id @unique
   flightName       String
   flightDate       DateTime
-  flightTime       String
+  flightTime       String?
   flightImages     String[]
   airlineName      String
   economySeats     Int

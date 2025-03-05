@@ -13,7 +13,7 @@ export const flightSchema = z.object({
       { message: "Invalid date format" }
     )
     .transform((val) => new Date(val)),
-  flightTime: z.string().min(1, "Flight time is required"),
+  // flightTime: z.string().min(1, "Flight time is required"),
   flightImages: z.array(z.string()).min(1, "Please upload at least one image"),
   airlineName: z.string().min(1, "Airline name is required"),
   economySeats: z
