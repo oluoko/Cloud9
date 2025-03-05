@@ -16,17 +16,15 @@ export function Hero() {
       </p>
       <SignedIn>
         <Link href="/dashboard">
-          <Button className="text-xl md:text-3xl w-[90vw] md:w-auto p-6 items-center flex gap-2">
-            Book a Flight
-            <ArrowRightIcon className="size-16 mr-4" />
+          <Button className="text-xl md:text-3xl w-[90vw] md:w-auto p-6">
+            Search for a Flight
           </Button>
         </Link>
       </SignedIn>
       <SignedOut>
         <SignInButton>
-          <Button className="text-lg p-6 flex items-center gap-2 w-[80vw] md:w-auto">
+          <Button className="text-xl md:text-3xl p-6 w-[80vw] md:w-auto">
             Get Started
-            <ArrowRightIcon className="size-5" />
           </Button>
         </SignInButton>
       </SignedOut>
