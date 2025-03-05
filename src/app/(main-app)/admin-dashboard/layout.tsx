@@ -16,7 +16,7 @@ export default function AdminDashboardLayout({
   return (
     <div className="selection:bg-foreground/20">
       <NavBar />
-      <div className="min-h-screen bg-[radial-gradient(hsl(0,32%,17%,40%),hsl(24,27%,23%,2 9%),hsl(var(--background))_60%)] text-balance px-4 pt-[70px] md:pt-[100px]">
+      <div className="my-3 md:my-5 bg-[radial-gradient(hsl(0,32%,17%,40%),hsl(24,27%,23%,2 9%),hsl(var(--background))_60%)] mt-20 md:mt-20 mx-5 md:mx-24">
         {children}
       </div>
     </div>

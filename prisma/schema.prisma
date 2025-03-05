@@ -23,7 +23,7 @@ model Flight {
   id               String   @id @unique
   flightName       String
   flightDate       DateTime
-  flightTime       DateTime
+  flightTime       String
   flightImages     String[]
   airlineName      String
   economySeats     Int
@@ -32,10 +32,8 @@ model Flight {
   economyPrice     Float
   businessPrice    Float
   firstClassPrice  Float
-  departure        String
   departureAirport String
   arrivalAirport   String
-  arrival          String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }

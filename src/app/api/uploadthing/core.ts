@@ -25,7 +25,7 @@ export const ourFileRouter = {
 
       return { uploadedBy: metadata.userId };
     }),
-  flightImageRoute: f({
+  flightImagesRoute: f({
     image: {
       maxFileSize: "4MB",
       maxFileCount: 4,

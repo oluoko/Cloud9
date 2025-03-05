@@ -41,7 +41,7 @@ export default async function Flights() {
   const flights = await getData();
   return (
     <>
-      <div className="flex justify-between items-center w-[95vw] md:w-[80vw]">
+      <div className="flex justify-between items-center">
         <Link
           href="/admin-dashboard"
           className="rounded-full bg-secondary-foreground/40 p-2 hover:bg-primary"
@@ -55,7 +55,7 @@ export default async function Flights() {
           Create a new flight
         </Link>
       </div>
-      <Card className="mt-3 md:mt-5 w-[95vw] md:w-[80vw]">
+      <Card className="mt-3 md:mt-5">
         <CardHeader>
           <CardTitle>Flights</CardTitle>
           <CardDescription>

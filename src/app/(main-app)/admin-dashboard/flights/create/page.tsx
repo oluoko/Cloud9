@@ -22,6 +22,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useFormState } from "react-dom";
+import { DateTimePicker } from "../../_components/DateTimePicker";
 
 export default function CreateFlight() {
   const { toast } = useToast();
@@ -42,7 +43,7 @@ export default function CreateFlight() {
   return (
     <>
       <form id={form.id} onSubmit={form.onSubmit} action={action}>
-        <div className="flex justify-between items-center w-[95vw] md:w-[60vw] mb-4">
+        <div className="flex justify-between items-center mb-4">
           <Link
             href="/admin-dashboard/flights"
             className="rounded-full bg-secondary-foreground/40 p-2 hover:bg-primary"
@@ -64,7 +65,7 @@ export default function CreateFlight() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-y-6">
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="flex flex-col gap-2">
                   <Label>Title</Label>
                   <Input
@@ -88,31 +89,19 @@ export default function CreateFlight() {
                   <p className="text-red-500">{fields.airlineName.errors}</p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="flex flex-col gap-2">
-                  <Label>Flight Date</Label>
-                  <Input
-                    type="text"
-                    name={fields.flightDate.name}
-                    key={fields.flightDate.key}
-                    defaultValue={fields.flightDate.value}
-                    placeholder="Enter the date of the flight"
-                  />
-                  <p className="text-red-500">{fields.flightDate.errors}</p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Departure Time</Label>
-                  <Input
-                    type="text"
-                    name={fields.flightTime.name}
-                    key={fields.flightTime.key}
-                    defaultValue={fields.flightTime.value}
-                    placeholder="Enter the departure time of the flight"
-                  />
-                  <p className="text-red-500">{fields.flightTime.errors}</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
+
+              <DateTimePicker
+                dateFieldName={fields.flightDate.name}
+                timeFieldName={fields.flightTime.name}
+                dateFieldValue={fields.flightDate.value}
+                timeFieldValue={fields.flightTime.value}
+                dateFieldKey={fields.flightDate.key}
+                timeFieldKey={fields.flightTime.key}
+                dateFieldErrors={fields.flightDate.errors}
+                timeFieldErrors={fields.flightTime.errors}
+              />
+
+              <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="flex flex-col gap-2">
                   <Label>Economy Seats</Label>
                   <Input
@@ -136,7 +125,7 @@ export default function CreateFlight() {
                   <p className="text-red-500">{fields.economyPrice.errors}</p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="flex flex-col gap-2">
                   <Label>Business Seats</Label>
                   <Input
@@ -160,7 +149,7 @@ export default function CreateFlight() {
                   <p className="text-red-500">{fields.businessPrice.errors}</p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="flex flex-col gap-2">
                   <Label>First Class Seats</Label>
                   <Input
@@ -188,17 +177,17 @@ export default function CreateFlight() {
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="flex flex-col gap-2">
-                  <Label>Departure City</Label>
+                  <Label>Arrival Airport</Label>
                   <Input
                     type="text"
-                    name={fields.departure.name}
-                    key={fields.departure.key}
-                    defaultValue={fields.departure.value}
-                    placeholder="Enter the departure City"
+                    name={fields.arrivalAirport.name}
+                    key={fields.arrivalAirport.key}
+                    defaultValue={fields.arrivalAirport.value}
+                    placeholder="Enter the arrival airport"
                   />
-                  <p className="text-red-500">{fields.departure.errors}</p>
+                  <p className="text-red-500">{fields.arrivalAirport.errors}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label>Departure Airport</Label>
@@ -214,32 +203,8 @@ export default function CreateFlight() {
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="flex flex-col gap-2">
-                  <Label>Arrival City</Label>
-                  <Input
-                    type="text"
-                    name={fields.arrival.name}
-                    key={fields.arrival.key}
-                    defaultValue={fields.arrival.value}
-                    placeholder="Enter the arrival city"
-                  />
-                  <p className="text-red-500">{fields.arrival.errors}</p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Arrival Airport</Label>
-                  <Input
-                    type="text"
-                    name={fields.arrivalAirport.name}
-                    key={fields.arrivalAirport.key}
-                    defaultValue={fields.arrivalAirport.value}
-                    placeholder="Enter the arrival airport"
-                  />
-                  <p className="text-red-500">{fields.arrivalAirport.errors}</p>
-                </div>
-              </div>
 
-              <div className="flex flex-col gap-2 border-dashed border-2 border-gray-300 p-2 md:p-4 rounded-lg">
+              <div className="flex flex-col gap-2 md:gap-4 border-dashed border-2 border-gray-300 p-2 md:p-4 rounded-lg">
                 <Label className="text-xl font-bold">Flight Images</Label>
                 <Input
                   type="hidden"
@@ -275,7 +240,7 @@ export default function CreateFlight() {
                   </div>
                 ) : (
                   <UploadButton
-                    endpoint="bannerImageRoute"
+                    endpoint="flightImagesRoute"
                     onClientUploadComplete={(res) => {
                       setImages(res.map((r) => r.url));
                       toast({
@@ -287,7 +252,7 @@ export default function CreateFlight() {
                     onUploadError={(error: Error) => {
                       toast({
                         variant: "destructive",
-                        title: "Error Uploading Banner Image",
+                        title: "Error Uploading Flight Images",
                         description: `Error! : ${error.message}`,
                       });
                     }}
