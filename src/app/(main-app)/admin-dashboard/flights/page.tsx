@@ -69,8 +69,8 @@ export default async function Flights() {
                 <TableRow>
                   <TableHead>Title</TableHead>
                   <TableHead> Flight Images</TableHead>
-                  <TableHead>Departure City</TableHead>
-                  <TableHead>Arrival City</TableHead>
+                  <TableHead>Departure Aiport</TableHead>
+                  <TableHead>Arrival Airport</TableHead>
                   <TableHead className="text-end">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -91,8 +91,8 @@ export default async function Flights() {
                       ))}
                     </TableCell>
 
-                    <TableCell>{flight.departure}</TableCell>
-                    <TableCell>{flight.arrival}</TableCell>
+                    <TableCell>{flight.departureAirport}</TableCell>
+                    <TableCell>{flight.arrivalAirport}</TableCell>
                     <TableCell className="text-end">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
