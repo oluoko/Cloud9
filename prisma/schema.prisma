@@ -22,8 +22,8 @@ model User {
 model Flight {
   id               String   @id @default(uuid())
   flightName       String
-  flightDate       DateTime
-  flightTime       String?
+  flightDate       String
+  flightTime       String
   flightImages     String[]
   airlineName      String
   economySeats     Int

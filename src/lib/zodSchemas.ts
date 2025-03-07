@@ -4,16 +4,34 @@ export const flightSchema = z.object({
   flightName: z.string().min(1, "Flight name is required"),
   flightDate: z
     .string()
+    .min(1, "Flight date is required")
     .refine(
       (val) => {
-        // Validate date string format (YYYY-MM-DD)
-        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-        return dateRegex.test(val);
+        try {
+          // Validate that it's a valid date in yyyy-MM-dd format
+          const date = new Date(val);
+          return !isNaN(date.getTime());
+        } catch {
+          return false;
+        }
       },
-      { message: "Invalid date format" }
-    )
-    .transform((val) => new Date(val)),
-  // flightTime: z.string().min(1, "Flight time is required"),
+      {
+        message: "Invalid date format",
+      }
+    ),
+
+  flightTime: z
+    .string()
+    .min(1, "Flight time is required")
+    .refine(
+      (val) => {
+        // Validate time is in HH:MM format
+        return /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/.test(val);
+      },
+      {
+        message: "Invalid time format (HH:MM)",
+      }
+    ),
   flightImages: z.array(z.string()).min(1, "Please upload at least one image"),
   airlineName: z.string().min(1, "Airline name is required"),
   economySeats: z
