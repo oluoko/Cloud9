@@ -68,6 +68,7 @@ export default async function Flights() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Title</TableHead>
+                  <TableHead>Airline</TableHead>
                   <TableHead> Flight Images</TableHead>
                   <TableHead>Departure Aiport</TableHead>
                   <TableHead>Arrival Airport</TableHead>
@@ -78,15 +79,16 @@ export default async function Flights() {
                 {flights.map((flight) => (
                   <TableRow key={flight.id}>
                     <TableCell>{flight.flightName}</TableCell>
-                    <TableCell className="flex gap-2">
+                    <TableCell>{flight.airlineName}</TableCell>
+                    <TableCell className="grid grid-cols-1 md:flex gap-2">
                       {flight.flightImages.map((image, index) => (
                         <Image
                           key={index}
                           src={image}
                           alt={flight.flightName}
-                          width={64}
-                          height={64}
-                          className="rounded-lg object-cover size-16"
+                          width={60}
+                          height={60}
+                          className="rounded-md md:rounded-lg object-cover size-[35px] md:size-[60px]"
                         />
                       ))}
                     </TableCell>

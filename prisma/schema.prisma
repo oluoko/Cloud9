@@ -39,15 +39,14 @@ model Flight {
 }
 
 model Banner {
-  id              String    @id @default(uuid())
-  title           String
-  description     String?
-  destinationCity String // This matches with Flight.arrival
-  largeImageUrl   String
-  smallImageUrl   String
-  isActive        Boolean   @default(true)
-  startDate       DateTime  @default(now())
-  endDate         DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  id                 String  @id @default(uuid())
+  title              String
+  description        String?
+  destinationAirport String
+  largeImageUrl      String
+  smallImageUrl      String
+  isActive           Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

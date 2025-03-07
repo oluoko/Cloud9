@@ -1,6 +1,7 @@
 "use client";
 
 import { createBanner } from "@/app/actions";
+import { SubmitButton } from "@/components/CustomButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,7 +22,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { ChevronLeft, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 
 export default function CreateBanner() {
@@ -89,13 +90,13 @@ export default function CreateBanner() {
                   <Label>Destination City</Label>
                   <Input
                     type="text"
-                    name={fields.destinationCity.name}
-                    key={fields.destinationCity.key}
-                    defaultValue={fields.destinationCity.value}
+                    name={fields.destinationAirport.name}
+                    key={fields.destinationAirport.key}
+                    defaultValue={fields.destinationAirport.value}
                     placeholder="Enter the destination city"
                   />
                   <p className="text-red-500">
-                    {fields.destinationCity.errors}
+                    {fields.destinationAirport.errors}
                   </p>
                 </div>
               </div>
@@ -226,9 +227,7 @@ export default function CreateBanner() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full md:w-auto text-lg">
-              Create Banner
-            </Button>
+            <SubmitButton text="Create Banner" />
           </CardFooter>
         </Card>
       </form>

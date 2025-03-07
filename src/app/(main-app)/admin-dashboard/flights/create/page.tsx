@@ -23,6 +23,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useFormState } from "react-dom";
 import { DateTimePicker } from "../../_components/DateTimePicker";
+import { SubmitButton } from "@/components/CustomButton";
 
 export default function CreateFlight() {
   const { toast } = useToast();
@@ -263,9 +264,7 @@ export default function CreateFlight() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full md:w-auto text-lg">
-              Create a Flight
-            </Button>
+            <SubmitButton text="Create a Flight" />
           </CardFooter>
         </Card>
       </form>

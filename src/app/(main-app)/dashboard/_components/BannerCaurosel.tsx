@@ -2,53 +2,26 @@
 
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import mombasaPhoneImage from "../../../../../public/images/Mombasa - phoneImage.jpeg";
-import nairobiPhoneImage from "../../../../../public/images/Nairobi - phoneImage.jpeg";
-import kisumuPhoneImage from "../../../../../public/images/Kisumu - phoneImage.jpeg";
-import mombasaLaptopImage from "../../../../../public/images/Mombasa - laptopImage.jpeg";
-import nairobiLaptopImage from "../../../../../public/images/Nairobi - laptopImage.jpeg";
-import kisumuLaptopImage from "../../../../../public/images/Kisumu - laptopImage.jpeg";
 import Image from "next/image";
 import SearchFlights from "./SearchFlight";
 
-const BannerCarousel = () => {
+interface Banner {
+  id: string | number;
+  title: string;
+  description: string | null;
+  destinationAirport: string;
+  largeImageUrl: string;
+  smallImageUrl: string;
+}
+
+interface BannerCarouselProps {
+  banners: Banner[];
+}
+
+const BannerCarousel = ({ banners = [] }: BannerCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
-
-  const slides = [
-    {
-      id: 1,
-      largeImage: nairobiLaptopImage,
-      smallImage: nairobiPhoneImage,
-      title: "Nairobi. Kenya's Capital",
-      description:
-        "Discover amazing features and services tailored just for you.",
-      isActive: true,
-      destinationCity: "Learn More",
-      buttonLink: "/features",
-    },
-    {
-      id: 2,
-      largeImage: kisumuLaptopImage,
-      smallImage: kisumuPhoneImage,
-      title: "Kisumu. The Lakeside City",
-      description: "Limited time deals you won't want to miss. Act fast!",
-      isActive: true,
-      destinationCity: "View Offers",
-      buttonLink: "/offers",
-    },
-    {
-      id: 3,
-      largeImage: mombasaLaptopImage,
-      smallImage: mombasaPhoneImage,
-      title: "Mombasa. The Kenyan Coastal Paradise",
-      description: "Connect with like-minded individuals and grow together.",
-      isActive: false,
-      destinationCity: "Sign Up",
-      buttonLink: "/signup",
-    },
-  ];
 
   // Check if the screen is mobile size
   useEffect(() => {
@@ -71,19 +44,19 @@ const BannerCarousel = () => {
     let interval: NodeJS.Timeout;
     if (isAutoPlaying) {
       interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+        setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
       }, 5000); // Changed from 1000ms to 5000ms for better user experience
     }
     return () => clearInterval(interval);
-  }, [isAutoPlaying, slides.length]);
+  }, [isAutoPlaying, banners.length]);
 
   const goToPrevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    setCurrentSlide((prev) => (prev === 0 ? banners.length - 1 : prev - 1));
     setIsAutoPlaying(false);
   };
 
   const goToNextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
     setIsAutoPlaying(false);
   };
 
@@ -105,9 +78,9 @@ const BannerCarousel = () => {
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
       >
-        {/* Slides */}
+        {/* Banners */}
         <div className="relative w-full h-full overflow-hidden">
-          {slides.map((slide, index) => (
+          {banners.map((slide, index) => (
             <div
               key={slide.id || index}
               className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
@@ -117,7 +90,7 @@ const BannerCarousel = () => {
               {/* Background Image - Responsive */}
               <div className="absolute inset-0 bg-black bg-opacity-20">
                 <Image
-                  src={isMobile ? slide.smallImage : slide.largeImage}
+                  src={isMobile ? slide.smallImageUrl : slide.largeImageUrl}
                   alt={slide.title}
                   layout="fill"
                   objectFit="cover"
@@ -136,10 +109,10 @@ const BannerCarousel = () => {
                     {slide.description}
                   </p>
                   <a
-                    href={slide.buttonLink}
+                    href={slide.title}
                     className="inline-block px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-opacity-90 transition-colors duration-200 shadow-lg"
                   >
-                    {slide.destinationCity}
+                    {slide.destinationAirport}
                   </a>
                 </div>
               </div>
@@ -166,7 +139,7 @@ const BannerCarousel = () => {
 
         {/* Indicators */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
-          {slides.map((_, index) => (
+          {banners.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}

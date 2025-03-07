@@ -129,12 +129,10 @@ export async function createBanner(preveState: unknown, formData: FormData) {
     data: {
       title: submission.value.title,
       description: submission.value.description,
-      destinationCity: submission.value.destinationCity,
+      destinationAirport: submission.value.destinationAirport,
       largeImageUrl: submission.value.largeImageUrl,
       smallImageUrl: submission.value.smallImageUrl,
       isActive: submission.value.isActive,
-      startDate: submission.value.startDate,
-      endDate: submission.value.endDate,
     },
   });
   revalidatePath("/admin-dashboard/banners");

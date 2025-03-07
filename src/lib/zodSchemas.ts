@@ -87,10 +87,8 @@ export const flightSchema = z.object({
 export const bannerSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
-  destinationCity: z.string(),
+  destinationAirport: z.string(),
   largeImageUrl: z.string(),
   smallImageUrl: z.string(),
-  isActive: z.boolean().optional(),
-  startDate: z.date(),
-  endDate: z.date().optional(),
+  isActive: z.boolean().optional().default(true),
 });
