@@ -26,6 +26,8 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import prisma from "@/utils/db";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import DeleteConfirmation from "../_components/DeleteConfirmation";
 
 async function getData() {
   const data = await prisma.flight.findMany({
@@ -111,11 +113,18 @@ export default async function Flights() {
                             </Link>
                           </DropdownMenuItem>
                           <DropdownMenuItem asChild>
-                            <Link
-                              href={`/dashboard/flights/${flight.id}/delete`}
-                            >
-                              Delete
-                            </Link>
+                            <Dialog>
+                              <DialogTrigger>
+                                <span className="p-2 text-sm">Delete</span>
+                              </DialogTrigger>
+                              <DialogContent>
+                                <DeleteConfirmation
+                                  id={flight.id}
+                                  title={flight.flightName}
+                                  modelType="flight"
+                                />
+                              </DialogContent>
+                            </Dialog>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

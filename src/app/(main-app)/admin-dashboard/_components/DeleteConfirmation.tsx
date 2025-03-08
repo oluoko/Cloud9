@@ -48,7 +48,7 @@ export default function DeleteConfirmation({
   const entityName = modelType.charAt(0).toUpperCase() + modelType.slice(1);
 
   return (
-    <Card className="border-none shadow-none max-w-xl">
+    <Card className="border-none shadow-none bg-transparent max-w-xl">
       <CardHeader>
         <CardTitle>
           Are you absolutely sure you want to delete this {modelType}?
@@ -65,26 +65,24 @@ export default function DeleteConfirmation({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={`Type "${title}" to confirm`}
+          className="mb-4"
         />
-        <div className="w-full flex justify-between my-2">
-          <Button variant="secondary">Cancel</Button>
 
-          {isDeleting ? (
-            <Button disabled variant="destructive" className="text-xl">
-              <Loader2 className="animate-spin mr-2 size-4" />
-              Deleting...
-            </Button>
-          ) : (
-            <Button
-              variant="destructive"
-              className="text-xl"
-              disabled={!match}
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
-          )}
-        </div>
+        {isDeleting ? (
+          <Button disabled variant="destructive" className="text-xl">
+            <Loader2 className="animate-spin mr-2 size-4" />
+            Deleting...
+          </Button>
+        ) : (
+          <Button
+            variant="destructive"
+            className="text-xl"
+            disabled={!match}
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
