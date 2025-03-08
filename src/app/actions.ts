@@ -1,15 +1,14 @@
 "use server";
 
-import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
-
 import { revalidatePath } from "next/cache";
 import { flightSchema, bannerSchema } from "@/lib/zodSchemas";
 import prisma from "@/utils/db";
+import { getUserByClerkId } from "@/lib/auth";
 
 export async function createFlight(preveState: unknown, formData: FormData) {
-  const user = await currentUser();
+  const user = await getUserByClerkId();
   if (!user) {
     return redirect("/sign-in");
   }
@@ -48,7 +47,7 @@ export async function createFlight(preveState: unknown, formData: FormData) {
 }
 
 export async function editFlight(prevState: unknown, formData: FormData) {
-  const user = await currentUser();
+  const user = await getUserByClerkId();
   if (!user) {
     return redirect("/sign-in");
   }
@@ -92,7 +91,7 @@ export async function editFlight(prevState: unknown, formData: FormData) {
 }
 
 export async function deleteProduct(formData: FormData) {
-  const user = await currentUser();
+  const user = await getUserByClerkId();
   if (!user) {
     return redirect("/sign-in");
   }
@@ -108,7 +107,7 @@ export async function deleteProduct(formData: FormData) {
 }
 
 export async function createBanner(preveState: unknown, formData: FormData) {
-  const user = await currentUser();
+  const user = await getUserByClerkId();
   if (!user) {
     return redirect("/sign-in");
   }
@@ -136,7 +135,7 @@ export async function createBanner(preveState: unknown, formData: FormData) {
 }
 
 export async function editBanner(prevState: unknown, formData: FormData) {
-  const user = await currentUser();
+  const user = await getUserByClerkId();
   if (!user) {
     return redirect("/sign-in");
   }
@@ -169,7 +168,7 @@ export async function editBanner(prevState: unknown, formData: FormData) {
 }
 
 export async function deleteBanner(formData: FormData) {
-  const user = await currentUser();
+  const user = await getUserByClerkId();
   if (!user) {
     return redirect("/sign-in");
   }

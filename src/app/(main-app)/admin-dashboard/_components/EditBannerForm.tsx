@@ -65,6 +65,7 @@ export function EditBannerForm({ data }: EditBannerFormProps) {
   return (
     <>
       <form id={form.id} onSubmit={form.onSubmit} action={action}>
+        <input type="hidden" name="bannerId" value={data.id} />
         <div className="flex justify-between items-center mb-4">
           <Link
             href="/admin-dashboard/banners"
