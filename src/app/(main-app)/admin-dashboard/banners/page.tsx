@@ -17,6 +17,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Table,
   TableBody,
@@ -26,6 +27,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
+import DeleteConfirmation from "../_components/DeleteConfirmation";
 
 async function getData() {
   const data = await prisma.banner.findMany({
@@ -126,11 +128,18 @@ export default async function Banners() {
                             </Link>
                           </DropdownMenuItem>
                           <DropdownMenuItem asChild>
-                            <Link
-                              href={`/admin-dashboard/banners/${banner.id}/delete`}
-                            >
-                              Delete
-                            </Link>
+                            <Dialog>
+                              <DialogTrigger>
+                                <span className="p-2 text-sm">Delete</span>
+                              </DialogTrigger>
+                              <DialogContent>
+                                <DeleteConfirmation
+                                  id={banner.id}
+                                  title={banner.title}
+                                  modelType="banner"
+                                />
+                              </DialogContent>
+                            </Dialog>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

@@ -26,7 +26,7 @@ import { useFormState } from "react-dom";
 
 interface EditBannerFormProps {
   data: {
-    id: string | number;
+    id: string;
     title: string;
     destinationAirport: string;
     description: string | null;

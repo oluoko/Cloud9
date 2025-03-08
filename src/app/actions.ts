@@ -90,7 +90,7 @@ export async function editFlight(prevState: unknown, formData: FormData) {
   redirect("/admin-dashboard/flights");
 }
 
-export async function deleteProduct(formData: FormData) {
+export async function deleteFlight(flightId: string) {
   const user = await getUserByClerkId();
   if (!user) {
     return redirect("/sign-in");
@@ -98,7 +98,7 @@ export async function deleteProduct(formData: FormData) {
 
   await prisma.flight.delete({
     where: {
-      id: formData.get("flightId") as string,
+      id: flightId,
     },
   });
 
@@ -167,7 +167,7 @@ export async function editBanner(prevState: unknown, formData: FormData) {
   redirect("/admin-dashboard/banners");
 }
 
-export async function deleteBanner(formData: FormData) {
+export async function deleteBanner(bannerId: string) {
   const user = await getUserByClerkId();
   if (!user) {
     return redirect("/sign-in");
@@ -175,7 +175,7 @@ export async function deleteBanner(formData: FormData) {
 
   await prisma.banner.delete({
     where: {
-      id: formData.get("bannerId") as string,
+      id: bannerId,
     },
   });
 
