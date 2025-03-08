@@ -246,6 +246,7 @@ export default function CreateFlight() {
                       setImages(res.map((r) => r.url));
                       toast({
                         title: "Image Uploaded",
+                        variant: "success",
                         description:
                           "The selected images, for the flight, have been uploaded successfully",
                       });

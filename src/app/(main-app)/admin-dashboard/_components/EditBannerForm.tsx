@@ -1,6 +1,6 @@
 "use client";
 
-import { createBanner } from "@/app/actions";
+import { editBanner } from "@/app/actions";
 import { SubmitButton } from "@/components/CustomButton";
 import {
   Card,
@@ -21,14 +21,30 @@ import { parseWithZod } from "@conform-to/zod";
 import { ChevronLeft, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormState } from "react-dom";
 
-export default function CreateBanner() {
+interface EditBannerFormProps {
+  data: {
+    id: string | number;
+    title: string;
+    destinationAirport: string;
+    description: string | null;
+    largeImageUrl: string;
+    smallImageUrl: string;
+    isActive: boolean;
+  };
+}
+
+export function EditBannerForm({ data }: EditBannerFormProps) {
   const { toast } = useToast();
-  const [smallImage, setSmallImage] = useState<string | undefined>(undefined);
-  const [largeImage, setLargeImage] = useState<string | undefined>(undefined);
-  const [lastResult, action] = useFormState(createBanner, undefined);
+  const [smallImage, setSmallImage] = useState<string | undefined>(
+    data.smallImageUrl
+  );
+  const [largeImage, setLargeImage] = useState<string | undefined>(
+    data.largeImageUrl
+  );
+  const [lastResult, action] = useFormState(editBanner, undefined);
 
   const [form, fields] = useForm({
     lastResult,
@@ -46,7 +62,6 @@ export default function CreateBanner() {
       setLargeImage(undefined);
     }
   };
-
   return (
     <>
       <form id={form.id} onSubmit={form.onSubmit} action={action}>
@@ -58,17 +73,14 @@ export default function CreateBanner() {
             <ChevronLeft className="size-4 md:size-5" />
           </Link>
 
-          <h1 className="text-xl font-semibold tracking-tight">
-            Create New Banner
-          </h1>
+          <h1 className="text-xl font-semibold tracking-tight">Edit Banner</h1>
         </div>
 
         <Card>
           <CardHeader>
             <CardTitle>Banner Details</CardTitle>
             <CardDescription>
-              Create your banner right here. We need two images: one for small
-              screens(phones) and another for large screens(laptops and PCs).
+              Edit the already createed banner right here.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -80,7 +92,7 @@ export default function CreateBanner() {
                     type="text"
                     name={fields.title.name}
                     key={fields.title.key}
-                    defaultValue={fields.title.value}
+                    defaultValue={data.title}
                     placeholder="Enter the title of the banner"
                   />
                   <p className="text-red-500">{fields.title.errors}</p>
@@ -91,7 +103,7 @@ export default function CreateBanner() {
                     type="text"
                     name={fields.destinationAirport.name}
                     key={fields.destinationAirport.key}
-                    defaultValue={fields.destinationAirport.value}
+                    defaultValue={data.destinationAirport}
                     placeholder="Enter the destination city"
                   />
                   <p className="text-red-500">
@@ -105,7 +117,7 @@ export default function CreateBanner() {
                   type="text"
                   name={fields.description.name}
                   key={fields.description.key}
-                  defaultValue={fields.description.value}
+                  defaultValue={data.description ?? ""}
                   placeholder="Enter the description of the banner"
                 />
                 <p className="text-red-500">{fields.description.errors}</p>
@@ -115,7 +127,7 @@ export default function CreateBanner() {
                 <Switch
                   key={fields.isActive.key}
                   name={fields.isActive.name}
-                  defaultValue={fields.isActive.initialValue}
+                  defaultChecked={data.isActive}
                 />
                 <p className="text-red-500">{fields.isActive.errors}</p>
               </div>
@@ -228,7 +240,7 @@ export default function CreateBanner() {
             </div>
           </CardContent>
           <CardFooter>
-            <SubmitButton text="Create Banner" />
+            <SubmitButton text="Edit This Banner" />
           </CardFooter>
         </Card>
       </form>

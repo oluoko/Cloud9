@@ -39,10 +39,8 @@ export async function createFlight(preveState: unknown, formData: FormData) {
       economyPrice: submission.value.economyPrice,
       businessPrice: submission.value.businessPrice,
       firstClassPrice: submission.value.firstClassPrice,
-      departure: submission.value.departure,
       departureAirport: submission.value.departureAirport,
       arrivalAirport: submission.value.arrivalAirport,
-      arrival: submission.value.arrival,
     },
   });
   revalidatePath("/admin-dashboard/flights");
@@ -84,10 +82,8 @@ export async function editFlight(prevState: unknown, formData: FormData) {
       economyPrice: submission.value.economyPrice,
       businessPrice: submission.value.businessPrice,
       firstClassPrice: submission.value.firstClassPrice,
-      departure: submission.value.departure,
       departureAirport: submission.value.departureAirport,
       arrivalAirport: submission.value.arrivalAirport,
-      arrival: submission.value.arrival,
     },
   });
 
@@ -161,12 +157,10 @@ export async function editBanner(prevState: unknown, formData: FormData) {
     data: {
       title: submission.value.title,
       description: submission.value.description,
-      destinationCity: submission.value.destinationCity,
+      destinationAirport: submission.value.destinationAirport,
       largeImageUrl: submission.value.largeImageUrl,
       smallImageUrl: submission.value.smallImageUrl,
       isActive: submission.value.isActive,
-      startDate: submission.value.startDate,
-      endDate: submission.value.endDate,
     },
   });
 

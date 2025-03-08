@@ -90,5 +90,5 @@ export const bannerSchema = z.object({
   destinationAirport: z.string(),
   largeImageUrl: z.string(),
   smallImageUrl: z.string(),
-  isActive: z.boolean().optional().default(true),
+  isActive: z.boolean().optional().default(false),
 });
