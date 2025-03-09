@@ -24,6 +24,8 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { DateTimePicker } from "../../_components/DateTimePicker";
 import { SubmitButton } from "@/components/CustomButton";
+import axios from "axios";
+import { getImageKey } from "@/utils/utils";
 
 export default function CreateFlight() {
   const { toast } = useToast();
@@ -38,7 +40,10 @@ export default function CreateFlight() {
     shouldRevalidate: "onInput",
   });
 
-  const handleDeleteImage = (index: number) => {
+  const handleDeleteImage = async (index: number) => {
+    await axios.post("/api/uploadthing/delete", {
+      key: getImageKey(images[index]),
+    });
     setImages(images.filter((_, i) => i !== index));
   };
   return (

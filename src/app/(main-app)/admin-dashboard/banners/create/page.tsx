@@ -21,8 +21,9 @@ import { parseWithZod } from "@conform-to/zod";
 import { ChevronLeft, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormState } from "react-dom";
+import axios from "axios";
 
 export default function CreateBanner() {
   const { toast } = useToast();
@@ -39,10 +40,16 @@ export default function CreateBanner() {
     shouldRevalidate: "onInput",
   });
 
-  const handleDeleteImage = (image: "small" | "large") => {
+  const getImageKey = (image: "small" | "large") => {
+    return image === "small" ? smallImage : largeImage;
+  };
+
+  const handleDeleteImage = async (image: "small" | "large") => {
     if (image === "small") {
+      await axios.post("/api/uploadthing/delete", { key: getImageKey(image) });
       setSmallImage(undefined);
     } else {
+      await axios.post("/api/uploadthing/delete", { key: getImageKey(image) });
       setLargeImage(undefined);
     }
   };
