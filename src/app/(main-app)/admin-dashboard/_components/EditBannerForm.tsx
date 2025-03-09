@@ -16,8 +16,10 @@ import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { bannerSchema } from "@/lib/zodSchemas";
 import { UploadButton } from "@/utils/uploadthing";
+import { getImageKey } from "@/utils/utils";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
+import axios from "axios";
 import { ChevronLeft, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,13 +57,23 @@ export function EditBannerForm({ data }: EditBannerFormProps) {
     shouldRevalidate: "onInput",
   });
 
-  const handleDeleteImage = (image: "small" | "large") => {
-    if (image === "small") {
+  const handleDeleteImage = async (
+    imageType: "small" | "large",
+    imageUrl: string
+  ) => {
+    if (imageType === "small") {
+      await axios.post("/api/uploadthing/delete", {
+        imageKey: getImageKey(imageUrl),
+      });
       setSmallImage(undefined);
-    } else {
+    } else if (imageType === "large") {
+      await axios.post("/api/uploadthing/delete", {
+        imageKey: getImageKey(imageUrl),
+      });
       setLargeImage(undefined);
     }
   };
+
   return (
     <>
       <form id={form.id} onSubmit={form.onSubmit} action={action}>
@@ -154,7 +166,7 @@ export function EditBannerForm({ data }: EditBannerFormProps) {
                         className="w-full h-full object-cover rounded-lg border"
                       />
                       <button
-                        onClick={() => handleDeleteImage("large")}
+                        onClick={() => handleDeleteImage("large", largeImage)}
                         type="button"
                         className="absolute -top-3 -right-3 bg-red-500 p-1 rounded-lg text-white"
                         title="Delete Image"
@@ -206,7 +218,7 @@ export function EditBannerForm({ data }: EditBannerFormProps) {
                         className="w-full h-full object-cover rounded-lg border"
                       />
                       <button
-                        onClick={() => handleDeleteImage("small")}
+                        onClick={() => handleDeleteImage("small", smallImage)}
                         type="button"
                         className="absolute -top-3 -right-3 bg-red-500 p-1 rounded-lg text-white"
                         title="Delete Image"

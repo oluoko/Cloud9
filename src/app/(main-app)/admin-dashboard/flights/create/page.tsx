@@ -42,7 +42,7 @@ export default function CreateFlight() {
 
   const handleDeleteImage = async (index: number) => {
     await axios.post("/api/uploadthing/delete", {
-      key: getImageKey(images[index]),
+      imageKey: getImageKey(images[index]),
     });
     setImages(images.filter((_, i) => i !== index));
   };

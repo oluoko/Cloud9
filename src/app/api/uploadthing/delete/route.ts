@@ -11,6 +11,9 @@ export async function POST(req: Request) {
 
   const { imageKey } = await req.json();
 
+  console.log("req.body::", req.body);
+  console.log("Image key::", imageKey);
+
   try {
     const res = await utapi.deleteFiles(imageKey);
     return NextResponse.json(res);

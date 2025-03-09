@@ -3,7 +3,7 @@ export function getInitials(firstName: string, secondName: string): string {
 }
 
 export function getImageKey(src: string) {
-  src.substring(src.lastIndexOf("/") + 1);
+  return src.substring(src.lastIndexOf("/") + 1);
 }
 
 // to delete and image maker a request to this route:
