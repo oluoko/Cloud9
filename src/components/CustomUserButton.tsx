@@ -10,18 +10,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SignOutButton } from "@clerk/nextjs";
 import { getInitials } from "@/utils/utils";
-import { currentUser } from "@clerk/nextjs/server";
 import userImage from "../../public/assets/userProfile.png";
 import Link from "next/link";
-import prisma from "@/utils/db";
+
+import { getUserByClerkId } from "@/lib/auth";
 
 const CustomUserButton = async () => {
-  const user = await currentUser();
-  const dbUser = await prisma.user.findUnique({
-    where: {
-      id: user?.id as string,
-    },
-  });
+  const dbUser = await getUserByClerkId();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
