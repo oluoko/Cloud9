@@ -41,17 +41,6 @@ export function DateTimePicker({
   dateFieldErrors,
   timeFieldErrors,
 }: DateTimePickerProps) {
-  console.log("DateTimePicker Props:", {
-    dateFieldName,
-    timeFieldName,
-    dateFieldValue,
-    timeFieldValue,
-    dateFieldKey,
-    timeFieldKey,
-    dateFieldErrors,
-    timeFieldErrors,
-  });
-
   // Generate time options
   const timeOptions = Array.from({ length: 96 }).map((_, i) => {
     const hour = Math.floor(i / 4)

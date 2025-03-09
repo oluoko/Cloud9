@@ -108,7 +108,9 @@ export default async function Flights() {
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem asChild>
-                            <Link href={`/dashboard/flights/${flight.id}`}>
+                            <Link
+                              href={`/admin-dashboard/flights/${flight.id}`}
+                            >
                               Edit
                             </Link>
                           </DropdownMenuItem>
