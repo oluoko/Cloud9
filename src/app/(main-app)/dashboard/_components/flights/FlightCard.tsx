@@ -30,7 +30,7 @@ export function FlightCard({ flight }) {
         />
         <div className="mt-3 text-sm">
           <p>
-            From <span className="font-bold">${flight.economyPrice}</span>
+            From <span className="font-bold">Ksh {flight.economyPrice}</span>
           </p>
         </div>
       </CardContent>
