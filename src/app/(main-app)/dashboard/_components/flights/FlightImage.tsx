@@ -12,7 +12,6 @@ export function FlightImage({ images, airlineName, size = "medium" }) {
           src={images[0]}
           alt={`${airlineName} flight`}
           width={size === "large" ? 800 : 400}
-          height={size === "large" ? 250 : 200}
           className={className}
         />
       </div>
