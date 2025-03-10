@@ -14,9 +14,13 @@ import userImage from "../../public/assets/userProfile.png";
 import Link from "next/link";
 
 import { getUserByClerkId } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 const CustomUserButton = async () => {
   const dbUser = await getUserByClerkId();
+  if (!dbUser.phoneNumber) {
+    redirect("/complete-profile");
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

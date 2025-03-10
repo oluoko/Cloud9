@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 const createNewUser = async () => {
   const user = await currentUser();
-  console.log(user);
+
   if (!user) {
     throw new Error("User not found");
   }
@@ -28,7 +28,7 @@ const createNewUser = async () => {
     });
   }
 
-  redirect("/dashboard");
+  redirect("/complete-profile");
 };
 
 const NewUser = async () => {

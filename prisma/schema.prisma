@@ -8,15 +8,18 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  clerkUserId  String   @unique
-  email        String   @unique
+  id           String  @id @default(uuid())
+  clerkUserId  String  @unique
+  email        String  @unique
   firstName    String?
   lastName     String?
   profileImage String?
   phoneNumber  String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Flight {
@@ -34,8 +37,11 @@ model Flight {
   firstClassPrice  Float
   departureAirport String
   arrivalAirport   String
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Banner {
@@ -46,6 +52,23 @@ model Banner {
   largeImageUrl      String
   smallImageUrl      String
   isActive           Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id         String @id @default(uuid())
+  status     String @default("pending")
+  seatType   String
+  seatNumber String
+  price      Float
+
+  User   User?  @relation(fields: [userId], references: [id])
+  userId String
+
+  Flight   Flight? @relation(fields: [flightId], references: [id])
+  flightId String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -65,7 +65,7 @@ export default function SignUpPage() {
     return (
       <Loader
         mainText="Registration Complete"
-        subText="Redirecting you to your dashboard"
+        subText="Let's complete your profile"
       />
     );
   }
