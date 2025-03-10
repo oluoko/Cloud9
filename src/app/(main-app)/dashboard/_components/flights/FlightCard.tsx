@@ -8,7 +8,6 @@ import {
 import { FlightImage } from "./FlightImage";
 import { FlightDateTime } from "./FlightDateTime";
 import { FlightRoute } from "./FlightRoute";
-import { DollarSign } from "lucide-react";
 
 export function FlightCard({ flight }) {
   return (
