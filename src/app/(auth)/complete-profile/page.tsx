@@ -97,7 +97,20 @@ export default function CompleteProfile() {
             action={action}
             className="space-y-4"
           >
-            {!isOAuthUser && (
+            {isOAuthUser ? (
+              <div className="hidden">
+                <Input
+                  type="hidden"
+                  name={fields.firstName.name}
+                  value={user?.firstName || ""}
+                />
+                <Input
+                  type="hidden"
+                  name={fields.lastName.name}
+                  value={user?.lastName || ""}
+                />
+              </div>
+            ) : (
               <div className="flex justify-between space-x-4">
                 <div className="space-y-2">
                   <Label>Profile Image</Label>
