@@ -73,7 +73,7 @@ export async function editProfile(prevState: unknown, formData: FormData) {
     },
   });
 
-  revalidatePath("/dashboard/profile");
+  revalidatePath("/");
   redirect("/dashboard/profile");
 }
 
