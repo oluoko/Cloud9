@@ -45,6 +45,38 @@ export async function updateProfile(prevState: unknown, formData: FormData) {
   }
 }
 
+export async function editProfile(prevState: unknown, formData: FormData) {
+  const user = await getUserByClerkId();
+  if (!user) {
+    return redirect("/sign-in");
+  }
+
+  const submission = parseWithZod(formData, {
+    schema: profileSchema,
+  });
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  const userId = formData.get("userId") as string;
+
+  await prisma.user.update({
+    where: {
+      clerkUserId: userId,
+    },
+    data: {
+      firstName: submission.value.firstName,
+      lastName: submission.value.lastName,
+      phoneNumber: submission.value.phoneNumber,
+      profileImage: submission.value.profileImage || undefined,
+    },
+  });
+
+  revalidatePath("/dashboard/profile");
+  redirect("/dashboard/profile");
+}
+
 export async function createFlight(preveState: unknown, formData: FormData) {
   const user = await getUserByClerkId();
   if (!user) {

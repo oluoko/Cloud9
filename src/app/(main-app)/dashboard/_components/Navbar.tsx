@@ -12,15 +12,13 @@ import CustomUserButton from "@/components/CustomUserButton";
 
 export function NavBar() {
   const navbarLinks = [
-    { id: 0, name: "Home", href: "/dashboard" },
-    { id: 1, name: "Profile", href: "/dashboard/profile" },
-    { id: 2, name: "Bookings", href: "/dashboard/bookings" },
-    { id: 3, name: "Checkout", href: "/dashboard/check-out" },
+    { id: 0, name: "Flights", href: "/dashboard/flights" },
+    { id: 1, name: "Bookings", href: "/dashboard/bookings" },
   ];
   return (
     <header className="flex items-center justify-center py-1 fixed shadow-xl top-0 w-screen z-99 bg-background z-50">
       <nav className="flex items-center justify-between container font-semibold w-11/12 ">
-        <Link href="/">
+        <Link href="/dashboard">
           <BrandLogo styling="h-[45px] md:h-[60px] w-[90px] md:w-[120px]" />
         </Link>
         <div className="flex items-center justify-between gap-5 md:gap-10">
