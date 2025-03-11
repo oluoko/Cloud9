@@ -3,7 +3,7 @@ import { Plane } from "lucide-react";
 
 export function FlightImage({ images, airlineName, size = "medium" }) {
   const iconSize = size === "large" ? 64 : 48;
-  const className = "object-cover h-full w-full";
+  const className = "object-cover h-full";
 
   if (images && images.length > 0) {
     return (
@@ -11,7 +11,8 @@ export function FlightImage({ images, airlineName, size = "medium" }) {
         <Image
           src={images[0]}
           alt={`${airlineName} flight`}
-          width={size === "large" ? 550 : 400}
+          width={400}
+          height={10}
           className={className}
         />
       </div>
