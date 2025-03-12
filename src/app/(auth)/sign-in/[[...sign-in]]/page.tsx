@@ -40,7 +40,7 @@ export default function SignInForm() {
 
   console.log("userId:: ", userId);
   if (userId) {
-    router.push("/saving-info");
+    router.push("/dashboard");
   }
 
   if (!isLoaded) {

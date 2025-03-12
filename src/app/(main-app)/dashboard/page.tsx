@@ -2,6 +2,9 @@ import Footer from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import BannerCarousel from "./_components/BannerCaurosel";
 import prisma from "@/utils/db";
+import Flights from "@/components/Flights";
+import Testimonials from "@/components/Testimonials";
+import ContactUsPage from "@/components/ContactUsPage";
 
 async function getBanners() {
   const banners = await prisma.banner.findMany({
@@ -29,7 +32,9 @@ export default async function Home() {
   return (
     <div className="">
       <BannerCarousel banners={banners} />
-      <Hero />
+      <Flights />
+      <Testimonials />
+      <ContactUsPage />
       <Footer />
     </div>
   );

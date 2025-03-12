@@ -11,6 +11,7 @@ import { FlightImage } from "./FlightImage";
 import { FlightDateTime } from "./FlightDateTime";
 import { FlightRoute } from "./FlightRoute";
 import { FlightClassInfo } from "./FlightClassInfo";
+import Link from "next/link";
 
 export function FeaturedFlightCard({ flight }) {
   return (
@@ -64,9 +65,12 @@ export function FeaturedFlightCard({ flight }) {
             />
           </CardContent>
           <CardFooter className="px-0 pt-4">
-            <button className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary transition w-full">
+            <Link
+              href={`/dashboard/flights/${flight.id}`}
+              className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary transition w-full"
+            >
               Book Now
-            </button>
+            </Link>
           </CardFooter>
         </div>
       </div>
