@@ -203,7 +203,6 @@ export default function FlightPage({ flight }) {
                 </div>
               </TabsContent>
             </Tabs>
-
             <div className="mt-6">
               <label className="text-sm font-medium mb-2 block">
                 Number of Passengers
@@ -223,7 +222,6 @@ export default function FlightPage({ flight }) {
                 </SelectContent>
               </Select>
             </div>
-
             <div className="mt-6 p-4 bg-muted rounded-md">
               <div className="flex items-center justify-between font-semibold">
                 <span>Total Price:</span>
@@ -235,13 +233,19 @@ export default function FlightPage({ flight }) {
                 Ksh
                 {priceMap[selectedClass].toFixed(2)}
               </div>
+            </div>{" "}
+            <div className="mt-4 p-4 border border-muted rounded-md text-sm">
+              This is a dummy site, and you are about to book and pay for a fake
+              flight.
             </div>
           </CardContent>
-          <CardFooter>
-            <Button className="w-full" size="lg">
+
+          <CardFooter className="flex justify-between gap-2">
+            <Button>
               <CreditCard className="mr-2 h-4 w-4" />
-              Proceed to Payment
+              Payment With Card
             </Button>
+            <Button>Lipa na Mpesa</Button>
           </CardFooter>
         </Card>
       </div>
