@@ -222,7 +222,7 @@ export default function FlightPage({ flight }) {
                 </SelectContent>
               </Select>
             </div>
-            <div className="mt-6 p-4 bg-muted rounded-md">
+            <div className="mt-4 p-4 bg-muted rounded-md">
               <div className="flex items-center justify-between font-semibold">
                 <span>Total Price:</span>
                 <span className="text-xl">Ksh {totalPrice.toFixed(2)}</span>
@@ -234,7 +234,7 @@ export default function FlightPage({ flight }) {
                 {priceMap[selectedClass].toFixed(2)}
               </div>
             </div>{" "}
-            <div className="mt-4 p-4 border border-muted rounded-md text-sm">
+            <div className="mt-4 p-2 border border-muted rounded-md text-sm">
               This is a dummy site, and you are about to book and pay for a fake
               flight.
             </div>
