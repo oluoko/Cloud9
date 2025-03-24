@@ -12,5 +12,9 @@ export default authMiddleware({
     "/saving-info",
     "/api/uploadthing",
     "/sso-callback",
+    "/terms-and-conditions",
+    "/privacy-policy",
+    "/blog",
+    "/destination",
   ],
 });

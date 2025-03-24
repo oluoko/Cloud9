@@ -257,15 +257,33 @@ export default function SignUpPage() {
           </CardContent>
           <CardFooter className="justify-center">
             {!pendingVerification && (
-              <p className="text-sm text-muted-foreground">
-                Already have an account?{" "}
-                <Link
-                  href="/sign-in"
-                  className="font-medium text-primary hover:underline"
-                >
-                  Sign In
-                </Link>
-              </p>
+              <>
+                <p className="text-sm text-muted-foreground">
+                  Already have an account?{" "}
+                  <Link
+                    href="/sign-in"
+                    className="font-medium text-primary hover:underline"
+                  >
+                    Sign In
+                  </Link>
+                </p>{" "}
+                <p className="text-sm text-muted-foreground">
+                  By signing up to create an account, you accepting with our{" "}
+                  <Link
+                    href="/terms-and-conditions"
+                    className="font-medium text-primary hover:underline"
+                  >
+                    terms and conditions
+                  </Link>{" "}
+                  together with our{" "}
+                  <Link
+                    href="/privacy-policy"
+                    className="font-medium text-primary hover:underline"
+                  >
+                    privacy policy.
+                  </Link>
+                </p>
+              </>
             )}
           </CardFooter>
         </Card>

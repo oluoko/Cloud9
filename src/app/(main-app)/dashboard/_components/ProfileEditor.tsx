@@ -19,6 +19,7 @@ import { useFormState } from "react-dom";
 import { SubmitButton } from "@/components/CustomButton";
 import { profileSchema } from "@/lib/zodSchemas";
 import { PhoneInput } from "@/components/ui/phone-input";
+import ApplyAdmin from "./ApplyAdmin";
 
 interface ProfileEditorProps {
   data: {
@@ -65,7 +66,8 @@ export function ProfileEditor({ data }: ProfileEditorProps) {
     setProfileImage(undefined);
   };
   return (
-    <div className="h-screen flex flex-col items-center justify-center">
+    <div className="relative h-screen flex flex-col items-center justify-center">
+      <ApplyAdmin />
       <Card className="mx-2">
         <CardHeader>
           <CardTitle className="font-bold text-center text-2xl">
