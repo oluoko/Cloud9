@@ -26,7 +26,7 @@ import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
 import Loader from "@/components/Loader";
 import AuthLayout from "@/components/AuthLayout";
 import Separator from "@/components/CustomSeparator";
-import OauthSignIn from "@/components/Oauth";
+import OauthSignIn from "@/components/OAuth";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 
 export default function SignUpPage() {

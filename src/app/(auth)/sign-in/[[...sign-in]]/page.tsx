@@ -22,7 +22,7 @@ import { BrandLogo } from "@/components/BrandLogo";
 import Loader from "@/components/Loader";
 import AuthLayout from "@/components/AuthLayout";
 import Separator from "@/components/CustomSeparator";
-import OauthSignIn from "@/components/Oauth";
+import OauthSignIn from "@/components/OAuth";
 
 export default function SignInForm() {
   const { isLoaded, signIn, setActive } = useSignIn();
