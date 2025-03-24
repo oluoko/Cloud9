@@ -120,7 +120,7 @@ export default function ContactUsPage() {
                     <Checkbox id="acceptTerms" />
                     <Label htmlFor="acceptTerms">
                       You agree to our{" "}
-                      <Link href="#" className="underline">
+                      <Link href="/terms-and-conditions" className="underline">
                         terms and conditions
                       </Link>
                       .
