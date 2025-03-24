@@ -1,8 +1,15 @@
+import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
-export function PrivacyPolicy() {
+export default function PrivacyPolicy() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-4 text-center text-balance gap-6">
+    <section className="min-h-screen flex flex-col items-center justify-center px-4 text-center text-balance gap-6  py-8">
+      <Link
+        href="/"
+        className="rounded-full bg-secondary-foreground/40 p-2 hover:bg-primary absolute left-5 top-5"
+      >
+        <ChevronLeft className="size-4 md:size-5" />
+      </Link>
       <h1 className="text-5xl lg:text-6xl font-bold tracking-tight mb-4">
         Privacy Policy
       </h1>

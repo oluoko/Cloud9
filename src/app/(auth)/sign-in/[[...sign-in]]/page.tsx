@@ -174,7 +174,7 @@ export default function SignInForm() {
             </form>
           </CardContent>
           <CardFooter className="justify-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground">
               Don&apos;t have an account?{" "}
               <Link
                 href="/sign-up"

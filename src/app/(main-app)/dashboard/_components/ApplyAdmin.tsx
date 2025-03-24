@@ -77,7 +77,7 @@ export default function ApplyAdmin() {
 
   return (
     <div className="fixed bottom-5 left-5 md:left-10 z-50">
-      <Link href="/admin-dashboard" className="block">
+      <Link href="/dashboard/apply-admin" className="block">
         <Button
           className={`
             transition-all duration-500 ease-in-out origin-left font-bold

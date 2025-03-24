@@ -255,10 +255,10 @@ export default function SignUpPage() {
               </form>
             )}
           </CardContent>
-          <CardFooter className="justify-center">
+          <CardFooter className="justify-center flex flex-col items-center">
             {!pendingVerification && (
               <>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground">
                   Already have an account?{" "}
                   <Link
                     href="/sign-in"
@@ -267,15 +267,15 @@ export default function SignUpPage() {
                     Sign In
                   </Link>
                 </p>{" "}
-                <p className="text-sm text-muted-foreground">
-                  By signing up to create an account, you accepting with our{" "}
+                <p className="text-sm text-muted-foreground mt-4">
+                  By signing up to create an account, you are accepting our{" "}
                   <Link
                     href="/terms-and-conditions"
                     className="font-medium text-primary hover:underline"
                   >
-                    terms and conditions
+                    terms
                   </Link>{" "}
-                  together with our{" "}
+                  and{" "}
                   <Link
                     href="/privacy-policy"
                     className="font-medium text-primary hover:underline"
