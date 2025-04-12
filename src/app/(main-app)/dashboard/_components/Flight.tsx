@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Card,
   CardContent,
@@ -37,6 +37,8 @@ import {
   Users,
 } from "lucide-react";
 import { FaPlane } from "react-icons/fa";
+import Image from "next/image";
+import LipaNaMpesa from "./LipaNaMpesa";
 
 interface FlightProps {
   id: string;
@@ -168,8 +170,9 @@ export default function FlightPage({
                     {flight.flightImages.map((image, index) => (
                       <CarouselItem key={index}>
                         <div className="relative h-64 w-full rounded-md overflow-hidden">
-                          <img
+                          <Image
                             src={image}
+                            fill={true}
                             alt={`Flight image ${index + 1}`}
                             className="object-cover w-full h-full"
                           />
@@ -282,7 +285,14 @@ export default function FlightPage({
               <CreditCard className="mr-2 h-4 w-4" />
               Payment With Card
             </Button>
-            <Button>Lipa na Mpesa</Button>
+            <Button>
+              <Dialog>
+                <DialogTrigger>Lipa na Mpesa</DialogTrigger>
+                <DialogContent>
+                  <LipaNaMpesa amount={totalPrice} user={user} />
+                </DialogContent>
+              </Dialog>
+            </Button>
           </CardFooter>
         </Card>
       </div>
