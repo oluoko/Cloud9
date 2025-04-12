@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-interface LipaNaMpesaProps {
+interface PayWithCardProps {
   User: {
     id: string;
     email: string;
@@ -14,12 +14,12 @@ interface LipaNaMpesaProps {
   };
 }
 
-export default function LipaNaMpesa({
+export default function PayWithCard({
   amount,
   user,
 }: {
   amount: number;
-  user: LipaNaMpesaProps["User"];
+  user: PayWithCardProps["User"];
 }) {
   return (
     <div className="p-4">
@@ -29,15 +29,11 @@ export default function LipaNaMpesa({
       </h1>
       <p className=" my-3 text-lg text-gray-500">
         Please confirm your payment of{" "}
-        <span className="text-black font-bold">Ksh {amount}</span> via Lipa Na
-        Mpesa, using the phone number,{" "}
-        <span className="text-black font-bold">{user?.phoneNumber}</span> to
+        <span className="text-black font-bold">Ksh {amount}</span> via card, to
         complete your booking.
       </p>
-      <div className="flex justify-between">
-        <Button>Use a different number</Button>
-        <Button>Complete Payment</Button>
-      </div>
+
+      <Button>Complete Payment</Button>
     </div>
   );
 }

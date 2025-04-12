@@ -39,6 +39,8 @@ import {
 import { FaPlane } from "react-icons/fa";
 import Image from "next/image";
 import LipaNaMpesa from "./LipaNaMpesa";
+import PayWithCard from "./PayWithCard";
+import mpesaText from "../../../../../public/assets/lipa na mpesa.png";
 
 interface FlightProps {
   id: string;
@@ -282,12 +284,21 @@ export default function FlightPage({
 
           <CardFooter className="flex justify-between gap-2">
             <Button>
-              <CreditCard className="mr-2 h-4 w-4" />
-              Payment With Card
-            </Button>
-            <Button>
               <Dialog>
-                <DialogTrigger>Lipa na Mpesa</DialogTrigger>
+                <DialogTrigger className="flex items-center gap-2">
+                  <CreditCard className="mr-2 h-4 w-4" />
+                  Pay With Card
+                </DialogTrigger>
+                <DialogContent>
+                  <PayWithCard amount={totalPrice} user={user} />
+                </DialogContent>
+              </Dialog>
+            </Button>
+            <Button variant="outline">
+              <Dialog>
+                <DialogTrigger className="flex items-center gap-2 p-2">
+                  <Image src={mpesaText} alt="Lipa Na Mpesa" height={23} />
+                </DialogTrigger>
                 <DialogContent>
                   <LipaNaMpesa amount={totalPrice} user={user} />
                 </DialogContent>
