@@ -6,7 +6,7 @@ export const getUserByClerkId = async () => {
   const { userId } = await auth();
 
   if (!userId) {
-    return redirect("/dashboard/products");
+    return redirect("/dashboard");
   }
 
   const user = await prisma.user.findUniqueOrThrow({
