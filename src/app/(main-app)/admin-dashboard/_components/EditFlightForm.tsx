@@ -290,7 +290,7 @@ export function EditFlightForm({ data }: EditFlightFormProps) {
             </div>
           </CardContent>
           <CardFooter>
-            <SubmitButton text="Create a Flight" />
+            <SubmitButton text="Update Flight Details" />
           </CardFooter>
         </Card>
       </form>

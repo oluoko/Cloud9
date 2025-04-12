@@ -253,7 +253,7 @@ export function EditBannerForm({ data }: EditBannerFormProps) {
             </div>
           </CardContent>
           <CardFooter>
-            <SubmitButton text="Edit This Banner" />
+            <SubmitButton text="Update This Banner" />
           </CardFooter>
         </Card>
       </form>

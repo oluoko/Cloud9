@@ -1,5 +1,6 @@
 import prisma from "@/utils/db";
 import FlightPage from "../../_components/Flight";
+import { getUserByClerkId } from "@/lib/auth";
 
 export default async function Flight({ params }: { params: { id: string } }) {
   const flight = await prisma.flight.findUnique({
@@ -7,9 +8,14 @@ export default async function Flight({ params }: { params: { id: string } }) {
       id: params.id,
     },
   });
+  const user = await getUserByClerkId();
   return (
     <div className="container mx-auto mt-8 py-8">
-      <FlightPage flight={flight} />
+      {flight ? (
+        <FlightPage flight={flight} user={user} />
+      ) : (
+        <p>Flight not found.</p>
+      )}
     </div>
   );
 }

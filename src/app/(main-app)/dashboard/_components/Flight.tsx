@@ -38,7 +38,44 @@ import {
 } from "lucide-react";
 import { FaPlane } from "react-icons/fa";
 
-export default function FlightPage({ flight }) {
+interface FlightProps {
+  id: string;
+  flightName: string;
+  flightDate: string;
+  flightTime: string;
+  flightImages: string[];
+  airlineName: string;
+  economySeats: number;
+  businessSeats: number;
+  firstClassSeats: number;
+  economyPrice: number;
+  businessPrice: number;
+  firstClassPrice: number;
+  departureAirport: string;
+  arrivalAirport: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface UserProps {
+  id: string;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+  clerkUserId: string;
+  firstName: string | null;
+  lastName: string | null;
+  profileImage: string | null;
+  phoneNumber: string | null;
+}
+
+export default function FlightPage({
+  flight,
+  user,
+}: {
+  flight: FlightProps;
+  user: UserProps;
+}) {
   const [selectedClass, setSelectedClass] = useState("economy");
   const [numPassengers, setNumPassengers] = useState("1");
 
