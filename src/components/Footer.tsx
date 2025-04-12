@@ -10,7 +10,11 @@ import {
 } from "react-icons/fa6";
 import logoImage from "../../public/assets/logo gif white text.gif";
 
-const Footer = () => {
+interface FooterProps {
+  className?: string;
+}
+
+const Footer = ({ className }: FooterProps) => {
   const socials = [
     {
       href: "https://www.facebook.com/profile.php?id=100070284942061",
@@ -55,7 +59,11 @@ const Footer = () => {
     { href: "https://x.com/@oluoko_", label: "Twitter", icon: FaXTwitter },
   ];
   return (
-    <div className="w-screen overflow-hidden py-5 md:py-[120px] bg-black text-slate-400/80 p-2 md:px-10 flex flex-col justify-center items-center">
+    <div
+      className={`w-screen overflow-hidden  flex flex-col justify-center items-center py-5 md:py-[120px] p-2 md:px-10 ${
+        className ? className : " bg-black  text-slate-400/80 "
+      }`}
+    >
       <div className="grid grid-cols-1 lg:grid-cols-4 w-full h-10/12">
         <div className="grid my-4 md:my-2 mx-3 md:mx-6 content-start h-full">
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 grid ">
