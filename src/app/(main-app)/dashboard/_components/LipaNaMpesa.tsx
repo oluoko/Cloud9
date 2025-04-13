@@ -204,10 +204,6 @@ export default function LipaNaMpesa({
           {messageType === "success" && <Sucess message={message} />}
           {messageType === "neutral" && <NeutralMessage message={message} />}
 
-          {reference && (
-            <p className="text-sm text-gray-600 mt-1">Reference: {reference}</p>
-          )}
-
           {reference && !isVerifying && (
             <Button
               onClick={checkPaymentStatus}
