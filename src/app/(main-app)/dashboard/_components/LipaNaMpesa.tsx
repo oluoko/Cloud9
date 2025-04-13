@@ -185,11 +185,11 @@ export default function LipaNaMpesa({
         you&apos;re about to complete a booking.
       </h1>
       <p className="my-3 text-lg text-gray-500">
-        Please confirm your payment of{" "}
-        <span className="text-foreground font-bold">Ksh {amount}</span> via Lipa
-        Na Mpesa, using the phone number,{" "}
+        Confirm your payment of{" "}
+        <span className="text-foreground font-bold">Ksh {amount}</span> Lipa Na
+        Mpesa, using the phone number,{" "}
         <span className="text-foreground font-bold">{user?.phoneNumber}</span>{" "}
-        to complete your booking.
+        to complete booking.
       </p>
       <div className="flex justify-between my-2">
         <Button>Use a different number</Button>

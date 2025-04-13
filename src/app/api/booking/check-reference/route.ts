@@ -1,4 +1,3 @@
-// app/api/booking/check-reference/route.ts
 import prisma from "@/utils/db";
 import { NextResponse } from "next/server";
 

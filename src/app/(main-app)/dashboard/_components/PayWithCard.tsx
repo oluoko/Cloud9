@@ -29,8 +29,8 @@ export default function PayWithCard({
       </h1>
       <p className=" my-3 text-lg text-gray-500">
         Please confirm your payment of{" "}
-        <span className="text-black font-bold">Ksh {amount}</span> via card, to
-        complete your booking.
+        <span className="text-foreground font-bold">Ksh {amount}</span> via
+        card, to complete your booking.
       </p>
 
       <Button>Complete Payment</Button>
