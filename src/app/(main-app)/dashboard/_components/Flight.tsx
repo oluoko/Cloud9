@@ -300,7 +300,13 @@ export default function FlightPage({
                   <Image src={mpesaText} alt="Lipa Na Mpesa" height={23} />
                 </DialogTrigger>
                 <DialogContent>
-                  <LipaNaMpesa amount={totalPrice} user={user} />
+                  <LipaNaMpesa
+                    flightId={flight.id}
+                    seatType={selectedClass}
+                    seatCount={parseInt(numPassengers)}
+                    amount={totalPrice}
+                    user={user}
+                  />
                 </DialogContent>
               </Dialog>
             </Button>

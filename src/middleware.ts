@@ -16,5 +16,6 @@ export default authMiddleware({
     "/privacy-policy",
     "/blog",
     "/destination",
+    "/api/paystack",
   ],
 });
