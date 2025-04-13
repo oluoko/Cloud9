@@ -68,7 +68,23 @@ function verifySignature(payload: string, signature: string | null): boolean {
 }
 
 // Handle successful payment
-async function handleSuccessfulCharge(data: any) {
+interface PaymentData {
+  reference: string;
+  amount: number;
+  metadata?: {
+    userId?: string;
+    flightId?: string;
+    seatType?: string;
+    seatCount?: number;
+    passengerNames?: string[];
+  };
+  customer: {
+    email: string;
+    phone?: string;
+  };
+}
+
+async function handleSuccessfulCharge(data: PaymentData) {
   try {
     console.log("Payment successful:", data.reference);
 
@@ -119,13 +135,29 @@ async function handleSuccessfulCharge(data: any) {
 }
 
 // Handle successful transfer
-async function handleSuccessfulTransfer(data: any) {
+interface TransferData {
+  reference: string;
+  amount: number;
+  recipient: {
+    name: string;
+    accountNumber: string;
+    bank: string;
+  };
+}
+
+async function handleSuccessfulTransfer(data: TransferData) {
   console.log("Transfer successful:", data.reference);
   // Implement your logic for successful transfers
 }
 
 // Handle failed transfer
-async function handleFailedTransfer(data: any) {
+interface FailedTransferData {
+  reference: string;
+  amount: number;
+  reason: string;
+}
+
+async function handleFailedTransfer(data: FailedTransferData) {
   console.log("Transfer failed:", data.reference);
   // Implement your logic for failed transfers
 }

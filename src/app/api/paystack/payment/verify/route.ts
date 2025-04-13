@@ -32,7 +32,19 @@ export async function GET(request: Request) {
 }
 
 // Helper function to verify transaction with Paystack
-function verifyPaystackTransaction(reference: string): Promise<any> {
+interface PaystackTransactionResponse {
+  status: boolean;
+  message: string;
+  data: {
+    reference: string;
+    status: string;
+    [key: string]: unknown; // Adjust this based on the actual API response structure
+  };
+}
+
+function verifyPaystackTransaction(
+  reference: string
+): Promise<PaystackTransactionResponse> {
   return new Promise((resolve, reject) => {
     const options = {
       hostname: "api.paystack.co",
