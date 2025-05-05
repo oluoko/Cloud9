@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
 import { Error, NeutralMessage, Sucess } from "@/components/Messages";
+import { Input } from "@/components/ui/input";
 
 interface LipaNaMpesaProps {
   User: {
@@ -47,11 +48,14 @@ export default function LipaNaMpesa({
   const [isVerifying, setIsVerifying] = useState(false);
   const [isProcessingComplete, setIsProcessingComplete] = useState(false);
   const [bookingId, setBookingId] = useState<string | null>(null);
+  const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber || "");
+  const [isChangingNumber, setIsChangingNumber] = useState(false);
+  const [newPhoneNumber, setNewPhoneNumber] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!amount || !user?.email || !user?.phoneNumber) {
+    if (!amount || !user?.email || !phoneNumber) {
       setMessage("Please provide all required fields");
       setMessageType("error");
       return;
@@ -70,7 +74,7 @@ export default function LipaNaMpesa({
         body: JSON.stringify({
           amount,
           email: user?.email,
-          phoneNumber: user?.phoneNumber,
+          phoneNumber: phoneNumber, // Use the current phoneNumber state
           userId: user.id,
           flightId,
           seatType,
@@ -169,6 +173,36 @@ export default function LipaNaMpesa({
     }
   };
 
+  // Function to toggle phone number change form
+  const toggleChangeNumber = () => {
+    setIsChangingNumber(!isChangingNumber);
+    setNewPhoneNumber("");
+  };
+
+  // Function to save the new phone number
+  const handleNumberChange = () => {
+    if (!newPhoneNumber) {
+      setMessage("Please enter a valid phone number");
+      setMessageType("error");
+      return;
+    }
+
+    // Basic validation for phone number format
+    const phoneRegex = /^(?:\+\d{1,3})?\d{9,15}$/;
+    if (!phoneRegex.test(newPhoneNumber)) {
+      setMessage(
+        "Please enter a valid phone number format (e.g., +254712345678)"
+      );
+      setMessageType("error");
+      return;
+    }
+
+    setPhoneNumber(newPhoneNumber);
+    setIsChangingNumber(false);
+    setMessage(`Phone number updated to ${newPhoneNumber}`);
+    setMessageType("success");
+  };
+
   if (isProcessingComplete) {
     return (
       <Loader
@@ -179,7 +213,7 @@ export default function LipaNaMpesa({
   }
 
   return (
-    <div className="p-4">
+    <div className="mx-2 md:p-4">
       <h1 className="text-xl font-bold">
         <span className="text-2xl font-black">{user?.firstName}</span>,
         you&apos;re about to complete a booking.
@@ -188,15 +222,37 @@ export default function LipaNaMpesa({
         Confirm your payment of{" "}
         <span className="text-foreground font-bold">Ksh {amount}</span> Lipa Na
         Mpesa, using the phone number,{" "}
-        <span className="text-foreground font-bold">{user?.phoneNumber}</span>{" "}
-        to complete booking.
+        <span className="text-foreground font-bold">{phoneNumber}</span> to
+        complete booking.
       </p>
-      <div className="flex justify-between my-2">
-        <Button>Use a different number</Button>
-        <Button onClick={handleSubmit} disabled={loading}>
-          {loading ? "Processing..." : "Complete Payment"}
-        </Button>
-      </div>
+
+      {isChangingNumber ? (
+        <div className="my-4 p-4 border border-gray-200 rounded-lg">
+          <h3 className="text-lg font-semibold mb-2">Change Phone Number</h3>
+          <div className="flex flex-col md:flex-row gap-3">
+            <Input
+              type="text"
+              placeholder="Enter new phone number"
+              value={newPhoneNumber}
+              onChange={(e) => setNewPhoneNumber(e.target.value)}
+              className="flex-grow"
+            />
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={toggleChangeNumber}>
+                Cancel
+              </Button>
+              <Button onClick={handleNumberChange}>Save Number</Button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex justify-between my-2 gap-2">
+          <Button onClick={toggleChangeNumber}>Use a different number</Button>
+          <Button onClick={handleSubmit} disabled={loading}>
+            {loading ? "Processing..." : "Complete Payment"}
+          </Button>
+        </div>
+      )}
 
       {message && (
         <div className="mt-4">
