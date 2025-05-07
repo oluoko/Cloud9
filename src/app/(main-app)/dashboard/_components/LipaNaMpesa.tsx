@@ -232,7 +232,7 @@ export default function LipaNaMpesa({
           <div className="flex flex-col md:flex-row gap-3">
             <Input
               type="text"
-              placeholder="Enter new phone number"
+              placeholder="+254 000 000 000"
               value={newPhoneNumber}
               onChange={(e) => setNewPhoneNumber(e.target.value)}
               className="flex-grow"
