@@ -247,7 +247,7 @@ export default function LipaNaMpesa({
         </div>
       ) : (
         <div className="flex justify-between my-2 gap-2">
-          <Button onClick={toggleChangeNumber}>Use a different number</Button>
+          <Button onClick={toggleChangeNumber}>Change Number</Button>
           <Button onClick={handleSubmit} disabled={loading}>
             {loading ? "Processing..." : "Complete Payment"}
           </Button>
