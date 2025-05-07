@@ -241,7 +241,7 @@ export default function LipaNaMpesa({
               <Button variant="outline" onClick={toggleChangeNumber}>
                 Cancel
               </Button>
-              <Button onClick={handleNumberChange}>Save Number</Button>
+              <Button onClick={handleNumberChange}>Use Number</Button>
             </div>
           </div>
         </div>
