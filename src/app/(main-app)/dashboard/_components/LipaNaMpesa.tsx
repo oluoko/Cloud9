@@ -213,12 +213,12 @@ export default function LipaNaMpesa({
   }
 
   return (
-    <div className="mx-2 md:p-4">
-      <h1 className="text-xl font-bold">
-        <span className="text-2xl font-black">{user?.firstName}</span>,
-        you&apos;re about to complete a booking.
+    <div className="mx-2 px-0 py-[2px] md:p-4">
+      <h1 className="font-bold">
+        <span className="font-black">{user?.firstName}</span>, you&apos;re about
+        to complete a booking.
       </h1>
-      <p className="my-3 text-lg text-gray-500">
+      <p className="my-3 text-gray-500">
         Confirm your payment of{" "}
         <span className="text-foreground font-bold">Ksh {amount}</span> Lipa Na
         Mpesa, using the phone number,{" "}
@@ -228,7 +228,7 @@ export default function LipaNaMpesa({
 
       {isChangingNumber ? (
         <div className="my-4 p-4 border border-gray-200 rounded-lg">
-          <h3 className="text-lg font-semibold mb-2">Change Phone Number</h3>
+          <h3 className="font-semibold mb-2">Change Phone Number</h3>
           <div className="flex flex-col md:flex-row gap-3">
             <Input
               type="text"
@@ -237,7 +237,7 @@ export default function LipaNaMpesa({
               onChange={(e) => setNewPhoneNumber(e.target.value)}
               className="flex-grow"
             />
-            <div className="flex gap-2">
+            <div className="flex justify-between gap-2">
               <Button variant="outline" onClick={toggleChangeNumber}>
                 Cancel
               </Button>
