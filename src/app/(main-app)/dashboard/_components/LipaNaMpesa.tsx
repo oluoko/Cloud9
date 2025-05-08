@@ -220,7 +220,7 @@ export default function LipaNaMpesa({
         to complete a booking.
       </h1>
       <p className="my-3 text-gray-500">
-        Confirm your payment of{" "}
+        Confirm your payment ddddof{" "}
         <span className="text-foreground font-bold">Ksh {amount}.</span> Lipa Na
         Mpesa using the phone number{" "}
         <span className="text-foreground font-bold">{phoneNumber}</span> to
