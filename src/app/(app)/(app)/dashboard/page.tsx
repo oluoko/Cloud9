@@ -4,10 +4,10 @@ import prisma from "@/utils/db";
 import Flights from "@/components/Flights";
 import Testimonials from "@/components/Testimonials";
 import ContactUsPage from "@/components/ContactUsPage";
-import imageOne from "../../../../public/images/dev/banners/1.jpeg";
-import imageTwo from "../../../../public/images/dev/banners/2.jpeg";
-import imageOneLargeScreen from "../../../../public/images/dev/banners/1-large-screens.jpeg";
-import imageTwoLargeScreen from "../../../../public/images/dev/banners/2-large-screens.jpeg";
+import imageOne from "../../../../../public/images/dev/banners/1.jpeg";
+import imageTwo from "../../../../../public/images/dev/banners/2.jpeg";
+import imageOneLargeScreen from "../../../../../public/images/dev/banners/1-large-screens.jpeg";
+import imageTwoLargeScreen from "../../../../../public/images/dev/banners/2-large-screens.jpeg";
 
 async function getBanners() {
   const banners = await prisma.banner.findMany({

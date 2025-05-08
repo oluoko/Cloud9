@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  allowedDevOrigins: [
+    "pctmxd-3000.csb.app",
+    "local-origin.dev",
+    "*.local-origin.dev",
+  ],
 };
 
 export default nextConfig;

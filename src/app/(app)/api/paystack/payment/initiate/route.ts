@@ -24,8 +24,17 @@ export async function POST(request: Request) {
       flightId,
       seatType = "economy",
       seatCount = 1,
-      passengerNames = [],
     } = body;
+
+    console.log("flight details::", {
+      amount: amount,
+      email: email,
+      phoneNumber: phoneNumber,
+      userId: userId,
+      flight: flightId,
+      seatType: seatType,
+      seatCount: seatCount,
+    });
 
     if (!amount || !email || !phoneNumber || !userId || !flightId) {
       return NextResponse.json(
@@ -51,7 +60,6 @@ export async function POST(request: Request) {
         flightId,
         seatType,
         seatCount,
-        passengerNames,
       },
       mobile_money: {
         phone: phoneNumber,

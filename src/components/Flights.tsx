@@ -1,5 +1,5 @@
-import { FlightCard } from "@/app/(main-app)/dashboard/_components/flights/FlightCard";
-import { FeaturedFlightCard } from "@/app/(main-app)/dashboard/_components/flights/FlightFeaturedCard";
+import { FlightCard } from "@/app/(app)/(app)/dashboard/_components/flights/FlightCard";
+import { FeaturedFlightCard } from "@/app/(app)/(app)/dashboard/_components/flights/FlightFeaturedCard";
 import prisma from "@/utils/db";
 
 export default async function Flights() {

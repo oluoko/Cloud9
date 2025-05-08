@@ -3,11 +3,17 @@
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
 import { revalidatePath } from "next/cache";
-import { flightSchema, bannerSchema, profileSchema } from "@/lib/zodSchemas";
+import {
+  flightSchema,
+  bannerSchema,
+  profileSchema,
+  payWithCardSchema,
+} from "@/lib/zodSchemas";
 import prisma from "@/utils/db";
 import { getUserByClerkId } from "@/lib/auth";
 import { generateRandomSixDigitNumber } from "@/utils/utils";
 import twilio from "twilio";
+import Stripe from "stripe";
 
 export async function sendSmsToUser(number: string) {
   const verificationNumber = generateRandomSixDigitNumber();
@@ -280,4 +286,29 @@ export async function deleteBanner(bannerId: string) {
 
   revalidatePath("/admin-dashboard/banners");
   redirect("/admin-dashboard/banners");
+}
+
+export async function payUsingCard(prevState: unknown, formData: FormData) {
+  const user = await getUserByClerkId();
+  if (!user) {
+    return redirect("/sign-in");
+  }
+
+  const submission = parseWithZod(formData, {
+    schema: payWithCardSchema,
+  });
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  console.log("Card Payment Submission::", submission.value);
+  const flight = prisma.flight.findUnique({
+    where: {
+      id: submission.value.flightId,
+    },
+  });
+
+  if (flight) {
+  }
 }

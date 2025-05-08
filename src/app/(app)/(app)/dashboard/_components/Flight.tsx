@@ -290,7 +290,12 @@ export default function FlightPage({
                   Pay With Card
                 </DialogTrigger>
                 <DialogContent>
-                  <PayWithCard amount={totalPrice} user={user} />
+                  <PayWithCard
+                    flightId={flight.id}
+                    seatCount={parseInt(numPassengers)}
+                    amount={totalPrice}
+                    user={user}
+                  />
                 </DialogContent>
               </Dialog>
             </Button>

@@ -1,4 +1,12 @@
+"use client";
+
+import { payUsingCard } from "@/app/actions";
 import { Button } from "@/components/ui/button";
+import { payWithCardSchema } from "@/lib/zodSchemas";
+import { Loader2 } from "lucide-react";
+import { useFormState, useFormStatus } from "react-dom";
+import { useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
 
 interface PayWithCardProps {
   User: {
@@ -12,15 +20,33 @@ interface PayWithCardProps {
     profileImage: string | null;
     phoneNumber: string | null;
   };
+  flightId: string;
+  seatCount: number;
 }
 
 export default function PayWithCard({
   amount,
   user,
+  flightId,
+  seatCount,
 }: {
   amount: number;
+  flightId: string;
+  seatCount?: number;
   user: PayWithCardProps["User"];
 }) {
+  const { pending } = useFormStatus();
+
+  const [lastResult, action] = useFormState(payUsingCard, undefined);
+  const [form, fields] = useForm({
+    lastResult,
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: payWithCardSchema });
+    },
+    shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
+  });
+
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold">
@@ -33,7 +59,21 @@ export default function PayWithCard({
         card, to complete your booking.
       </p>
 
-      <Button>Complete Payment</Button>
+      <form action={action}>
+        <input type="hidden" name="flightId" value={flightId} />
+        <input type="hidden" name="amount" value={amount} />
+        <input type="hidden" name="seatCount" value={seatCount} />
+        {pending ? (
+          <Button disabled size="lg" className="w-full mt-5">
+            <Loader2 className="mr-4 size-4 md:size-6 animate-spin" />{" "}
+            Processing Completing Payment...
+          </Button>
+        ) : (
+          <Button size="lg" className="w-full mt-5" type="submit">
+            Complete Payment
+          </Button>
+        )}
+      </form>
     </div>
   );
 }

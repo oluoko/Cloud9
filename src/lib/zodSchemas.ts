@@ -98,3 +98,9 @@ export const bannerSchema = z.object({
   smallImageUrl: z.string(),
   isActive: z.boolean().optional().default(false),
 });
+
+export const payWithCardSchema = z.object({
+  flightId: z.string(),
+  amount: z.string(),
+  seatCount: z.number().optional(),
+});
