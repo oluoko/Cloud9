@@ -84,6 +84,7 @@ export default function LipaNaMpesa({
       });
 
       const data = await response.json();
+      console.log("Initiating paystack data:: ", data);
 
       if (response.ok && data.status) {
         setReference(data.data.reference);
@@ -220,8 +221,8 @@ export default function LipaNaMpesa({
       </h1>
       <p className="my-3 text-gray-500">
         Confirm your payment of{" "}
-        <span className="text-foreground font-bold">Ksh {amount}</span> Lipa Na
-        Mpesa, using the phone number,{" "}
+        <span className="text-foreground font-bold">Ksh {amount}.</span> Lipa Na
+        Mpesa using the phone number{" "}
         <span className="text-foreground font-bold">{phoneNumber}</span> to
         complete booking.
       </p>
