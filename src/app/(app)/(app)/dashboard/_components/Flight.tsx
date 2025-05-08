@@ -40,7 +40,7 @@ import { FaPlane } from "react-icons/fa";
 import Image from "next/image";
 import LipaNaMpesa from "./LipaNaMpesa";
 import PayWithCard from "./PayWithCard";
-import mpesaText from "../../../../../public/assets/lipa na mpesa.png";
+import mpesaText from "../../../../../../public/assets/lipa na mpesa.png";
 
 interface FlightProps {
   id: string;

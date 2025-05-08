@@ -2,7 +2,15 @@ import { NextResponse } from "next/server";
 import https from "https";
 import prisma from "@/utils/db";
 
-const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
+// let PAYSTACK_SECRET_KEY;
+
+// if (process.env.NODE_ENV !== "production") {
+//   PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
+// } else {
+//   PAYSTACK_SECRET_KEY = process.env.LIVE_PAYSTACK_SECRET_KEY;
+// }
+
+const PAYSTACK_SECRET_KEY = process.env.LIVE_PAYSTACK_SECRET_KEY;
 
 export async function POST(request: Request) {
   try {

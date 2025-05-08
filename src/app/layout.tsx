@@ -5,8 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ourFileRouter } from "./api/uploadthing/core";
 import { Toaster } from "@/components/ui/toaster";
+import { ourFileRouter } from "./(app)/api/uploadthing/core";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
