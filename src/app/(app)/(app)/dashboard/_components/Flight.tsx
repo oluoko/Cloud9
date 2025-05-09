@@ -285,9 +285,10 @@ export default function FlightPage({
           <CardFooter className="flex justify-between gap-2">
             <Button>
               <Dialog>
-                <DialogTrigger className="flex items-center gap-2">
+                <DialogTrigger  asChild>
+                  <div className="flex items-center gap-2"> 
                   <CreditCard className="mr-2 h-4 w-4" />
-                  Pay With Stripe
+                  Pay With Stripe</div>
                 </DialogTrigger>
                 <DialogContent>
                   <PayWithCard
@@ -302,7 +303,7 @@ export default function FlightPage({
             </Button>
             <Button variant="outline">
               <Dialog>
-                <DialogTrigger className="flex items-center gap-2 p-2">
+                <DialogTrigger className="flex items-center gap-2 p-2" asChild>
                   <Image src={mpesaText} alt="Lipa Na Mpesa" height={23} />
                 </DialogTrigger>
                 <DialogContent>

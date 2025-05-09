@@ -310,6 +310,13 @@ export async function payUsingCard(prevState: unknown, formData: FormData) {
     },
   });
 
+  console.log("Payment Details:: ", {
+    "Flight Id": submission.value.flightId,
+    "Total Amount": submission.value.amount,
+    "Seat Type": submission.value.seatType,
+    "Seat Count": submission.value.seatCount,
+  });
+
   if (flight) {
     try {
       const session = await stripe.checkout.sessions.create({
@@ -324,7 +331,7 @@ export async function payUsingCard(prevState: unknown, formData: FormData) {
                 images: flight.flightImages,
               },
             },
-            quantity: submission.value.seatCount,
+            quantity: 1,
           },
         ],
         success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success`,
