@@ -1,3 +1,7 @@
+"use client";
+
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,11 +14,20 @@ import {
 } from "react-icons/fa6";
 import logoImage from "../../public/assets/logo gif white text.gif";
 
-interface FooterProps {
-  className?: string;
-}
+const Footer = () => {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-const Footer = ({ className }: FooterProps) => {
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // If the component is not yet mounted, return null or a placeholder
+  if (!mounted) {
+    return null;
+  }
+
   const socials = [
     {
       href: "https://www.facebook.com/profile.php?id=100070284942061",
@@ -60,9 +73,8 @@ const Footer = ({ className }: FooterProps) => {
   ];
   return (
     <div
-      className={`w-screen overflow-hidden  flex flex-col justify-center items-center py-5 md:py-[120px] p-2 md:px-10 ${
-        className ? className : " bg-black  text-slate-400/80 "
-      }`}
+      className={`w-screen overflow-hidden  flex flex-col justify-center items-center py-5 md:py-[120px] p-2 md:px-10 text-white/60
+       ${resolvedTheme === "dark" ? "bg-slate-800" : "bg-black/80"}`}
     >
       <div className="grid grid-cols-1 lg:grid-cols-4 w-full h-10/12">
         <div className="grid my-4 md:my-2 mx-3 md:mx-6 content-start h-full">

@@ -287,11 +287,12 @@ export default function FlightPage({
               <Dialog>
                 <DialogTrigger className="flex items-center gap-2">
                   <CreditCard className="mr-2 h-4 w-4" />
-                  Pay With Card
+                  Pay With Stripe
                 </DialogTrigger>
                 <DialogContent>
                   <PayWithCard
                     flightId={flight.id}
+                    seatType={selectedClass}
                     seatCount={parseInt(numPassengers)}
                     amount={totalPrice}
                     user={user}

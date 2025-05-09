@@ -101,6 +101,7 @@ export const bannerSchema = z.object({
 
 export const payWithCardSchema = z.object({
   flightId: z.string(),
-  amount: z.string(),
+  amount: z.number(),
   seatCount: z.number().optional(),
+  seatType: z.string().optional(),
 });

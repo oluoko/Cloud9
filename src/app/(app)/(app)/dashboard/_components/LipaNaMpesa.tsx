@@ -17,10 +17,6 @@ interface LipaNaMpesaProps {
     profileImage: string | null;
     phoneNumber: string | null;
   };
-  flightId: string;
-  seatType: string;
-  seatCount: number;
-  passengerNames: string[];
 }
 
 export default function LipaNaMpesa({

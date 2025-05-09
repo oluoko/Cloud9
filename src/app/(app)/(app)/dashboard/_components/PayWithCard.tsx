@@ -20,8 +20,6 @@ interface PayWithCardProps {
     profileImage: string | null;
     phoneNumber: string | null;
   };
-  flightId: string;
-  seatCount: number;
 }
 
 export default function PayWithCard({
@@ -29,10 +27,12 @@ export default function PayWithCard({
   user,
   flightId,
   seatCount,
+  seatType,
 }: {
   amount: number;
   flightId: string;
   seatCount?: number;
+  seatType?: string;
   user: PayWithCardProps["User"];
 }) {
   const { pending } = useFormStatus();
@@ -55,7 +55,8 @@ export default function PayWithCard({
       </h1>
       <p className=" my-3 text-lg text-gray-500">
         Please confirm your payment of{" "}
-        <span className="text-foreground font-bold">Ksh {amount}</span> via
+        <span className="text-foreground font-bold">Ksh {amount}</span> for{" "}
+        <span className="text-foreground font-bold">{seatType} class</span> via
         card, to complete your booking.
       </p>
 
@@ -63,6 +64,7 @@ export default function PayWithCard({
         <input type="hidden" name="flightId" value={flightId} />
         <input type="hidden" name="amount" value={amount} />
         <input type="hidden" name="seatCount" value={seatCount} />
+        <input type="hidden" name="seatType" value={seatType} />
         {pending ? (
           <Button disabled size="lg" className="w-full mt-5">
             <Loader2 className="mr-4 size-4 md:size-6 animate-spin" />{" "}

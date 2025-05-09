@@ -27,7 +27,7 @@ export default async function Flights() {
           ))}
         </div>
       </div>
-      <Footer className="bg-primary/50 text-white/80" />
+      <Footer />
     </>
   );
 }
