@@ -74,7 +74,7 @@ const Footer = () => {
   return (
     <div
       className={`w-screen overflow-hidden  flex flex-col justify-center items-center py-5 md:py-[120px] p-2 md:px-10 text-white/60
-       ${resolvedTheme === "dark" ? "bg-slate-800" : "bg-black/80"}`}
+       ${resolvedTheme === "dark" ? "bg-accent" : "bg-black/80"}`}
     >
       <div className="grid grid-cols-1 lg:grid-cols-4 w-full h-10/12">
         <div className="grid my-4 md:my-2 mx-3 md:mx-6 content-start h-full">
