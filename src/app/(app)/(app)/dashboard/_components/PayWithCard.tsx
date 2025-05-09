@@ -1,12 +1,16 @@
 "use client";
 
-import { payUsingCard } from "@/app/actions";
-import { Button } from "@/components/ui/button";
-import { payWithCardSchema } from "@/lib/zodSchemas";
-import { Loader2 } from "lucide-react";
-import { useFormState, useFormStatus } from "react-dom";
-import { useForm } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
+import { loadStripe } from "@stripe/stripe-js";
+import convertToSubcurrency from "@/lib/convertToSubcurrency";
+import { useEffect, useState } from "react";
+import CheckOut from "./CheckOut";
+import { Elements } from "@stripe/react-stripe-js";
+
+if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
+  throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not defined");
+}
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
 interface PayWithCardProps {
   User: {
@@ -35,47 +39,29 @@ export default function PayWithCard({
   seatType?: string;
   user: PayWithCardProps["User"];
 }) {
-  const { pending } = useFormStatus();
-
-  const [lastResult, action] = useFormState(payUsingCard, undefined);
-  const [form, fields] = useForm({
-    lastResult,
-    onValidate({ formData }) {
-      return parseWithZod(formData, { schema: payWithCardSchema });
-    },
-    shouldValidate: "onBlur",
-    shouldRevalidate: "onInput",
-  });
-
   return (
-    <div className="p-4">
+    <div className="p-4 h-[85vh] overflow-scroll">
       <h1 className="text-xl font-bold">
         <span className="text-2xl font-black">{user?.firstName}</span>,
         you&apos;re about to complete a booking.
       </h1>
       <p className=" my-3 text-lg text-gray-500">
-        Please confirm your payment of{" "}
+        Fill in your details to complete payment of{" "}
         <span className="text-foreground font-bold">Ksh {amount}</span> for{" "}
-        <span className="text-foreground font-bold">{seatType} class</span> via
-        card, to complete your booking.
+        <span className="text-foreground font-bold">{seatType} class</span> to
+        complete your booking.
       </p>
 
-      <form action={action}>
-        <input type="hidden" name="flightId" value={flightId} />
-        <input type="hidden" name="amount" value={amount} />
-        <input type="hidden" name="seatCount" value={seatCount} />
-        <input type="hidden" name="seatType" value={seatType} />
-        {pending ? (
-          <Button disabled size="lg" className="w-full mt-5">
-            <Loader2 className="mr-4 size-4 md:size-6 animate-spin" />{" "}
-            Processing Completing Payment...
-          </Button>
-        ) : (
-          <Button size="lg" className="w-full mt-5" type="submit">
-            Complete Payment
-          </Button>
-        )}
-      </form>
+      <Elements
+        stripe={stripePromise}
+        options={{
+          mode: "payment",
+          amount: convertToSubcurrency(amount),
+          currency: "kes",
+        }}
+      >
+        <CheckOut amount={amount} />
+      </Elements>
     </div>
   );
 }
