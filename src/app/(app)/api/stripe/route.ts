@@ -27,6 +27,7 @@ export async function POST(req: Request) {
         data: {
           totalAmount: session.amount_total as number,
           bookingStatus: session.status as string,
+          paymentMethod: "Stripe",
           userId: session.metadata?.userId,
           flightId: session.metadata?.flightId,
           seatType: session.metadata?.seatType || "",

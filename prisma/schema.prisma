@@ -60,15 +60,12 @@ model Banner {
 model Booking {
   id               String   @id @default(uuid())
   paymentReference String
+  paymentMethod    String
   totalAmount      Float
   paymentStatus    String   @default("pending")
   bookingStatus    String   @default("confirmed")
   seatType         String
   seatCount        Int      @default(1)
-  contactEmail     String?
-  contactPhone     String?
-  passengerNames   String[]
-  specialRequests  String?
 
   // Relations
   User     User?   @relation(fields: [userId], references: [id])
