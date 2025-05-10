@@ -1,34 +1,20 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
 import { Error, NeutralMessage, Sucess } from "@/components/Messages";
 import { Input } from "@/components/ui/input";
 
-interface LipaNaMpesaProps {
-  User: {
-    id: string;
-    email: string;
-    createdAt: Date;
-    updatedAt: Date;
-    clerkUserId: string;
-    firstName: string | null;
-    lastName: string | null;
-    profileImage: string | null;
-    phoneNumber: string | null;
-  };
-}
-
 export default function LipaNaMpesa({
   amount,
-  user,
   flightId,
   seatType = "economy",
   seatCount = 1,
   passengerNames = [],
 }: {
   amount: number;
-  user: LipaNaMpesaProps["User"];
   flightId: string;
   seatType?: string;
   seatCount?: number;
@@ -36,6 +22,7 @@ export default function LipaNaMpesa({
 }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<
     "neutral" | "success" | "error"
@@ -44,9 +31,39 @@ export default function LipaNaMpesa({
   const [isVerifying, setIsVerifying] = useState(false);
   const [isProcessingComplete, setIsProcessingComplete] = useState(false);
   const [bookingId, setBookingId] = useState<string | null>(null);
-  const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber || "");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [isChangingNumber, setIsChangingNumber] = useState(false);
   const [newPhoneNumber, setNewPhoneNumber] = useState("");
+  const [user, setUser] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const response = await fetch("/api/user", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const userData = await response.json();
+        setUser(userData);
+        setPhoneNumber(userData?.phoneNumber || "");
+      } catch (err) {
+        console.error("Error fetching user:", err);
+        setError("Failed to load user details");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchUser();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -209,6 +226,13 @@ export default function LipaNaMpesa({
     );
   }
 
+  if (loading) {
+    return <div className="p-4">Loading user details...</div>;
+  }
+
+  if (error) {
+    return <div className="p-4 text-red-500">{error}</div>;
+  }
   return (
     <div className="mx-2 px-0 py-[2px] md:p-4">
       <h1 className="font-bold">

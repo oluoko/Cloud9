@@ -48,7 +48,7 @@ export default function CheckOut({ amount }: { amount: number }) {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment-success?amount=${amount}`,
+        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payments/success?amount=${amount}`,
       },
     });
     if (error) {

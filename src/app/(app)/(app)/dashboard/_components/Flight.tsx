@@ -61,25 +61,7 @@ interface FlightProps {
   updatedAt: Date;
 }
 
-interface UserProps {
-  id: string;
-  email: string;
-  createdAt: Date;
-  updatedAt: Date;
-  clerkUserId: string;
-  firstName: string | null;
-  lastName: string | null;
-  profileImage: string | null;
-  phoneNumber: string | null;
-}
-
-export default function FlightPage({
-  flight,
-  user,
-}: {
-  flight: FlightProps;
-  user: UserProps;
-}) {
+export default function FlightPage({ flight }: { flight: FlightProps }) {
   const [selectedClass, setSelectedClass] = useState("economy");
   const [numPassengers, setNumPassengers] = useState("1");
 
@@ -285,10 +267,11 @@ export default function FlightPage({
           <CardFooter className="flex justify-between gap-2">
             <Button>
               <Dialog>
-                <DialogTrigger  asChild>
-                  <div className="flex items-center gap-2"> 
-                  <CreditCard className="mr-2 h-4 w-4" />
-                  Pay With Stripe</div>
+                <DialogTrigger asChild>
+                  <div className="flex items-center gap-2">
+                    <CreditCard className="mr-2 h-4 w-4" />
+                    Pay With Stripe
+                  </div>
                 </DialogTrigger>
                 <DialogContent>
                   <PayWithCard
@@ -296,7 +279,6 @@ export default function FlightPage({
                     seatType={selectedClass}
                     seatCount={parseInt(numPassengers)}
                     amount={totalPrice}
-                    user={user}
                   />
                 </DialogContent>
               </Dialog>
@@ -312,7 +294,6 @@ export default function FlightPage({
                     seatType={selectedClass}
                     seatCount={parseInt(numPassengers)}
                     amount={totalPrice}
-                    user={user}
                   />
                 </DialogContent>
               </Dialog>

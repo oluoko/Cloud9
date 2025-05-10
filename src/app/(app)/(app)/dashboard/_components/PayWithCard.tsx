@@ -12,23 +12,8 @@ if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
-interface PayWithCardProps {
-  User: {
-    id: string;
-    email: string;
-    createdAt: Date;
-    updatedAt: Date;
-    clerkUserId: string;
-    firstName: string | null;
-    lastName: string | null;
-    profileImage: string | null;
-    phoneNumber: string | null;
-  };
-}
-
 export default function PayWithCard({
   amount,
-  user,
   flightId,
   seatCount,
   seatType,
@@ -37,8 +22,46 @@ export default function PayWithCard({
   flightId: string;
   seatCount?: number;
   seatType?: string;
-  user: PayWithCardProps["User"];
 }) {
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const response = await fetch("/api/user", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const userData = await response.json();
+        setUser(userData);
+      } catch (err) {
+        console.error("Error fetching user:", err);
+        setError("Failed to load user details");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchUser();
+  }, []);
+
+  if (loading) {
+    return <div className="p-4">Loading user details...</div>;
+  }
+
+  if (error) {
+    return <div className="p-4 text-red-500">{error}</div>;
+  }
+
   return (
     <div className="p-4 h-[85vh] overflow-scroll">
       <h1 className="text-xl font-bold">

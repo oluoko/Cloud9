@@ -1,9 +1,13 @@
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Check } from 'lucide-react'
-import Link from 'next/link'
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Check } from "lucide-react";
+import Link from "next/link";
 
-export default function SuccessPage() {
+export default function SuccessPage({
+  searchParams: { amount },
+}: {
+  searchParams: { amount: string };
+}) {
   return (
     <section className="w-full min-h-[80vh] flex items-center justify-center">
       <Card className="w-[350px]">
@@ -27,5 +31,5 @@ export default function SuccessPage() {
         </div>
       </Card>
     </section>
-  )
+  );
 }
