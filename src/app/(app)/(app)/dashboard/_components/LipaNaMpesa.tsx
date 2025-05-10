@@ -22,6 +22,7 @@ export default function LipaNaMpesa({
 }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(true);
 
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<
@@ -58,7 +59,7 @@ export default function LipaNaMpesa({
         console.error("Error fetching user:", err);
         setError("Failed to load user details");
       } finally {
-        setLoading(false);
+        setLoadingUser(false);
       }
     }
 
@@ -226,7 +227,7 @@ export default function LipaNaMpesa({
     );
   }
 
-  if (loading) {
+  if (loadingUser) {
     return <div className="p-4">Loading user details...</div>;
   }
 
