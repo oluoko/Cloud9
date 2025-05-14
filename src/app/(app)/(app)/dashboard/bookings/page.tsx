@@ -43,7 +43,10 @@ async function getData(id: string) {
 
 export default async function Bookings() {
   const user = await getUserByClerkId();
+
   const bookings = await getData(user.id);
+  console.log("userid", user.id);
+  console.log("userId", bookings[0].userId);
   console.log("Bookings: ", bookings);
 
   return (
@@ -62,7 +65,7 @@ export default async function Bookings() {
           <CardDescription>Manage your flight bookings.</CardDescription>
         </CardHeader>
         <CardContent>
-          {bookings.length === 0 ? (
+          {bookings.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>

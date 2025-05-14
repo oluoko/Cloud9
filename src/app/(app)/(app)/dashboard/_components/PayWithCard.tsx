@@ -36,21 +36,20 @@ export default function PayWithCard({
             "Content-Type": "application/json",
           },
         });
-
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          throw new Error(
+            `HTTP error:: ! Status: ${(response.error, response.status)}`
+          );
         }
-
         const userData = await response.json();
         setUser(userData);
       } catch (err) {
         console.error("Error fetching user:", err);
-        setError("Failed to load user details");
+        setError(`Failed to load user details:::: ${err}`);
       } finally {
         setLoading(false);
       }
     }
-
     fetchUser();
   }, []);
 
@@ -74,7 +73,6 @@ export default function PayWithCard({
         <span className="text-foreground font-bold">{seatType} class</span> to
         complete your booking.
       </p>
-
       <Elements
         stripe={stripePromise}
         options={{
@@ -83,7 +81,12 @@ export default function PayWithCard({
           currency: "kes",
         }}
       >
-        <CheckOut amount={amount} />
+        <CheckOut
+          amount={amount}
+          flightId={flightId}
+          seatType={seatType}
+          seatCount={seatCount}
+        />
       </Elements>
     </div>
   );
