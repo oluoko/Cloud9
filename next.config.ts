@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
     "local-origin.dev",
     "*.local-origin.dev",
     "dqc5xz-3000.csb.app",
+    "cloud9-git-paystack-and-stripe-fo-4ffcbd-brian-otienos-projects.vercel.app"
   ],
 };
 
