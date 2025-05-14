@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
     "pctmxd-3000.csb.app",
     "local-origin.dev",
     "*.local-origin.dev",
+    "dqc5xz-3000.csb.app",
   ],
 };
 

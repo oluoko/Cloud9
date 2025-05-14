@@ -57,7 +57,7 @@ const imageRoutes: ImageRouteConfig[] = [
 const createAuthMiddleware =
   () =>
   async ({ req }: { req: Request }) => {
-    const { userId } = auth();
+    const { userId } = await auth();
     if (!userId) throw new UploadThingError("Unauthorized");
     return { userId };
   };

@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -27,11 +28,27 @@ import {
 } from "@/components/ui/table";
 import prisma from "@/utils/db";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import Image from "next/image";
+import { capitalize, getStatusBadgeVariant } from "@/utils/utils";
 
 async function getData(id: string) {
   const data = await prisma.booking.findMany({
     where: {
       userId: id,
+    },
+    include: {
+      Flight: {
+        select: {
+          id: true,
+          flightName: true,
+          airlineName: true,
+          flightDate: true,
+          flightTime: true,
+          departureAirport: true,
+          arrivalAirport: true,
+          flightImages: true,
+        },
+      },
     },
     orderBy: {
       createdAt: "desc",
@@ -45,12 +62,10 @@ export default async function Bookings() {
   const user = await getUserByClerkId();
 
   const bookings = await getData(user.id);
-  console.log("userid", user.id);
-  console.log("userId", bookings[0].userId);
   console.log("Bookings: ", bookings);
 
   return (
-    <div className="mx-2 md:mx-8 mt-20">
+    <div className="mx-2 md:mx-8 my-4 mt-20">
       <div className="flex justify-between items-center my-4">
         <Link
           href="/dashboard"
@@ -69,9 +84,12 @@ export default async function Bookings() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Payment Reference</TableHead>
-                  <TableHead>Booking Status</TableHead>
-                  <TableHead>Seat Count</TableHead>
+                  <TableHead>Flight</TableHead>
+                  <TableHead className="hidden md:table-cell">Image</TableHead>
+                  <TableHead className="hidden md:table-cell">
+                    Booking Status
+                  </TableHead>
+                  <TableHead>Seats</TableHead>
                   <TableHead>Amount</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>
@@ -79,9 +97,24 @@ export default async function Bookings() {
               <TableBody>
                 {bookings.map((booking) => (
                   <TableRow key={booking.id}>
-                    <TableCell>{booking.paymentReference}</TableCell>
-                    <TableCell>{booking.bookingStatus}</TableCell>
-                    <TableCell>{booking.seatCount}</TableCell>
+                    <TableCell>{booking.Flight?.flightName}</TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {booking.Flight?.flightImages[0] && (
+                        <Image
+                          src={booking.Flight?.flightImages[0]}
+                          className="h-[40px] w-[85px] md:h-[70px] md:w-[100px] object-fill rounded-md"
+                          width={80}
+                          height={50}
+                          alt="Flight Image"
+                        />
+                      )}
+                    </TableCell>
+                    <TableCell className={`hidden md:table-cell`}>
+                      {capitalize(booking.bookingStatus)}
+                    </TableCell>
+                    <TableCell>
+                      {booking.seatCount} x {capitalize(booking.seatType)}
+                    </TableCell>
                     <TableCell>KES {booking.totalAmount.toFixed(2)}</TableCell>
                     <TableCell className="flex items-center">
                       <DropdownMenu>
