@@ -11,35 +11,6 @@ import {
 } from "@/lib/zodSchemas";
 import prisma from "@/utils/db";
 import { getUserByClerkId } from "@/lib/auth";
-import { generateRandomSixDigitNumber } from "@/utils/utils";
-import twilio from "twilio";
-
-export async function sendSmsToUser(number: string) {
-  const verificationNumber = generateRandomSixDigitNumber();
-
-  try {
-    const client = twilio(
-      process.env.TWILIO_ACCOUNT_SID,
-      process.env.TWILIO_AUTH_TOKEN
-    );
-    client.messages
-      .create({
-        body: `Your verification code for Cloud9 is ${verificationNumber}`,
-        from: process.env.TWILIO_PHONE_NUMBER,
-        to: number,
-      })
-      .catch((err) => {});
-
-    // save the verification number in the database
-    return verificationNumber;
-  } catch (error) {
-    console.error("Error sending SMS:", error);
-    return {
-      status: "error" as const,
-      error: "Failed to send SMS. Please try again.",
-    };
-  }
-}
 
 export async function updateProfile(prevState: unknown, formData: FormData) {
   try {
