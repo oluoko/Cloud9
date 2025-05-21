@@ -15,8 +15,7 @@ export function NavBar() {
     { id: 1, name: "Bookings", href: "/admin-dashboard/bookings" },
     { id: 2, name: "Flights", href: "/admin-dashboard/flights" },
     { id: 3, name: "Users", href: "/admin-dashboard/users" },
-    { id: 4, name: "Profile", href: "/admin-dashboard/profile" },
-    { id: 5, name: "Banners", href: "/admin-dashboard/banners" },
+    { id: 4, name: "Banners", href: "/admin-dashboard/banners" },
   ];
   return (
     <header className="flex items-center justify-center py-1 fixed shadow-xl top-0 w-screen z-99 bg-background/90">
