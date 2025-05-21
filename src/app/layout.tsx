@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
+import NextTopLoader from "nextjs-toploader";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
 import { ourFileRouter } from "./(app)/api/uploadthing/core";
@@ -41,6 +42,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <NextTopLoader color="#16A34A" showSpinner={false} />
             <NextSSRPlugin
               /**
                * The `extractRouterConfig` will extract **only** the route configs
