@@ -454,7 +454,7 @@ export default function UserDetailsPage() {
                 <CardHeader>
                   <CardTitle>Recent Activity</CardTitle>
                   <CardDescription>
-                    Track user's platform activity
+                    Track user&apos;s platform activity
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
