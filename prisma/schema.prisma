@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String  @id @default(uuid())
+  clerkUserId  String  @unique
+  email        String  @unique
+  firstName    String?
+  lastName     String?
+  profileImage String?
+  phoneNumber  String?
+
+  bookings     Booking[]
+  testimonials Testimonial[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Flight {
+  id               String   @id @default(uuid())
+  flightName       String
+  flightDate       String
+  flightTime       String
+  flightImages     String[]
+  airlineName      String
+  economySeats     Int
+  businessSeats    Int
+  firstClassSeats  Int
+  economyPrice     Float
+  businessPrice    Float
+  firstClassPrice  Float
+  departureAirport String
+  arrivalAirport   String
+
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Banner {
+  id                 String  @id @default(uuid())
+  title              String
+  description        String?
+  destinationAirport String
+  largeImageUrl      String
+  smallImageUrl      String
+  isActive           Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id               String @id @default(uuid())
+  paymentReference String
+  paymentMethod    String
+  totalAmount      Float
+  paymentStatus    String @default("pending")
+  bookingStatus    String @default("confirmed")
+  seatType         String
+  seatCount        Int    @default(1)
+
+  // Relations
+  User     User?   @relation(fields: [userId], references: [id])
+  userId   String
+  Flight   Flight? @relation(fields: [flightId], references: [id])
+  flightId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id               String @id @default(uuid())
+  userId           String
+  rating           Int
+  descriptiveTitle String @default("Cloud9 Patron")
+  comment          String
+
+  // Relations
+  User User? @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
