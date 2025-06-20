@@ -1,13 +1,49 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { sendUsAMessageEmail } from "@/lib/mail";
 import { MailIcon, MapPinIcon, MessageCircle, PhoneIcon } from "lucide-react";
 import Link from "next/link";
+import { useState, useTransition } from "react";
+import LoadingDots from "./loading-dots";
 
 export default function ContactUsPage() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !email || !message) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    startTransition(async () => {
+      await sendUsAMessageEmail(firstName, lastName, email, message).catch(
+        (error) => {
+          console.error("Error sending email:", error);
+          alert(
+            "There was an error sending your message. Please try again later."
+          );
+        }
+      );
+      alert("Your message has been sent successfully!");
+      // Reset form fields
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setMessage("");
+    });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center py-10">
       <div className="w-full max-w-screen-xl mx-auto px-6 xl:px-0">
@@ -79,8 +115,8 @@ export default function ContactUsPage() {
 
           {/* Form */}
           <Card className="bg-accent shadow-none">
-            <CardContent className="p-6 md:p-10">
-              <form>
+            <form onSubmit={handleSubmit}>
+              <CardContent>
                 <div className="grid md:grid-cols-2 gap-x-8 gap-y-5">
                   <div className="col-span-2 sm:col-span-1">
                     <Label htmlFor="firstName">First Name</Label>
@@ -88,6 +124,9 @@ export default function ContactUsPage() {
                       placeholder="First name"
                       id="firstName"
                       className="mt-1.5 bg-white h-11 shadow-none"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      disabled={isPending}
                     />
                   </div>
                   <div className="col-span-2 sm:col-span-1">
@@ -96,6 +135,9 @@ export default function ContactUsPage() {
                       placeholder="Last name"
                       id="lastName"
                       className="mt-1.5 bg-white h-11 shadow-none"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      disabled={isPending}
                     />
                   </div>
                   <div className="col-span-2">
@@ -105,6 +147,9 @@ export default function ContactUsPage() {
                       placeholder="Email"
                       id="email"
                       className="mt-1.5 bg-white h-11 shadow-none"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={isPending}
                     />
                   </div>
                   <div className="col-span-2">
@@ -114,24 +159,24 @@ export default function ContactUsPage() {
                       placeholder="Message"
                       className="mt-1.5 bg-white shadow-none"
                       rows={6}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      disabled={isPending}
                     />
                   </div>
                   <div className="col-span-2 flex items-center gap-2">
-                    <Checkbox id="acceptTerms" />
-                    <Label htmlFor="acceptTerms">
-                      You agree to our{" "}
-                      <Link href="/terms-and-conditions" className="underline">
-                        terms and conditions
-                      </Link>
-                      .
-                    </Label>
+                    See to our{" "}
+                    <Link href="/terms-and-conditions" className="underline">
+                      terms and conditions
+                    </Link>
+                    .
                   </div>
                 </div>
-                <Button className="mt-6 w-full" size="lg">
-                  Submit
+                <Button className="mt-6 w-full" size="lg" disabled={isPending}>
+                  {isPending ? <LoadingDots text="Sending" /> : "Send Message"}
                 </Button>
-              </form>
-            </CardContent>
+              </CardContent>
+            </form>
           </Card>
         </div>
       </div>

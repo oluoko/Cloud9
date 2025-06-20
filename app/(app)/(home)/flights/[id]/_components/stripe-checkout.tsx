@@ -10,6 +10,8 @@ import {
 import { useEffect, useState } from "react";
 import convertToSubcurrency from "@/lib/utils";
 import LoadingDots from "@/components/loading-dots";
+import { sendBookingDetailsEmail } from "@/lib/mail";
+import { User } from "@prisma/client";
 
 export default function StripeCheckOut({
   amount,
@@ -27,7 +29,7 @@ export default function StripeCheckOut({
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
   const [clientSecret, setClientSecret] = useState("");
-  const [userId, setUserId] = useState<string>("");
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     // Get user ID for booking
@@ -35,7 +37,7 @@ export default function StripeCheckOut({
       .then((res) => res.json())
       .then((data) => {
         if (data && data.id) {
-          setUserId(data.id);
+          setUser(data);
         }
       })
       .catch((err) => console.error("Error fetching user ID:", err));
@@ -69,7 +71,7 @@ export default function StripeCheckOut({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payments/success/${userId}/${flightId}`,
+        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payments/success/${user?.id}/${flightId}`,
       },
       redirect: "if_required",
     });
@@ -89,7 +91,7 @@ export default function StripeCheckOut({
             totalAmount: amount,
             bookingStatus: "complete",
             paymentMethod: "Stripe",
-            userId: userId,
+            userId: user?.id,
             flightId: flightId,
             seatType: seatType || "",
             seatCount: seatCount || 1,
@@ -99,6 +101,10 @@ export default function StripeCheckOut({
 
         if (bookingResponse.ok) {
           const bookingData = await bookingResponse.json();
+
+          if (user) {
+            await sendBookingDetailsEmail(bookingData.booking, user);
+          }
 
           // Redirect to success page
           window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/payments/success/${bookingData.booking.id}/${flightId}`;
