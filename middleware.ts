@@ -4,6 +4,9 @@ const isPublicRoute = createRouteMatcher([
   "/",
   "/login(.*)",
   "/register(.*)",
+  "/complete-profile(.*)",
+  "/saving-info(.*)",
+  "/sso-fallback(.*)",
   "/api/uploadthing",
   "/api/webhooks(.*)",
   "/flights",
@@ -22,4 +25,3 @@ export const config = {
     "/(api|trpc)(.*)",
   ],
 };
-
