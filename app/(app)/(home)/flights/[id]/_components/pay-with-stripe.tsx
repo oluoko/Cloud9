@@ -74,7 +74,12 @@ export default function PayWithStripe({
         Fill in your details to complete payment of{" "}
         <span className="text-foreground font-bold">Ksh {amount}</span> for{" "}
         <span className="text-foreground font-bold">{seatType} class</span> to
-        complete your booking.
+        complete your booking.{" "}
+        <span className="text-sm text-muted">
+          Use the account number{" "}
+          <span className="font-bold">4242 4242 4242 4242</span>. You won&apos;t
+          be charged
+        </span>
       </p>
       <Elements
         stripe={stripePromise}

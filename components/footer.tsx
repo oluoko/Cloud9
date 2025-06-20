@@ -136,11 +136,11 @@ const Footer = () => {
             <Link href="/">
               <span className=" hover:text-primary">Home</span>
             </Link>
-            <Link href="/destinations">
-              <span className=" hover:text-primary">Destination</span>
+            <Link href="/terms-and-conditions">
+              <span className=" hover:text-primary">Ts & Cs</span>
             </Link>
-            <Link href="/blog">
-              <span className=" hover:text-primary">Blog</span>
+            <Link href="/privacy-policy">
+              <span className=" hover:text-primary">Privacy Policy</span>
             </Link>
           </div>
         </div>

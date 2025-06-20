@@ -26,6 +26,7 @@ import { SubmitButton } from "@/components/custom-button";
 import { profileSchema } from "@/lib/zodSchemas";
 import { PhoneInput } from "@/components/phone-input";
 import { getImageKey } from "@/lib/utils";
+import AuthLayout from "@/components/auth-layout";
 
 export default function CompleteProfile() {
   const { toast } = useToast();
@@ -78,150 +79,154 @@ export default function CompleteProfile() {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center">
-      <Card className="mx-2">
-        <CardHeader>
-          <CardTitle className="font-bold text-center text-2xl">
-            Complete Your Profile
-            <div className="font-normal text-sm text-muted-foreground mt-2">
-              {isOAuthUser
-                ? "Please provide your phone number to complete your profile"
-                : "Please provide your details to complete your profile"}
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form
-            id={form.id}
-            onSubmit={form.onSubmit}
-            action={action}
-            className="space-y-4"
-          >
-            {isOAuthUser ? (
-              <div className="hidden">
-                <Input
-                  type="hidden"
-                  name={fields.firstName.name}
-                  value={user?.firstName || ""}
-                />
-                <Input
-                  type="hidden"
-                  name={fields.lastName.name}
-                  value={user?.lastName || ""}
-                />
+    <AuthLayout mode="register">
+      <div className="flex flex-col items-center justify-center">
+        <Card className="mx-2">
+          <CardHeader>
+            <CardTitle className="font-bold text-center text-2xl">
+              Complete Your Profile
+              <div className="font-normal text-sm text-muted-foreground mt-2">
+                {isOAuthUser
+                  ? "Please provide your phone number to complete your profile"
+                  : "Please provide your details to complete your profile"}
               </div>
-            ) : (
-              <div className="flex justify-between space-x-4">
-                <div className="space-y-2">
-                  <Label>Profile Image</Label>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form
+              id={form.id}
+              onSubmit={form.onSubmit}
+              action={action}
+              className="space-y-4"
+            >
+              {isOAuthUser ? (
+                <div className="hidden">
                   <Input
                     type="hidden"
-                    value={profileImage || ""}
-                    name={fields.profileImage.name}
-                    key={fields.profileImage.key}
-                    defaultValue={fields.profileImage.initialValue}
+                    name={fields.firstName.name}
+                    value={user?.firstName || ""}
                   />
-                  {profileImage ? (
-                    <div className="relative size-[100px] rounded-full hover:border hover:border-primary">
-                      <Image
-                        src={profileImage}
-                        alt="Profile Image"
-                        layout="fill"
-                        objectFit="cover"
-                        className="rounded-full"
+                  <Input
+                    type="hidden"
+                    name={fields.lastName.name}
+                    value={user?.lastName || ""}
+                  />
+                </div>
+              ) : (
+                <div className="flex justify-between space-x-4">
+                  <div className="space-y-2">
+                    <Label>Profile Image</Label>
+                    <Input
+                      type="hidden"
+                      value={profileImage || ""}
+                      name={fields.profileImage.name}
+                      key={fields.profileImage.key}
+                      defaultValue={fields.profileImage.initialValue}
+                    />
+                    {profileImage ? (
+                      <div className="relative size-[100px] rounded-full hover:border hover:border-primary">
+                        <Image
+                          src={profileImage}
+                          alt="Profile Image"
+                          layout="fill"
+                          objectFit="cover"
+                          className="rounded-full"
+                        />
+                        <button
+                          onClick={() => handleDeleteImage(profileImage)}
+                          type="button"
+                          className="absolute top-1 right-1 bg-red-500 p-1 rounded-lg text-white"
+                          title="Delete Image"
+                        >
+                          <XIcon className="size-4" />
+                        </button>
+                      </div>
+                    ) : (
+                      <UploadButton
+                        endpoint="profileImageRoute"
+                        onClientUploadComplete={(res) => {
+                          setProfileImage(res[0].url);
+                          toast({
+                            title: "Image Uploaded",
+                            variant: "success",
+                            description:
+                              "Profile image has been uploaded successfully",
+                          });
+                        }}
+                        onUploadError={(error: Error) => {
+                          toast({
+                            variant: "destructive",
+                            title: "Error Uploading Profile Image",
+                            description: `Error! : ${error.message}`,
+                          });
+                        }}
                       />
-                      <button
-                        onClick={() => handleDeleteImage(profileImage)}
-                        type="button"
-                        className="absolute top-1 right-1 bg-red-500 p-1 rounded-lg text-white"
-                        title="Delete Image"
-                      >
-                        <XIcon className="size-4" />
-                      </button>
+                    )}
+                    <p className="text-red-500">{fields.profileImage.errors}</p>
+                  </div>
+                  <div className="">
+                    <div className="space-y-2 w-full">
+                      <Label htmlFor="firstName">First Name</Label>
+                      <Input
+                        id="firstName"
+                        type="text"
+                        name={fields.firstName.name}
+                        key={fields.firstName.key}
+                        defaultValue={fields.firstName.value}
+                      />
+                      <p className="text-red-500">{fields.firstName.errors}</p>
                     </div>
-                  ) : (
-                    <UploadButton
-                      endpoint="profileImageRoute"
-                      onClientUploadComplete={(res) => {
-                        setProfileImage(res[0].url);
-                        toast({
-                          title: "Image Uploaded",
-                          variant: "success",
-                          description:
-                            "Profile image has been uploaded successfully",
-                        });
-                      }}
-                      onUploadError={(error: Error) => {
-                        toast({
-                          variant: "destructive",
-                          title: "Error Uploading Profile Image",
-                          description: `Error! : ${error.message}`,
-                        });
-                      }}
-                    />
-                  )}
-                  <p className="text-red-500">{fields.profileImage.errors}</p>
-                </div>
-                <div className="">
-                  <div className="space-y-2 w-full">
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input
-                      id="firstName"
-                      type="text"
-                      name={fields.firstName.name}
-                      key={fields.firstName.key}
-                      defaultValue={fields.firstName.value}
-                    />
-                    <p className="text-red-500">{fields.firstName.errors}</p>
-                  </div>
-                  <div className="space-y-2 w-full">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input
-                      id="lastName"
-                      type="text"
-                      name={fields.lastName.name}
-                      key={fields.lastName.key}
-                      defaultValue={fields.lastName.value}
-                    />
-                    <p className="text-red-500">{fields.lastName.errors}</p>
+                    <div className="space-y-2 w-full">
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <Input
+                        id="lastName"
+                        type="text"
+                        name={fields.lastName.name}
+                        key={fields.lastName.key}
+                        defaultValue={fields.lastName.value}
+                      />
+                      <p className="text-red-500">{fields.lastName.errors}</p>
+                    </div>
                   </div>
                 </div>
+              )}
+              <div className="space-y-2">
+                <Label>Phone Number</Label>
+
+                <PhoneInput
+                  value={phoneNumber}
+                  onChange={(value) =>
+                    setPhoneNumber(value ? String(value) : "")
+                  }
+                  key={fields.phoneNumber.key}
+                  defaultValue={fields.phoneNumber.value}
+                  international={false}
+                  placeholder="Enter a phone number"
+                />
+                <Input
+                  type="hidden"
+                  name={fields.phoneNumber.name}
+                  value={phoneNumber || ""}
+                />
+                <p className="text-red-500">{fields.phoneNumber.errors}</p>
               </div>
-            )}
-            <div className="space-y-2">
-              <Label>Phone Number</Label>
 
-              <PhoneInput
-                value={phoneNumber}
-                onChange={(value) => setPhoneNumber(value ? String(value) : "")}
-                key={fields.phoneNumber.key}
-                defaultValue={fields.phoneNumber.value}
-                international={false}
-                placeholder="Enter a phone number"
-              />
-              <Input
-                type="hidden"
-                name={fields.phoneNumber.name}
-                value={phoneNumber || ""}
-              />
-              <p className="text-red-500">{fields.phoneNumber.errors}</p>
-            </div>
+              {lastResult && lastResult.status === "error" && (
+                <Alert>
+                  <AlertDescription>{lastResult.error}</AlertDescription>
+                </Alert>
+              )}
 
-            {lastResult && lastResult.status === "error" && (
-              <Alert>
-                <AlertDescription>{lastResult.error}</AlertDescription>
-              </Alert>
-            )}
-
-            <SubmitButton text="Complete Profile" />
-          </form>
-        </CardContent>
-        <CardFooter className="justify-center">
-          <p className="text-sm text-muted-foreground">
-            This information helps us provide you with a better experience
-          </p>
-        </CardFooter>
-      </Card>
-    </div>
+              <SubmitButton text="Complete Profile" />
+            </form>
+          </CardContent>
+          <CardFooter className="justify-center">
+            <p className="text-sm text-muted-foreground">
+              This information helps us provide you with a better experience
+            </p>
+          </CardFooter>
+        </Card>
+      </div>
+    </AuthLayout>
   );
 }

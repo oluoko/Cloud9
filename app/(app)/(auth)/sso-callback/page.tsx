@@ -1,3 +1,4 @@
+import AuthLayout from "@/components/auth-layout";
 import { AuthenticateWithRedirectCallback } from "@clerk/nextjs";
 
 export default function SSOCallback() {
@@ -5,9 +6,11 @@ export default function SSOCallback() {
   // or rendering the prebuilt <AuthenticateWithRedirectCallback/> component.
   // This is the final step in the custom OAuth flow.
   return (
-    <AuthenticateWithRedirectCallback
-      signUpForceRedirectUrl="/saving-info"
-      signInForceRedirectUrl="/saving-info"
-    />
+    <AuthLayout mode="login">
+      <AuthenticateWithRedirectCallback
+        signUpForceRedirectUrl="/saving-info"
+        signInForceRedirectUrl="/saving-info"
+      />
+    </AuthLayout>
   );
 }
