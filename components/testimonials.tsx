@@ -100,7 +100,7 @@ export default function Testimonials() {
   }, [api]);
 
   return (
-    <div className="min-h-screen w-full flex justify-center items-center py-12 px-6 bg-foreground/85 ">
+    <div className="min-h-screen w-full flex justify-center items-center py-12 px-6 bg-foreground">
       <div className="w-full">
         <h2 className="mb-14 text-5xl md:text-6xl font-bold text-center tracking-tight text-background">
           Testimonials
