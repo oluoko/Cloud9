@@ -30,17 +30,17 @@ const Footer = () => {
 
   const socials = [
     {
-      href: "https://www.facebook.com/profile.php?id=100070284942061",
+      href: "https://www.facebook.com/oluokobrian",
       label: "Facebook",
       icon: FaFacebookF,
     },
     {
-      href: "https://www.instagram.com/that_guy.brian",
+      href: "https://www.instagram.com/oluoko_",
       label: "Instagram",
       icon: FaInstagram,
     },
     {
-      href: "https://www.tiktok.com/that_guy.brian",
+      href: "https://www.tiktok.com/oluoko_",
       label: "TikTok",
       icon: FaTiktok,
     },
@@ -49,13 +49,13 @@ const Footer = () => {
 
   const briansSocials = [
     {
-      href: "https://www.facebook.com/profile.php?id=100070284942061",
+      href: "https://www.facebook.com/oluokobrian",
       label: "Facebook",
       icon: FaFacebookF,
     },
     { href: "https://github.com/oluoko", label: "Github", icon: FaGithub },
     {
-      href: "https://instagram.com/that_guy.brian",
+      href: "https://instagram.com/oluoko_",
       label: "Instagram",
       icon: FaInstagram,
     },
@@ -65,7 +65,7 @@ const Footer = () => {
       icon: FaLinkedin,
     },
     {
-      href: "https://tiktok.com/@that_guy.brian",
+      href: "https://tiktok.com/@oluoko_",
       label: "Tiktok",
       icon: FaTiktok,
     },
