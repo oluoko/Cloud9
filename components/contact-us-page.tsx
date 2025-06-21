@@ -5,11 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { sendUsAMessageEmail } from "@/lib/mail";
 import { MailIcon, MapPinIcon, MessageCircle, PhoneIcon } from "lucide-react";
 import Link from "next/link";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import LoadingDots from "./loading-dots";
+import { toast } from "sonner";
 
 export default function ContactUsPage() {
   const [firstName, setFirstName] = useState("");
@@ -17,31 +17,46 @@ export default function ContactUsPage() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!firstName || !lastName || !email || !message) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
-    startTransition(async () => {
-      await sendUsAMessageEmail(firstName, lastName, email, message).catch(
-        (error) => {
-          console.error("Error sending email:", error);
-          alert(
-            "There was an error sending your message. Please try again later."
-          );
-        }
-      );
-      alert("Your message has been sent successfully!");
-      // Reset form fields
+    try {
+      setIsLoading(true);
+      const response = await fetch("/api/send-message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          message,
+        }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(errorData.error || "Failed to send message.");
+        console.error("Error sending message:", errorData);
+      } else {
+        toast.success("Message sent successfully!");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
       setFirstName("");
       setLastName("");
       setEmail("");
       setMessage("");
-    });
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -126,7 +141,7 @@ export default function ContactUsPage() {
                       className="mt-1.5 bg-white h-11 shadow-none"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      disabled={isPending}
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="col-span-2 sm:col-span-1">
@@ -137,7 +152,7 @@ export default function ContactUsPage() {
                       className="mt-1.5 bg-white h-11 shadow-none"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      disabled={isPending}
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="col-span-2">
@@ -149,7 +164,7 @@ export default function ContactUsPage() {
                       className="mt-1.5 bg-white h-11 shadow-none"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      disabled={isPending}
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="col-span-2">
@@ -161,7 +176,7 @@ export default function ContactUsPage() {
                       rows={6}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      disabled={isPending}
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="col-span-2 flex items-center gap-2">
@@ -172,8 +187,8 @@ export default function ContactUsPage() {
                     .
                   </div>
                 </div>
-                <Button className="mt-6 w-full" size="lg" disabled={isPending}>
-                  {isPending ? <LoadingDots text="Sending" /> : "Send Message"}
+                <Button className="mt-6 w-full" size="lg" disabled={isLoading}>
+                  {isLoading ? <LoadingDots text="Sending" /> : "Send Message"}
                 </Button>
               </CardContent>
             </form>

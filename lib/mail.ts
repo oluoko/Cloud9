@@ -1,7 +1,7 @@
 import { Booking, User } from "@prisma/client";
 import { Resend } from "resend";
 
-const API_KEY = process.env.NEXT_PUBLIC_RESEND_API_KEY;
+const API_KEY = process.env.RESEND_API_KEY;
 
 if (!API_KEY) {
   throw new Error("RESEND_API_KEY is not defined in environment variables");
@@ -124,6 +124,7 @@ export const sendUsAMessageEmail = async (
   email: string,
   message: string
 ) => {
+  console.log("Sending message email");
   const content = `
     <h2 style="color: ${BRAND_COLOR}; margin-bottom: 20px;">New Message from ${firstName} ${lastName}</h2>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">You have received a new message:</p>
@@ -134,9 +135,9 @@ export const sendUsAMessageEmail = async (
   `;
 
   await resend.emails.send({
-    from: "Cloud9-User@live-ly.tech",
+    from: `Cloud9-User-Message@live-ly.tech`,
     to: process.env.CONTACT_EMAIL || "",
-    subject: "New Message from ${firstName} ${lastName}",
+    subject: `New Contact-us Message from ${firstName} ${lastName}`,
     html: createEmailTemplate(content),
   });
 };
