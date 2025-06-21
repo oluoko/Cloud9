@@ -25,6 +25,7 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import axios from "axios";
 import { getImageKey } from "@/lib/utils";
+import { twMerge } from "tailwind-merge";
 
 export default function CreateBanner() {
   const { toast } = useToast();
@@ -163,6 +164,8 @@ export default function CreateBanner() {
                   ) : (
                     <UploadButton
                       endpoint="bannerImageRoute"
+                      config={{ cn: twMerge }}
+                      className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                       onClientUploadComplete={(res) => {
                         setLargeImage(res[0].url);
                         toast({
@@ -215,6 +218,8 @@ export default function CreateBanner() {
                   ) : (
                     <UploadButton
                       endpoint="bannerImageRoute"
+                      config={{ cn: twMerge }}
+                      className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                       onClientUploadComplete={(res) => {
                         setSmallImage(res[0].url);
                         toast({

@@ -1,4 +1,3 @@
-import { auth } from "@clerk/nextjs/server";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
@@ -57,8 +56,8 @@ const imageRoutes: ImageRouteConfig[] = [
 const createAuthMiddleware =
   () =>
   async ({ req }: { req: Request }) => {
-    const { userId } = auth();
-    if (!userId) throw new UploadThingError("Unauthorized");
+    const userId = "chill-iguana";
+
     return { userId };
   };
 

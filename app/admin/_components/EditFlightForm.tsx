@@ -26,6 +26,7 @@ import axios from "axios";
 import { getImageKey } from "@/lib/utils";
 import { DateTimePicker } from "./DateTimePicker";
 import { Flight } from "@prisma/client";
+import { twMerge } from "tailwind-merge";
 
 export function EditFlightForm({ data }: { data: Flight }) {
   const { toast } = useToast();
@@ -249,6 +250,8 @@ export function EditFlightForm({ data }: { data: Flight }) {
                 ) : (
                   <UploadButton
                     endpoint="flightImagesRoute"
+                    config={{ cn: twMerge }}
+                    className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                     onClientUploadComplete={(res) => {
                       setImages(res.map((r) => r.url));
                       toast({

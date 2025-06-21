@@ -18,6 +18,8 @@ const BRAND_COLOR = "#16A34A";
 const BRAND_COLOR_DARK = "#0D9B3A";
 const TEXT_COLOR = "#333333";
 const BACKGROUND_COLOR = "#F9F9F9";
+const LOGO_URL =
+  "https://utfs.io/f/0tp8Nw6atwboNCidPIW2G9dUyxfAXEmsJ1OQaDriMzteBwo5";
 
 // Common email template with consistent branding
 const createEmailTemplate = (content: string) => {
@@ -37,7 +39,9 @@ const createEmailTemplate = (content: string) => {
                 <!-- Header with Logo -->
                 <tr>
                   <td align="center" style="padding: 30px 30px 20px 30px; border-bottom: 1px solid #EEEEEE;">
-                    <h1 style="margin-top: 15px; color: ${BRAND_COLOR}; font-size: 24px; font-weight: bold;">Cloud9</h1>
+                    <div style="margin-top: 15px; border: solid 1px ${BRAND_COLOR}; border-radius: 8px; padding: 10px;">
+                      <img src="${LOGO_URL}" alt="Cloud9 Logo" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
+                    </div>
                   </td>
                 </tr>
                 <!-- Content -->

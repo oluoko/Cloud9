@@ -26,6 +26,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useFormState } from "react-dom";
 import { Banner } from "@prisma/client";
+import { twMerge } from "tailwind-merge";
 
 export function EditBannerForm({ data }: { data: Banner }) {
   const { toast } = useToast();
@@ -166,6 +167,8 @@ export function EditBannerForm({ data }: { data: Banner }) {
                   ) : (
                     <UploadButton
                       endpoint="bannerImageRoute"
+                      config={{ cn: twMerge }}
+                      className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                       onClientUploadComplete={(res) => {
                         setLargeImage(res[0].url);
                         toast({
@@ -218,6 +221,8 @@ export function EditBannerForm({ data }: { data: Banner }) {
                   ) : (
                     <UploadButton
                       endpoint="bannerImageRoute"
+                      config={{ cn: twMerge }}
+                      className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                       onClientUploadComplete={(res) => {
                         setSmallImage(res[0].url);
                         toast({

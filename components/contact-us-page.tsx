@@ -138,7 +138,7 @@ export default function ContactUsPage() {
                     <Input
                       placeholder="First name"
                       id="firstName"
-                      className="mt-1.5 bg-white h-11 shadow-none"
+                      className="mt-1.5 bg-background/70 h-11 shadow-none"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                       disabled={isLoading}
@@ -149,7 +149,7 @@ export default function ContactUsPage() {
                     <Input
                       placeholder="Last name"
                       id="lastName"
-                      className="mt-1.5 bg-white h-11 shadow-none"
+                      className="mt-1.5 bg-background/70 h-11 shadow-none"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       disabled={isLoading}
@@ -161,7 +161,7 @@ export default function ContactUsPage() {
                       type="email"
                       placeholder="Email"
                       id="email"
-                      className="mt-1.5 bg-white h-11 shadow-none"
+                      className="mt-1.5 bg-background/70 h-11 shadow-none"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       disabled={isLoading}
@@ -172,7 +172,7 @@ export default function ContactUsPage() {
                     <Textarea
                       id="message"
                       placeholder="Message"
-                      className="mt-1.5 bg-white shadow-none"
+                      className="mt-1.5 bg-background/70 shadow-none"
                       rows={6}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}

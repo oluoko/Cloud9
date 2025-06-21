@@ -27,6 +27,7 @@ import { profileSchema } from "@/lib/zodSchemas";
 import { PhoneInput } from "@/components/phone-input";
 import { getImageKey } from "@/lib/utils";
 import AuthLayout from "@/components/auth-layout";
+import { twMerge } from "tailwind-merge";
 
 export default function CompleteProfile() {
   const { toast } = useToast();
@@ -144,6 +145,8 @@ export default function CompleteProfile() {
                     ) : (
                       <UploadButton
                         endpoint="profileImageRoute"
+                        config={{ cn: twMerge }}
+                        className="bg-primary hover:bg-primary/70 text-background"
                         onClientUploadComplete={(res) => {
                           setProfileImage(res[0].url);
                           toast({

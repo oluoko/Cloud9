@@ -25,6 +25,7 @@ import { DateTimePicker } from "../../_components/DateTimePicker";
 import { SubmitButton } from "@/components/custom-button";
 import axios from "axios";
 import { getImageKey } from "@/lib/utils";
+import { twMerge } from "tailwind-merge";
 
 export default function CreateFlight() {
   const { toast } = useToast();
@@ -246,6 +247,8 @@ export default function CreateFlight() {
                 ) : (
                   <UploadButton
                     endpoint="flightImagesRoute"
+                    config={{ cn: twMerge }}
+                    className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                     onClientUploadComplete={(res) => {
                       setImages(res.map((r) => r.url));
                       toast({
