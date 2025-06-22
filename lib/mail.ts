@@ -98,7 +98,7 @@ export const sendBookingDetailsEmail = async (booking: Booking, user: User) => {
       <li><strong>Payment Status:</strong> ${capitalize(booking.paymentStatus)}</li>
       <li><strong>Booking Status:</strong> ${capitalize(booking.bookingStatus)}</li>
     </ul>
-    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">Your booking was made on ${formatDate(booking.createdAt)} at ${formatISODateToTime(booking.createdAt)}/p>
+    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">Your booking was made on ${formatDate(booking.createdAt)} at ${formatISODateToTime(booking.createdAt)}</p>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">If you need to make any changes or cancellations, please do so before the deadline specified in your booking confirmation.</p>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 25px;">To view your booking details, please click the button below:</p>
     ${createButton("View Booking", bookingLink)}
@@ -135,7 +135,7 @@ export const sendBookingReminderEmail = async (
       <li><strong>Payment Status:</strong> ${capitalize(booking.paymentStatus)}</li>
       <li><strong>Booking Status:</strong> ${capitalize(booking.bookingStatus)}</li>
     </ul>
-    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">Your booking was made on ${formatDate(booking.createdAt)} at ${formatISODateToTime(booking.createdAt)}/p>
+    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">Your booking was made on ${formatDate(booking.createdAt)} at ${formatISODateToTime(booking.createdAt)}</p>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">If you need to make any changes or cancellations, please do so before the deadline specified in your booking confirmation.</p>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 25px;">To view your booking details, please click the button below:</p>
     ${createButton("View Booking", bookingLink)}
