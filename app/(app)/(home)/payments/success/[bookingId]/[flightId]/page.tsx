@@ -34,7 +34,7 @@ export default function SuccessPage({ params }: SuccessPageProps) {
               flying with us.
             </p>
 
-            <div className="flex w-full gap-2 my-2 mt-4">
+            <div className="flex justify-between w-full gap-2 my-2 mt-4">
               <Link href={`/bookings/${bookingId}`}>
                 <Button className="w-full">View Booking</Button>
               </Link>
