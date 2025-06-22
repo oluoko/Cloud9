@@ -136,7 +136,7 @@ export default async function Bookings() {
             </Table>
           ) : (
             <div className="flex flex-col w-full items-center justify-center">
-              <p className="text-xl font-bold">No Flights Created Yet.</p>
+              <p className="text-xl font-bold">No Booked Flight Yet.</p>
             </div>
           )}
         </CardContent>
