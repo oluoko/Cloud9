@@ -94,7 +94,7 @@ export const sendBookingDetailsEmail = async (booking: Booking, user: User) => {
       <li><strong>Seat Count:</strong> ${booking.seatCount}</li>
       <li><strong>Payment Reference:</strong> ${booking.paymentReference}</li>
       <li><strong>Payment Method:</strong> ${booking.paymentMethod}</li>
-      <li><strong>Total Amount:</strong> $${booking.totalAmount.toFixed(2)}</li>
+      <li><strong>Total Amount:</strong>Ksh ${booking.totalAmount.toFixed(2)}</li>
       <li><strong>Payment Status:</strong> ${capitalize(booking.paymentStatus)}</li>
       <li><strong>Booking Status:</strong> ${capitalize(booking.bookingStatus)}</li>
     </ul>
@@ -106,7 +106,7 @@ export const sendBookingDetailsEmail = async (booking: Booking, user: User) => {
   `;
 
   await resend.emails.send({
-    from: "Cloud9-Booking@live-ly.tech",
+    from: "Cloud9-New-Booking@live-ly.tech",
     to: user.email,
     subject: "Details for booking made with Cloud9",
     html: createEmailTemplate(content),

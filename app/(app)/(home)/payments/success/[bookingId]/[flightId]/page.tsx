@@ -30,8 +30,9 @@ export default function SuccessPage({ params }: SuccessPageProps) {
 
             <p className="mt-2 text-sm text-muted-foreground">
               Your payment was successful. You will receive an email with the
-              details shortly. We hope you enjoy your flight. Thank you for
-              flying with us.
+              details shortly. If it is not in the main inbox, be sure to check
+              the spam. We hope you enjoy your flight. Thank you for flying with
+              us.
             </p>
 
             <div className="flex justify-between w-full gap-2 my-2 mt-4">
