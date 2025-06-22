@@ -75,7 +75,7 @@ export default function PayWithStripe({
         <span className="text-foreground font-bold">Ksh {amount}</span> for{" "}
         <span className="text-foreground font-bold">{seatType} class</span> to
         complete your booking.{" "}
-        <span className="text-sm text-muted">
+        <span className="text-sm text-primary/80">
           Use the account number{" "}
           <span className="font-bold">4242 4242 4242 4242</span>. You won&apos;t
           be charged
