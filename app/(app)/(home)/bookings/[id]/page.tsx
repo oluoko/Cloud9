@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image"; // Assume you have a date formatter utility
+import Image from "next/image";
 import { FaPlane } from "react-icons/fa6";
 import {
   capitalize,
@@ -23,6 +23,13 @@ import {
   formatTime,
   getStatusBadgeVariant3,
 } from "@/lib/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import SendEmail from "@/components/send-email";
 
 interface BookingPageProps {
   params: {
@@ -80,10 +87,25 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
           <h1 className="text-xl md:text-2xl font-bold">Booking Details</h1>
         </div>
 
-        <Button variant="outline" size="sm" className="hidden md:flex gap-2">
-          <Mail className="size-4" />
-          Email Me The Details
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              className="hidden md:flex gap-2"
+            >
+              <Mail className="size-4" />
+              Email Me The Details
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogTitle>Send Booking Details to my Email</DialogTitle>
+            <SendEmail
+              bookingId={booking.id}
+              initialEmail={booking.User?.email || "user@example.com"}
+            />
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Status Banner */}

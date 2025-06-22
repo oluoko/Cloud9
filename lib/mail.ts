@@ -1,5 +1,6 @@
 import { Booking, User } from "@prisma/client";
 import { Resend } from "resend";
+import { formatDate, formatISODateToTime, capitalize } from "@/lib/utils";
 
 const API_KEY = process.env.RESEND_API_KEY;
 
@@ -15,13 +16,9 @@ const domain =
     : process.env.NEXT_PUBLIC_APP_URL;
 
 const BRAND_COLOR = "#16A34A";
-const BRAND_COLOR_DARK = "#0D9B3A";
 const TEXT_COLOR = "#333333";
 const BACKGROUND_COLOR = "#F9F9F9";
-const LOGO_URL =
-  "https://utfs.io/f/0tp8Nw6atwboNCidPIW2G9dUyxfAXEmsJ1OQaDriMzteBwo5";
 
-// Common email template with consistent branding
 const createEmailTemplate = (content: string) => {
   return `
     <!DOCTYPE html>
@@ -40,7 +37,9 @@ const createEmailTemplate = (content: string) => {
                 <tr>
                   <td align="center" style="padding: 30px 30px 20px 30px; border-bottom: 1px solid #EEEEEE;">
                     <div style="margin-top: 15px; border: solid 1px ${BRAND_COLOR}; border-radius: 8px; padding: 10px;">
-                      <img src="${LOGO_URL}" alt="Cloud9 Logo" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
+                      <h1 style="margin: 0; font-size: 36px; font-weight: bold; letter-spacing: 2px;">
+                        Cloud<span style="color: ${BRAND_COLOR};">9</span>
+                      </h1>
                     </div>
                   </td>
                 </tr>
@@ -53,7 +52,7 @@ const createEmailTemplate = (content: string) => {
                 <!-- Footer -->
                 <tr>
                   <td style="padding: 20px 30px; background-color: #F5F5F5; border-radius: 0 0 8px 8px; font-size: 12px; color: #666666; text-align: center;">
-                    <p>© ${new Date().getFullYear()} Cloud9. All rights reserved.</p>
+                    <p>© ${new Date().getFullYear()} | All rights reserved.</p>
                     <p>Fly faster, better.</p>
                   </td>
                 </tr>
@@ -87,6 +86,20 @@ export const sendBookingDetailsEmail = async (booking: Booking, user: User) => {
   const content = `
     <h2 style="color: ${BRAND_COLOR}; margin-bottom: 20px;">Booking Confirmation</h2>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">Thank you for your booking! We're excited to have you on board.</p>
+    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">Here are the details of your booking:</p>
+    <ul style="list-style-type: none; padding: 0; margin-bottom: 25px;">
+      <li><strong>Booking ID:</strong> ${booking.id}</li>
+      <li><strong>Flight ID:</strong> ${booking.flightId}</li>
+      <li><strong>Seat Type:</strong> ${capitalize(booking.seatType)}</li>
+      <li><strong>Seat Count:</strong> ${booking.seatCount}</li>
+      <li><strong>Payment Reference:</strong> ${booking.paymentReference}</li>
+      <li><strong>Payment Method:</strong> ${booking.paymentMethod}</li>
+      <li><strong>Total Amount:</strong> $${booking.totalAmount.toFixed(2)}</li>
+      <li><strong>Payment Status:</strong> ${capitalize(booking.paymentStatus)}</li>
+      <li><strong>Booking Status:</strong> ${capitalize(booking.bookingStatus)}</li>
+    </ul>
+    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">Your booking was made on ${formatDate(booking.createdAt)} at ${formatISODateToTime(booking.createdAt)}/p>
+    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">If you need to make any changes or cancellations, please do so before the deadline specified in your booking confirmation.</p>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 25px;">To view your booking details, please click the button below:</p>
     ${createButton("View Booking", bookingLink)}
     <p style="font-size: 14px; line-height: 1.5; margin-top: 25px;">If you have any questions or need assistance, feel free to reach out to our support team.</p>
@@ -102,13 +115,28 @@ export const sendBookingDetailsEmail = async (booking: Booking, user: User) => {
 
 export const sendBookingReminderEmail = async (
   booking: Booking,
-  user: User
+  email: string
 ) => {
   const bookingLink = `${domain}/bookings/${booking.id}`;
 
   const content = `
     <h2 style="color: ${BRAND_COLOR}; margin-bottom: 20px;">Booking Reminder</h2>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">This is a friendly reminder about your upcoming booking.</p>
+    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">Here are the details of your booking:</p>
+    <ul style="list-style-type: none; padding: 0; margin-bottom: 25px;">
+
+      <li><strong>Booking ID:</strong> ${booking.id}</li>
+      <li><strong>Flight ID:</strong> ${booking.flightId}</li>
+      <li><strong>Seat Type:</strong> ${capitalize(booking.seatType)}</li>
+      <li><strong>Seat Count:</strong> ${booking.seatCount}</li>
+      <li><strong>Payment Reference:</strong> ${booking.paymentReference}</li>
+      <li><strong>Payment Method:</strong> ${booking.paymentMethod}</li>
+      <li><strong>Total Amount:</strong> Ksh ${booking.totalAmount.toFixed(2)}</li>
+      <li><strong>Payment Status:</strong> ${capitalize(booking.paymentStatus)}</li>
+      <li><strong>Booking Status:</strong> ${capitalize(booking.bookingStatus)}</li>
+    </ul>
+    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">Your booking was made on ${formatDate(booking.createdAt)} at ${formatISODateToTime(booking.createdAt)}/p>
+    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">If you need to make any changes or cancellations, please do so before the deadline specified in your booking confirmation.</p>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 25px;">To view your booking details, please click the button below:</p>
     ${createButton("View Booking", bookingLink)}
     <p style="font-size: 14px; line-height: 1.5; margin-top: 25px;">If you have any questions or need assistance, feel free to reach out to our support team.</p>
@@ -116,7 +144,7 @@ export const sendBookingReminderEmail = async (
 
   await resend.emails.send({
     from: "Cloud9-Booking@live-ly.tech",
-    to: user.email,
+    to: email,
     subject: "Reminder for your upcoming booking",
     html: createEmailTemplate(content),
   });

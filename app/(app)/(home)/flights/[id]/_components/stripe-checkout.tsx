@@ -10,7 +10,6 @@ import {
 import { useEffect, useState } from "react";
 import convertToSubcurrency from "@/lib/utils";
 import LoadingDots from "@/components/loading-dots";
-import { sendBookingDetailsEmail } from "@/lib/mail";
 import { User } from "@prisma/client";
 
 export default function StripeCheckOut({
@@ -101,10 +100,6 @@ export default function StripeCheckOut({
 
         if (bookingResponse.ok) {
           const bookingData = await bookingResponse.json();
-
-          if (user) {
-            await sendBookingDetailsEmail(bookingData.booking, user);
-          }
 
           // Redirect to success page
           window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/payments/success/${bookingData.booking.id}/${flightId}`;

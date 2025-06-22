@@ -1,12 +1,13 @@
-import { getUserByClerkId } from "@/lib/auth";
+import { getUserByClerkId, getUserById } from "@/lib/auth";
+import { sendBookingDetailsEmail } from "@/lib/mail";
 import prisma from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const user = await getUserByClerkId();
+    const loggedInUser = await getUserByClerkId();
 
-    if (!user) {
+    if (!loggedInUser) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -43,6 +44,10 @@ export async function POST(request: NextRequest) {
         paymentReference: paymentIntentId || "",
       },
     });
+
+    const user = await getUserById(userId);
+
+    await sendBookingDetailsEmail(booking, user);
 
     return NextResponse.json({ success: true, booking }, { status: 201 });
   } catch (error) {
