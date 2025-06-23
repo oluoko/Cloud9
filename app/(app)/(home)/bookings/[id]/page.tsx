@@ -312,7 +312,6 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
           <Button asChild variant="outline" className="flex-1 md:flex-auto">
             <Link href="/flights">Find More Flights</Link>
           </Button>
-<<<<<<< HEAD
           <Button
             asChild
             variant="primaryOutline"
@@ -320,8 +319,6 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
           >
             <Link href={`/flights/${booking.Flight?.id}`}>View Flight</Link>
           </Button>
-=======
->>>>>>> 1b385eaf9e2d20413d1ebe160e53a4f678621fe9
           <Button asChild className="flex-1 md:flex-auto">
             <Link href="/">Go Back Home</Link>
           </Button>

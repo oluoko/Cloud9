@@ -7,16 +7,10 @@ import imageOneLargeScreen from "@/public/images/dev/banners/1-large-screens.jpe
 import imageTwoLargeScreen from "@/public/images/dev/banners/2-large-screens.jpeg";
 import prisma from "@/utils/db";
 import BannerCarousel from "@/components/banner-carousel";
-<<<<<<< HEAD
 import Flights from "@/components/flights/flights";
 
 export default async function Home() {
   let banners = await prisma.banner.findMany({
-=======
-
-async function getBanners() {
-  const banners = await prisma.banner.findMany({
->>>>>>> 1b385eaf9e2d20413d1ebe160e53a4f678621fe9
     where: {
       isActive: true,
     },
@@ -33,20 +27,12 @@ async function getBanners() {
     },
   });
 
-<<<<<<< HEAD
   const flights = await prisma.flight.findMany({
     orderBy: {
       createdAt: "desc",
     },
   });
 
-=======
-  return banners;
-}
-
-export default async function Home() {
-  let banners = await getBanners();
->>>>>>> 1b385eaf9e2d20413d1ebe160e53a4f678621fe9
   if (!banners || banners.length === 0) {
     banners = [
       {
@@ -71,10 +57,7 @@ export default async function Home() {
   return (
     <div className="overflow-hidden">
       <BannerCarousel banners={banners} />
-<<<<<<< HEAD
       <Flights flights={flights} />
-=======
->>>>>>> 1b385eaf9e2d20413d1ebe160e53a4f678621fe9
       <Testimonials />
       <ContactUsPage />
       <Footer />

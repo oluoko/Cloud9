@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Banner } from "@prisma/client";
 import { useIsMobile } from "@/hooks/use-mobile";
+import SearchFlights from "@/components/search-flights/search-flight";
 
 interface BannerCarouselProps {
   banners: Partial<Banner>[];
@@ -46,7 +47,7 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
   };
   return (
     <div className="relative w-full h-screen">
-      {/* <SearchFlights /> */}
+      <SearchFlights />
       <div
         className="relative w-full h-full"
         onMouseEnter={() => setIsAutoPlaying(false)}
