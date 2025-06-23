@@ -127,9 +127,12 @@ export default async function Bookings() {
                           <Link href={`/bookings/${booking.id}`}>
                             <DropdownMenuItem>View Booking</DropdownMenuItem>
                           </Link>
+<<<<<<< HEAD
                           <Link href={`/flights/${booking.Flight?.id}`}>
                             <DropdownMenuItem>View Flight</DropdownMenuItem>
                           </Link>
+=======
+>>>>>>> 1b385eaf9e2d20413d1ebe160e53a4f678621fe9
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
