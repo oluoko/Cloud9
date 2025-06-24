@@ -253,7 +253,7 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Passengers</span>
-                  <span>× {booking.seatCount}</span>
+                  <span>{booking.seatCount}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Seat Type</span>
