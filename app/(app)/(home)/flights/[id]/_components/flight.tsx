@@ -46,6 +46,7 @@ import Image from "next/image";
 import mpesaText from "@/public/assets/lipa na mpesa.png";
 import { Flight, User } from "@prisma/client";
 import PayWithStripe from "./pay-with-stripe";
+import Link from "next/link";
 
 type SeatClass = "economy" | "business" | "firstClass";
 
@@ -87,7 +88,7 @@ export default function FlightPage({
   );
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <div className="py-8 px-4">
       <div className="grid md:grid-cols-3 gap-6">
         {/* Flight Details Section */}
         <Card className="md:col-span-2">
@@ -376,6 +377,25 @@ export default function FlightPage({
           </div>
         </CardContent>
       </Card>
+      <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p className="text-sm text-muted-foreground text-center md:text-left">
+          Thank you for flying with us. If you have any questions,{" "}
+          <Link
+            href="/#contact-us-page"
+            className="underline hover:text-primary"
+          >
+            please contact our support team
+          </Link>
+        </p>
+        <div className="flex gap-3 w-full md:w-auto">
+          <Button asChild variant="outline" className="flex-1 md:flex-auto">
+            <Link href="/flights">Find More Flights</Link>
+          </Button>
+          <Button asChild className="flex-1 md:flex-auto">
+            <Link href="/">Go Back Home</Link>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

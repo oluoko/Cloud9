@@ -1,4 +1,4 @@
-import { Plane } from "lucide-react";
+import { FaPlane } from "react-icons/fa";
 
 interface FlightRouteProps {
   departure: string;
@@ -21,11 +21,14 @@ export function FlightRoute({
       } ${textSize}`}
     >
       <div className={textSize}>{departure}</div>
-      <Plane
-        className={`h-${iconSize} w-${iconSize} mx-${
-          size === "large" ? "4" : "2"
-        } text-primary`}
-      />
+      <div className="grow mx-4 relative">
+        <div className="border-t-2 border-dashed border-primary w-full absolute top-1/2" />
+        <FaPlane
+          className={`h-${iconSize} w-${iconSize} mx-${
+            size === "large" ? "4" : "2"
+          } text-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2`}
+        />
+      </div>
       <div className={textSize}>{arrival}</div>
     </div>
   );

@@ -18,12 +18,12 @@ export default function SuccessPage({ params }: SuccessPageProps) {
 
   return (
     <section className="w-full h-screen flex items-center justify-center">
-      <Card className="w-[350px]">
-        <div className="p-6">
-          <div className="w-full flex justify-center">
+      <Card className="w-[80vw] md:w-[50vw]">
+        <div className="p-6 w-full">
+          <div className="flex justify-center">
             <Check className="size-12 rounded-full bg-green-500/30 hover:bg-green-700/30 text-green-500 p-2" />
           </div>
-          <div className="mt-3 text-center sm:mt-5 w-full">
+          <div className="mt-3 text-center w-full">
             <h3 className="text-lg leading-6 font-medium">
               Payment Successful
             </h3>
@@ -35,11 +35,11 @@ export default function SuccessPage({ params }: SuccessPageProps) {
               us.
             </p>
 
-            <div className="flex justify-between w-full gap-2 my-2 mt-4">
-              <Link href={`/bookings/${bookingId}`}>
+            <div className="flex w-full gap-2 my-2 mt-4">
+              <Link href={`/bookings/${bookingId}`} className="w-full">
                 <Button className="w-full">View Booking</Button>
               </Link>
-              <Link href={`/flights/${flightId}`}>
+              <Link href={`/flights/${flightId}`} className="w-full">
                 <Button variant="outline" className="w-full">
                   View Flight
                 </Button>

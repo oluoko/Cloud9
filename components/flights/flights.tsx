@@ -2,6 +2,7 @@ import prisma from "@/utils/db";
 import { FeaturedFlightCard } from "@/components/flights/featured-flight-card";
 import { FlightCard } from "@/components/flights/flight";
 import { Flight } from "@prisma/client";
+import MainFlightsInterface from "@/components/flights/main-flights-interface";
 
 interface FlightsProps {
   flights: Flight[];
@@ -24,11 +25,13 @@ export default function Flights({
   const firstFlight = flights[0];
   const remainingFlights = flights.slice(1);
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Featured Flights</h1>
 
       {/* Featured Flight - Wide Card */}
       {firstFlight && <FeaturedFlightCard flight={firstFlight} />}
+
+      <MainFlightsInterface flights={remainingFlights} />
 
       {/* Remaining Flights - Grid Layout */}
       {showFlightCards && (

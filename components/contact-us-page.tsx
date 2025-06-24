@@ -60,7 +60,10 @@ export default function ContactUsPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-10">
+    <div
+      className="min-h-screen flex items-center justify-center py-10"
+      id="contact-us-page"
+    >
       <div className="w-full max-w-screen-xl mx-auto px-6 xl:px-0">
         <b className="text-muted-foreground">Contact Us</b>
         <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight">
