@@ -172,7 +172,7 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
                     </p>
                   </div>
                   <div className="grow mx-4 relative">
-                    <div className="border-t-2 border-muted-foreground/20 w-full absolute top-1/2" />
+                    <div className="border-t-2 border-dashed border-primary w-full absolute top-1/2" />
                     <FaPlane className="h-6 w-6 text-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2" />
                   </div>
                   <div className="flex-1">
@@ -309,8 +309,13 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
         {/* Action Buttons */}
         <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground text-center md:text-left">
-            Thank you for booking with us. If you have any questions, please
-            contact our support team.
+            Thank you for booking with us. If you have any questions,{" "}
+            <Link
+              href="/#contact-us-page"
+              className="underline hover:text-primary"
+            >
+              please contact our support team
+            </Link>
           </p>
           <div className="flex gap-3 w-full md:w-auto">
             <Button asChild variant="outline" className="flex-1 md:flex-auto">
