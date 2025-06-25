@@ -2,6 +2,7 @@
 
 import { deleteBanner } from "@/actions/banners";
 import { deleteFlight } from "@/actions/flights";
+import { deleteTestimonial } from "@/actions/testimonials";
 import LoadingDots from "@/components/loading-dots";
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,7 +15,7 @@ import { useEffect, useState } from "react";
 interface ModelProps {
   id: string;
   title: string;
-  modelType: "banner" | "flight";
+  modelType: "banner" | "flight" | "testimonial";
 }
 
 export default function DeleteConfirmation({
@@ -38,6 +39,8 @@ export default function DeleteConfirmation({
           await deleteBanner(id);
         } else if (modelType === "flight") {
           await deleteFlight(id);
+        } else if (modelType === "testimonial") {
+          await deleteTestimonial(id);
         }
         // Handle successful deletion (could add navigation here)
       } catch (error) {

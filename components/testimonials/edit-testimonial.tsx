@@ -18,9 +18,12 @@ import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { useFormState } from "react-dom";
 import { useState } from "react";
-import { SubmitButton } from "../custom-button";
+import { DeleteButton, SubmitButton } from "../custom-button";
 import { Textarea } from "../ui/textarea";
 import { Testimonial } from "@prisma/client";
+import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
+import LoadingDots from "../loading-dots";
 
 export default function EditTestimonial({ data }: { data: Testimonial }) {
   const { toast } = useToast();
@@ -38,7 +41,12 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
   });
   return (
     <>
-      <form id={form.id} onSubmit={form.onSubmit} action={action}>
+      <form
+        id={form.id}
+        onSubmit={form.onSubmit}
+        action={action}
+        className="m-4"
+      >
         <input type="hidden" name="testimonialId" value={data.id} />
         <Card>
           <CardHeader>
@@ -97,8 +105,12 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
               </div>
             </div>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex justify-between">
             <SubmitButton text="Create Testimonial" />
+
+            <Button variant="destructive" className="text-xl">
+              Delete Testimonial
+            </Button>
           </CardFooter>
         </Card>
       </form>

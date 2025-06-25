@@ -37,7 +37,12 @@ export default function CreateTestimonial() {
   });
   return (
     <>
-      <form id={form.id} onSubmit={form.onSubmit} action={action}>
+      <form
+        id={form.id}
+        onSubmit={form.onSubmit}
+        action={action}
+        className="m-4"
+      >
         <Card>
           <CardHeader>
             <CardTitle>Create a Testimonial</CardTitle>
@@ -60,9 +65,9 @@ export default function CreateTestimonial() {
                     defaultValue={fields.rating.value}
                   />
                   <div className="flex items-center gap-1">
-                    <StarFilledIcon className="size-4 fill-yellow-500 stroke-muted-foreground" />
-                    <StarFilledIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
-                    <StarIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
+                    <StarFilledIcon className="size-4 text-yellow-500" />
+                    <StarFilledIcon className="size-4 text-yellow-500" />
+                    <StarIcon className="size-4 fill-yello-300 stroke-muted-foreground" />
                     <StarIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
                     <StarIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
                   </div>
