@@ -7,7 +7,7 @@ import imageOneLargeScreen from "@/public/images/dev/banners/1-large-screens.jpe
 import imageTwoLargeScreen from "@/public/images/dev/banners/2-large-screens.jpeg";
 import prisma from "@/utils/db";
 import BannerCarousel from "@/components/banner-carousel";
-import Flights from "@/components/flights/flights";
+import Flights from "@/components/flights";
 
 export default async function Home() {
   let banners = await prisma.banner.findMany({
@@ -22,6 +22,12 @@ export default async function Home() {
       largeImageUrl: true,
       smallImageUrl: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  const testimonials = await prisma.testimonial.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -58,7 +64,7 @@ export default async function Home() {
     <div className="overflow-hidden">
       <BannerCarousel banners={banners} />
       <Flights flights={flights} />
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
       <ContactUsPage />
       <Footer />
     </div>

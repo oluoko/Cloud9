@@ -10,7 +10,7 @@ import { getUserByClerkId } from "@/lib/auth";
 export async function createFlight(preveState: unknown, formData: FormData) {
   const user = await getUserByClerkId();
   if (!user) {
-    return redirect("/sign-in");
+    return redirect("/login");
   }
 
   const submission = parseWithZod(formData, {
@@ -49,7 +49,7 @@ export async function createFlight(preveState: unknown, formData: FormData) {
 export async function editFlight(prevState: unknown, formData: FormData) {
   const user = await getUserByClerkId();
   if (!user) {
-    return redirect("/sign-in");
+    return redirect("/login");
   }
 
   const submission = parseWithZod(formData, {
@@ -93,7 +93,7 @@ export async function editFlight(prevState: unknown, formData: FormData) {
 export async function deleteFlight(flightId: string) {
   const user = await getUserByClerkId();
   if (!user) {
-    return redirect("/sign-in");
+    return redirect("/login");
   }
 
   await prisma.flight.delete({

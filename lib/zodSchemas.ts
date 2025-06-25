@@ -105,3 +105,9 @@ export const payWithCardSchema = z.object({
   seatCount: z.number().optional(),
   seatType: z.string().optional(),
 });
+
+export const testimonialSchema = z.object({
+  rating: z.number().int().min(1).max(5, "Rating must be between 1 and 5"),
+  descriptiveTitle: z.string().default("Cloud9 Patron"),
+  comment: z.string().min(10, "Comment is required"),
+});

@@ -1,4 +1,4 @@
-import Flights from "@/components/flights/flights";
+import Flights from "@/components/flights";
 import MainFlightsInterface from "@/components/flights/main-flights-interface";
 import Footer from "@/components/footer";
 import prisma from "@/utils/db";

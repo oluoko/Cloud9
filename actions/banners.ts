@@ -7,10 +7,10 @@ import { bannerSchema } from "@/lib/zodSchemas";
 import prisma from "@/utils/db";
 import { getUserByClerkId } from "@/lib/auth";
 
-export async function createBanner(preveState: unknown, formData: FormData) {
+export async function createBanner(prevState: unknown, formData: FormData) {
   const user = await getUserByClerkId();
   if (!user) {
-    return redirect("/sign-in");
+    return redirect("/login");
   }
 
   const submission = parseWithZod(formData, {
@@ -38,7 +38,7 @@ export async function createBanner(preveState: unknown, formData: FormData) {
 export async function editBanner(prevState: unknown, formData: FormData) {
   const user = await getUserByClerkId();
   if (!user) {
-    return redirect("/sign-in");
+    return redirect("/login");
   }
 
   const submission = parseWithZod(formData, {
@@ -71,7 +71,7 @@ export async function editBanner(prevState: unknown, formData: FormData) {
 export async function deleteBanner(bannerId: string) {
   const user = await getUserByClerkId();
   if (!user) {
-    return redirect("/sign-in");
+    return redirect("/login");
   }
 
   await prisma.banner.delete({

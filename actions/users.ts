@@ -11,7 +11,7 @@ export async function updateProfile(prevState: unknown, formData: FormData) {
   try {
     const user = await getUserByClerkId();
     if (!user) {
-      return redirect("/sign-in");
+      return redirect("/login");
     }
 
     const submission = parseWithZod(formData, {
@@ -48,7 +48,7 @@ export async function updateProfile(prevState: unknown, formData: FormData) {
 export async function editProfile(prevState: unknown, formData: FormData) {
   const user = await getUserByClerkId();
   if (!user) {
-    return redirect("/sign-in");
+    return redirect("/login");
   }
 
   const submission = parseWithZod(formData, {
