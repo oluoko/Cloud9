@@ -75,7 +75,7 @@ export default function CreateTestimonial() {
                   {/* Rating Ui to go here */}
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Destination City</Label>
+                  <Label>Descriptive Title</Label>
                   <Input
                     type="text"
                     name={fields.descriptiveTitle.name}
