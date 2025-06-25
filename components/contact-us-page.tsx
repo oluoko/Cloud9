@@ -183,11 +183,10 @@ export default function ContactUsPage() {
                     />
                   </div>
                   <div className="col-span-2 flex items-center gap-2">
-                    See to our{" "}
+                    See our{" "}
                     <Link href="/terms-and-conditions" className="underline">
-                      terms and conditions
+                      terms and conditions.
                     </Link>
-                    .
                   </div>
                 </div>
                 <Button className="mt-6 w-full" size="lg" disabled={isLoading}>
