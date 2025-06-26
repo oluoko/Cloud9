@@ -3,14 +3,12 @@
 import { deleteBanner } from "@/actions/banners";
 import { deleteFlight } from "@/actions/flights";
 import { deleteTestimonial } from "@/actions/testimonials";
-import LoadingDots from "@/components/loading-dots";
-import { Button } from "@/components/ui/button";
+import { DeleteButton } from "@/components/custom-button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { capitalize } from "@/lib/utils";
-import { Loader2 } from "lucide-react"; // Import Loader2 icon
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Button } from "./ui/button";
 
 interface ModelProps {
   id: string;
@@ -32,8 +30,10 @@ export default function DeleteConfirmation({
   }, [input, title]);
 
   const handleDelete = async () => {
+    console.log("Match is true");
     if (match) {
       setIsDeleting(true); // Set loading state to true before deletion
+      console.log("Starting to delete ", modelType, "with ID:", id);
       try {
         if (modelType === "banner") {
           await deleteBanner(id);
@@ -74,22 +74,16 @@ export default function DeleteConfirmation({
           placeholder={`Type "${title}" to confirm`}
           className="mb-4"
         />
+        <Button variant="destructive" onClick={handleDelete}>
+          Delete {modelType}
+        </Button>
 
-        {isDeleting ? (
-          <Button disabled variant="destructive" className="text-xl">
-            <Loader2 className="animate-spin mr-2 size-4" />
-            <LoadingDots text={`Deleting ${entityName}`} />
-          </Button>
-        ) : (
-          <Button
-            variant="destructive"
-            className="text-xl"
-            disabled={!match}
-            onClick={handleDelete}
-          >
-            Delete
-          </Button>
-        )}
+        {/* <DeleteButton
+          isPending={isDeleting}
+          text={`Delete ${entityName}`}
+          loadingText={`Deleting ${entityName}`}
+          onClick={handleDelete}
+        /> */}
       </CardFooter>
     </Card>
   );

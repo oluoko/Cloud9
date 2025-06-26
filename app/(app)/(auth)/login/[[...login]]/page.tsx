@@ -14,16 +14,14 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BrandLogo } from "@/components/brand-logo";
 import Loader from "@/components/loader";
 import AuthLayout from "@/components/auth-layout";
 import Separator from "@/components/custom-separator";
 import OauthSignIn from "@/components/o-auth";
-import LoadingDots from "@/components/loading-dots";
+import { SubmitButton } from "@/components/custom-button";
 
 export default function SignInForm() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -160,16 +158,13 @@ export default function SignInForm() {
                 </Alert>
               )}
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 size-4 md:size-6 animate-spin" />
-                    <LoadingDots text="Logging you in" />
-                  </>
-                ) : (
-                  "Log In"
-                )}
-              </Button>
+              <SubmitButton
+                disabled={isLoading}
+                type="submit"
+                text="Log In"
+                loadingText="Logging In"
+              />
+
               <Separator text="Sign In" />
               <OauthSignIn />
             </form>

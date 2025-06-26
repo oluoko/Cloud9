@@ -79,11 +79,11 @@ model Booking {
 }
 
 model Testimonial {
-  id               String @id @default(uuid())
+  id               String  @id @default(uuid())
   name             String
-  imageUrl         String
-  rating           Int    @default(0)
-  descriptiveTitle String @default("Cloud9 Patron")
+  imageUrl         String?
+  rating           Int?    @default(0)
+  descriptiveTitle String? @default("Cloud9 Patron")
   comment          String
 
   userId String @unique

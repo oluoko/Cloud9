@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import CreateTestimonial from "@/components/testimonials/create-testimonial";
+import EditTestimonial from "@/components/testimonials/edit-testimonial";
 import { getUserByClerkId } from "@/lib/auth";
 import prisma from "@/utils/db";
 
@@ -16,7 +17,11 @@ export default async function ProfilePage() {
         <h1 className="text-2xl font-bold mb-4">Profile Page</h1>
         <p className="text-gray-600">This is the profile page.</p>
       </div>
-      <CreateTestimonial />
+      {testimonial ? (
+        <EditTestimonial data={testimonial} />
+      ) : (
+        <CreateTestimonial />
+      )}
       <Footer />
     </div>
   );

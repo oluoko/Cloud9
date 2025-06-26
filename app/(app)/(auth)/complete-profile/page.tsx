@@ -220,7 +220,10 @@ export default function CompleteProfile() {
                 </Alert>
               )}
 
-              <SubmitButton text="Complete Profile" />
+              <SubmitButton
+                text="Complete Profile"
+                loadingText="Completing Profile"
+              />
             </form>
           </CardContent>
           <CardFooter className="justify-center">

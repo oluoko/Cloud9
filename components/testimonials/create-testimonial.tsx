@@ -24,6 +24,7 @@ import { Textarea } from "../ui/textarea";
 export default function CreateTestimonial() {
   const { toast } = useToast();
   const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
 
   const [lastResult, action] = useFormState(createTestimonial, undefined);
 
@@ -35,6 +36,47 @@ export default function CreateTestimonial() {
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
+
+  interface StarClickHandler {
+    (starIndex: number): void;
+  }
+
+  const handleStarClick: StarClickHandler = (starIndex) => {
+    setRating(starIndex);
+  };
+
+  const handleStarHover: StarClickHandler = (starIndex) => {
+    setHoverRating(starIndex);
+  };
+
+  const handleStarLeave = () => {
+    setHoverRating(0);
+  };
+
+  const renderStars = () => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      const isFilled = i <= (hoverRating || rating);
+      stars.push(
+        <button
+          key={i}
+          type="button"
+          onClick={() => handleStarClick(i)}
+          onMouseEnter={() => handleStarHover(i)}
+          onMouseLeave={handleStarLeave}
+          className="focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 rounded transition-colors duration-150"
+        >
+          {isFilled ? (
+            <StarFilledIcon className="size-4 text-yellow-500 hover:text-yellow-400 transition-colors duration-150" />
+          ) : (
+            <StarIcon className="size-4 text-muted-foreground hover:text-yellow-300 transition-colors duration-150" />
+          )}
+        </button>
+      );
+    }
+    return stars;
+  };
+
   return (
     <>
       <form
@@ -62,20 +104,19 @@ export default function CreateTestimonial() {
                     type="number"
                     name={fields.rating.name}
                     key={fields.rating.key}
-                    defaultValue={fields.rating.value}
+                    value={rating}
+                    onChange={() => {}} // Controlled by star clicks
                   />
-                  <div className="flex items-center gap-1">
-                    <StarFilledIcon className="size-4 text-yellow-500" />
-                    <StarFilledIcon className="size-4 text-yellow-500" />
-                    <StarIcon className="size-4 fill-yello-300 stroke-muted-foreground" />
-                    <StarIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
-                    <StarIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
-                  </div>
+                  <div className="flex items-center gap-1">{renderStars()}</div>
+                  {rating > 0 && (
+                    <p className="text-sm text-muted-foreground">
+                      {rating} out of 5 stars
+                    </p>
+                  )}
                   <p className="text-red-500">{fields.rating.errors}</p>
-                  {/* Rating Ui to go here */}
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Destination City</Label>
+                  <Label>Descriptive Title</Label>
                   <Input
                     type="text"
                     name={fields.descriptiveTitle.name}
@@ -101,7 +142,10 @@ export default function CreateTestimonial() {
             </div>
           </CardContent>
           <CardFooter>
-            <SubmitButton text="Create Testimonial" />
+            <SubmitButton
+              text="Create Testimonial"
+              loadingText="Creating Testimonial"
+            />
           </CardFooter>
         </Card>
       </form>

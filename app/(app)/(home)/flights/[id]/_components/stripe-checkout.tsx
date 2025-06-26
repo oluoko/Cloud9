@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import {
   PaymentElement,
@@ -9,8 +8,8 @@ import {
 } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import convertToSubcurrency from "@/lib/utils";
-import LoadingDots from "@/components/loading-dots";
 import { User } from "@prisma/client";
+import { SubmitButton } from "@/components/custom-button";
 
 export default function StripeCheckOut({
   amount,
@@ -127,16 +126,12 @@ export default function StripeCheckOut({
     <form onSubmit={handleSubmit}>
       {clientSecret && <PaymentElement />}
       {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
-      {loading ? (
-        <Button disabled size="lg" className="w-full mt-5">
-          <Loader2 className="mr-4 size-4 md:size-6 animate-spin" />{" "}
-          <LoadingDots text={`Processing Ksh ${amount}`} />
-        </Button>
-      ) : (
-        <Button size="lg" className="w-full mt-5">
-          Complete Payment of Ksh {amount}
-        </Button>
-      )}
+      <SubmitButton
+        onClick={handleSubmit}
+        disabled={loading}
+        text="Complete Payment"
+        loadingText={`Processing Ksh ${amount}`}
+      />
     </form>
   );
 }

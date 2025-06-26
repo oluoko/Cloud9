@@ -4,7 +4,6 @@ import React, { FormEvent, useState } from "react";
 import { useAuth, useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -18,7 +17,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ClerkAPIError } from "@clerk/types";
@@ -28,7 +27,7 @@ import AuthLayout from "@/components/auth-layout";
 import Separator from "@/components/custom-separator";
 import OauthSignIn from "@/components/o-auth";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
-import LoadingDots from "@/components/loading-dots";
+import { SubmitButton } from "@/components/custom-button";
 
 export default function SignUpPage() {
   const { isLoaded, setActive, signUp } = useSignUp();
@@ -202,16 +201,12 @@ export default function SignUpPage() {
                   )}
                   {/* CAPTCHA Widget */}
                   <div id="clerk-captcha"></div>
-                  <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="mr-2 size-6 animate-spin" />
-                        <LoadingDots text="Signing you up" />
-                      </>
-                    ) : (
-                      "Sign Up"
-                    )}
-                  </Button>
+                  <SubmitButton
+                    disabled={isLoading}
+                    type="submit"
+                    text="Sign Up"
+                    loadingText="Signing you up"
+                  />
                   <Separator text="Sign Up" />
                   <OauthSignIn />
                 </form>
@@ -243,16 +238,12 @@ export default function SignUpPage() {
                     ))}
                   </Alert>
                 )}
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      <LoadingDots text="Verifying email" />
-                    </>
-                  ) : (
-                    "Verify Email"
-                  )}
-                </Button>
+                <SubmitButton
+                  disabled={isLoading}
+                  type="submit"
+                  text="Verify Email"
+                  loadingText="Verifying Email"
+                />
               </form>
             )}
           </CardContent>

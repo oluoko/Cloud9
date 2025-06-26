@@ -1,8 +1,7 @@
 "use client";
 
-import LoadingDots from "@/components/loading-dots";
+import { SubmitButton } from "@/components/custom-button";
 import { Error, NeutralMessage, Sucess } from "@/components/messages";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -112,13 +111,12 @@ export default function LipaNaMpesa({
         complete booking.
       </p>
 
-      <Button onClick={handleSubmit} disabled={loading}>
-        {loading ? (
-          <LoadingDots text="Processing payment" />
-        ) : (
-          "Complete Payment"
-        )}
-      </Button>
+      <SubmitButton
+        onClick={handleSubmit}
+        disabled={loading}
+        text="Complete Payment"
+        loadingText="Processing Payment"
+      />
 
       {message && (
         <div className="mt-4">

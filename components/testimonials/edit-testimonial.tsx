@@ -18,16 +18,23 @@ import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { useFormState } from "react-dom";
 import { useState } from "react";
-import { DeleteButton, SubmitButton } from "../custom-button";
-import { Textarea } from "../ui/textarea";
+import { SubmitButton } from "@/components/custom-button";
+import { Textarea } from "@/components/ui/textarea";
 import { Testimonial } from "@prisma/client";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import DeleteConfirmation from "@/components/DeleteConfirmation";
+import { truncate } from "@/lib/utils";
 import { Button } from "../ui/button";
-import { Loader2 } from "lucide-react";
-import LoadingDots from "../loading-dots";
 
 export default function EditTestimonial({ data }: { data: Testimonial }) {
   const { toast } = useToast();
-  const [rating, setRating] = useState(data.rating);
+  const [rating, setRating] = useState(data?.rating);
+  const [hoverRating, setHoverRating] = useState(data.rating);
 
   const [lastResult, action] = useFormState(editTestimonial, undefined);
 
@@ -39,6 +46,47 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
+
+  interface StarClickHandler {
+    (starIndex: number): void;
+  }
+
+  const handleStarClick: StarClickHandler = (starIndex) => {
+    setRating(starIndex);
+  };
+
+  const handleStarHover: StarClickHandler = (starIndex) => {
+    setHoverRating(starIndex);
+  };
+
+  const handleStarLeave = () => {
+    setHoverRating(0);
+  };
+
+  const renderStars = () => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      const isFilled = i <= ((hoverRating || rating) ?? 0);
+      stars.push(
+        <button
+          key={i}
+          type="button"
+          onClick={() => handleStarClick(i)}
+          onMouseEnter={() => handleStarHover(i)}
+          onMouseLeave={handleStarLeave}
+          className="focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 rounded transition-colors duration-150"
+        >
+          {isFilled ? (
+            <StarFilledIcon className="size-4 text-yellow-500 hover:text-yellow-400 transition-colors duration-150" />
+          ) : (
+            <StarIcon className="size-4 text-muted-foreground hover:text-yellow-300 transition-colors duration-150" />
+          )}
+        </button>
+      );
+    }
+    return stars;
+  };
+
   return (
     <>
       <form
@@ -50,7 +98,7 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
         <input type="hidden" name="testimonialId" value={data.id} />
         <Card>
           <CardHeader>
-            <CardTitle>Create a Testimonial</CardTitle>
+            <CardTitle>Edit Testimonial</CardTitle>
 
             <CardDescription>
               Share your experience when flying with Cloud9, the service or
@@ -67,25 +115,24 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
                     type="number"
                     name={fields.rating.name}
                     key={fields.rating.key}
-                    defaultValue={data.rating}
+                    value={rating ?? ""}
+                    onChange={() => {}} // Controlled by star clicks
                   />
-                  <div className="flex items-center gap-1">
-                    <StarFilledIcon className="size-4 fill-yellow-500 stroke-muted-foreground" />
-                    <StarFilledIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
-                    <StarIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
-                    <StarIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
-                    <StarIcon className="size-4 fill-muted-foreground stroke-muted-foreground" />
-                  </div>
+                  <div className="flex items-center gap-1">{renderStars()}</div>
+                  {(rating ?? 0) > 0 && (
+                    <p className="text-sm text-muted-foreground">
+                      {rating} out of 5 stars
+                    </p>
+                  )}
                   <p className="text-red-500">{fields.rating.errors}</p>
-                  {/* Rating Ui to go here */}
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Destination City</Label>
+                  <Label>Descriptive Title</Label>
                   <Input
                     type="text"
                     name={fields.descriptiveTitle.name}
                     key={fields.descriptiveTitle.key}
-                    defaultValue={data.descriptiveTitle}
+                    defaultValue={data?.descriptiveTitle ?? ""}
                     placeholder="How would you describe yourself"
                   />
                   <p className="text-red-500">
@@ -105,12 +152,30 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between">
-            <SubmitButton text="Create Testimonial" />
-
-            <Button variant="destructive" className="text-xl">
-              Delete Testimonial
-            </Button>
+          <CardFooter className="grid md:flex justify-between items-center gap-2">
+            <SubmitButton
+              text="Edit Testimonial"
+              loadingText="Editing Testimonial"
+              className="w-full md:w-max"
+            />
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  variant="destructive"
+                  className="text-xl w-full md:w-max"
+                >
+                  Delete Testimonial
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogTitle>Delete Testimonial</DialogTitle>
+                <DeleteConfirmation
+                  id={data.id}
+                  title={truncate(data.comment, 5)}
+                  modelType="testimonial"
+                />
+              </DialogContent>
+            </Dialog>
           </CardFooter>
         </Card>
       </form>

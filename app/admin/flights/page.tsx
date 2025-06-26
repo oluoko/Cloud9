@@ -27,7 +27,7 @@ import {
 import Image from "next/image";
 import prisma from "@/utils/db";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import DeleteConfirmation from "../_components/DeleteConfirmation";
+import DeleteConfirmation from "../../../components/DeleteConfirmation";
 
 async function getData() {
   const data = await prisma.flight.findMany({

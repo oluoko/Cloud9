@@ -107,7 +107,12 @@ export const payWithCardSchema = z.object({
 });
 
 export const testimonialSchema = z.object({
-  rating: z.number().int().min(0).max(5, "Rating must be between 1 and 5"),
-  descriptiveTitle: z.string().default("Cloud9 Patron"),
+  rating: z
+    .number()
+    .int()
+    .min(0)
+    .max(5, "Rating must be between 1 and 5")
+    .optional(),
+  descriptiveTitle: z.string().default("Cloud9 Patron").optional(),
   comment: z.string().min(10, "Comment is required"),
 });

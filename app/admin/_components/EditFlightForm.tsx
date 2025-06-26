@@ -275,7 +275,10 @@ export function EditFlightForm({ data }: { data: Flight }) {
             </div>
           </CardContent>
           <CardFooter>
-            <SubmitButton text="Update Flight Details" />
+            <SubmitButton
+              text="Update Flight Details"
+              loadingText="Updating Flight Details"
+            />
           </CardFooter>
         </Card>
       </form>

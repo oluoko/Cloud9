@@ -272,7 +272,10 @@ export default function CreateFlight() {
             </div>
           </CardContent>
           <CardFooter>
-            <SubmitButton text="Create a Flight" />
+            <SubmitButton
+              text="Create a Flight"
+              loadingText="Creating Flight"
+            />
           </CardFooter>
         </Card>
       </form>

@@ -244,7 +244,7 @@ export default function CreateBanner() {
             </div>
           </CardContent>
           <CardFooter>
-            <SubmitButton text="Create Banner" />
+            <SubmitButton text="Create Banner" loadingText="Creating Banner" />
           </CardFooter>
         </Card>
       </form>
