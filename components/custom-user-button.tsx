@@ -140,7 +140,7 @@ export default function CustomUserButton({
         <DropdownMenuItem>
           <Link
             href="/profile"
-            className={`${config.menuItem} font-medium leading-none p-1`}
+            className={`${config.menuItem} font-medium leading-none p-1 w-full`}
           >
             {user?.firstName ? `${user?.firstName}'s Profile` : "Profile"}
           </Link>

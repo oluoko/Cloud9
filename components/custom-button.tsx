@@ -16,7 +16,8 @@ interface buttonProps {
   onClick?:
     | ((e: React.FormEvent) => Promise<void>)
     | ((e: React.FormEvent<Element>) => Promise<void>)
-    | ((e: React.FormEvent<HTMLFormElement>) => Promise<void>);
+    | ((e: React.FormEvent<HTMLFormElement>) => Promise<void>)
+    | (() => Promise<void>);
   variant?:
     | "default"
     | "destructive"
@@ -45,7 +46,7 @@ export function SubmitButton({
         <Button
           disabled={disabled}
           variant={variant}
-          className={cn("text-xl w-full md:w-max", className)}
+          className={cn("text-xl w-full", className)}
         >
           <Loader2 className="animate-spin mr-2 size-4" />
           {loadingText ? (
@@ -58,7 +59,7 @@ export function SubmitButton({
         <Button
           variant={variant}
           type={type}
-          className={cn("text-xl w-full md:w-max", className)}
+          className={cn("text-xl w-full", className)}
         >
           {text}
         </Button>
@@ -86,7 +87,7 @@ export function DeleteButton({
           disabled
           variant="destructive"
           size="sm"
-          className={cn("text-xl w-full md:w-max", className)}
+          className={cn("text-xl w-full", className)}
         >
           <Loader2 className="animate-spin mr-2 size-4" />
           {loadingText ? (
@@ -101,7 +102,7 @@ export function DeleteButton({
           size="sm"
           type={type}
           disabled={disabled}
-          className={cn("text-xl w-full md:w-max", className)}
+          className={cn("text-xl w-full", className)}
         >
           {text}
         </Button>

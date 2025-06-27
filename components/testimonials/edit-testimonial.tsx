@@ -28,7 +28,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import DeleteConfirmation from "@/components/DeleteConfirmation";
-import { truncate } from "@/lib/utils";
+import { getFirstWords } from "@/lib/utils";
 import { Button } from "../ui/button";
 
 export default function EditTestimonial({ data }: { data: Testimonial }) {
@@ -154,8 +154,8 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
           </CardContent>
           <CardFooter className="grid md:flex justify-between items-center gap-2">
             <SubmitButton
-              text="Edit Testimonial"
-              loadingText="Editing Testimonial"
+              text="Update Testimonial"
+              loadingText="Updating Testimonial"
               className="w-full md:w-max"
             />
             <Dialog>
@@ -171,7 +171,7 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
                 <DialogTitle>Delete Testimonial</DialogTitle>
                 <DeleteConfirmation
                   id={data.id}
-                  title={truncate(data.comment, 5)}
+                  title={getFirstWords(data.comment, 4)}
                   modelType="testimonial"
                 />
               </DialogContent>

@@ -160,10 +160,48 @@ export function truncate(str: string | undefined, maxLength = 20): string {
 }
 
 /**
- *
- * @param status
- * @returns
+ * Extract specified number of words from a paragraph based on a collection of search strings
+ * @param searchStrings Collection of strings to search for in the paragraph
+ * @param paragraph The paragraph to extract words from
+ * @param wordCount Number of words to return from the paragraph
+ * @returns Array of words extracted from the paragraph
  */
+export function extractWords(
+  searchStrings: string[],
+  paragraph: string,
+  wordCount: number
+): string[] {
+  if (!paragraph || wordCount <= 0) return [];
+
+  const words = paragraph.split(/\s+/).filter((word) => word.length > 0);
+
+  // If searchStrings is provided and not empty, filter words that contain any of the search strings
+  if (searchStrings && searchStrings.length > 0) {
+    const filteredWords = words.filter((word) =>
+      searchStrings.some((searchStr) =>
+        word.toLowerCase().includes(searchStr.toLowerCase())
+      )
+    );
+    return filteredWords.slice(0, wordCount);
+  }
+
+  // If no search strings provided, return first N words
+  return words.slice(0, wordCount);
+}
+
+/**
+ * Get the first specified number of words from a paragraph
+ * @param paragraph The paragraph to extract words from
+ * @param wordCount Number of words to return
+ * @returns Array of the first N words from the paragraph
+ */
+export function getFirstWords(paragraph: string, wordCount: number): string {
+  if (!paragraph || wordCount <= 0) return "";
+
+  const words = paragraph.split(/\s+/).filter((word) => word.length > 0);
+  return words.slice(0, wordCount).join(" ");
+}
+
 export function getStatusBadgeVariant(status: string) {
   switch (status.toLowerCase()) {
     case "confirmed":

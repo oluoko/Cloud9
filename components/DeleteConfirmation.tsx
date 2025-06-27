@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { capitalize } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import { Loader2 } from "lucide-react";
+import LoadingDots from "./loading-dots";
 
 interface ModelProps {
   id: string;
@@ -60,29 +62,47 @@ export default function DeleteConfirmation({
         <CardTitle>
           Are you absolutely sure you want to delete this {modelType}?
         </CardTitle>
-      </CardHeader>
-      <CardFooter className="grid">
-        <div className="my-2">
-          This will permanently delete the {modelType}. First match the{" "}
-          {modelType}&apos;s title{" "}
-          <span className="font-extrabold">{title}</span> below
-        </div>
+        <p className="text-sm text-muted-foreground">
+          This action cannot be undone. This will permanently delete the{" "}
+          {modelType} <span className="font-bold">&quot;{title}&quot;</span>
+        </p>
+        <p className="text-sm font-medium">
+          Please type <span className="font-bold">&quot;{title}&quot;</span> to
+          confirm deletion:
+        </p>
         <Input
-          type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={`Type "${title}" to confirm`}
-          className="mb-4"
+          className="mt-2"
         />
-        <Button variant="destructive" onClick={handleDelete}>
-          Delete {modelType}
+      </CardHeader>
+      <CardFooter className="flex gap-2">
+        <Button variant="outline" className="flex-1">
+          Cancel
         </Button>
-
+        {isDeleting ? (
+          <Button disabled variant="destructive" className="flex-1">
+            <Loader2 className="animate-spin mr-2 size-4" />
+            <LoadingDots text={`Deleting ${entityName}`} />
+          </Button>
+        ) : (
+          <Button
+            variant="destructive"
+            className="flex-1"
+            disabled={!match || isDeleting}
+            onClick={handleDelete}
+          >
+            Delete {entityName}
+          </Button>
+        )}
         {/* <DeleteButton
-          isPending={isDeleting}
           text={`Delete ${entityName}`}
           loadingText={`Deleting ${entityName}`}
+          disabled={!match}
+          isPending={isDeleting}
           onClick={handleDelete}
+          className="flex-1"
         /> */}
       </CardFooter>
     </Card>

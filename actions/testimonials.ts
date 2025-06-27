@@ -75,7 +75,7 @@ export async function deleteTestimonial(testimonialId: string) {
 
   if (!user) return redirect("/login");
 
-  await prisma.banner.delete({
+  await prisma.testimonial.delete({
     where: {
       id: testimonialId,
     },
