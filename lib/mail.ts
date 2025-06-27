@@ -156,7 +156,6 @@ export const sendUsAMessageEmail = async (
   email: string,
   message: string
 ) => {
-  console.log("Sending message email");
   const content = `
     <h2 style="color: ${BRAND_COLOR}; margin-bottom: 20px;">New Message from ${firstName} ${lastName}</h2>
     <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">You have received a new message:</p>
@@ -170,6 +169,23 @@ export const sendUsAMessageEmail = async (
     from: `Cloud9-User-Message@live-ly.tech`,
     to: process.env.CONTACT_EMAIL || "",
     subject: `New Contact-us Message from ${firstName} ${lastName}`,
+    html: createEmailTemplate(content),
+  });
+};
+
+export const messageFollowUpEmail = async (email: string, message: string) => {
+  const content = `
+    <h2 style="color: ${BRAND_COLOR}; margin-bottom: 20px;">Your Message to Cloud9</h2>
+    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 15px;">You have sent this message to the ticket booking website, Cloud9. Thank you for using our website. Have a pleasant day.</p>
+    <blockquote style="background-color: #F5F5F5; padding: 15px; border-left: 4px solid ${BRAND_COLOR}; margin-bottom: 25px;">
+      <p style="margin: 0;">${message}</p>
+    </blockquote>
+  `;
+
+  await resend.emails.send({
+    from: `Cloud9-User-Message@live-ly.tech`,
+    to: email,
+    subject: `Message Sent to Cloud9`,
     html: createEmailTemplate(content),
   });
 };

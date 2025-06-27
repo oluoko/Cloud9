@@ -1,4 +1,5 @@
-import { sendUsAMessageEmail } from "@/lib/mail";
+import { getUserByClerkId } from "@/lib/auth";
+import { messageFollowUpEmail, sendUsAMessageEmail } from "@/lib/mail";
 import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -14,6 +15,12 @@ export async function POST(request: NextRequest) {
 
     // Call the function to send the email
     await sendUsAMessageEmail(firstName, lastName, email, message);
+
+    const user = await getUserByClerkId();
+
+    if (user) {
+      await messageFollowUpEmail(user.email, message);
+    }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {
