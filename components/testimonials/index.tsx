@@ -108,7 +108,7 @@ function StarRating({ rating }: { rating: number }) {
 export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <Link href={`/testimonials#${testimonial.id}`}>
-      <div className="mb-8 bg-accent rounded-xl p-4">
+      <div className="mb-8 bg-accent rounded-xl p-4" id={testimonial.id}>
         <div className="flex items-center gap-4 md:gap-6">
           <div className="hidden lg:block relative shrink-0 aspect-[3/4] size-[150px] bg-muted-foreground/20 rounded-full">
             <Image
