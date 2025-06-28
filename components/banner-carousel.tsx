@@ -3,15 +3,33 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { Banner } from "@prisma/client";
+import { Banner, Flight } from "@prisma/client";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SearchFlights from "@/components/search-flights/search-flight";
 
 interface BannerCarouselProps {
   banners: Partial<Banner>[];
+  destinations: {
+    id: string;
+    airlineName: {
+      label: string;
+      value: string;
+    };
+    departureAirport: {
+      label: string;
+      value: string;
+    };
+    arrivalAirport: {
+      label: string;
+      value: string;
+    };
+  }[];
 }
 
-export default function BannerCarousel({ banners }: BannerCarouselProps) {
+export default function BannerCarousel({
+  banners,
+  destinations,
+}: BannerCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const isMobile = useIsMobile();
@@ -47,7 +65,7 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
   };
   return (
     <div className="relative w-full h-screen">
-      <SearchFlights />
+      <SearchFlights destinations={destinations} />
       <div
         className="relative w-full h-full"
         onMouseEnter={() => setIsAutoPlaying(false)}

@@ -1,36 +1,74 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { FaPlane } from "react-icons/fa6";
 import { FaPlaneDeparture } from "react-icons/fa";
-
 import DestinationsCombobox from "@/components/search-flights/destination-combo-box";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
+import qs from "query-string";
 
-export default function SearchFlights() {
-  const flightType = [
-    { id: 0, name: "Return", value: "return" },
-    { id: 1, name: "One Way", value: "one-way" },
-    { id: 2, name: "Multi City", value: "multi-city" },
-  ];
-  const destinations = [
-    {
-      value: "nairobi",
-      label: "Nairobi",
-    },
-    {
-      value: "mombasa",
-      label: "Mombasa",
-    },
-    {
-      value: "kisumu",
-      label: "Kisumu",
-    },
-    {
-      value: "eldoret",
-      label: "Eldoret",
-    },
-  ];
+interface SearchFlightsProps {
+  destinations: {
+    id: string;
+    airlineName: {
+      label: string;
+      value: string;
+    };
+    departureAirport: {
+      label: string;
+      value: string;
+    };
+    arrivalAirport: {
+      label: string;
+      value: string;
+    };
+  }[];
+}
+
+export default function SearchFlights({ destinations }: SearchFlightsProps) {
+  const router = useRouter();
+  const [searchParams, setSearchParams] = useState({
+    airline: "",
+    departure: "",
+    arrival: "",
+  });
+
+  const handleSearchChange = (params: {
+    airline: string;
+    departure: string;
+    arrival: string;
+  }) => {
+    setSearchParams(params);
+  };
+
+  const handleSearch = () => {
+    // Validate required fields
+    if (!searchParams.departure || !searchParams.arrival) {
+      toast.error("Please select both departure and arrival airports.");
+      return;
+    }
+
+    // Build query string
+    const url = qs.stringifyUrl(
+      {
+        url: "/search",
+        query: {
+          airline: searchParams.airline,
+          departure: searchParams.departure,
+          arrival: searchParams.arrival,
+        },
+      },
+      { skipEmptyString: true }
+    );
+
+    // Navigate to search page
+    router.push(url);
+  };
+
   return (
     <Card className="absolute z-40 top-[85%] -translate-x-1/2 -translate-y-1/2  left-[50%] w-[95vw] md:w-[70vw] p-2 px-2 md:bg-background/90">
       <CardContent>
@@ -44,30 +82,35 @@ export default function SearchFlights() {
             </span>
           </SheetTrigger>
           <SheetContent side="bottom" className="w-screen h-[50vh] px-0">
-            <div className="flex flex-col gap-2 items-center p-4 mt-4">
-              <DestinationsCombobox destinations={destinations} />
-
+            <div className="flex flex-col gap-2 items-center p-4 mt-8">
+              <DestinationsCombobox
+                destinations={destinations}
+                onSearchChange={handleSearchChange}
+              />
               <div className="flex justify-between gap-2 w-full">
-                <Link href="/search/availability">
-                  <Button className="h-[70px] m-0 flex items-center justify-between gap-2">
-                    <FaPlaneDeparture size={32} />
-                    <span className="text-lg">Search Flights</span>
-                  </Button>
-                </Link>
+                <Button
+                  onClick={handleSearch}
+                  className="h-[70px] m-0 flex items-center justify-between gap-2"
+                >
+                  <FaPlaneDeparture size={32} />
+                  <span className="text-lg">Search Flights</span>
+                </Button>
               </div>
             </div>
           </SheetContent>
         </Sheet>
-
         <div className="hidden md:flex justify-between items-center gap-2 my-[10px]">
-          <DestinationsCombobox destinations={destinations} />
-
-          <Link href="/search/availability">
-            <Button className="h-[50px] m-0 flex items-center justify-between gap-2">
-              <FaPlaneDeparture size={32} />
-              <span className="text-xl">Search Flights</span>
-            </Button>
-          </Link>
+          <DestinationsCombobox
+            destinations={destinations}
+            onSearchChange={handleSearchChange}
+          />
+          <Button
+            onClick={handleSearch}
+            className="h-[50px] m-0 flex items-center justify-between gap-2"
+          >
+            <FaPlaneDeparture size={32} />
+            <span className="text-xl">Search Flights</span>
+          </Button>
         </div>
       </CardContent>
     </Card>
