@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import SearchResults from "./_components/search-results";
+import { FlightInterfaceSkeleton } from "@/components/flights/main-flights-interface";
 
 interface SearchPageProps {
   searchParams: {
@@ -21,7 +22,7 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <div className="h-screen p-8 max-w-screen">
-      <Suspense>
+      <Suspense fallback={<FlightInterfaceSkeleton />}>
         <SearchResults
           arrival={searchParams.arrival}
           departure={searchParams.departure}
