@@ -208,6 +208,8 @@ export default function SearchFlights({
       { skipEmptyString: true }
     );
 
+    toast.success("Searching for flights...");
+
     router.push(url);
   };
 
