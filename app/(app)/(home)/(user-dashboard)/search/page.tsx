@@ -20,7 +20,7 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
   }
 
   return (
-    <div className="h-screen p-8 max-w-screen mt-20">
+    <div className="h-screen p-8 max-w-screen">
       <Suspense>
         <SearchResults
           arrival={searchParams.arrival}

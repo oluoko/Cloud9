@@ -1,5 +1,4 @@
 import ContactUsPage from "@/components/contact-us-page";
-import Footer from "@/components/footer";
 import Testimonials from "@/components/testimonials";
 import imageOne from "@/public/images/dev/banners/1.jpeg";
 import imageTwo from "@/public/images/dev/banners/2.jpeg";
@@ -64,12 +63,11 @@ export default async function Home() {
   }
 
   return (
-    <div className="overflow-hidden">
+    <div>
       <BannerCarousel banners={banners} destinations={destinations} />
       <Flights flights={flights} />
       <Testimonials testimonials={testimonials} />
       <ContactUsPage />
-      <Footer />
     </div>
   );
 }

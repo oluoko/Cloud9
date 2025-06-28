@@ -207,7 +207,7 @@ export default function SignUpPage() {
                     text="Sign Up"
                     loadingText="Signing you up"
                   />
-                  <Separator text="Sign Up" />
+                  <Separator text="Or" />
                   <OauthSignIn />
                 </form>
               </>
@@ -247,7 +247,7 @@ export default function SignUpPage() {
               </form>
             )}
           </CardContent>
-          <CardFooter className="justify-center flex flex-col items-center">
+          <CardFooter className="justify-center flex flex-col items-center text-sm">
             {!pendingVerification && (
               <>
                 <p className="text-muted-foreground">

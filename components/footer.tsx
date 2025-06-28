@@ -89,7 +89,7 @@ const Footer = () => {
           </h3>
 
           <span className=" text-xs">
-            Copyrights © 2024 Cloud
+            Copyrights © {new Date().getFullYear()} Cloud
             <span className="text-primary text-lg md:text-xl font-black">
               9
             </span>

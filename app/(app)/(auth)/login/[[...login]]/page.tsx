@@ -165,11 +165,11 @@ export default function SignInForm() {
                 loadingText="Logging In"
               />
 
-              <Separator text="Sign In" />
+              <Separator text="Or" />
               <OauthSignIn />
             </form>
           </CardContent>
-          <CardFooter className="justify-center">
+          <CardFooter className="justify-center text-sm">
             <p className="text-muted-foreground">
               Don&apos;t have an account?{" "}
               <Link

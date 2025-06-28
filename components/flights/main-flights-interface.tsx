@@ -114,9 +114,9 @@ export default function MainFlightsInterface({
                 <button
                   key={date}
                   onClick={() => hasFlights && setSelectedDate(date)}
-                  className={`flex-1 min-w-[120px] p-4 border-r border-border/50 transition-all duration-200 ${
+                  className={`flex-1 min-w-[120px] p-2 border-r border-border/50 transition-all duration-200 ${
                     isSelected
-                      ? "bg-primary/60 text-white border-b-4 border-primary"
+                      ? "bg-primary/60 text-foreground border-b-4 border-primary"
                       : hasFlights
                         ? "hover:bg-accent hover:text-accent-foreground cursor-pointer"
                         : "text-muted-foreground cursor-not-allowed opacity-50"
