@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { Banner, Flight } from "@prisma/client";
+import { Banner } from "@prisma/client";
 import { useIsMobile } from "@/hooks/use-mobile";
-import SearchFlights from "@/components/search-flights/search-flight";
+import SearchFlights from "@/components/search-flights";
 
 interface BannerCarouselProps {
   banners: Partial<Banner>[];
@@ -59,10 +59,6 @@ export default function BannerCarousel({
     setIsAutoPlaying(false);
   };
 
-  // Function to toggle autoplay
-  const toggleAutoplay = () => {
-    setIsAutoPlaying((prev) => !prev);
-  };
   return (
     <div className="relative w-full h-screen">
       <SearchFlights destinations={destinations} />
