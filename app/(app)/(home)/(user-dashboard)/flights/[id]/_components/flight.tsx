@@ -263,44 +263,47 @@ export default function FlightPage({
           </CardContent>
 
           <CardFooter className="grid gap-2">
-            <Button>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <div className="flex items-center gap-2">
-                    <CreditCard className="mr-2 h-4 w-4" />
-                    Pay With Stripe
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogTitle>Pay Using Stripe</DialogTitle>
-                  <PayWithStripe
-                    flightId={flight.id}
-                    seatType={selectedClass}
-                    seatCount={parseInt(numPassengers)}
-                    amount={totalPrice}
-                  />
-                </DialogContent>
-              </Dialog>
-            </Button>
-            <Button variant="outline">
-              <Dialog>
-                <DialogTrigger className="flex items-center gap-2 p-2" asChild>
-                  <Image src={mpesaText} alt="Lipa Na Mpesa" height={23} />
-                </DialogTrigger>
-                <DialogContent>
-                  {/* <LipaNaMpesa
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="flex items-center gap-2">
+                  <CreditCard className="mr-2 h-4 w-4" />
+                  Pay With Stripe
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogTitle>Pay Using Stripe</DialogTitle>
+                <PayWithStripe
+                  flightId={flight.id}
+                  seatType={selectedClass}
+                  seatCount={parseInt(numPassengers)}
+                  amount={totalPrice}
+                />
+              </DialogContent>
+            </Dialog>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="flex items-center gap-2 p-2"
+                >
+                  {" "}
+                  <Image src={mpesaText} alt="Lipa Na Mpesa" height={23} />{" "}
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                {/* <LipaNaMpesa
                     flightId={flight.id}
                     seatType={selectedClass}
                     seatCount={parseInt(numPassengers)}
                     amount={totalPrice}
                     user={user}
                   /> */}
-                  <DialogTitle className="text-muted-foreground">
-                    Under construction
-                  </DialogTitle>
-                </DialogContent>
-              </Dialog>
-            </Button>
+                <DialogTitle className="text-muted-foreground">
+                  Under construction
+                </DialogTitle>
+              </DialogContent>
+            </Dialog>
           </CardFooter>
         </Card>
       </div>

@@ -6,6 +6,8 @@ import Image from "next/image";
 import { Banner } from "@prisma/client";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SearchFlights from "@/components/search-flights";
+import Link from "next/link";
+import queryString from "query-string";
 
 interface BannerCarouselProps {
   banners: Partial<Banner>[];
@@ -59,6 +61,21 @@ export default function BannerCarousel({
     setIsAutoPlaying(false);
   };
 
+  const getUrl = (destinationAirport: string) => {
+    const url = queryString.stringifyUrl(
+      {
+        url: "/search",
+        query: {
+          airline: destinationAirport,
+          arrival: destinationAirport,
+          departure: destinationAirport,
+        },
+      },
+      { skipEmptyString: true }
+    );
+    return url;
+  };
+
   return (
     <div className="relative w-full h-screen">
       <SearchFlights destinations={destinations} />
@@ -99,12 +116,12 @@ export default function BannerCarousel({
                   <p className="text-lg md:text-[22px] mb-8 [text-shadow:_0_2px_4px_rgb(0_0_0_/_0.8)]">
                     {slide.description}
                   </p>
-                  <a
-                    href={slide.title}
+                  <Link
+                    href={getUrl(slide.destinationAirport || "")}
                     className="inline-block px-6 py-3 bg-foreground text-background font-semibold rounded-md hover:bg-opacity-90 transition-colors duration-200 shadow-lg"
                   >
                     {slide.destinationAirport}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

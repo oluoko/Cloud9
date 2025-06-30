@@ -1,4 +1,3 @@
-// components/FeaturedFlightCard.jsx
 import {
   Card,
   CardContent,
@@ -7,22 +6,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FlightImage } from "./flight-image";
 import { FlightDateTime } from "./flight-date-time";
 import { FlightRoute } from "./flight-route";
 import { FlightClassInfo } from "./flight-class-info";
 import Link from "next/link";
 import { Flight } from "@prisma/client";
+import Image from "next/image";
 
 export function FeaturedFlightCard({ flight }: { flight: Flight }) {
   return (
-    <Card className="mb-8 overflow-hidden">
+    <Card className="mb-8 overflow-hidden py-0">
       <div className="grid md:grid-cols-2">
         <div className="relative">
-          <FlightImage
-            images={flight.flightImages}
-            airlineName={flight.airlineName}
-            size="large"
+          <Image
+            src={flight.flightImages[0]}
+            alt={flight.flightName}
+            layout="responsive"
+            width={500}
+            height={300}
+            className="object-cover"
           />
         </div>
         <div className="p-6">

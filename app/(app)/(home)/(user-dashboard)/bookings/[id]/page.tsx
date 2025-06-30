@@ -76,17 +76,34 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
 
   return (
     <div className="p-4 md:p-8">
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex items-center gap-2">
-          <Link
-            href="/bookings"
-            className="rounded-full bg-secondary-foreground/10 p-2 hover:bg-secondary-foreground/20 transition-colors"
-          >
-            <ArrowLeft className="size-4 md:size-5" />
-          </Link>
-          <h1 className="text-xl md:text-2xl font-bold">Booking Details</h1>
-        </div>
+      <div className="flex items-center justify-between w-full mb-4">
+        <Link
+          href="/bookings"
+          className="rounded-full bg-secondary-foreground/10 p-2 hover:bg-secondary-foreground/20 transition-colors"
+        >
+          <ArrowLeft className="size-4 md:size-5" />
+        </Link>
+        <h1 className="text-xl md:text-2xl font-bold">Booking Details</h1>
+      </div>
 
+      {/* Status Banner */}
+      <div className="rounded-lg bg-primary/5 p-4 mb-6 border border-primary/20 grid md:flex justify-between items-center">
+        <Badge
+          className={`${getStatusBadgeVariant3(
+            booking.bookingStatus
+          )} px-3 py-1.5`}
+        >
+          {capitalize(booking.bookingStatus)}
+        </Badge>
+        <div className="flex items-center gap-3">
+          <div className="rounded-full bg-primary/10 p-2">
+            <Plane className="size-5 text-primary" />
+          </div>
+          <div>
+            <p className="text-sm font-medium">Booking Reference</p>
+            <p className="text-lg font-bold">{booking.paymentReference}</p>
+          </div>
+        </div>
         <Dialog>
           <DialogTrigger asChild>
             <Button
@@ -106,26 +123,6 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
             />
           </DialogContent>
         </Dialog>
-      </div>
-
-      {/* Status Banner */}
-      <div className="rounded-lg bg-primary/5 p-4 mb-6 border border-primary/20 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <div className="rounded-full bg-primary/10 p-2">
-            <Plane className="size-5 text-primary" />
-          </div>
-          <div>
-            <p className="text-sm font-medium">Booking Reference</p>
-            <p className="text-lg font-bold">{booking.paymentReference}</p>
-          </div>
-        </div>
-        <Badge
-          className={`${getStatusBadgeVariant3(
-            booking.bookingStatus
-          )} px-3 py-1.5`}
-        >
-          {capitalize(booking.bookingStatus)}
-        </Badge>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -306,14 +303,11 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
       <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground text-center md:text-left">
           Thank you for booking with us. If you have any questions,{" "}
-          <Link
-            href="/#contact-us-page"
-            className="underline hover:text-primary"
-          >
+          <Link href="/#contact-us" className="underline hover:text-primary">
             please contact our support team
           </Link>
         </p>
-        <div className="flex gap-3 w-full md:w-auto">
+        <div className="grid md:flex gap-3 w-full md:w-auto">
           <Button asChild variant="outline" className="flex-1 md:flex-auto">
             <Link href="/flights">Find More Flights</Link>
           </Button>

@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MailIcon, MapPinIcon, MessageCircle, PhoneIcon } from "lucide-react";
+import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import LoadingDots from "./loading-dots";
@@ -62,7 +62,7 @@ export default function ContactUsPage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center py-10"
-      id="contact-us-page"
+      id="contact-us"
     >
       <div className="w-full max-w-screen-xl mx-auto px-6 xl:px-0">
         <b className="text-muted-foreground">Contact Us</b>
