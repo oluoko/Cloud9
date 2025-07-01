@@ -12,7 +12,7 @@ import { StarFilledIcon, StarIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { editTestimonial } from "@/actions/testimonials";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { testimonialSchema } from "@/lib/zodSchemas";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
@@ -32,7 +32,6 @@ import { getFirstWords } from "@/lib/utils";
 import { Button } from "../ui/button";
 
 export default function EditTestimonial({ data }: { data: Testimonial }) {
-  const { toast } = useToast();
   const [rating, setRating] = useState(data?.rating);
   const [hoverRating, setHoverRating] = useState(data.rating);
 

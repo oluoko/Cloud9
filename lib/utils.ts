@@ -303,3 +303,19 @@ export function capitalize(
   // Basic capitalization for simple strings
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
+
+export function ProfileImageInitials(
+  firstName: string | undefined,
+  lastName: string | undefined
+): string {
+  if (!firstName || !lastName) return "/default-profile.png";
+
+  const initials = getInitials(firstName, lastName);
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(
+    initials
+  )}&background=random&color=fff&size=256`;
+}
+
+export function defaultProfileImage(): string {
+  return "https://utfs.io/f/0tp8Nw6atwbo0waOyr6atwboVZS7XUTIAHkvQg2xPFcRBe4E";
+}

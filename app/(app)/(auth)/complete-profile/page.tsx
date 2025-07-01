@@ -25,7 +25,7 @@ import { useFormState } from "react-dom";
 import { SubmitButton } from "@/components/custom-button";
 import { profileSchema } from "@/lib/zodSchemas";
 import { PhoneInput } from "@/components/phone-input";
-import { getImageKey } from "@/lib/utils";
+import { getImageKey, ProfileImageInitials } from "@/lib/utils";
 import AuthLayout from "@/components/auth-layout";
 import { twMerge } from "tailwind-merge";
 
@@ -33,13 +33,13 @@ export default function CompleteProfile() {
   const { toast } = useToast();
   const { isLoaded: isUserLoaded, user } = useUser();
   const [profileImage, setProfileImage] = useState<string | undefined>(
-    undefined
+    ProfileImageInitials(user?.firstName || "", user?.lastName || "")
   );
 
   const [lastResult, action] = useFormState(updateProfile, undefined);
 
   const [form, fields] = useForm({
-    lastResult,
+    lastResult: lastResult as any,
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: profileSchema });
     },
@@ -50,12 +50,6 @@ export default function CompleteProfile() {
   const [phoneNumber, setPhoneNumber] = useState<string>(
     typeof fields.phoneNumber.value === "string" ? fields.phoneNumber.value : ""
   );
-
-  useEffect(() => {
-    if (lastResult?.success && lastResult?.redirectTo) {
-      window.location.href = lastResult.redirectTo;
-    }
-  }, [lastResult]);
 
   useEffect(() => {
     if (isUserLoaded && user) {
@@ -216,7 +210,11 @@ export default function CompleteProfile() {
 
               {lastResult && lastResult.status === "error" && (
                 <Alert>
-                  <AlertDescription>{lastResult.error}</AlertDescription>
+                  <AlertDescription>
+                    {typeof lastResult.error === "string"
+                      ? lastResult.error
+                      : "An error occurred while completing your profile."}
+                  </AlertDescription>
                 </Alert>
               )}
 

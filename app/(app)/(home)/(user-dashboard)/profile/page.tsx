@@ -2,6 +2,7 @@ import CreateTestimonial from "@/components/testimonials/create-testimonial";
 import EditTestimonial from "@/components/testimonials/edit-testimonial";
 import { getUserByClerkId } from "@/lib/auth";
 import prisma from "@/utils/db";
+import { UpdateProfile } from "./_components/update-profile";
 
 export default async function ProfilePage() {
   const user = await getUserByClerkId();
@@ -11,16 +12,17 @@ export default async function ProfilePage() {
     },
   });
   return (
-    <>
-      <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-2xl font-bold mb-4">Profile Page</h1>
-        <p className="text-gray-600">This is the profile page.</p>
+    <div className="grid grid-cols-1 md:grid-cols-3 h-[95vh] items-center">
+      <div className="md:col-span-1">
+        <UpdateProfile />
       </div>
-      {testimonial ? (
-        <EditTestimonial data={testimonial} />
-      ) : (
-        <CreateTestimonial />
-      )}
-    </>
+      <div className="md:col-span-2">
+        {testimonial ? (
+          <EditTestimonial data={testimonial} />
+        ) : (
+          <CreateTestimonial />
+        )}
+      </div>
+    </div>
   );
 }

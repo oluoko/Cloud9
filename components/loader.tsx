@@ -24,7 +24,7 @@ const Loader = ({
   }, []);
 
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-center bg-background">
+    <div className="absolute top-0 left-0 z-20 h-screen w-screen overflow-hidden flex flex-col items-center justify-center bg-background">
       {/* Main animation container */}
       <div className="relative w-64 h-64 flex items-center justify-center">
         {/* Outer rotating circle */}
