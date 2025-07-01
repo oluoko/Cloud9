@@ -16,6 +16,7 @@ import { getImageKey } from "@/lib/utils";
 import { User } from "@prisma/client";
 import Loader from "@/components/loader";
 import { useRouter } from "next/navigation";
+import { DeleteButton, SubmitButton } from "@/components/custom-button";
 
 interface UpdateProfileFormData {
   firstName: string;
@@ -101,7 +102,7 @@ export function UpdateProfile() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setUpdating(true);
     setError(null);
@@ -139,6 +140,34 @@ export function UpdateProfile() {
     }
   };
 
+  const handleDeleteProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setUpdating(true);
+    setError(null);
+    try {
+      const response = await fetch("/api/user/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to delete profile");
+      }
+
+      toast.success("Profile deleted successfully");
+      router.push("/auth/login");
+    } catch (err) {
+      console.error("Error deleting profile:", err);
+      setError(err instanceof Error ? err.message : "Failed to delete profile");
+      toast.error("Failed to delete profile");
+    } finally {
+      setUpdating(false);
+    }
+  };
+
   if (loading) {
     return (
       <Loader mainText="Loading your profile" subText="Please wait a moment" />
@@ -171,7 +200,7 @@ export function UpdateProfile() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form className="space-y-4">
             <div className="flex justify-between space-x-4">
               <div className="space-y-2">
                 <Label>Profile Image</Label>
@@ -247,9 +276,20 @@ export function UpdateProfile() {
               />
             </div>
 
-            <Button type="submit" disabled={updating} className="w-full">
-              {updating ? "Updating Profile..." : "Update Profile"}
-            </Button>
+            <div className="">
+              <SubmitButton
+                onClick={handleUpdate}
+                text="Update Profile"
+                loadingText="Updating Profile"
+                className="w-full"
+              />
+              <DeleteButton
+                onClick={handleDeleteProfile}
+                text="Delete Profile"
+                loadingText="Deleting Profile"
+                className="w-full"
+              />
+            </div>
           </form>
         </CardContent>
       </Card>

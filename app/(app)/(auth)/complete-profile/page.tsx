@@ -140,7 +140,7 @@ export default function CompleteProfile() {
                       <UploadButton
                         endpoint="profileImageRoute"
                         config={{ cn: twMerge }}
-                        className="bg-primary hover:bg-primary/70 text-background"
+                        className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                         onClientUploadComplete={(res) => {
                           setProfileImage(res[0].url);
                           toast({
@@ -219,6 +219,7 @@ export default function CompleteProfile() {
               )}
 
               <SubmitButton
+                type="submit"
                 text="Complete Profile"
                 loadingText="Completing Profile"
               />
