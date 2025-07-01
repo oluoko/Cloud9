@@ -30,6 +30,7 @@ export function UpdateProfile() {
   const [user, setUser] = useState<Partial<User> | null>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
+  const [deleting, setDeleting] = useState(false); // Separate state for delete operation
   const [error, setError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | undefined>(
     undefined
@@ -142,8 +143,19 @@ export function UpdateProfile() {
 
   const handleDeleteProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    setUpdating(true);
+
+    // Add confirmation dialog
+    if (
+      !confirm(
+        "Are you sure you want to delete your profile? This action cannot be undone."
+      )
+    ) {
+      return;
+    }
+
+    setDeleting(true);
     setError(null);
+
     try {
       const response = await fetch("/api/user/delete", {
         method: "DELETE",
@@ -164,7 +176,7 @@ export function UpdateProfile() {
       setError(err instanceof Error ? err.message : "Failed to delete profile");
       toast.error("Failed to delete profile");
     } finally {
-      setUpdating(false);
+      setDeleting(false);
     }
   };
 
@@ -200,7 +212,7 @@ export function UpdateProfile() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleUpdate}>
             <div className="flex justify-between space-x-4">
               <div className="space-y-2">
                 <Label>Profile Image</Label>
@@ -276,18 +288,23 @@ export function UpdateProfile() {
               />
             </div>
 
-            <div className="">
+            <div className="grid gap-2">
               <SubmitButton
-                onClick={handleUpdate}
+                type="submit"
                 text="Update Profile"
                 loadingText="Updating Profile"
+                isPending={updating}
                 className="w-full"
+                disabled={updating || deleting}
               />
               <DeleteButton
+                type="button"
                 onClick={handleDeleteProfile}
                 text="Delete Profile"
                 loadingText="Deleting Profile"
+                isPending={deleting}
                 className="w-full"
+                disabled={updating || deleting}
               />
             </div>
           </form>

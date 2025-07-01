@@ -6,18 +6,14 @@ import { useFormStatus } from "react-dom";
 import LoadingDots from "./loading-dots";
 import { cn } from "@/lib/utils";
 
-interface buttonProps {
+interface ButtonProps {
   text: string;
   type?: "button" | "submit" | "reset";
   loadingText?: string;
   disabled?: boolean;
   isPending?: boolean;
   className?: string;
-  onClick?:
-    | ((e: React.FormEvent) => Promise<void>)
-    | ((e: React.FormEvent<Element>) => Promise<void>)
-    | ((e: React.FormEvent<HTMLFormElement>) => Promise<void>)
-    | (() => Promise<void>);
+  onClick?: (e: React.FormEvent) => void | Promise<void>;
   variant?:
     | "default"
     | "destructive"
@@ -27,86 +23,144 @@ interface buttonProps {
     | "link"
     | null
     | undefined;
+  size?: "default" | "sm" | "lg" | "icon" | null | undefined;
+  useFormStatus?: boolean; // New prop to control when to use useFormStatus
 }
 
 export function SubmitButton({
   text,
   loadingText,
-  isPending,
-  type,
+  isPending = false,
+  type = "submit",
   className,
-  disabled,
-  variant,
+  disabled = false,
+  variant = "default",
+  size = "default",
   onClick,
-}: buttonProps) {
-  const { pending } = useFormStatus() || isPending;
+  useFormStatus = false,
+}: ButtonProps) {
+  const formStatus = useFormStatus();
+
+  // Use form status only if explicitly requested and available
+  const pending = useFormStatus ? formStatus?.pending || isPending : isPending;
+
+  const handleClick = async (e: React.FormEvent) => {
+    if (onClick) {
+      await onClick(e);
+    }
+  };
+
   return (
-    <>
+    <Button
+      type={type}
+      disabled={disabled || pending}
+      variant={variant}
+      size={size}
+      className={cn("text-xl w-full", className)}
+      onClick={handleClick}
+    >
+      {pending && <Loader2 className="animate-spin mr-2 size-4" />}
       {pending ? (
-        <Button
-          disabled={disabled}
-          variant={variant}
-          className={cn("text-xl w-full", className)}
-        >
-          <Loader2 className="animate-spin mr-2 size-4" />
-          {loadingText ? (
-            <LoadingDots text={loadingText} size="lg" />
-          ) : (
-            <LoadingDots text={text} size="lg" />
-          )}
-        </Button>
+        loadingText ? (
+          <LoadingDots text={loadingText} size="lg" />
+        ) : (
+          <LoadingDots text={text} size="lg" />
+        )
       ) : (
-        <Button
-          variant={variant}
-          type={type}
-          className={cn("text-xl w-full", className)}
-        >
-          {text}
-        </Button>
+        text
       )}
-    </>
+    </Button>
   );
 }
 
 export function DeleteButton({
   text,
   loadingText,
-  isPending,
-  type,
+  isPending = false,
+  type = "button",
   className,
-  disabled,
-  variant,
+  disabled = false,
+  variant = "destructive",
+  size = "sm",
   onClick,
-}: buttonProps) {
-  const { pending } = useFormStatus() || isPending;
+  useFormStatus = false,
+}: ButtonProps) {
+  const formStatus = useFormStatus();
+
+  // Use form status only if explicitly requested and available
+  const pending = useFormStatus ? formStatus?.pending || isPending : isPending;
+
+  const handleClick = async (e: React.FormEvent) => {
+    if (onClick) {
+      await onClick(e);
+    }
+  };
 
   return (
-    <>
+    <Button
+      type={type}
+      disabled={disabled || pending}
+      variant={variant}
+      size={size}
+      className={cn("text-xl w-full", className)}
+      onClick={handleClick}
+    >
+      {pending && <Loader2 className="animate-spin mr-2 size-4" />}
       {pending ? (
-        <Button
-          disabled
-          variant="destructive"
-          size="sm"
-          className={cn("text-xl w-full", className)}
-        >
-          <Loader2 className="animate-spin mr-2 size-4" />
-          {loadingText ? (
-            <LoadingDots text={loadingText} size="lg" />
-          ) : (
-            <LoadingDots text={text} size="lg" />
-          )}
-        </Button>
+        loadingText ? (
+          <LoadingDots text={loadingText} size="lg" />
+        ) : (
+          <LoadingDots text={text} size="lg" />
+        )
       ) : (
-        <Button
-          variant="destructive"
-          size="sm"
-          type={type}
-          disabled={disabled}
-          className={cn("text-xl w-full", className)}
-        >
-          {text}
-        </Button>
+        text
       )}
-    </>
+    </Button>
+  );
+}
+
+// Even more reusable generic button
+export function CustomButton({
+  text,
+  loadingText,
+  isPending = false,
+  type = "button",
+  className,
+  disabled = false,
+  variant = "default",
+  size = "default",
+  onClick,
+  useFormStatus = false,
+}: ButtonProps) {
+  const formStatus = useFormStatus();
+
+  const pending = useFormStatus ? formStatus?.pending || isPending : isPending;
+
+  const handleClick = async (e: React.FormEvent) => {
+    if (onClick) {
+      await onClick(e);
+    }
+  };
+
+  return (
+    <Button
+      type={type}
+      disabled={disabled || pending}
+      variant={variant}
+      size={size}
+      className={cn(className)}
+      onClick={handleClick}
+    >
+      {pending && <Loader2 className="animate-spin mr-2 size-4" />}
+      {pending ? (
+        loadingText ? (
+          <LoadingDots text={loadingText} size="lg" />
+        ) : (
+          <LoadingDots text={text} size="lg" />
+        )
+      ) : (
+        text
+      )}
+    </Button>
   );
 }
