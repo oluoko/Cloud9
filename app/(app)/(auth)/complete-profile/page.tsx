@@ -135,7 +135,6 @@ export default function CompleteProfile() {
 
       toast.success("Profile updated successfully");
       setProfileComplete(true);
-      window.location.reload();
     } catch (err) {
       console.error("Error updating profile:", err);
       setError(err instanceof Error ? err.message : "Failed to update profile");
