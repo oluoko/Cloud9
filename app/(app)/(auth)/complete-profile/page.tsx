@@ -79,6 +79,10 @@ export default function CompleteProfile() {
     fetchUser();
   }, []);
 
+  if (currentUser?.phoneNumber) {
+    setProfileComplete(true);
+  }
+
   const handleInputChange = (field: keyof Partial<User>, value: string) => {
     setFormData((prev) => ({
       ...prev,
