@@ -8,6 +8,7 @@ import prisma from "@/utils/db";
 import { getUserByClerkId } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { clerkClient } from "@clerk/nextjs/server";
+import { defaultProfileImage } from "@/lib/utils";
 
 export async function completeProfile(prevState: unknown, formData: FormData) {
   try {
@@ -32,7 +33,7 @@ export async function completeProfile(prevState: unknown, formData: FormData) {
         firstName: submission.value.firstName,
         lastName: submission.value.lastName,
         phoneNumber: submission.value.phoneNumber,
-        profileImage: submission.value.profileImage || undefined,
+        profileImage: submission.value.profileImage || defaultProfileImage(),
       },
     });
 
@@ -58,7 +59,7 @@ export async function updateUserRole(userId: string) {
     }
 
     const userExists = await prisma.user.findUnique({
-      where: { clerkUserId: user.id },
+      where: { clerkUserId: userId },
     });
 
     if (!userExists) {
@@ -67,7 +68,7 @@ export async function updateUserRole(userId: string) {
 
     await prisma.user.update({
       where: {
-        clerkUserId: user.id,
+        clerkUserId: userId,
       },
       data: {
         role: userExists.role === "USER" ? "ADMIN" : "USER",
@@ -97,7 +98,7 @@ export async function deleteUserProfile(userId: string) {
     }
 
     const userExists = await prisma.user.findUnique({
-      where: { clerkUserId: user.id },
+      where: { clerkUserId: userId },
     });
 
     if (!userExists) {

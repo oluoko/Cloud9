@@ -17,7 +17,7 @@ import Loader from "@/components/loader";
 import axios from "axios";
 import { UploadButton } from "@/utils/uploadthing";
 import Image from "next/image";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { completeProfile } from "@/actions/users";
@@ -28,35 +28,124 @@ import { PhoneInput } from "@/components/phone-input";
 import { defaultProfileImage, getImageKey } from "@/lib/utils";
 import AuthLayout from "@/components/auth-layout";
 import { twMerge } from "tailwind-merge";
+import { useRouter } from "next/navigation";
+import { User } from "@prisma/client";
 
 export default function CompleteProfile() {
-  const { toast } = useToast();
   const { isLoaded: isUserLoaded, user } = useUser();
+  const router = useRouter();
+  const [currentUser, setCurrentUser] = useState<Partial<User> | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
+  const [deleting, setDeleting] = useState(false); // Separate state for delete operation
+  const [error, setError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | undefined>(
     defaultProfileImage()
   );
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [formData, setFormData] = useState<Partial<User>>({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    profileImage: undefined,
+  });
 
   const [lastResult, action] = useFormState(completeProfile, undefined);
 
-  const [form, fields] = useForm({
-    lastResult: lastResult as any,
-    onValidate({ formData }) {
-      return parseWithZod(formData, { schema: profileSchema });
-    },
-    shouldValidate: "onBlur",
-    shouldRevalidate: "onInput",
-  });
-
-  const [phoneNumber, setPhoneNumber] = useState<string>(
-    typeof fields.phoneNumber.value === "string" ? fields.phoneNumber.value : ""
-  );
-
   useEffect(() => {
-    if (isUserLoaded && user) {
-      if (user.firstName) fields.firstName.initialValue = user.firstName;
-      if (user.lastName) fields.lastName.initialValue = user.lastName;
+    async function fetchUser() {
+      try {
+        const response = await fetch("/api/user", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Error while fetching user");
+        }
+        const userData = await response.json();
+        setCurrentUser(userData);
+        setProfileImage(userData.profileImage);
+        setPhoneNumber(userData.phoneNumber || "");
+        setFormData({
+          firstName: userData.firstName || "",
+          lastName: userData.lastName || "",
+          phoneNumber: userData.phoneNumber || "",
+          profileImage: userData.profileImage,
+        });
+      } catch (err) {
+        console.error("Error fetching user:", err);
+        setError(`Failed to load user details: ${err}`);
+      } finally {
+        setLoading(false);
+      }
     }
-  }, [isUserLoaded, user, fields]);
+    fetchUser();
+  }, []);
+
+  const handleInputChange = (field: keyof Partial<User>, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleDeleteImage = async (imageUrl: string) => {
+    try {
+      await axios.post("/api/uploadthing/delete", {
+        imageKey: getImageKey(imageUrl),
+      });
+
+      setProfileImage(undefined);
+      setFormData((prev) => ({
+        ...prev,
+        profileImage: undefined,
+      }));
+      toast.success("Profile image deleted successfully");
+    } catch (error) {
+      toast.error("Failed to delete profile image");
+      console.error("Error deleting image:", error);
+    }
+  };
+
+  const handleCompleteProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setUpdating(true);
+    setError(null);
+
+    try {
+      const updateData = {
+        ...formData,
+        phoneNumber: phoneNumber,
+        profileImage: profileImage,
+      };
+
+      const response = await fetch("/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updateData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to update profile");
+      }
+
+      const updatedUser = await response.json();
+      setCurrentUser(updatedUser);
+      toast.success("Profile updated successfully");
+      router.push("/");
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      setError(err instanceof Error ? err.message : "Failed to update profile");
+      toast.error("Failed to update profile");
+    } finally {
+      setUpdating(false);
+    }
+  };
 
   if (!isUserLoaded) {
     return (
@@ -66,12 +155,19 @@ export default function CompleteProfile() {
 
   const isOAuthUser = Boolean(user?.firstName || user?.lastName);
 
-  const handleDeleteImage = async (imageUrl: string) => {
-    await axios.post("/api/uploadthing/delete", {
-      imageKey: getImageKey(imageUrl),
-    });
-    setProfileImage(undefined);
-  };
+  if (error) {
+    return (
+      <div className="relative flex flex-col items-center justify-center">
+        <Card className="mx-2">
+          <CardContent className="p-6">
+            <Alert>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <AuthLayout mode="register">
@@ -88,36 +184,16 @@ export default function CompleteProfile() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <form
-              id={form.id}
-              onSubmit={form.onSubmit}
-              action={action}
-              className="space-y-4"
-            >
+            <form onSubmit={handleCompleteProfile} className="space-y-4">
               {isOAuthUser ? (
                 <div className="hidden">
-                  <Input
-                    type="hidden"
-                    name={fields.firstName.name}
-                    value={user?.firstName || ""}
-                  />
-                  <Input
-                    type="hidden"
-                    name={fields.lastName.name}
-                    value={user?.lastName || ""}
-                  />
+                  <Input type="hidden" value={user?.firstName || ""} />
+                  <Input type="hidden" value={user?.lastName || ""} />
                 </div>
               ) : (
                 <div className="flex justify-between space-x-4">
                   <div className="space-y-2">
                     <Label>Profile Image</Label>
-                    <Input
-                      type="hidden"
-                      value={profileImage || ""}
-                      name={fields.profileImage.name}
-                      key={fields.profileImage.key}
-                      defaultValue={fields.profileImage.initialValue}
-                    />
                     {profileImage ? (
                       <div className="relative size-[100px] rounded-full hover:border hover:border-primary">
                         <Image
@@ -143,23 +219,15 @@ export default function CompleteProfile() {
                         className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                         onClientUploadComplete={(res) => {
                           setProfileImage(res[0].url);
-                          toast({
-                            title: "Image Uploaded",
-                            variant: "success",
-                            description:
-                              "Profile image has been uploaded successfully",
-                          });
+                          toast.success(
+                            "Profile image has been uploaded successfully"
+                          );
                         }}
                         onUploadError={(error: Error) => {
-                          toast({
-                            variant: "destructive",
-                            title: "Error Uploading Profile Image",
-                            description: `Error! : ${error.message}`,
-                          });
+                          toast.error(`Error! : ${error.message}`);
                         }}
                       />
                     )}
-                    <p className="text-red-500">{fields.profileImage.errors}</p>
                   </div>
                   <div className="">
                     <div className="space-y-2 w-full">
@@ -167,22 +235,24 @@ export default function CompleteProfile() {
                       <Input
                         id="firstName"
                         type="text"
-                        name={fields.firstName.name}
-                        key={fields.firstName.key}
-                        defaultValue={fields.firstName.value}
+                        value={formData.firstName || ""}
+                        onChange={(e) =>
+                          handleInputChange("firstName", e.target.value)
+                        }
+                        placeholder="Enter your first name"
                       />
-                      <p className="text-red-500">{fields.firstName.errors}</p>
                     </div>
                     <div className="space-y-2 w-full">
                       <Label htmlFor="lastName">Last Name</Label>
                       <Input
                         id="lastName"
                         type="text"
-                        name={fields.lastName.name}
-                        key={fields.lastName.key}
-                        defaultValue={fields.lastName.value}
+                        value={formData.lastName || ""}
+                        onChange={(e) =>
+                          handleInputChange("lastName", e.target.value)
+                        }
+                        placeholder="Enter your last name"
                       />
-                      <p className="text-red-500">{fields.lastName.errors}</p>
                     </div>
                   </div>
                 </div>
@@ -195,28 +265,10 @@ export default function CompleteProfile() {
                   onChange={(value) =>
                     setPhoneNumber(value ? String(value) : "")
                   }
-                  key={fields.phoneNumber.key}
-                  defaultValue={fields.phoneNumber.value}
                   international={false}
                   placeholder="Enter a phone number"
                 />
-                <Input
-                  type="hidden"
-                  name={fields.phoneNumber.name}
-                  value={phoneNumber || ""}
-                />
-                <p className="text-red-500">{fields.phoneNumber.errors}</p>
               </div>
-
-              {lastResult && lastResult.status === "error" && (
-                <Alert>
-                  <AlertDescription>
-                    {typeof lastResult.error === "string"
-                      ? lastResult.error
-                      : "An error occurred while completing your profile."}
-                  </AlertDescription>
-                </Alert>
-              )}
 
               <SubmitButton
                 type="submit"
