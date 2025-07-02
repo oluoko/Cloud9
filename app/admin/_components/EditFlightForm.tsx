@@ -112,78 +112,74 @@ export function EditFlightForm({ data }: { data: Flight }) {
 
               <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="flex flex-col gap-2">
-                  <Label>Economy Seats</Label>
+                  <Label>Low Seats</Label>
                   <Input
                     type="text"
-                    name={fields.economySeats.name}
-                    key={fields.economySeats.key}
-                    defaultValue={data.economySeats}
-                    placeholder="Enter the number of economy seats"
+                    name={fields.lowSeats.name}
+                    key={fields.lowSeats.key}
+                    defaultValue={data.lowSeats}
+                    placeholder="Enter the number of low seats"
                   />
-                  <p className="text-red-500">{fields.economySeats.errors}</p>
+                  <p className="text-red-500">{fields.lowSeats.errors}</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Economy Seat Price</Label>
+                  <Label>Low Seat Price</Label>
                   <Input
                     type="text"
-                    name={fields.economyPrice.name}
-                    key={fields.economyPrice.key}
-                    defaultValue={data.economyPrice}
-                    placeholder="Enter the price per economy seat"
+                    name={fields.lowPrice.name}
+                    key={fields.lowPrice.key}
+                    defaultValue={data.lowPrice}
+                    placeholder="Enter the price per low seat"
                   />
-                  <p className="text-red-500">{fields.economyPrice.errors}</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-2 md:gap-4">
-                <div className="flex flex-col gap-2">
-                  <Label>Business Seats</Label>
-                  <Input
-                    type="text"
-                    name={fields.businessSeats.name}
-                    key={fields.businessSeats.key}
-                    defaultValue={data.businessSeats}
-                    placeholder="Enter the number of business seats"
-                  />
-                  <p className="text-red-500">{fields.businessSeats.errors}</p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Business Seat Price</Label>
-                  <Input
-                    type="text"
-                    name={fields.businessPrice.name}
-                    key={fields.businessPrice.key}
-                    defaultValue={data.businessPrice}
-                    placeholder="Enter the price per business seat"
-                  />
-                  <p className="text-red-500">{fields.businessPrice.errors}</p>
+                  <p className="text-red-500">{fields.lowPrice.errors}</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="flex flex-col gap-2">
-                  <Label>First Class Seats</Label>
+                  <Label>Middle Seats</Label>
                   <Input
                     type="text"
-                    name={fields.firstClassSeats.name}
-                    key={fields.firstClassSeats.key}
-                    defaultValue={data.firstClassSeats}
-                    placeholder="Enter the number of first class seats"
+                    name={fields.middleSeats.name}
+                    key={fields.middleSeats.key}
+                    defaultValue={data.middleSeats}
+                    placeholder="Enter the number of middle seats"
                   />
-                  <p className="text-red-500">
-                    {fields.firstClassSeats.errors}
-                  </p>
+                  <p className="text-red-500">{fields.middleSeats.errors}</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>First Class Seat Price</Label>
+                  <Label>Middle Seat Price</Label>
                   <Input
                     type="text"
-                    name={fields.firstClassPrice.name}
-                    key={fields.firstClassPrice.key}
-                    defaultValue={data.firstClassPrice}
-                    placeholder="Enter the price per first class seat"
+                    name={fields.middlePrice.name}
+                    key={fields.middlePrice.key}
+                    defaultValue={data.middlePrice}
+                    placeholder="Enter the price per middle seat"
                   />
-                  <p className="text-red-500">
-                    {fields.firstClassPrice.errors}
-                  </p>
+                  <p className="text-red-500">{fields.middlePrice.errors}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2 md:gap-4">
+                <div className="flex flex-col gap-2">
+                  <Label>Executive Class Seats</Label>
+                  <Input
+                    type="text"
+                    name={fields.executiveSeats.name}
+                    key={fields.executiveSeats.key}
+                    defaultValue={data.executiveSeats}
+                    placeholder="Enter the number of executive seats"
+                  />
+                  <p className="text-red-500">{fields.executiveSeats.errors}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label>Executive Class Seat Price</Label>
+                  <Input
+                    type="text"
+                    name={fields.executivePrice.name}
+                    key={fields.executivePrice.key}
+                    defaultValue={data.executivePrice}
+                    placeholder="Enter the price per executive class seat"
+                  />
+                  <p className="text-red-500">{fields.executivePrice.errors}</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2 md:gap-4">

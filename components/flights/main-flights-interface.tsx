@@ -175,13 +175,13 @@ export default function MainFlightsInterface({
   }, []);
 
   const getSeatsLeft = (flight: Flight) => {
-    return flight.economySeats + flight.businessSeats + flight.firstClassSeats;
+    return flight.lowSeats + flight.middleSeats + flight.executiveSeats;
   };
 
   const getMinPrice = (date: string) => {
     const flights = flightsByDate[date];
     if (!flights || flights.length === 0) return null;
-    return Math.min(...flights.map((f) => f.economyPrice));
+    return Math.min(...flights.map((f) => f.lowPrice));
   };
 
   const calculateArrivalTime = (flightTime: string) => {
@@ -352,19 +352,19 @@ export default function MainFlightsInterface({
                   <div className="bg-accent rounded-lg p-2 mx-2 mb-2 lg:mx-0 lg:mb-0 lg:mr-2 lg:my-2 lg:w-80 flex flex-col gap-2 sm:gap-4">
                     <div className="bg-card rounded-lg p-2">
                       <h3 className="font-semibold text-sm sm:text-base">
-                        Economy
+                        Low
                       </h3>
                       <div className="flex items-center justify-between">
                         <div className="flex gap-1 sm:gap-2 items-center">
                           <div className="text-xs sm:text-sm">From</div>
                           <div className="text-sm sm:text-lg lg:text-xl font-bold">
-                            Ksh {flight.economyPrice?.toLocaleString()}
+                            Ksh {flight.lowPrice?.toLocaleString()}
                           </div>
                         </div>
                         <div className="flex gap-1 sm:gap-2 items-center">
                           <div className="text-xs sm:text-sm">Seats</div>
                           <div className="text-sm sm:text-lg lg:text-xl font-bold">
-                            {flight.economySeats}
+                            {flight.lowSeats}
                           </div>
                         </div>
                       </div>
@@ -372,19 +372,19 @@ export default function MainFlightsInterface({
 
                     <div className="bg-primary/25 rounded-lg p-2 border border-primary/30">
                       <h3 className="font-semibold text-sm sm:text-base">
-                        Business
+                        Middle
                       </h3>
                       <div className="flex items-center justify-between">
                         <div className="flex gap-1 sm:gap-2 items-center">
                           <div className="text-xs sm:text-sm">From</div>
                           <div className="text-sm sm:text-lg lg:text-xl font-bold">
-                            Ksh {flight.businessPrice?.toLocaleString()}
+                            Ksh {flight.middlePrice?.toLocaleString()}
                           </div>
                         </div>
                         <div className="flex gap-1 sm:gap-2 items-center">
                           <div className="text-xs sm:text-sm">Seats</div>
                           <div className="text-sm sm:text-lg lg:text-xl font-bold">
-                            {flight.businessSeats}
+                            {flight.middleSeats}
                           </div>
                         </div>
                       </div>
@@ -392,19 +392,19 @@ export default function MainFlightsInterface({
 
                     <div className="bg-primary/45 rounded-lg p-2 border border-primary/50">
                       <h3 className="font-semibold text-sm sm:text-base">
-                        First
+                        Executive
                       </h3>
                       <div className="flex items-center justify-between">
                         <div className="flex gap-1 sm:gap-2 items-center">
                           <div className="text-xs sm:text-sm">From</div>
                           <div className="text-sm sm:text-lg lg:text-xl font-bold">
-                            Ksh {flight.firstClassPrice?.toLocaleString()}
+                            Ksh {flight.executivePrice?.toLocaleString()}
                           </div>
                         </div>
                         <div className="flex gap-1 sm:gap-2 items-center">
                           <div className="text-xs sm:text-sm">Seats</div>
                           <div className="text-sm sm:text-lg lg:text-xl font-bold">
-                            {flight.firstClassSeats}
+                            {flight.executiveSeats}
                           </div>
                         </div>
                       </div>

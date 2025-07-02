@@ -48,7 +48,7 @@ import { Flight, User } from "@prisma/client";
 import PayWithStripe from "./pay-with-stripe";
 import Link from "next/link";
 
-type SeatClass = "economy" | "business" | "firstClass";
+type SeatClass = "low" | "middle" | "executive";
 
 export default function FlightPage({
   flight,
@@ -57,21 +57,21 @@ export default function FlightPage({
   flight: Flight;
   user: User;
 }) {
-  const [selectedClass, setSelectedClass] = useState<SeatClass>("economy");
+  const [selectedClass, setSelectedClass] = useState<SeatClass>("low");
   const [numPassengers, setNumPassengers] = useState("1");
 
   // Determine available seats based on class
   const availableSeats = {
-    economy: flight?.economySeats || 0,
-    business: flight?.businessSeats || 0,
-    firstClass: flight?.firstClassSeats || 0,
+    low: flight?.lowSeats || 0,
+    middle: flight?.middleSeats || 0,
+    executive: flight?.executiveSeats || 0,
   };
 
   // Determine price based on selected class
   const priceMap = {
-    economy: flight?.economyPrice || 0,
-    business: flight?.businessPrice || 0,
-    firstClass: flight?.firstClassPrice || 0,
+    low: flight?.lowPrice || 0,
+    middle: flight?.middlePrice || 0,
+    executive: flight?.executivePrice || 0,
   };
 
   const totalPrice = priceMap[selectedClass] * parseInt(numPassengers);
@@ -175,52 +175,52 @@ export default function FlightPage({
           </CardHeader>
           <CardContent>
             <Tabs
-              defaultValue="economy"
+              defaultValue="low"
               onValueChange={(value) => setSelectedClass(value as SeatClass)}
             >
               <TabsList className="grid grid-cols-3 mb-4">
-                <TabsTrigger value="economy">Economy</TabsTrigger>
-                <TabsTrigger value="business">Business</TabsTrigger>
-                <TabsTrigger value="firstClass">First Class</TabsTrigger>
+                <TabsTrigger value="low">Low</TabsTrigger>
+                <TabsTrigger value="middle">Middle</TabsTrigger>
+                <TabsTrigger value="executive">Executive</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="economy" className="space-y-4">
+              <TabsContent value="low" className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span>Price per person:</span>
                   <span className="font-semibold">
-                    Ksh {flight?.economyPrice?.toFixed(2)}
+                    Ksh {flight?.lowPrice?.toFixed(2)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>Available seats:</span>
-                  <span className="font-semibold">{flight?.economySeats}</span>
+                  <span className="font-semibold">{flight?.lowSeats}</span>
                 </div>
               </TabsContent>
 
-              <TabsContent value="business" className="space-y-4">
+              <TabsContent value="middle" className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span>Price per person:</span>
                   <span className="font-semibold">
-                    Ksh {flight?.businessPrice?.toFixed(2)}
+                    Ksh {flight?.middlePrice?.toFixed(2)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>Available seats:</span>
-                  <span className="font-semibold">{flight?.businessSeats}</span>
+                  <span className="font-semibold">{flight?.middleSeats}</span>
                 </div>
               </TabsContent>
 
-              <TabsContent value="firstClass" className="space-y-4">
+              <TabsContent value="executive" className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span>Price per person:</span>
                   <span className="font-semibold">
-                    Ksh {flight?.firstClassPrice?.toFixed(2)}
+                    Ksh {flight?.executivePrice?.toFixed(2)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>Available seats:</span>
                   <span className="font-semibold">
-                    {flight?.firstClassSeats}
+                    {flight?.executiveSeats}
                   </span>
                 </div>
               </TabsContent>
@@ -351,27 +351,27 @@ export default function FlightPage({
                 <li className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <span>
-                    Economy:{" "}
+                    Low:{" "}
                     <span className="font-medium">
-                      {flight?.economySeats} seats
+                      {flight?.lowSeats} seats
                     </span>
                   </span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <span>
-                    Business:{" "}
+                    Middle:{" "}
                     <span className="font-medium">
-                      {flight?.businessSeats} seats
+                      {flight?.middleSeats} seats
                     </span>
                   </span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <span>
-                    First Class:{" "}
+                    Executive:{" "}
                     <span className="font-medium">
-                      {flight?.firstClassSeats} seats
+                      {flight?.executiveSeats} seats
                     </span>
                   </span>
                 </li>

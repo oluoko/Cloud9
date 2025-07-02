@@ -53,17 +53,17 @@ export function FeaturedFlightCard({ flight }: { flight: Flight }) {
               />
             </div>
             <FlightClassInfo
-              economy={{
-                price: flight.economyPrice,
-                seats: flight.economySeats,
+              low={{
+                price: flight.lowPrice,
+                seats: flight.lowSeats,
               }}
-              business={{
-                price: flight.businessPrice,
-                seats: flight.businessSeats,
+              middle={{
+                price: flight.middlePrice,
+                seats: flight.middleSeats,
               }}
-              firstClass={{
-                price: flight.firstClassPrice,
-                seats: flight.firstClassSeats,
+              executive={{
+                price: flight.executivePrice,
+                seats: flight.executiveSeats,
               }}
             />
           </CardContent>

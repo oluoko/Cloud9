@@ -1,45 +1,45 @@
 interface FlightClassInfoProps {
-  economy: {
+  low: {
     price: number;
     seats: number;
   };
-  business: {
+  middle: {
     price: number;
     seats: number;
   };
-  firstClass: {
+  executive: {
     price: number;
     seats: number;
   };
 }
 
 export function FlightClassInfo({
-  economy,
-  business,
-  firstClass,
+  low,
+  middle,
+  executive,
 }: FlightClassInfoProps) {
   return (
     <div className="grid grid-cols-3 gap-2 mt-4">
       <div className="bg-background/60 p-2 rounded ">
-        <p className="text-sm text-gray-500">Economy</p>
+        <p className="text-sm text-gray-500">Low</p>
         <p className="font-semibold flex items-center">
-          <span className="font-bold">Ksh</span> {economy.price}
+          <span className="font-bold">Ksh</span> {low.price}
         </p>
-        <p className="text-xs text-gray-500">{economy.seats} seats</p>
+        <p className="text-xs text-gray-500">{low.seats} seats</p>
       </div>
       <div className="bg-background/60 p-2 rounded ">
-        <p className="text-sm text-gray-500">Business</p>
+        <p className="text-sm text-gray-500">Middle</p>
         <p className="font-semibold flex items-center">
-          <span className="font-bold">Ksh</span> {business.price}
+          <span className="font-bold">Ksh</span> {middle.price}
         </p>
-        <p className="text-xs text-gray-500">{business.seats} seats</p>
+        <p className="text-xs text-gray-500">{middle.seats} seats</p>
       </div>
       <div className="bg-background/60 p-2 rounded ">
-        <p className="text-sm text-gray-500">First Class</p>
+        <p className="text-sm text-gray-500">Executive Class</p>
         <p className="font-semibold flex items-center">
-          <span className="font-bold">Ksh</span> {firstClass.price}
+          <span className="font-bold">Ksh</span> {executive.price}
         </p>
-        <p className="text-xs text-gray-500">{firstClass.seats} seats</p>
+        <p className="text-xs text-gray-500">{executive.seats} seats</p>
       </div>
     </div>
   );
