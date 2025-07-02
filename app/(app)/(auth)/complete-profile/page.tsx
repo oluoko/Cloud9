@@ -272,7 +272,7 @@ export default function CompleteProfile() {
               </div>
 
               {profileComplete ? (
-                <div className="grid gap-4">
+                <div className="grid gap-4 w-full h-auto">
                   <Link href="/profile">
                     <Button asChild variant="primaryOutline" className="w-full">
                       Go to Profile
