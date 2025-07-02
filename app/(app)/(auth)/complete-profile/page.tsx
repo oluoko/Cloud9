@@ -37,7 +37,6 @@ export default function CompleteProfile() {
   const [currentUser, setCurrentUser] = useState<Partial<User> | null>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
-  const [deleting, setDeleting] = useState(false); // Separate state for delete operation
   const [error, setError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | undefined>(
     defaultProfileImage()
@@ -275,6 +274,8 @@ export default function CompleteProfile() {
                 text="Complete Profile"
                 loadingText="Completing Profile"
                 className="w-full"
+                isPending={updating}
+                disabled={updating || loading}
               />
             </form>
           </CardContent>
