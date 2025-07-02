@@ -125,12 +125,6 @@ export default function CompleteProfile() {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to update profile");
       }
-
-      const updatedUser = await response.json();
-
-      setCurrentUser(updatedUser);
-
-      toast.success("Profile updated successfully");
       router.push("/");
     } catch (err) {
       console.error("Error updating profile:", err);
