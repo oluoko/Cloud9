@@ -222,6 +222,7 @@ export default function CompleteProfile() {
                 type="submit"
                 text="Complete Profile"
                 loadingText="Completing Profile"
+                className="w-full"
               />
             </form>
           </CardContent>
