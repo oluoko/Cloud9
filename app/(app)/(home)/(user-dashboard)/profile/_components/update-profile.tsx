@@ -12,18 +12,11 @@ import { UploadButton } from "@/utils/uploadthing";
 import Image from "next/image";
 import { toast } from "sonner";
 import { PhoneInput } from "@/components/phone-input";
-import { getImageKey } from "@/lib/utils";
+import { defaultProfileImage, getImageKey } from "@/lib/utils";
 import { User } from "@prisma/client";
 import Loader from "@/components/loader";
 import { useRouter } from "next/navigation";
 import { DeleteButton, SubmitButton } from "@/components/custom-button";
-
-interface UpdateProfileFormData {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  profileImage?: string;
-}
 
 export function UpdateProfile() {
   const router = useRouter();
@@ -33,10 +26,10 @@ export function UpdateProfile() {
   const [deleting, setDeleting] = useState(false); // Separate state for delete operation
   const [error, setError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | undefined>(
-    undefined
+    defaultProfileImage()
   );
   const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [formData, setFormData] = useState<UpdateProfileFormData>({
+  const [formData, setFormData] = useState<Partial<User>>({
     firstName: "",
     lastName: "",
     phoneNumber: "",
@@ -75,10 +68,7 @@ export function UpdateProfile() {
     fetchUser();
   }, []);
 
-  const handleInputChange = (
-    field: keyof UpdateProfileFormData,
-    value: string
-  ) => {
+  const handleInputChange = (field: keyof Partial<User>, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
@@ -257,7 +247,7 @@ export function UpdateProfile() {
                   <Input
                     id="firstName"
                     type="text"
-                    value={formData.firstName}
+                    value={formData.firstName || ""}
                     onChange={(e) =>
                       handleInputChange("firstName", e.target.value)
                     }
@@ -269,7 +259,7 @@ export function UpdateProfile() {
                   <Input
                     id="lastName"
                     type="text"
-                    value={formData.lastName}
+                    value={formData.lastName || ""}
                     onChange={(e) =>
                       handleInputChange("lastName", e.target.value)
                     }

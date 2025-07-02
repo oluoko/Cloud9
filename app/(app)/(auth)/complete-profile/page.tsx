@@ -18,12 +18,7 @@ import axios from "axios";
 import { UploadButton } from "@/utils/uploadthing";
 import Image from "next/image";
 import { toast } from "sonner";
-import { useForm } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
-import { completeProfile } from "@/actions/users";
-import { useFormState } from "react-dom";
 import { SubmitButton } from "@/components/custom-button";
-import { profileSchema } from "@/lib/zodSchemas";
 import { PhoneInput } from "@/components/phone-input";
 import { defaultProfileImage, getImageKey } from "@/lib/utils";
 import AuthLayout from "@/components/auth-layout";
@@ -48,8 +43,6 @@ export default function CompleteProfile() {
     phoneNumber: "",
     profileImage: undefined,
   });
-
-  const [lastResult, action] = useFormState(completeProfile, undefined);
 
   useEffect(() => {
     async function fetchUser() {
@@ -134,7 +127,9 @@ export default function CompleteProfile() {
       }
 
       const updatedUser = await response.json();
+
       setCurrentUser(updatedUser);
+
       toast.success("Profile updated successfully");
       router.push("/");
     } catch (err) {
