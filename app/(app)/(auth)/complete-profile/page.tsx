@@ -20,7 +20,7 @@ import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
-import { updateProfile } from "@/actions/users";
+import { completeProfile } from "@/actions/users";
 import { useFormState } from "react-dom";
 import { SubmitButton } from "@/components/custom-button";
 import { profileSchema } from "@/lib/zodSchemas";
@@ -36,7 +36,7 @@ export default function CompleteProfile() {
     ProfileImageInitials(user?.firstName || "", user?.lastName || "")
   );
 
-  const [lastResult, action] = useFormState(updateProfile, undefined);
+  const [lastResult, action] = useFormState(completeProfile, undefined);
 
   const [form, fields] = useForm({
     lastResult: lastResult as any,
