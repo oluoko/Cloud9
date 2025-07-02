@@ -159,10 +159,7 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
             />
             <Dialog>
               <DialogTrigger asChild>
-                <Button
-                  variant="destructive"
-                  className="text-xl w-full md:w-max"
-                >
+                <Button variant="destructive" className="w-full md:w-max">
                   Delete Testimonial
                 </Button>
               </DialogTrigger>

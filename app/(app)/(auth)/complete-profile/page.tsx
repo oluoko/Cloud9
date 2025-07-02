@@ -25,7 +25,7 @@ import { useFormState } from "react-dom";
 import { SubmitButton } from "@/components/custom-button";
 import { profileSchema } from "@/lib/zodSchemas";
 import { PhoneInput } from "@/components/phone-input";
-import { getImageKey, ProfileImageInitials } from "@/lib/utils";
+import { defaultProfileImage, getImageKey } from "@/lib/utils";
 import AuthLayout from "@/components/auth-layout";
 import { twMerge } from "tailwind-merge";
 
@@ -33,7 +33,7 @@ export default function CompleteProfile() {
   const { toast } = useToast();
   const { isLoaded: isUserLoaded, user } = useUser();
   const [profileImage, setProfileImage] = useState<string | undefined>(
-    ProfileImageInitials(user?.firstName || "", user?.lastName || "")
+    defaultProfileImage()
   );
 
   const [lastResult, action] = useFormState(completeProfile, undefined);
