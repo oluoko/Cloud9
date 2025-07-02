@@ -268,8 +268,7 @@ export default function CompleteProfile() {
               </div>
 
               {profileComplete ? (
-                <div className="text-center">
-                  <p className="text-lg font-semibold">Profile Completed!</p>
+                <div className="grid gap-4">
                   <Link href="/profile">
                     <Button asChild variant="primaryOutline" className="w-full">
                       Go to Profile
