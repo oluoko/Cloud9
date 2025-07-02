@@ -271,17 +271,17 @@ export default function CompleteProfile() {
                 <div className="text-center">
                   <p className="text-lg font-semibold">Profile Completed!</p>
                   <Link href="/profile">
-                    <Button asChild variant="primaryOutline">
+                    <Button asChild variant="primaryOutline" className="w-full">
                       Go to Profile
                     </Button>
                   </Link>
                   <Link href="/">
-                    <Button asChild variant="outline">
+                    <Button asChild variant="outline" className="w-full">
                       Go to Home
                     </Button>
                   </Link>
                   <Link href="/flights">
-                    <Button asChild variant="outline">
+                    <Button asChild variant="outline" className="w-full">
                       Book a flight
                     </Button>
                   </Link>
