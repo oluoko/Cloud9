@@ -145,6 +145,7 @@ export default function CreateTestimonial() {
             <SubmitButton
               text="Create Testimonial"
               loadingText="Creating Testimonial"
+              className="w-full"
             />
           </CardFooter>
         </Card>
