@@ -159,8 +159,10 @@ export default function SignInForm() {
               )}
 
               <SubmitButton
-                disabled={isLoading}
+                isPending={isLoading}
+                useFormStatus={false}
                 type="submit"
+                className="w-full"
                 text="Log In"
                 loadingText="Logging In"
               />

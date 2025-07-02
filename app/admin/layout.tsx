@@ -2,7 +2,7 @@
 
 import { isAdmin } from "@/lib/isAdmin";
 import { useUser } from "@clerk/nextjs";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import AdminFallBack from "./_components/AdminFallback";
 import NavLinks from "@/components/nav-links";
 import { NavBar } from "@/components/nav-bar";
@@ -21,9 +21,41 @@ export default function AdminDashboardLayout({
 }: {
   children: ReactNode;
 }) {
+  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const response = await fetch("/api/user", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Error while fetching  user");
+        }
+        const userData = await response.json();
+        setCurrentUser(userData);
+      } catch (err) {
+        console.error("Error fetching user:", err);
+        setError(`Failed to load user details:::: ${err}`);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchUser();
+  }, []);
   const { user } = useUser();
 
-  if (!isAdmin(user)) return <AdminFallBack />;
+  if (
+    !isAdmin(user) ||
+    currentUser.role !== "ADMIN" ||
+    currentUser.role !== "MAIN_ADMIN"
+  )
+    return <AdminFallBack />;
 
   const AdminPageNavLinks = [
     {

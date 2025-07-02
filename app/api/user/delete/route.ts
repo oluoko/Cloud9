@@ -16,6 +16,13 @@ export async function DELETE(request: NextRequest) {
     });
 
     await clerk.users.deleteUser(userId);
+
+    return NextResponse.json(
+      {
+        message: "Your profile has been deleted successfully",
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error deleting user:", error);
     return NextResponse.json(

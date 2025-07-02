@@ -1,4 +1,5 @@
 import Loader from "@/components/loader";
+import { defaultProfileImage } from "@/lib/utils";
 import prisma from "@/utils/db";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -16,6 +17,8 @@ const createNewUser = async () => {
   });
 
   if (!match) {
+    const finalProfileImage = user?.imageUrl || defaultProfileImage();
+
     await prisma.user.create({
       data: {
         id: user.id,
@@ -23,7 +26,7 @@ const createNewUser = async () => {
         email: user?.emailAddresses[0].emailAddress,
         firstName: user?.firstName,
         lastName: user?.lastName,
-        profileImage: user?.imageUrl,
+        profileImage: finalProfileImage,
       },
     });
   }

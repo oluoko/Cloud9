@@ -170,7 +170,7 @@ export function UpdateProfile() {
       }
 
       toast.success("Profile deleted successfully");
-      router.push("/auth/login");
+      router.push("/");
     } catch (err) {
       console.error("Error deleting profile:", err);
       setError(err instanceof Error ? err.message : "Failed to delete profile");

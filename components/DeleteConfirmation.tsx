@@ -8,14 +8,15 @@ import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { capitalize } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import LoadingDots from "./loading-dots";
+import LoadingDots from "@/components/loading-dots";
+import { deleteUserProfile } from "@/actions/users";
 
 interface ModelProps {
   id: string;
   title: string;
-  modelType: "banner" | "flight" | "testimonial";
+  modelType: "banner" | "flight" | "testimonial" | "user";
 }
 
 export default function DeleteConfirmation({
@@ -43,8 +44,9 @@ export default function DeleteConfirmation({
           await deleteFlight(id);
         } else if (modelType === "testimonial") {
           await deleteTestimonial(id);
+        } else if (modelType === "user") {
+          await deleteUserProfile(id);
         }
-        // Handle successful deletion (could add navigation here)
       } catch (error) {
         console.error(`Error deleting ${modelType}:`, error);
         // Handle error if needed

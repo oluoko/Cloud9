@@ -16,9 +16,8 @@ import { getInitials } from "@/lib/utils";
 import userImage from "@/public/assets/userProfile.png";
 import Link from "next/link";
 import { User } from "@prisma/client";
-
-import { useQuery } from "@tanstack/react-query";
 import useSWR from "swr";
+import { useRouter } from "next/navigation";
 
 // Fetcher function
 const fetcher = async (url: string): Promise<User> => {
@@ -91,6 +90,12 @@ export default function CustomUserButton({
     revalidateOnReconnect: true, // Refetch on reconnect
     dedupingInterval: 5000, // Dedupe requests within 5 seconds
   });
+
+  const router = useRouter();
+
+  if (user?.phoneNumber === "") {
+    router.push("/complete-profile");
+  }
 
   const config = sizeConfig[size];
 

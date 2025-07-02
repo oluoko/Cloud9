@@ -202,7 +202,8 @@ export default function SignUpPage() {
                   {/* CAPTCHA Widget */}
                   <div id="clerk-captcha"></div>
                   <SubmitButton
-                    disabled={isLoading}
+                    isPending={isLoading}
+                    className="w-full"
                     type="submit"
                     text="Sign Up"
                     loadingText="Signing you up"
@@ -213,7 +214,7 @@ export default function SignUpPage() {
               </>
             ) : (
               <form onSubmit={handleVerify} className="space-y-4">
-                <div className="space-y-2">
+                <div className="space-y-2 flex flex-col items-center justify-center">
                   <Label htmlFor="code">Verification Code</Label>
                   <InputOTP
                     maxLength={codeLength}
@@ -239,7 +240,7 @@ export default function SignUpPage() {
                   </Alert>
                 )}
                 <SubmitButton
-                  disabled={isLoading}
+                  className="w-full"
                   type="submit"
                   text="Verify Email"
                   loadingText="Verifying Email"

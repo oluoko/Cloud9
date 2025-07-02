@@ -16,6 +16,8 @@ model User {
   profileImage String?
   phoneNumber  String?
 
+  role UserRole @default(USER)
+
   bookings    Booking[]
   testimonial Testimonial?
 
@@ -30,12 +32,12 @@ model Flight {
   flightTime       String
   flightImages     String[]
   airlineName      String
-  economySeats     Int
-  businessSeats    Int
-  firstClassSeats  Int
-  economyPrice     Float
-  businessPrice    Float
-  firstClassPrice  Float
+  lowSeats         Int
+  middleSeats      Int
+  executiveSeats   Int
+  lowPrice         Float
+  middlePrice      Float
+  executivePrice   Float
   departureAirport String
   arrivalAirport   String
 
@@ -91,4 +93,10 @@ model Testimonial {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum UserRole {
+  MAIN_ADMIN
+  ADMIN
+  USER
 }

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
+import LoadingDots from "./loading-dots";
 
 interface ButtonProps {
   text: string;
@@ -17,7 +18,7 @@ interface ButtonProps {
 
 export function SubmitButton({
   text,
-  loadingText = "Loading...",
+  loadingText = "Loading",
   isPending = false,
   useFormStatus: shouldUseFormStatus = true,
   className = "",
@@ -42,7 +43,7 @@ export function SubmitButton({
       {...props}
     >
       {pending && <Loader2 className="h-4 w-4 animate-spin" />}
-      {pending ? loadingText : text}
+      {pending ? <LoadingDots text={loadingText} /> : text}
     </Button>
   );
 }
@@ -75,7 +76,7 @@ export function DeleteButton({
       {...props}
     >
       {pending && <Loader2 className="h-4 w-4 animate-spin" />}
-      {pending ? loadingText : text}
+      {pending ? <LoadingDots text={loadingText} /> : text}
     </Button>
   );
 }
