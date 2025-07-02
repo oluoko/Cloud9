@@ -170,6 +170,7 @@ export function UpdateProfile() {
       }
 
       toast.success("Profile deleted successfully");
+      window.location.reload();
       router.push("/");
     } catch (err) {
       console.error("Error deleting profile:", err);
@@ -205,7 +206,7 @@ export function UpdateProfile() {
       <Card className="mx-2">
         <CardHeader>
           <CardTitle className="font-bold text-center text-2xl">
-            Edit Your Profile Information
+            Update Your Profile
             <div className="font-normal text-sm text-muted-foreground mt-2">
               Please provide your profile information for editing
             </div>
