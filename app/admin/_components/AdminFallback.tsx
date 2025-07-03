@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
-import { BrandLogo } from "@/components/brand-logo";
+import logoWhiteText from "@/public/logo white text.svg";
+import Image from "next/image";
+import CustomUserButton from "@/components/custom-user-button";
 
 const AdminFallBack = () => {
   return (
@@ -9,7 +10,13 @@ const AdminFallBack = () => {
         className={`navbar w-screen fixed top-0 left-0 h-[40px] md:h-[55px] p-4 md:px-8 flex items-center justify-between shadow-black/15 shadow-lg text-white bg-black z-50`}
       >
         <Link href={"/"} className="logo">
-          <BrandLogo styling="h-[45px] md:h-[60px] w-[90px] md:w-[120px]" />
+          <div className="h-[45px] md:h-[60px] w-[90px] md:w-[120px]">
+            <Image
+              src={logoWhiteText}
+              className="size-full"
+              alt="Logo in white text"
+            />
+          </div>
         </Link>
         <div className="flex justify-between gap-2">
           <Link
@@ -18,7 +25,7 @@ const AdminFallBack = () => {
           >
             Back
           </Link>
-          <UserButton />
+          <CustomUserButton />
         </div>
       </nav>
       <div className="mt-[70px] flex flex-col justify-center items-center h-[calc(100vh-70px)] p-4 md:p-10">
