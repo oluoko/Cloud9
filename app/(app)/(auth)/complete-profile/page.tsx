@@ -23,10 +23,7 @@ import { PhoneInput } from "@/components/phone-input";
 import { defaultProfileImage, getImageKey } from "@/lib/utils";
 import AuthLayout from "@/components/auth-layout";
 import { twMerge } from "tailwind-merge";
-import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { useMe } from "@/contexts/use-user";
 
 export default function CompleteProfile() {
@@ -37,9 +34,7 @@ export default function CompleteProfile() {
     error: userError,
     mutate,
   } = useMe();
-  const router = useRouter();
 
-  const [profileComplete, setProfileComplete] = useState<boolean>(false);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | undefined>(
@@ -65,7 +60,6 @@ export default function CompleteProfile() {
       });
 
       if (me.phoneNumber) {
-        setProfileComplete(true);
         window.location.replace("/");
       }
     }
@@ -141,7 +135,7 @@ export default function CompleteProfile() {
       await mutate();
 
       toast.success("Profile updated successfully");
-      setProfileComplete(true);
+      window.location.replace("/");
     } catch (err) {
       console.error("Error updating profile:", err);
       setError(err instanceof Error ? err.message : "Failed to update profile");
@@ -274,34 +268,14 @@ export default function CompleteProfile() {
                 />
               </div>
 
-              {profileComplete ? (
-                <div className="grid gap-4 w-full h-auto">
-                  <Link href="/profile">
-                    <Button asChild variant="primaryOutline" className="w-full">
-                      Go to Profile
-                    </Button>
-                  </Link>
-                  <Link href="/">
-                    <Button asChild variant="outline" className="w-full">
-                      Go to Home
-                    </Button>
-                  </Link>
-                  <Link href="/flights">
-                    <Button asChild variant="outline" className="w-full">
-                      Book a flight
-                    </Button>
-                  </Link>
-                </div>
-              ) : (
-                <SubmitButton
-                  type="submit"
-                  text="Complete Profile"
-                  loadingText="Completing Profile"
-                  className="w-full"
-                  isPending={updating}
-                  disabled={updating || isUserDataLoading}
-                />
-              )}
+              <SubmitButton
+                type="submit"
+                text="Complete Profile"
+                loadingText="Completing Profile"
+                className="w-full"
+                isPending={updating}
+                disabled={updating || isUserDataLoading}
+              />
             </form>
           </CardContent>
           <CardFooter className="justify-center">
