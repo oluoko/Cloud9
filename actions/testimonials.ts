@@ -38,6 +38,7 @@ export async function createTestimonial(
 
   revalidatePath("/");
   revalidatePath("/testimonials");
+  revalidatePath("/profile");
 }
 
 export async function editTestimonial(prevState: unknown, formData: FormData) {
@@ -55,7 +56,7 @@ export async function editTestimonial(prevState: unknown, formData: FormData) {
 
   const testimonialId = formData.get("testimonialId") as string;
 
-  const testimonial = await prisma.testimonial.update({
+  await prisma.testimonial.update({
     where: {
       id: testimonialId,
     },
@@ -68,6 +69,7 @@ export async function editTestimonial(prevState: unknown, formData: FormData) {
 
   revalidatePath("/");
   revalidatePath("/testimonials");
+  revalidatePath("/profile");
 }
 
 export async function deleteTestimonial(testimonialId: string) {
