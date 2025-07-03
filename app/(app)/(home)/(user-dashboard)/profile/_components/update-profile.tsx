@@ -14,12 +14,10 @@ import { PhoneInput } from "@/components/phone-input";
 import { defaultProfileImage, getImageKey } from "@/lib/utils";
 import { User } from "@prisma/client";
 import Loader from "@/components/loader";
-import { useRouter } from "next/navigation";
 import { DeleteButton, SubmitButton } from "@/components/custom-button";
 import { useMe } from "@/contexts/use-user";
 
 export function UpdateProfile() {
-  const router = useRouter();
   const { me, isLoading, error: userError, mutate } = useMe();
 
   const [updating, setUpdating] = useState(false);
@@ -157,7 +155,7 @@ export function UpdateProfile() {
       }
 
       toast.success("Profile deleted successfully");
-      router.push("/");
+      window.location.replace("/");
     } catch (err) {
       console.error("Error deleting profile:", err);
       setError(err instanceof Error ? err.message : "Failed to delete profile");
