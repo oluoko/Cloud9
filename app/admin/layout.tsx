@@ -2,7 +2,7 @@
 
 import { isAdmin } from "@/lib/isAdmin";
 import { useUser } from "@clerk/nextjs";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import AdminFallBack from "./_components/AdminFallback";
 import NavLinks from "@/components/nav-links";
 import { NavBar } from "@/components/nav-bar";
@@ -15,47 +15,32 @@ import {
   LayoutList,
 } from "lucide-react";
 import Link from "next/link";
+import { useMe } from "@/contexts/use-user";
+import LoadingDots from "@/components/loading-dots";
 
 export default function AdminDashboardLayout({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [currentUser, setCurrentUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await fetch("/api/user", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Error while fetching  user");
-        }
-        const userData = await response.json();
-        setCurrentUser(userData);
-      } catch (err) {
-        console.error("Error fetching user:", err);
-        setError(`Failed to load user details:::: ${err}`);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchUser();
-  }, []);
+  const { me, isLoading, error } = useMe();
   const { user } = useUser();
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <LoadingDots text="Loading admin dashboard" />
+      </div>
+    );
+  }
 
   if (
     !isAdmin(user) ||
-    currentUser.role !== "ADMIN" ||
-    currentUser.role !== "MAIN_ADMIN"
-  )
+    !me ||
+    (me.role !== "ADMIN" && me.role !== "MAIN_ADMIN")
+  ) {
     return <AdminFallBack />;
+  }
 
   const AdminPageNavLinks = [
     {
@@ -84,21 +69,26 @@ export default function AdminDashboardLayout({
       href: "/admin/testimonials",
     },
   ];
-  return (
-    <div className="selection:bg-foreground/20">
-      <NavBar logoLink="/admin">
-        <NavLinks links={AdminPageNavLinks} />
 
-        <Link href="/">
-          <div className="flex gap-2 items-center rounded-xl hover:bg-primary/20 p-1.5 cursor-pointer">
-            <LogOut className="size-4" />
+  return (
+    <div className="flex h-screen bg-gray-100">
+      <aside className="w-64 bg-white shadow-md">
+        <NavBar />
+
+        <nav className="mt-8 px-4">
+          <NavLinks links={AdminPageNavLinks} />
+
+          <Link
+            href="/dashboard"
+            className="flex items-center mt-6 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <LogOut className="w-5 h-5 mr-3" />
             Exit
-          </div>
-        </Link>
-      </NavBar>
-      <div className="my-3 md:my-5 bg-[radial-gradient(hsl(0,32%,17%,40%),hsl(24,27%,23%,2 9%),hsl(var(--background))_60%)] mt-20 md:mt-20 mx-5 md:mx-24">
-        {children}
-      </div>
+          </Link>
+        </nav>
+      </aside>
+
+      <main className="flex-1 overflow-y-auto">{children}</main>
     </div>
   );
 }

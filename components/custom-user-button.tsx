@@ -15,21 +15,8 @@ import { SignOutButton } from "@clerk/nextjs";
 import { getInitials } from "@/lib/utils";
 import userImage from "@/public/assets/userProfile.png";
 import Link from "next/link";
-import { User } from "@prisma/client";
-import useSWR from "swr";
 import { useRouter } from "next/navigation";
-
-// Fetcher function
-const fetcher = async (url: string): Promise<User> => {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || "Failed to fetch");
-  }
-
-  return response.json();
-};
+import { useMe } from "@/contexts/use-user";
 
 type SizeMode = "sm" | "md" | "lg";
 
@@ -80,20 +67,10 @@ function CustomUserButtonSkeleton({ size = "md" }: { size?: SizeMode }) {
 export default function CustomUserButton({
   size = "md",
 }: CustomUserButtonProps) {
-  const {
-    data: user,
-    error,
-    isLoading,
-    mutate,
-  } = useSWR("/api/user", fetcher, {
-    revalidateOnFocus: false, // Don't refetch on window focus
-    revalidateOnReconnect: true, // Refetch on reconnect
-    dedupingInterval: 5000, // Dedupe requests within 5 seconds
-  });
-
+  const { me, isLoading } = useMe();
   const router = useRouter();
 
-  if (user?.phoneNumber === "") {
+  if (me?.phoneNumber === "") {
     router.push("/complete-profile");
   }
 
@@ -113,14 +90,13 @@ export default function CustomUserButton({
         >
           <Avatar className={config.avatar}>
             <AvatarImage
-              src={user?.profileImage ?? undefined}
-              className="object-cover
-"
+              src={me?.profileImage ?? undefined}
+              className="object-cover"
               alt="userImage"
             />
-            {user?.firstName || user?.lastName ? (
+            {me?.firstName || me?.lastName ? (
               <AvatarFallback>
-                {getInitials(user?.firstName ?? "", user?.lastName ?? "")}
+                {getInitials(me?.firstName ?? "", me?.lastName ?? "")}
               </AvatarFallback>
             ) : (
               <AvatarImage src={userImage.src} alt="userImage" />
@@ -133,12 +109,12 @@ export default function CustomUserButton({
           className={`flex flex-col space-y-1 ${config.label}`}
         >
           <p className={`${config.nameText} font-medium leading-none`}>
-            {user?.firstName ? `${user?.firstName} ${user?.lastName}` : ""}
+            {me?.firstName ? `${me?.firstName} ${me?.lastName}` : ""}
           </p>
           <p
             className={`${config.emailText} leading-none text-muted-foreground`}
           >
-            {user?.email}
+            {me?.email}
           </p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -147,7 +123,7 @@ export default function CustomUserButton({
             href="/profile"
             className={`${config.menuItem} font-medium leading-none p-1 w-full`}
           >
-            {user?.firstName ? `${user?.firstName}'s Profile` : "Profile"}
+            {me?.firstName ? `${me?.firstName}'s Profile` : "Profile"}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>

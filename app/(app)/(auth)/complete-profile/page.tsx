@@ -27,13 +27,19 @@ import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useMe } from "@/contexts/use-user";
 
 export default function CompleteProfile() {
   const { isLoaded: isUserLoaded, user } = useUser();
+  const {
+    me,
+    isLoading: isUserDataLoading,
+    error: userError,
+    mutate,
+  } = useMe();
   const router = useRouter();
-  const [currentUser, setCurrentUser] = useState<Partial<User> | null>(null);
+
   const [profileComplete, setProfileComplete] = useState<boolean>(false);
-  const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | undefined>(
@@ -48,40 +54,28 @@ export default function CompleteProfile() {
   });
 
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await fetch("/api/user", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Error while fetching user");
-        }
-        const userData = await response.json();
-        setCurrentUser(userData);
-        setProfileImage(userData.profileImage);
-        setPhoneNumber(userData.phoneNumber || "");
-        setFormData({
-          firstName: userData.firstName || "",
-          lastName: userData.lastName || "",
-          phoneNumber: userData.phoneNumber || "",
-          profileImage: userData.profileImage,
-        });
-      } catch (err) {
-        console.error("Error fetching user:", err);
-        setError(`Failed to load user details: ${err}`);
-      } finally {
-        setLoading(false);
+    if (me) {
+      setProfileImage(me.profileImage || undefined);
+      setPhoneNumber(me.phoneNumber || "");
+      setFormData({
+        firstName: me.firstName || "",
+        lastName: me.lastName || "",
+        phoneNumber: me.phoneNumber || "",
+        profileImage: me.profileImage || undefined,
+      });
+
+      if (me.phoneNumber) {
+        setProfileComplete(true);
+        window.location.replace("/");
       }
     }
-    fetchUser();
-  }, []);
+  }, [me]);
 
-  if (currentUser?.phoneNumber) {
-    setProfileComplete(true);
-  }
+  useEffect(() => {
+    if (userError) {
+      setError(`Failed to load user details: ${userError.message}`);
+    }
+  }, [userError]);
 
   const handleInputChange = (field: keyof Partial<User>, value: string) => {
     setFormData((prev) => ({
@@ -133,9 +127,7 @@ export default function CompleteProfile() {
         throw new Error(errorData.error || "Failed to update profile");
       }
 
-      const updatedUser = await response.json();
-
-      setCurrentUser(updatedUser);
+      await mutate();
 
       toast.success("Profile updated successfully");
       setProfileComplete(true);
@@ -148,7 +140,7 @@ export default function CompleteProfile() {
     }
   };
 
-  if (!isUserLoaded) {
+  if (!isUserLoaded || isUserDataLoading) {
     return (
       <Loader mainText="Loading your profile" subText="Please wait a moment" />
     );
@@ -296,7 +288,7 @@ export default function CompleteProfile() {
                   loadingText="Completing Profile"
                   className="w-full"
                   isPending={updating}
-                  disabled={updating || loading}
+                  disabled={updating || isUserDataLoading}
                 />
               )}
             </form>

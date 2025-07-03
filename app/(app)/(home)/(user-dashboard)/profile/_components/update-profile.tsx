@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { XIcon } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import axios from "axios";
@@ -17,13 +16,14 @@ import { User } from "@prisma/client";
 import Loader from "@/components/loader";
 import { useRouter } from "next/navigation";
 import { DeleteButton, SubmitButton } from "@/components/custom-button";
+import { useMe } from "@/contexts/use-user";
 
 export function UpdateProfile() {
   const router = useRouter();
-  const [user, setUser] = useState<Partial<User> | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { me, isLoading, error: userError, mutate } = useMe();
+
   const [updating, setUpdating] = useState(false);
-  const [deleting, setDeleting] = useState(false); // Separate state for delete operation
+  const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<string | undefined>(
     defaultProfileImage()
@@ -37,36 +37,24 @@ export function UpdateProfile() {
   });
 
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await fetch("/api/user", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Error while fetching user");
-        }
-        const userData = await response.json();
-        setUser(userData);
-        setProfileImage(userData.profileImage);
-        setPhoneNumber(userData.phoneNumber || "");
-        setFormData({
-          firstName: userData.firstName || "",
-          lastName: userData.lastName || "",
-          phoneNumber: userData.phoneNumber || "",
-          profileImage: userData.profileImage,
-        });
-      } catch (err) {
-        console.error("Error fetching user:", err);
-        setError(`Failed to load user details: ${err}`);
-      } finally {
-        setLoading(false);
-      }
+    if (me) {
+      setProfileImage(me.profileImage || undefined);
+      setPhoneNumber(me.phoneNumber || "");
+      setFormData({
+        firstName: me.firstName || "",
+        lastName: me.lastName || "",
+        phoneNumber: me.phoneNumber || "",
+        profileImage: me.profileImage || undefined,
+      });
     }
-    fetchUser();
-  }, []);
+  }, [me]);
+
+  // Handle user errors
+  useEffect(() => {
+    if (userError) {
+      setError(`Failed to load user details: ${userError.message}`);
+    }
+  }, [userError]);
 
   const handleInputChange = (field: keyof Partial<User>, value: string) => {
     setFormData((prev) => ({
@@ -118,10 +106,9 @@ export function UpdateProfile() {
         throw new Error(errorData.error || "Failed to update profile");
       }
 
-      const updatedUser = await response.json();
-      setUser(updatedUser);
+      await mutate();
+
       toast.success("Profile updated successfully");
-      window.location.reload();
     } catch (err) {
       console.error("Error updating profile:", err);
       setError(err instanceof Error ? err.message : "Failed to update profile");
@@ -134,7 +121,6 @@ export function UpdateProfile() {
   const handleDeleteProfile = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Add confirmation dialog
     if (
       !confirm(
         "Are you sure you want to delete your profile? This action cannot be undone."
@@ -160,7 +146,6 @@ export function UpdateProfile() {
       }
 
       toast.success("Profile deleted successfully");
-      window.location.reload();
       router.push("/");
     } catch (err) {
       console.error("Error deleting profile:", err);
@@ -171,7 +156,7 @@ export function UpdateProfile() {
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <Loader mainText="Loading your profile" subText="Please wait a moment" />
     );
