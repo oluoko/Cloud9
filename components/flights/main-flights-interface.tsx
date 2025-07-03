@@ -238,7 +238,7 @@ export default function MainFlightsInterface({
           </Button>
 
           <div
-            className="flex overflow-x-auto scrollbar-hide pb-2 flex-1"
+            className="flex overflow-x-auto scrollable pb-2 flex-1"
             ref={scrollContainerRef}
           >
             <div className="flex gap-0 min-w-full">

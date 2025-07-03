@@ -73,34 +73,34 @@ export default function AdminButton() {
     setIsHovered(false);
   };
 
-  if (isLoading || !isAdmin(user) || me?.role !== "ADMIN") {
-    return null;
-  }
-
-  return (
-    <div className="fixed bottom-4 right-4 z-50">
-      <Link href="/admin">
-        <Button
-          className={`
+  if (isAdmin(user) || me?.role === "ADMIN" || me?.role == "MAIN_ADMIN") {
+    return (
+      <div className="fixed bottom-4 left-4 z-50">
+        <Link href="/admin">
+          <Button
+            className={`
             ${getButtonWidth()}
             ${isWidthTransitioning ? "transition-all duration-500 ease-in-out" : ""}
-            h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium
+            h-12 bg-primary hover:bg-primary/90 text-background rounded-full p-0 px-4 font-medium
             shadow-lg hover:shadow-xl transform hover:scale-105
             transition-all duration-300 ease-in-out
           `}
-          onMouseEnter={handleHover}
-          onMouseLeave={handleMouseLeave}
-        >
-          <span
-            className={`
+            onMouseEnter={handleHover}
+            onMouseLeave={handleMouseLeave}
+          >
+            <span
+              className={`
               transition-opacity duration-150 ease-in-out
               ${isTextVisible ? "opacity-100" : "opacity-0"}
             `}
-          >
-            {displayText}
-          </span>
-        </Button>
-      </Link>
-    </div>
-  );
+            >
+              {displayText}
+            </span>
+          </Button>
+        </Link>
+      </div>
+    );
+  } else {
+    return null;
+  }
 }

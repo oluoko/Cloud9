@@ -86,9 +86,20 @@ export default function CompleteProfile() {
 
   const handleDeleteImage = async (imageUrl: string) => {
     try {
-      await axios.post("/api/uploadthing/delete", {
-        imageKey: getImageKey(imageUrl),
-      });
+      if (imageUrl !== defaultProfileImage()) {
+        if (
+          !confirm(
+            "Are you sure you want to delete your profile image? This action cannot be undone."
+          )
+        ) {
+          return;
+        }
+
+        await axios.post("/api/uploadthing/delete", {
+          imageKey: getImageKey(imageUrl),
+        });
+      } else {
+      }
 
       setProfileImage(undefined);
       setFormData((prev) => ({

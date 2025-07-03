@@ -12,7 +12,10 @@ export default async function ProfilePage() {
     },
   });
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 h-[95vh] items-center">
+    <div
+      className="grid grid-cols-1 md:grid-cols-3 h-[95vh] items-center overflow-hidden
+    "
+    >
       <div className="md:col-span-1">
         <UpdateProfile />
       </div>

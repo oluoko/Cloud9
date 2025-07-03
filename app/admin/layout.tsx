@@ -34,14 +34,6 @@ export default function AdminDashboardLayout({
     );
   }
 
-  if (
-    !isAdmin(user) ||
-    !me ||
-    (me.role !== "ADMIN" && me.role !== "MAIN_ADMIN")
-  ) {
-    return <AdminFallBack />;
-  }
-
   const AdminPageNavLinks = [
     {
       label: "Users",
@@ -70,25 +62,25 @@ export default function AdminDashboardLayout({
     },
   ];
 
-  return (
-    <div className="flex h-screen bg-gray-100">
-      <aside className="w-64 bg-white shadow-md">
-        <NavBar />
-
-        <nav className="mt-8 px-4">
+  if (isAdmin(user) || me?.role === "ADMIN" || me?.role == "MAIN_ADMIN") {
+    return (
+      <div className="selection:bg-foreground/20">
+        <NavBar logoLink="/admin">
           <NavLinks links={AdminPageNavLinks} />
 
-          <Link
-            href="/dashboard"
-            className="flex items-center mt-6 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            <LogOut className="w-5 h-5 mr-3" />
-            Exit
+          <Link href="/">
+            <div className="flex gap-2 items-center rounded-xl hover:bg-primary/20 p-1.5 cursor-pointer">
+              <LogOut className="size-4" />
+              Exit
+            </div>
           </Link>
-        </nav>
-      </aside>
-
-      <main className="flex-1 overflow-y-auto">{children}</main>
-    </div>
-  );
+        </NavBar>
+        <div className="my-3 md:my-5 bg-[radial-gradient(hsl(0,32%,17%,40%),hsl(24,27%,23%,2 9%),hsl(var(--background))_60%)] mt-20 md:mt-20 mx-5 md:mx-24">
+          {children}
+        </div>
+      </div>
+    );
+  } else {
+    return <AdminFallBack />;
+  }
 }

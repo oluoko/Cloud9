@@ -134,9 +134,9 @@
   background-color: var(--color-foreground);
 }
 
-.scrollbar-hide {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer and Edge */
+.scrollable::-webkit-scrollbar {
+  height: 3px;
+  width: 3px;
 }
 
 .unselectable,
