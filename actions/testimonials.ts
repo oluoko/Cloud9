@@ -85,5 +85,5 @@ export async function deleteTestimonial(testimonialId: string) {
 
   revalidatePath("/");
   revalidatePath("/testimonials");
-  redirect("/profile");
+  revalidatePath("/profile");
 }
