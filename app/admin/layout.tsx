@@ -3,7 +3,7 @@
 import { isAdmin } from "@/lib/isAdmin";
 import { useUser } from "@clerk/nextjs";
 import { ReactNode } from "react";
-import AdminFallBack from "./_components/AdminFallback";
+import AdminFallBack from "./_components/admin-fallback";
 import NavLinks from "@/components/nav-links";
 import { NavBar } from "@/components/nav-bar";
 import {

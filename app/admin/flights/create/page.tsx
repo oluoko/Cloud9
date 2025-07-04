@@ -21,7 +21,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useFormState } from "react-dom";
-import { DateTimePicker } from "../../_components/DateTimePicker";
+import { DateTimePicker } from "../../_components/date-time-picker";
 import { SubmitButton } from "@/components/custom-button";
 import axios from "axios";
 import { getImageKey } from "@/lib/utils";

@@ -24,7 +24,7 @@ import { useFormState } from "react-dom";
 import { SubmitButton } from "@/components/custom-button";
 import axios from "axios";
 import { getImageKey } from "@/lib/utils";
-import { DateTimePicker } from "./DateTimePicker";
+import { DateTimePicker } from "./date-time-picker";
 import { Flight } from "@prisma/client";
 import { twMerge } from "tailwind-merge";
 

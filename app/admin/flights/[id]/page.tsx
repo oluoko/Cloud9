@@ -1,6 +1,6 @@
 import prisma from "@/utils/db";
 import { notFound } from "next/navigation";
-import { EditFlightForm } from "../../_components/EditFlightForm";
+import { EditFlightForm } from "../../_components/edit-flight-form";
 
 export default async function EditFlight({
   params,

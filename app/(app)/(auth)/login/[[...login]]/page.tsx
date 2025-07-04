@@ -2,7 +2,6 @@
 
 import React, { FormEvent, useState } from "react";
 import { useAuth, useSignIn } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { ClerkAPIError } from "@clerk/types";
 import { isClerkAPIResponseError } from "@clerk/nextjs/errors";
 import {
@@ -33,13 +32,12 @@ export default function SignInForm() {
   const [authStage, setAuthStage] = useState<
     "initial" | "authenticating" | "redirecting"
   >("initial");
-  const router = useRouter();
 
   const { userId } = useAuth();
 
   console.log("userId:: ", userId);
   if (userId) {
-    router.push("/");
+    window.location.replace("/");
   }
 
   if (!isLoaded) {
@@ -66,7 +64,7 @@ export default function SignInForm() {
       if (signInAttempt.status === "complete") {
         setAuthStage("redirecting");
         await setActive({ session: signInAttempt.createdSessionId });
-        router.push("/saving-info");
+        window.location.replace("/saving-info");
       } else {
         console.error(JSON.stringify(signInAttempt, null, 2));
         setAuthStage("initial");

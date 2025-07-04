@@ -18,15 +18,8 @@ const AdminFallBack = () => {
             />
           </div>
         </Link>
-        <div className="flex justify-between gap-2">
-          <Link
-            href={"/"}
-            className="border hover:border-slate-400/30 hover:bg-slate-100/10 rounded-full w-[100px] flex items-center justify-center"
-          >
-            Back
-          </Link>
-          <CustomUserButton />
-        </div>
+
+        <CustomUserButton />
       </nav>
       <div className="mt-[70px] flex flex-col justify-center items-center h-[calc(100vh-70px)] p-4 md:p-10">
         <p className="text-xl md:text-3xl">

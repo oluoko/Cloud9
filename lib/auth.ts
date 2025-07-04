@@ -31,3 +31,27 @@ export const getUserById = async (userId: string) => {
 
   return user;
 };
+
+export const getUsers = async () => {
+  const self = await getUserByClerkId();
+
+  const users = await prisma.user.findMany({
+    where: {
+      id: {
+        not: self.id,
+      },
+      email: {
+        not: process.env.CONTACT_EMAIL,
+      },
+    },
+    include: {
+      bookings: true,
+      testimonial: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return users;
+};
