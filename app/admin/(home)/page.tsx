@@ -269,7 +269,7 @@ export default async function AdminDashboardHome() {
                 allBookings.map((booking) => (
                   <div
                     key={booking.id}
-                    className="flex items-center justify-between p-4 border-b last:border-0"
+                    className="flex items-center justify-between p-4 border-b last:border-0  bg-transparent hover:bg-accent/70 transition-colors rounded-lg"
                   >
                     <div className="flex items-center gap-x-2">
                       <Image
@@ -318,7 +318,7 @@ export default async function AdminDashboardHome() {
         <UserRoleDistribution pieChartData={pieChartData} COLORS={COLORS} />
         <Card>
           <div className="px-6">
-            <h3 className="text-lg font-semibold text-muted-foreground mb-4">
+            <h3 className="text-lg font-semibold text-muted-foreground mb-4 flex justify-between">
               <span>Recent Testimonials</span>
               <span>
                 Total:{" "}
