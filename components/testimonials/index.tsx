@@ -82,7 +82,7 @@ export default function Testimonials({
 }
 
 // Star Rating Component
-function StarRating({ rating }: { rating: number }) {
+export function StarRating({ rating }: { rating: number }) {
   const stars = [];
   const totalStars = 5;
 
