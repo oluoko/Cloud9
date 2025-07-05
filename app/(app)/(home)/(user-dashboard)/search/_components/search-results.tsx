@@ -26,7 +26,8 @@ export default async function SearchResults({
         )}
         {arrival && (
           <>
-            Arrival Airport : <span className="font-extrabold"> {arrival}</span>
+            Arrival Airport :{" "}
+            <span className="font-extrabold"> {arrival}</span>{" "}
           </>
         )}
         {departure && (
