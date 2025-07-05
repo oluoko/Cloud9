@@ -13,13 +13,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Call the function to send the email
-    await sendUsAMessageEmail(firstName, lastName, email, message);
+    try {
+      const user = await getUserByClerkId();
 
-    const user = await getUserByClerkId();
-
-    if (user) {
+      await sendUsAMessageEmail(firstName, lastName, email, message);
       await messageFollowUpEmail(user.email, message);
+    } catch {
+      await sendUsAMessageEmail(firstName, lastName, email, message);
+      await messageFollowUpEmail(email, message);
     }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });

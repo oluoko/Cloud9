@@ -128,8 +128,9 @@ export default function StripeCheckOut({
       {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
       <SubmitButton
         disabled={loading}
-        text="Complete Payment"
+        text={`Complete Payment of Ksh ${amount}`}
         loadingText={`Processing Ksh ${amount}`}
+        className="mt-4 w-full"
       />
     </form>
   );

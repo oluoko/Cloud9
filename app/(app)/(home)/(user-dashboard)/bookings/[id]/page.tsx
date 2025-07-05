@@ -87,7 +87,7 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
       </div>
 
       {/* Status Banner */}
-      <div className="rounded-lg bg-primary/5 p-4 mb-6 border border-primary/20 grid md:flex justify-between items-center">
+      <div className="rounded-lg bg-primary/5 p-4 mb-6 border border-primary/20 grid gap-4 md:flex justify-between items-center">
         <Badge
           className={`${getStatusBadgeVariant3(
             booking.bookingStatus
@@ -106,11 +106,7 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
         </div>
         <Dialog>
           <DialogTrigger asChild>
-            <Button
-              variant="outline"
-              size="sm"
-              className="hidden md:flex gap-2"
-            >
+            <Button variant="outline" size="sm" className="flex gap-2 w-max">
               <Mail className="size-4" />
               Email Me The Details
             </Button>
@@ -222,7 +218,7 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
                   <div>
                     <p className="text-sm text-muted-foreground">Seat Type</p>
                     <p className="font-medium">
-                      {capitalize(booking.seatType)}
+                      {capitalize(booking.seatType)} Class
                     </p>
                   </div>
                 </div>
@@ -250,7 +246,7 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Seat Type</span>
-                <span>{booking.seatType}</span>
+                <span>{capitalize(booking.seatType)} Class</span>
               </div>
               <div className="border-t pt-3 mt-3 flex justify-between font-semibold">
                 <span>Total Amount</span>
