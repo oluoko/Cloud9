@@ -40,8 +40,8 @@ export const flightSchema = z.object({
     .refine((val) => !isNaN(val), {
       message: "Middle seats must be a number",
     })
-    .refine((val) => val <= 250, {
-      message: "An airplane can only have a maximum of 250 middle seats.",
+    .refine((val) => val <= 50, {
+      message: "An airplane can only have a maximum of 50 middle class seats.",
     }),
   executiveSeats: z
     .string()
@@ -59,8 +59,8 @@ export const flightSchema = z.object({
     .refine((val) => !isNaN(val), {
       message: "Low seats must be a number",
     })
-    .refine((val) => val <= 50, {
-      message: "An airplane can only have a maximum of 50 low seats.",
+    .refine((val) => val <= 250, {
+      message: "An airplane can only have a maximum of 250 low class seats.",
     }),
   middlePrice: z
     .string()

@@ -109,18 +109,18 @@ export default function CreateFlight() {
 
               <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="flex flex-col gap-2">
-                  <Label>Low Seats</Label>
+                  <Label>Low Class Seats</Label>
                   <Input
                     type="text"
                     name={fields.lowSeats.name}
                     key={fields.lowSeats.key}
                     defaultValue={fields.lowSeats.value}
-                    placeholder="Enter the number of low seats"
+                    placeholder="Enter the number of low class seats"
                   />
                   <p className="text-red-500">{fields.lowSeats.errors}</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Low Seat Price</Label>
+                  <Label>Low Class Seat Price</Label>
                   <Input
                     type="text"
                     name={fields.lowPrice.name}
@@ -133,24 +133,24 @@ export default function CreateFlight() {
               </div>
               <div className="grid grid-cols-2 gap-2 md:gap-4">
                 <div className="flex flex-col gap-2">
-                  <Label>Middle Seats</Label>
+                  <Label>Middle Class Seats</Label>
                   <Input
                     type="text"
                     name={fields.middleSeats.name}
                     key={fields.middleSeats.key}
                     defaultValue={fields.middleSeats.value}
-                    placeholder="Enter the number of middle seats"
+                    placeholder="Enter the number of middle class seats"
                   />
                   <p className="text-red-500">{fields.middleSeats.errors}</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <Label>Middle Seat Price</Label>
+                  <Label>Middle Class Seat Price</Label>
                   <Input
                     type="text"
                     name={fields.middlePrice.name}
                     key={fields.middlePrice.key}
                     defaultValue={fields.middlePrice.value}
-                    placeholder="Enter the price per middle seat"
+                    placeholder="Enter the price per middle Class seat"
                   />
                   <p className="text-red-500">{fields.middlePrice.errors}</p>
                 </div>

@@ -179,9 +179,9 @@ export default function FlightPage({
               onValueChange={(value) => setSelectedClass(value as SeatClass)}
             >
               <TabsList className="grid grid-cols-3 mb-4">
-                <TabsTrigger value="low">Low</TabsTrigger>
-                <TabsTrigger value="middle">Middle</TabsTrigger>
-                <TabsTrigger value="executive">Executive</TabsTrigger>
+                <TabsTrigger value="low">Low Class</TabsTrigger>
+                <TabsTrigger value="middle">Middle Class</TabsTrigger>
+                <TabsTrigger value="executive">Executive Class</TabsTrigger>
               </TabsList>
 
               <TabsContent value="low" className="space-y-4">
