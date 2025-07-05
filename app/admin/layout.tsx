@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import { useMe } from "@/contexts/use-user";
 import LoadingDots from "@/components/loading-dots";
+import Loader from "@/components/loader";
 
 export default function AdminDashboardLayout({
   children,
@@ -27,11 +28,7 @@ export default function AdminDashboardLayout({
   const { user } = useUser();
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <LoadingDots text="Loading admin dashboard" />
-      </div>
-    );
+    return <Loader mainText="Admin Page" subText="Loading admin dashboard" />;
   }
 
   const AdminPageNavLinks = [

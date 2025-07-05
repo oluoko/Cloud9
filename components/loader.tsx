@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader2, Cloud, MapPin } from "lucide-react";
 import { FaPlane, FaCloud } from "react-icons/fa";
+import LoadingDots from "./loading-dots";
 
 interface AirlineLoaderProps {
   mainText?: string;
@@ -13,16 +14,6 @@ const Loader = ({
   mainText = "Finding the Best Flights",
   subText = "Searching across airlines",
 }: AirlineLoaderProps) => {
-  const [dots, setDots] = useState(1);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDots((prev) => (prev % 5) + 1);
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="absolute top-0 left-0 z-20 h-screen w-screen overflow-hidden flex flex-col items-center justify-center bg-background">
       {/* Main animation container */}
@@ -62,10 +53,7 @@ const Loader = ({
         <h2 className="text-xl md:text-2xl font-semibold text-foreground">
           {mainText}
         </h2>
-        <p className="text-sm md:text-lg text-muted-foreground animate-pulse font-extrabold">
-          {subText}
-          <span className="inline-block">{".".repeat(dots)}</span>
-        </p>
+        <LoadingDots text={subText} />
       </div>
     </div>
   );

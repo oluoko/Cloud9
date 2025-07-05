@@ -247,7 +247,7 @@ export default async function AdminDashboardHome() {
                   Total Banners
                 </p>
                 <p className="text-2xl font-bold text-accent-foreground">
-                  {banners.length ? banners.length : 0}
+                  {banners.length}
                 </p>
               </div>
               <div className="p-3 bg-orange-600/20 rounded-full">
