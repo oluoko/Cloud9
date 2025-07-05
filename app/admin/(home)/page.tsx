@@ -30,7 +30,7 @@ export default async function AdminDashboardHome() {
     include: {
       User: true,
     },
-    take: 5,
+    take: 3,
     orderBy: {
       createdAt: "desc",
     },
@@ -40,7 +40,7 @@ export default async function AdminDashboardHome() {
     include: {
       user: true,
     },
-    take: 5,
+    take: 3,
     orderBy: {
       createdAt: "desc",
     },
