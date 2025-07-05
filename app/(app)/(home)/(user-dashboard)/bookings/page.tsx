@@ -145,7 +145,7 @@ export default async function Bookings() {
           <CardFooter>
             <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="text-sm text-muted-foreground text-center md:text-left">
-                Thank you for booking with us. If you have any questions,{" "}
+                If you have any questions,{" "}
                 <Link
                   href="/#contact-us"
                   className="underline hover:text-primary"
