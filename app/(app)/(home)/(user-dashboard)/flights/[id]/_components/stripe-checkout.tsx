@@ -50,7 +50,7 @@ export default function StripeCheckOut({
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-  }, [amount]);
+  }, [amount, clientSecret]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -127,7 +127,6 @@ export default function StripeCheckOut({
       {clientSecret && <PaymentElement />}
       {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
       <SubmitButton
-        onClick={handleSubmit}
         disabled={loading}
         text="Complete Payment"
         loadingText={`Processing Ksh ${amount}`}
