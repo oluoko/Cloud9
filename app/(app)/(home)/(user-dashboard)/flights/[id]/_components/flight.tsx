@@ -88,7 +88,7 @@ export default function FlightPage({
   );
 
   return (
-    <div className="py-8 px-4">
+    <div className="p-4">
       <div className="grid md:grid-cols-3 gap-6">
         {/* Flight Details Section */}
         <Card className="md:col-span-2">
@@ -351,7 +351,7 @@ export default function FlightPage({
                 <li className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <span>
-                    Low:{" "}
+                    Low Class:{" "}
                     <span className="font-medium">
                       {flight?.lowSeats} seats
                     </span>
@@ -360,7 +360,7 @@ export default function FlightPage({
                 <li className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <span>
-                    Middle:{" "}
+                    Middle Class:{" "}
                     <span className="font-medium">
                       {flight?.middleSeats} seats
                     </span>
@@ -369,7 +369,7 @@ export default function FlightPage({
                 <li className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <span>
-                    Executive:{" "}
+                    Executive Class:{" "}
                     <span className="font-medium">
                       {flight?.executiveSeats} seats
                     </span>
