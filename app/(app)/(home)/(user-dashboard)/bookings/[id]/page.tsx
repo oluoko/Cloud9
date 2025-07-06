@@ -235,7 +235,7 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Ticket Price</span>
                 <span>
-                  KES {(booking.totalAmount / booking.seatCount).toFixed(2)}
+                  Ksh {(booking.totalAmount / booking.seatCount).toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between">
@@ -248,7 +248,7 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
               </div>
               <div className="border-t pt-3 mt-3 flex justify-between font-semibold">
                 <span>Total Amount</span>
-                <span>KES {booking.totalAmount.toFixed(2)}</span>
+                <span>Ksh {booking.totalAmount.toFixed(2)}</span>
               </div>
               <div className="flex items-center gap-2 text-xs bg-primary/5 text-green-800 p-2 rounded-md">
                 <CreditCard className="size-3" />

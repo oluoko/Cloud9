@@ -270,7 +270,7 @@ export default async function AdminDashboardHome() {
                 allBookings.map((booking) => (
                   <div
                     key={booking.id}
-                    className="flex items-center justify-between p-4 border-b last:border-0  bg-transparent hover:bg-accent/70 transition-colors rounded-lg"
+                    className="flex items-center justify-between p-4 border-b last:border-0  bg-transparent hover:bg-accent/70 transition-colors"
                   >
                     <div className="flex items-center gap-x-2">
                       <Image
@@ -291,18 +291,10 @@ export default async function AdminDashboardHome() {
                         </p>
                       </div>
                     </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">
-                        {booking.totalAmount}{" "}
-                        <span
-                          className={`px-2 py-1 rounded-full text-xs ${
-                            booking.paymentStatus === "completed"
-                              ? "bg-green-100 text-green-800"
-                              : "bg-yellow-100 text-yellow-800"
-                          }`}
-                        >
-                          {booking.paymentStatus}
-                        </span>
+                    <div className="grid gap-2">
+                      <span className="bold">
+                        Ksh {booking.totalAmount} /{" "}
+                        {booking.seatCount.toFixed(2)} Seats
                       </span>
                       <span className="text-sm text-accent-foreground">
                         {formatDate(booking.createdAt)}
@@ -326,14 +318,14 @@ export default async function AdminDashboardHome() {
                 <span className="font-black">{allTestimonials.length}</span>
               </span>
             </h3>
-            <div className="space-y-4">
+            <div className="grid gap-4">
               {allTestimonials.length > 0 ? (
                 allTestimonials.map((testimonial) => (
                   <Link
                     key={testimonial.id}
                     href={`/admin/testimonials/${testimonial.id}`}
                   >
-                    <div className="border-l-4 border-primary pl-2 flex items-center justify-between p-2 md:p-4 border-b last:border-b-0 bg-transparent hover:bg-accent/70 transition-colors">
+                    <div className="border-b-1 border-b-accent last:border-b-0 border-l-4 border-l-primary pl-2 flex items-center justify-between p-2 md:p-4 bg-transparent hover:bg-accent/70 transition-colors">
                       <div className="flex items-center gap-x-2">
                         <Image
                           src={

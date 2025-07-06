@@ -67,18 +67,27 @@ export const flightSchema = z.object({
     .transform(Number)
     .refine((val) => !isNaN(val), {
       message: "Middle price must be a number",
+    })
+    .refine((val) => val >= 85, {
+      message: "Middle price must be at least 85",
     }),
   executivePrice: z
     .string()
     .transform(Number)
     .refine((val) => !isNaN(val), {
       message: "Executive class price must be a number",
+    })
+    .refine((val) => val >= 100, {
+      message: "Executive price must be at least 100",
     }),
   lowPrice: z
     .string()
     .transform(Number)
     .refine((val) => !isNaN(val), {
       message: "Low price must be a number",
+    })
+    .refine((val) => val >= 66, {
+      message: "Low price must be at least 66",
     }),
   departureAirport: z.string().min(1, "Departure airport is required"),
   arrivalAirport: z.string().min(1, "Arrival airport is required"),
