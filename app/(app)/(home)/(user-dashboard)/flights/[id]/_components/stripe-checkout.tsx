@@ -112,7 +112,7 @@ export default function StripeCheckOut({
   if (!clientSecret || !stripe || !elements) {
     return (
       <div className="flex items-center justify-center h-auto p-6">
-        <Loader2 className="mr-4 size-4 md:size-6 animate-spin" />
+        <Loader2 className="mr-4 size-4 md:size-6 animate-spin text-primary" />
       </div>
     );
   }
