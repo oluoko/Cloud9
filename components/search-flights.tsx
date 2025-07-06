@@ -63,6 +63,12 @@ function ComboSelect({
 
   const selectedItem = items.find((item) => item.value === value);
 
+  // Remove duplicates based on value
+  const uniqueItems = items.filter(
+    (item, index, self) =>
+      index === self.findIndex((i) => i.value === item.value)
+  );
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -88,7 +94,7 @@ function ComboSelect({
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup>
-              {items.map((item) => (
+              {uniqueItems.map((item) => (
                 <CommandItem
                   key={item.value}
                   value={item.value}
