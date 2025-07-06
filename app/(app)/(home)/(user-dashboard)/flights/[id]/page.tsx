@@ -10,7 +10,7 @@ export default async function Flight({ params }: { params: { id: string } }) {
   });
   const user = await getUserByClerkId();
   return (
-    <div className="py-4 md:py-8">
+    <div>
       {flight ? (
         <FlightPage flight={flight} user={user} />
       ) : (

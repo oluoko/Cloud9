@@ -88,7 +88,7 @@ export default function FlightPage({
   );
 
   return (
-    <div className="p-4">
+    <div className="px-4">
       <div className="grid md:grid-cols-3 gap-6">
         {/* Flight Details Section */}
         <Card className="md:col-span-2">
@@ -383,10 +383,7 @@ export default function FlightPage({
       <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground text-center md:text-left">
           Thank you for flying with us. If you have any questions,{" "}
-          <Link
-            href="/#contact-us-page"
-            className="underline hover:text-primary"
-          >
+          <Link href="/#contact-us" className="underline hover:text-primary">
             please contact our support team
           </Link>
         </p>
