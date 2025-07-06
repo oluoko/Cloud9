@@ -1,11 +1,11 @@
 "use client";
 
 import { loadStripe } from "@stripe/stripe-js";
-import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import convertToSubcurrency from "@/lib/utils";
 import StripeCheckOut from "./stripe-checkout";
 import LoadingDots from "@/components/loading-dots";
+import { useMe } from "@/contexts/use-user";
 
 if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
   throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not defined");
@@ -24,35 +24,9 @@ export default function PayWithStripe({
   seatCount?: number;
   seatType?: string;
 }) {
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { me, isLoading, error } = useMe();
 
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await fetch("/api/user", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Error while fetching  user");
-        }
-        const userData = await response.json();
-        setUser(userData);
-      } catch (err) {
-        console.error("Error fetching user:", err);
-        setError(`Failed to load user details:::: ${err}`);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchUser();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="p-4">
         <LoadingDots text="Loading your details" />
@@ -67,7 +41,7 @@ export default function PayWithStripe({
   return (
     <div className="h-[70vh] md:h-[80vh] overflow-x-hidden overflow-y-scroll">
       <h1 className="text-xl font-bold">
-        <span className="text-2xl font-black">{user?.firstName}</span>,
+        <span className="text-2xl font-black">{me?.firstName}</span>,
         you&apos;re about to complete a booking.
       </h1>
       <p className=" my-3 text-lg text-gray-500">

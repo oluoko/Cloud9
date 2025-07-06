@@ -8,8 +8,8 @@ import {
 } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import convertToSubcurrency from "@/lib/utils";
-import { User } from "@prisma/client";
 import { SubmitButton } from "@/components/custom-button";
+import { useMe } from "@/contexts/use-user";
 
 export default function StripeCheckOut({
   amount,
@@ -27,19 +27,10 @@ export default function StripeCheckOut({
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
   const [clientSecret, setClientSecret] = useState("");
-  const [user, setUser] = useState<User | null>(null);
+
+  const { me, isLoading, error } = useMe();
 
   useEffect(() => {
-    // Get user ID for booking
-    fetch("/api/user")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.id) {
-          setUser(data);
-        }
-      })
-      .catch((err) => console.error("Error fetching user ID:", err));
-
     // Create payment intent
     fetch("/api/stripe/create-payment-intent", {
       method: "POST",
@@ -69,7 +60,7 @@ export default function StripeCheckOut({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payments/success/${user?.id}/${flightId}`,
+        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payments/success/${me?.id}/${flightId}`,
       },
       redirect: "if_required",
     });
@@ -89,7 +80,7 @@ export default function StripeCheckOut({
             totalAmount: amount,
             bookingStatus: "complete",
             paymentMethod: "Stripe",
-            userId: user?.id,
+            userId: me?.id,
             flightId: flightId,
             seatType: seatType || "",
             seatCount: seatCount || 1,
@@ -114,9 +105,13 @@ export default function StripeCheckOut({
     }
   };
 
+  if (error) {
+    return <div className="p-4 text-red-500">{error}</div>;
+  }
+
   if (!clientSecret || !stripe || !elements) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex items-center justify-center h-auto p-6">
         <Loader2 className="mr-4 size-4 md:size-6 animate-spin" />
       </div>
     );
