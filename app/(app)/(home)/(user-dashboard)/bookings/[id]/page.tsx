@@ -194,9 +194,7 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Time</p>
-                    <p className="font-medium">
-                      {flightTime || "N/A"} {booking.Flight?.flightTime}
-                    </p>
+                    <p className="font-medium">{flightTime || "N/A"}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
