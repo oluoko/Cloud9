@@ -14,6 +14,7 @@ import Image from "next/image";
 import UserRoleDistribution from "./_components/user-role-distribution";
 import { StarRating } from "@/components/testimonials";
 import Link from "next/link";
+import { ErrorImage } from "@/components/error-image";
 
 export default async function AdminDashboardHome() {
   const users = await prisma.user.findMany({
@@ -365,7 +366,12 @@ export default async function AdminDashboardHome() {
                   </Link>
                 ))
               ) : (
-                <p className="text-muted-foreground">No testimonials found.</p>
+                <div className="flex flex-col items-center justify-center">
+                  <ErrorImage />
+                  <p className="text-muted-foreground">
+                    No testimonials found.
+                  </p>
+                </div>
               )}
             </div>
           </div>

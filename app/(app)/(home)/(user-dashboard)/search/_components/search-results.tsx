@@ -1,3 +1,4 @@
+import { ErrorImage } from "@/components/error-image";
 import MainFlightsInterface from "@/components/flights/main-flights-interface";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getSearch } from "@/lib/search";
@@ -42,9 +43,12 @@ export default async function SearchResults({
           <MainFlightsInterface flights={data} />
         </div>
       ) : (
-        <p className="text-muted-foreground text-sm">
-          No results found. Try searching for something else!
-        </p>
+        <div className="flex flex-col items-center justify-center">
+          <ErrorImage />
+          <p className="text-muted-foreground text-sm">
+            No results found. Try searching for something else!
+          </p>
+        </div>
       )}
     </div>
   );

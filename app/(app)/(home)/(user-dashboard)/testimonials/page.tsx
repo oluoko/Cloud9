@@ -1,3 +1,4 @@
+import { ErrorImage } from "@/components/error-image";
 import { TestimonialCard } from "@/components/testimonials";
 import prisma from "@/utils/db";
 import { ChevronLeft } from "lucide-react";
@@ -23,9 +24,13 @@ export default async function TestimonialsPage() {
       </div>
 
       {testimonials.length === 0 ? (
-        <p className="text-center text-muted-foreground">
-          No testimonials found. Please add some testimonials to see them here.
-        </p>
+        <div className="flex flex-col items-center justify-center">
+          <ErrorImage />
+          <p className="text-center text-muted-foreground">
+            No testimonials found. Please add some testimonials to see them
+            here.
+          </p>
+        </div>
       ) : (
         <div className="flex md:grid grid-cols-2 gap-4">
           {testimonials.map((testimonial) => (
