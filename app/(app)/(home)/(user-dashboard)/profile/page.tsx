@@ -13,7 +13,7 @@ export default async function ProfilePage() {
   });
   return (
     <div
-      className="grid grid-cols-1 md:grid-cols-3 h-[95vh] items-center overflow-hidden
+      className="grid grid-cols-1 md:grid-cols-3 items-center overflow-x-hidden
     "
     >
       <div className="md:col-span-1">
