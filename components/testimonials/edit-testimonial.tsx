@@ -88,12 +88,7 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
 
   return (
     <>
-      <form
-        id={form.id}
-        onSubmit={form.onSubmit}
-        action={action}
-        className="m-4"
-      >
+      <form id={form.id} onSubmit={form.onSubmit} action={action}>
         <input type="hidden" name="testimonialId" value={data.id} />
         <Card>
           <CardHeader>

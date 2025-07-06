@@ -79,12 +79,7 @@ export default function CreateTestimonial() {
 
   return (
     <>
-      <form
-        id={form.id}
-        onSubmit={form.onSubmit}
-        action={action}
-        className="m-4"
-      >
+      <form id={form.id} onSubmit={form.onSubmit} action={action}>
         <Card>
           <CardHeader>
             <CardTitle>Create a Testimonial</CardTitle>
