@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { getUsers } from "@/lib/auth";
 import { defaultProfileImage, formatDate, getFirstWords } from "@/lib/utils";
 import prisma from "@/utils/db";
 import {
@@ -31,7 +30,6 @@ export default async function AdminDashboardHome() {
     include: {
       User: true,
     },
-    take: 3,
     orderBy: {
       createdAt: "desc",
     },
@@ -41,7 +39,6 @@ export default async function AdminDashboardHome() {
     include: {
       user: true,
     },
-    take: 3,
     orderBy: {
       createdAt: "desc",
     },
@@ -265,9 +262,9 @@ export default async function AdminDashboardHome() {
                 Total: <span className="font-black">{allBookings.length}</span>
               </span>
             </h3>
-            <div className="space-y-4">
+            <div>
               {allBookings.length > 0 ? (
-                allBookings.map((booking) => (
+                allBookings.slice(0, 3).map((booking) => (
                   <div
                     key={booking.id}
                     className="flex items-center justify-between p-4 border-b last:border-0  bg-transparent hover:bg-accent/70 transition-colors"
@@ -293,8 +290,7 @@ export default async function AdminDashboardHome() {
                     </div>
                     <div className="grid gap-2">
                       <span className="bold">
-                        Ksh {booking.totalAmount} /{" "}
-                        {booking.seatCount.toFixed(2)} Seats
+                        Ksh {booking.totalAmount} / {booking.seatCount} Seats
                       </span>
                       <span className="text-sm text-accent-foreground">
                         {formatDate(booking.createdAt)}
@@ -318,9 +314,9 @@ export default async function AdminDashboardHome() {
                 <span className="font-black">{allTestimonials.length}</span>
               </span>
             </h3>
-            <div className="grid gap-4">
+            <div>
               {allTestimonials.length > 0 ? (
-                allTestimonials.map((testimonial) => (
+                allTestimonials.slice(0, 3).map((testimonial) => (
                   <Link
                     key={testimonial.id}
                     href={`/admin/testimonials/${testimonial.id}`}
