@@ -241,7 +241,7 @@ export default function MainFlightsInterface({
             className="flex overflow-x-auto scrollable pb-2 flex-1"
             ref={scrollContainerRef}
           >
-            <div className="flex gap-0 min-w-full">
+            <div className="flex gap-0   min-w-full">
               {visibleDates.map((date, index) => {
                 const { dayName, dayNumber, monthName } = formatDate(date);
                 const hasFlights = flightsByDate[date]?.length > 0;
@@ -307,7 +307,7 @@ export default function MainFlightsInterface({
         </div>
       )}
 
-      <div className="space-y-3 sm:space-y-4">
+      <div className="grid gap-4">
         {selectedFlights.map((flight) => (
           <Link href={`/flights/${flight.id}`} key={flight.id}>
             <Card className="overflow-hidden hover:shadow-lg transition-shadow">
