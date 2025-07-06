@@ -15,9 +15,9 @@ import Image from "next/image";
 
 export function FeaturedFlightCard({ flight }: { flight: Flight }) {
   return (
-    <Card className="mb-8 overflow-hidden py-0">
+    <Card className="mb-8 overflow-hidden py-0 h-[60vh] md:h-[70vh]">
       <div className="grid md:grid-cols-2">
-        <div className="relative">
+        <div className="h-2/5 md:h-full relative">
           <Image
             src={flight.flightImages[0]}
             alt={flight.flightName}
