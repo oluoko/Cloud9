@@ -1,5 +1,10 @@
 import { Card } from "@/components/ui/card";
-import { defaultProfileImage, formatDate, getFirstWords } from "@/lib/utils";
+import {
+  capitalize,
+  defaultProfileImage,
+  formatDate,
+  getFirstWords,
+} from "@/lib/utils";
 import prisma from "@/utils/db";
 import {
   Calendar,
@@ -14,6 +19,38 @@ import UserRoleDistribution from "./_components/user-role-distribution";
 import { StarRating } from "@/components/testimonials";
 import Link from "next/link";
 import { ErrorImage } from "@/components/error-image";
+import SeatTypeGraph from "./_components/seat-type-graph";
+import TrendGraph from "./_components/trend-graph";
+
+const MetricCard = ({
+  title,
+  value,
+  icon: Icon,
+  bgColor,
+  iconColor,
+  href,
+}: {
+  title: string;
+  value: string | number;
+  icon: React.ComponentType<{ className?: string }>;
+  bgColor: string;
+  iconColor: string;
+  href: string;
+}) => (
+  <Link href={href}>
+    <Card>
+      <div className="flex items-center justify-between px-6">
+        <div>
+          <p className="text-sm font-medium text-muted-foreground">{title}</p>
+          <p className="text-2xl font-bold text-accent-foreground">{value}</p>
+        </div>
+        <div className={`p-3 ${bgColor} rounded-full`}>
+          <Icon className={`h-6 w-6 ${iconColor}`} />
+        </div>
+      </div>
+    </Card>
+  </Link>
+);
 
 export default async function AdminDashboardHome() {
   const users = await prisma.user.findMany({
@@ -84,64 +121,10 @@ export default async function AdminDashboardHome() {
     })
   );
 
-  const monthlyBookings = allBookings.reduce(
-    (acc, booking) => {
-      const month = new Date(booking.createdAt).toLocaleString("default", {
-        month: "short",
-      });
-      acc[month] = (acc[month] || 0) + 1;
-      return acc;
-    },
-    {} as Record<string, number>
+  const totalRevenue = allBookings.reduce(
+    (sum, booking) => sum + booking.totalAmount,
+    0
   );
-
-  const lineChartData = Object.entries(monthlyBookings).map(
-    ([month, count]) => ({
-      month,
-      bookings: count,
-    })
-  );
-
-  const revenueData = allBookings.reduce(
-    (acc, booking) => {
-      if (booking.paymentStatus === "completed") {
-        const month = new Date(booking.createdAt).toLocaleString("default", {
-          month: "short",
-        });
-        acc[month] = (acc[month] || 0) + booking.totalAmount;
-      }
-      return acc;
-    },
-    {} as Record<string, number>
-  );
-
-  const revenueChartData = Object.entries(revenueData).map(
-    ([month, revenue]) => ({
-      month,
-      revenue,
-    })
-  );
-
-  const combinedRevenueData = Object.entries(revenueData).map(
-    ([month, revenue]) => ({
-      month,
-      revenue,
-    })
-  );
-
-  // Combined booking and revenue trend data
-  const combinedTrendData = Object.keys({
-    ...monthlyBookings,
-    ...revenueData,
-  }).map((month) => ({
-    month,
-  }));
-
-  const totalRevenue = allBookings.reduce((sum, booking) => {
-    return (
-      sum + (booking.paymentStatus === "completed" ? booking.totalAmount : 0)
-    );
-  }, 0);
 
   const averageRating =
     allTestimonials.reduce(
@@ -149,7 +132,94 @@ export default async function AdminDashboardHome() {
       0
     ) / allTestimonials.length;
 
+  const trendData = (() => {
+    const monthlyData: Record<string, { bookings: number; revenue: number }> =
+      {};
+
+    // Initialize last 12 months
+    for (let i = 11; i >= 0; i--) {
+      const date = new Date();
+      date.setMonth(date.getMonth() - i);
+      const monthKey = date.toISOString().slice(0, 7); // YYYY-MM format
+      const monthName = date.toLocaleDateString("en-US", { month: "short" });
+
+      monthlyData[monthKey] = { bookings: 0, revenue: 0 };
+    }
+
+    // Aggregate booking data by month
+    allBookings.forEach((booking) => {
+      const monthKey = booking.createdAt.toISOString().slice(0, 7);
+      if (monthlyData[monthKey]) {
+        monthlyData[monthKey].bookings += 1;
+        monthlyData[monthKey].revenue += booking.totalAmount;
+      }
+    });
+
+    // Convert to chart format
+    return Object.entries(monthlyData).map(([monthKey, data]) => {
+      const date = new Date(monthKey + "-01");
+      const monthName = date.toLocaleDateString("en-US", { month: "short" });
+
+      return {
+        month: monthName,
+        bookings: data.bookings,
+        revenue: data.revenue,
+      };
+    });
+  })();
+
   const COLORS = ["#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6"];
+
+  const metricsData = [
+    {
+      title: "Total Users",
+      value: users.length,
+      icon: Users,
+      bgColor: "bg-blue-600/20",
+      iconColor: "text-blue-600",
+      href: "/admin/users",
+    },
+    {
+      title: "Total Bookings",
+      value: allBookings.length,
+      icon: Calendar,
+      bgColor: "bg-cyan-600/20",
+      iconColor: "text-cyan-600",
+      href: "/admin/bookings",
+    },
+    {
+      title: "Total Revenue",
+      value: `Ksh ${totalRevenue}`,
+      icon: DollarSign,
+      bgColor: "bg-green-600/20",
+      iconColor: "text-green-600",
+      href: "/admin/bookings",
+    },
+    {
+      title: "Avg Rating",
+      value: `${averageRating} Stars`,
+      icon: Star,
+      bgColor: "bg-yellow-600/20",
+      iconColor: "text-yellow-600",
+      href: "/admin/testimonials",
+    },
+    {
+      title: "Total Flights",
+      value: flights.length,
+      icon: Plane,
+      bgColor: "bg-purple-600/20",
+      iconColor: "text-purple-600",
+      href: "/admin/flights",
+    },
+    {
+      title: "Total Banners",
+      value: banners.length,
+      icon: ImageIcon,
+      bgColor: "bg-orange-600/20",
+      iconColor: "text-orange-600",
+      href: "/admin/banners",
+    },
+  ];
 
   return (
     <div className="p-1 md:p-6 min-h-screen">
@@ -163,96 +233,9 @@ export default async function AdminDashboardHome() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-6">
-          <Card>
-            <div className="flex items-center justify-between px-6">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  Total Users
-                </p>
-                <p className="text-2xl font-bold text-accent-foreground">
-                  {users.length}
-                </p>
-              </div>
-              <div className="p-3 bg-blue-600/20 rounded-full">
-                <Users className="h-6 w-6 text-blue-600" />
-              </div>
-            </div>
-          </Card>
-          <Card>
-            <div className="flex items-center justify-between px-6">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  Total Bookings
-                </p>
-                <p className="text-2xl font-bold text-accent-foreground">
-                  {allBookings.length}
-                </p>
-              </div>
-              <div className="p-3 bg-cyan-600/20 rounded-full">
-                <Calendar className="h-6 w-6 text-cyan-600" />
-              </div>
-            </div>
-          </Card>
-          <Card>
-            <div className="flex items-center justify-between px-6">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  Total Revenue
-                </p>
-                <p className="text-2xl font-bold text-accent-foreground">
-                  {totalRevenue}
-                </p>
-              </div>
-              <div className="p-3 bg-green-600/20 rounded-full">
-                <DollarSign className="h-6 w-6 text-green-600" />
-              </div>
-            </div>
-          </Card>
-          <Card>
-            <div className="flex items-center justify-between px-6">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  Avg Rating
-                </p>
-                <p className="text-2xl font-bold text-accent-foreground">
-                  {averageRating}
-                </p>
-              </div>
-              <div className="p-3 bg-yellow-600/20 rounded-full">
-                <Star className="h-6 w-6 text-yellow-600" />
-              </div>
-            </div>
-          </Card>
-          <Card>
-            <div className="flex items-center justify-between px-6">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  Total Flights
-                </p>
-                <p className="text-2xl font-bold text-accent-foreground">
-                  {flights.length}
-                </p>
-              </div>
-              <div className="p-3 bg-purple-600/20 rounded-full">
-                <Plane className="h-6 w-6 text-purple-600" />
-              </div>
-            </div>
-          </Card>
-          <Card>
-            <div className="flex items-center justify-between px-6">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  Total Banners
-                </p>
-                <p className="text-2xl font-bold text-accent-foreground">
-                  {banners.length}
-                </p>
-              </div>
-              <div className="p-3 bg-orange-600/20 rounded-full">
-                <ImageIcon className="h-6 w-6 text-orange-600" />
-              </div>
-            </div>
-          </Card>
+          {metricsData.map((metric, index) => (
+            <MetricCard key={index} {...metric} />
+          ))}
         </div>
         <Card>
           <div className="px-6">
@@ -277,7 +260,7 @@ export default async function AdminDashboardHome() {
                         alt="User profile"
                         width={40}
                         height={40}
-                        className="rounded-full size-[40px] md:size-[60px] border border-muted-foreground/40 hover:border-primary/60"
+                        className="rounded-full size-[40px] md:size-[50px] border border-muted-foreground/40 hover:border-primary/60"
                       />
                       <div>
                         <p className="text-muted-foreground">
@@ -289,8 +272,10 @@ export default async function AdminDashboardHome() {
                       </div>
                     </div>
                     <div className="grid gap-2">
-                      <span className="bold">
-                        Ksh {booking.totalAmount} / {booking.seatCount} Seats
+                      <span className="bold">Ksh {booking.totalAmount}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {capitalize(booking.seatType)} Class •{" "}
+                        {booking.seatCount} seat(s)
                       </span>
                       <span className="text-sm text-accent-foreground">
                         {formatDate(booking.createdAt)}
@@ -299,7 +284,10 @@ export default async function AdminDashboardHome() {
                   </div>
                 ))
               ) : (
-                <p className="text-muted-foreground">No bookings found.</p>
+                <div className="flex flex-col items-center justify-center">
+                  <ErrorImage />
+                  <p className="text-muted-foreground">No bookings found.</p>
+                </div>
               )}
             </div>
           </div>
@@ -314,14 +302,14 @@ export default async function AdminDashboardHome() {
                 <span className="font-black">{allTestimonials.length}</span>
               </span>
             </h3>
-            <div>
+            <div className="grid gap-2">
               {allTestimonials.length > 0 ? (
                 allTestimonials.slice(0, 3).map((testimonial) => (
                   <Link
                     key={testimonial.id}
                     href={`/admin/testimonials/${testimonial.id}`}
                   >
-                    <div className="border-b-1 border-b-accent last:border-b-0 border-l-4 border-l-primary pl-2 flex items-center justify-between p-2 md:p-4 bg-transparent hover:bg-accent/70 transition-colors">
+                    <div className="border-l-4 border-l-primary pl-2 flex items-center justify-between p-2 md:p-4 bg-transparent hover:bg-accent/70 transition-colors">
                       <div className="flex items-center gap-x-2">
                         <Image
                           src={
@@ -364,6 +352,9 @@ export default async function AdminDashboardHome() {
             </div>
           </div>
         </Card>
+        <SeatTypeGraph COLOR={COLORS} seatTypeChartData={seatTypeChartData} />
+
+        <TrendGraph trendData={trendData} />
       </div>
     </div>
   );

@@ -72,7 +72,7 @@ export default function AdminDashboardLayout({
             </div>
           </Link>
         </NavBar>
-        <div className="my-3 md:my-5 bg-[radial-gradient(hsl(0,32%,17%,40%),hsl(24,27%,23%,2 9%),hsl(var(--background))_60%)] mt-20 md:mt-20 mx-5 md:mx-24">
+        <div className="my-3 md:my-5 bg-[radial-gradient(hsl(0,32%,17%,40%),hsl(24,27%,23%,2 9%),hsl(var(--background))_60%)] mt-20 md:mt-20 mx-3 md:mx-5">
           {children}
         </div>
       </div>
