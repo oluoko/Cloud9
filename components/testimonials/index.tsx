@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { Testimonial } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { ErrorImage } from "@/components/error-image";
 
 export default function Testimonials({
   testimonials,
@@ -73,6 +74,7 @@ export default function Testimonials({
           </div>
         ) : (
           <div className="flex flex-col w-full items-center justify-center text-background/80">
+            <ErrorImage />
             <p className="text-xl font-bold">No Testimonials Yet.</p>
           </div>
         )}
