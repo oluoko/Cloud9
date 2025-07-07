@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { cn } from "@/lib/utils";
+import { cn, getFirstWords } from "@/lib/utils";
 import { StarFilledIcon, StarIcon } from "@radix-ui/react-icons";
 import { BiSolidQuoteAltRight } from "react-icons/bi";
 import { useEffect, useState } from "react";
@@ -107,7 +107,7 @@ export function StarRating({ rating }: { rating: number }) {
   return <div className="flex items-center gap-1">{stars}</div>;
 }
 
-export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+export function TestimonialCard({ testimonial, truncate=false }: { testimonial: Testimonial, truncate?: boolean }) {
   return (
     <Link href={`/testimonials#${testimonial.id}`}>
       <div className="mb-8 bg-accent rounded-xl p-4" id={testimonial.id}>
@@ -146,7 +146,9 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
               </div>
             </div>
             <p className="mt-6 text-lg md:text-2xl leading-normal lg:!leading-normal font-semibold tracking-tight">
-              &quot;{testimonial.comment}&quot;
+              &quot;{
+                truncate ? `${getFirstWords(testimonial.comment, 6)}...` : testimonial.comment
+              }&quot;
             </p>
             <div className="flex sm:hidden md:flex mt-6 items-center gap-4">
               <Avatar>

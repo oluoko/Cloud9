@@ -12,14 +12,17 @@ export default async function Testimonials() {
   return (
     <>
       {testimonials.length > 0 ? (
-        <div className="grid gap-2">
+        <div className="grid md:grid-cols-2 gap-2">
           {testimonials.map((testimonial) => (
-            <Link
-              key={testimonial.id}
-              href={`/admin/testimonials/${testimonial.id}`}
-            >
-              <TestimonialCard testimonial={testimonial} />
-            </Link>
+            <div className="relative" key={testimonial.id}>
+              <TestimonialCard testimonial={testimonial} truncate />
+              <Link
+                href={`/admin/testimonials/${testimonial.id}`}
+                className="absolute z-10 right-2 top-2 bg-background text-foreground px-4 py-2 rounded-md hover:bg-primary transition-colors"
+              >
+                View Testimonial
+              </Link>
+            </div>
           ))}
         </div>
       ) : (
