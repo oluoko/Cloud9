@@ -1,5 +1,6 @@
 import { ErrorImage } from "@/components/error-image";
 import prisma from "@/utils/db";
+import EditUser from "./_components/edit-user";
 
 interface UserPageProps {
   params: {
@@ -34,11 +35,7 @@ export default async function UserPage({ params }: UserPageProps) {
 
   return (
     <div>
-      <h1>
-        {user.firstName} {user.lastName}
-      </h1>
-      <p>Email: {user.email}</p>
-      <img src={user.profileImage} alt={`${user.firstName} ${user.lastName}`} />
+      <EditUser user={user} />
     </div>
   );
 }
