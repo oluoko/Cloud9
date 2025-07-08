@@ -73,7 +73,8 @@ export default function EditUser({ user }: { user: User }) {
                   Permission Denied
                 </DialogTitle>
                 <p className="text-red-500">
-                  You do not have permission to delete this user.
+                  You can view this user, but you do not have permission to
+                  delete this user.
                 </p>
               </>
             )}
