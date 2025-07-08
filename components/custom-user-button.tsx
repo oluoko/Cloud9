@@ -86,7 +86,7 @@ export default function CustomUserButton({
         <Button
           variant="ghost"
           size="icon"
-          className={`rounded-full relative ${config.button}`}
+          className={`rounded-full border border-foreground hover:border-primary relative ${config.button}`}
         >
           <Avatar className={config.avatar}>
             <AvatarImage

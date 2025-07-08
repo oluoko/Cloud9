@@ -238,10 +238,10 @@ export default async function AdminDashboardHome() {
           ))}
         </div>
         <Card>
-          <div className="px-6">
-            <h3 className="text-lg font-semibold text-muted-foreground mb-4 flex justify-between">
+          <div className="px-4 sm:px-6">
+            <h3 className="font-semibold text-muted-foreground mb-4 flex justify-between gap-2">
               <span>Recent Bookings</span>
-              <span>
+              <span className="text-sm sm:text-base">
                 Total: <span className="font-black">{allBookings.length}</span>
               </span>
             </h3>
@@ -250,9 +250,9 @@ export default async function AdminDashboardHome() {
                 allBookings.slice(0, 3).map((booking) => (
                   <div
                     key={booking.id}
-                    className="flex items-center justify-between p-4 border-b last:border-0  bg-transparent hover:bg-accent/70 transition-colors"
+                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 border-b last:border-0 bg-transparent hover:bg-accent/70 transition-colors gap-3 sm:gap-4"
                   >
-                    <div className="flex items-center gap-x-2">
+                    <div className="flex items-center gap-x-3">
                       <Image
                         src={
                           booking.User?.profileImage || defaultProfileImage()
@@ -260,33 +260,37 @@ export default async function AdminDashboardHome() {
                         alt="User profile"
                         width={40}
                         height={40}
-                        className="rounded-full size-[40px] md:size-[50px] border border-muted-foreground/40 hover:border-primary/60"
+                        className="rounded-full size-[40px] sm:size-[50px] border border-muted-foreground/40 hover:border-primary/60 flex-shrink-0"
                       />
-                      <div>
-                        <p className="text-muted-foreground">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-muted-foreground font-medium truncate">
                           {booking.User?.firstName} {booking.User?.lastName}
                         </p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-muted-foreground truncate">
                           {booking.User?.email}
                         </p>
                       </div>
                     </div>
-                    <div className="grid gap-2">
-                      <span className="bold">Ksh {booking.totalAmount}</span>
-                      <span className="text-xs text-muted-foreground">
+                    <div className="flex flex-col sm:grid sm:gap-2 gap-1 sm:text-right">
+                      <span className="font-bold text-base sm:text-lg">
+                        Ksh {booking.totalAmount}
+                      </span>
+                      <span className="text-xs sm:text-sm text-muted-foreground">
                         {capitalize(booking.seatType)} Class •{" "}
                         {booking.seatCount} seat(s)
                       </span>
-                      <span className="text-sm text-accent-foreground">
+                      <span className="text-xs sm:text-sm text-accent-foreground">
                         {formatDate(booking.createdAt)}
                       </span>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center py-8 sm:py-12">
                   <ErrorImage />
-                  <p className="text-muted-foreground">No bookings found.</p>
+                  <p className="text-muted-foreground text-sm sm:text-base mt-2">
+                    No bookings found.
+                  </p>
                 </div>
               )}
             </div>
@@ -294,10 +298,10 @@ export default async function AdminDashboardHome() {
         </Card>
         <UserRoleDistribution pieChartData={pieChartData} COLORS={COLORS} />
         <Card>
-          <div className="px-6">
-            <h3 className="text-lg font-semibold text-muted-foreground mb-4 flex justify-between">
+          <div className="px-4 sm:px-6">
+            <h3 className="font-semibold text-muted-foreground mb-4 flex justify-between gap-2">
               <span>Recent Testimonials</span>
-              <span>
+              <span className="text-sm sm:text-base">
                 Total:{" "}
                 <span className="font-black">{allTestimonials.length}</span>
               </span>
@@ -309,8 +313,8 @@ export default async function AdminDashboardHome() {
                     key={testimonial.id}
                     href={`/admin/testimonials/${testimonial.id}`}
                   >
-                    <div className="border-l-4 border-l-primary pl-2 flex items-center justify-between p-2 md:p-4 bg-transparent hover:bg-accent/70 transition-colors">
-                      <div className="flex items-center gap-x-2">
+                    <div className="border-l-4 border-l-primary pl-2 sm:pl-3 flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 sm:p-4 bg-transparent hover:bg-accent/70 transition-colors gap-3 sm:gap-4">
+                      <div className="flex items-center gap-x-3">
                         <Image
                           src={
                             testimonial.user.profileImage ||
@@ -319,22 +323,21 @@ export default async function AdminDashboardHome() {
                           alt="User profile"
                           width={40}
                           height={40}
-                          className="rounded-full size-[40px] md:size-[60px] border border-muted-foreground/40 hover:border-primary/60"
+                          className="rounded-full size-[40px] sm:size-[50px] md:size-[60px] border border-muted-foreground/40 hover:border-primary/60 flex-shrink-0"
                         />
-                        <div>
-                          <p>
+                        <div className="min-w-0 flex-1">
+                          <p className="font-medium truncate">
                             {testimonial.user.firstName}{" "}
                             {testimonial.user.lastName}
                           </p>
-                          <p className="font-medium text-muted-foreground">
+                          <p className="text-sm font-medium text-muted-foreground line-clamp-2 sm:line-clamp-1">
                             {getFirstWords(testimonial.comment, 4)}...
                           </p>
                         </div>
                       </div>
-                      <div>
+                      <div className="flex flex-col sm:items-end gap-1 sm:gap-2">
                         <StarRating rating={testimonial.rating ?? 0} />
-
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-xs sm:text-sm text-muted-foreground">
                           {formatDate(testimonial.createdAt)}
                         </span>
                       </div>
@@ -342,9 +345,9 @@ export default async function AdminDashboardHome() {
                   </Link>
                 ))
               ) : (
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center py-8 sm:py-12">
                   <ErrorImage />
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground text-sm sm:text-base mt-2">
                     No testimonials found.
                   </p>
                 </div>

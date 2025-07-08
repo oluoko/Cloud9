@@ -16,7 +16,7 @@ export default async function ProfilePage() {
       <div className="md:col-span-1">
         <UpdateProfile />
       </div>
-      <div className="md:col-span-2">
+      <div className="md:col-span-2 p-4">
         {testimonial ? (
           <EditTestimonial data={testimonial} />
         ) : (

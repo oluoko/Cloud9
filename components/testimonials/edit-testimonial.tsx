@@ -146,7 +146,8 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
               </div>
             </div>
           </CardContent>
-          <CardFooter className="grid md:flex justify-between items-center gap-2">
+
+          <CardFooter className="flex flex-col md:flex-row justify-between items-center gap-2 w-full">
             <SubmitButton
               text="Update Testimonial"
               loadingText="Updating Testimonial"
