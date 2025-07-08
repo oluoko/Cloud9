@@ -81,7 +81,7 @@ export default async function UserTestimonialPage({
           </div>
         </Card>
       </Link>
-      <Card className="md:col-span-2">
+      <Card className="md:col-span-2 overflow-hidden">
         <div className="p-4">
           <h2 className="text-xl font-semibold mb-2">Testimonial Details</h2>
           <p className="text-sm text-muted-foreground mb-4">
@@ -97,7 +97,9 @@ export default async function UserTestimonialPage({
         </div>
         <Dialog>
           <DialogTrigger asChild>
-            <Button>Delete Testimonial</Button>
+            <Button className="m-4" variant="destructive">
+              Delete Testimonial
+            </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogTitle>Delete User&apos;s Testimonial</DialogTitle>
@@ -105,7 +107,7 @@ export default async function UserTestimonialPage({
               <DeleteConfirmation
                 id={testimonial.id}
                 title={getFirstWords(testimonial.comment, 4)}
-                modelType="testimonial"
+                modelType="admin-testimonial"
               />
             </DialogContent>
           </DialogContent>

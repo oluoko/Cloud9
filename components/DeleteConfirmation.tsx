@@ -2,7 +2,10 @@
 
 import { deleteBanner } from "@/actions/banners";
 import { deleteFlight } from "@/actions/flights";
-import { deleteTestimonial } from "@/actions/testimonials";
+import {
+  deleteTestimonial,
+  adminDeleteTestimonial,
+} from "@/actions/testimonials";
 import { DeleteButton } from "@/components/custom-button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -16,7 +19,7 @@ import { deleteUserProfile } from "@/actions/users";
 interface ModelProps {
   id: string;
   title: string;
-  modelType: "banner" | "flight" | "testimonial" | "user";
+  modelType: "banner" | "flight" | "testimonial" | "admin-testimonial" | "user";
 }
 
 export default function DeleteConfirmation({
@@ -46,6 +49,8 @@ export default function DeleteConfirmation({
           await deleteTestimonial(id);
         } else if (modelType === "user") {
           await deleteUserProfile(id);
+        } else if (modelType === "admin-testimonial") {
+          await adminDeleteTestimonial(id);
         }
       } catch (error) {
         console.error(`Error deleting ${modelType}:`, error);

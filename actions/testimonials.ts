@@ -87,3 +87,20 @@ export async function deleteTestimonial(testimonialId: string) {
   revalidatePath("/testimonials");
   revalidatePath("/profile");
 }
+
+export async function adminDeleteTestimonial(testimonialId: string) {
+  const user = await getUserByClerkId();
+
+  if (!user) return redirect("/login");
+
+  await prisma.testimonial.delete({
+    where: {
+      id: testimonialId,
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/testimonials");
+
+  return redirect("/admin/testimonials");
+}
