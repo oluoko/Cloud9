@@ -11,6 +11,11 @@ export default async function Testimonials() {
   });
   return (
     <>
+      <h1 className="text-2xl font-bold mb-4">Testimonials</h1>
+      <p className="mb-4">
+        Here you can view and manage(delete) all testimonials submitted by
+        users.
+      </p>
       {testimonials.length > 0 ? (
         <div className="grid md:grid-cols-2 gap-2">
           {testimonials.map((testimonial) => (
