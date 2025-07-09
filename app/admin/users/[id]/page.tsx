@@ -1,6 +1,6 @@
-import { ErrorImage } from "@/components/error-image";
 import prisma from "@/utils/db";
 import EditUser from "./_components/edit-user";
+import ItemNotFound from "@/components/item-not-found";
 
 interface UserPageProps {
   params: {
@@ -25,12 +25,7 @@ export default async function UserPage({ params }: UserPageProps) {
   const user = await getUserDetails(params.id);
 
   if (!user) {
-    return (
-      <div className="flex flex-col items-center justify-center">
-        <ErrorImage />
-        <p className="font-semibold">User not found</p>
-      </div>
-    );
+    return <ItemNotFound item="user" />;
   }
 
   return (

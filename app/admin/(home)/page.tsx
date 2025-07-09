@@ -18,9 +18,9 @@ import Image from "next/image";
 import UserRoleDistribution from "./_components/user-role-distribution";
 import { StarRating } from "@/components/testimonials";
 import Link from "next/link";
-import { ErrorImage } from "@/components/error-image";
 import SeatTypeGraph from "./_components/seat-type-graph";
 import TrendGraph from "./_components/trend-graph";
+import ItemNotFound from "@/components/item-not-found";
 
 const MetricCard = ({
   title,
@@ -286,12 +286,7 @@ export default async function AdminDashboardHome() {
                   </div>
                 ))
               ) : (
-                <div className="flex flex-col items-center justify-center py-8 sm:py-12">
-                  <ErrorImage />
-                  <p className="text-muted-foreground text-sm sm:text-base mt-2">
-                    No bookings found.
-                  </p>
-                </div>
+                <ItemNotFound item="bookings" />
               )}
             </div>
           </div>
@@ -345,12 +340,7 @@ export default async function AdminDashboardHome() {
                   </Link>
                 ))
               ) : (
-                <div className="flex flex-col items-center justify-center py-8 sm:py-12">
-                  <ErrorImage />
-                  <p className="text-muted-foreground text-sm sm:text-base mt-2">
-                    No testimonials found.
-                  </p>
-                </div>
+                <ItemNotFound item="testimonials" />
               )}
             </div>
           </div>
