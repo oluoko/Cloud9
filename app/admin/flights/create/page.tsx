@@ -41,6 +41,14 @@ export default function CreateFlight() {
   });
 
   const handleDeleteImage = async (index: number) => {
+    if (
+      !confirm(
+        "Are you sure you want to delete your profile image? This action cannot be undone."
+      )
+    ) {
+      return;
+    }
+
     await axios.post("/api/uploadthing/delete", {
       imageKey: getImageKey(images[index]),
     });

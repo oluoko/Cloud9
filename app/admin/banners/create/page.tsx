@@ -46,6 +46,14 @@ export default function CreateBanner() {
     imageType: "small" | "large",
     imageUrl: string
   ) => {
+    if (
+      !confirm(
+        "Are you sure you want to delete this banner image? This action cannot be undone."
+      )
+    ) {
+      return;
+    }
+
     if (imageType === "small") {
       await axios.post("/api/uploadthing/delete", {
         imageKey: getImageKey(imageUrl),

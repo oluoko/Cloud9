@@ -42,6 +42,13 @@ export function EditFlightForm({ data }: { data: Flight }) {
   });
 
   const handleDeleteImage = async (index: number) => {
+    if (
+      !confirm(
+        "Are you sure you want to delete this flight image? This action cannot be undone."
+      )
+    ) {
+      return;
+    }
     await axios.post("/api/uploadthing/delete", {
       imageKey: getImageKey(images[index]),
     });

@@ -119,3 +119,10 @@ export const testimonialSchema = z.object({
   descriptiveTitle: z.string().default("Cloud9 Patron").optional(),
   comment: z.string().min(10, "Comment is required"),
 });
+
+export const profileSchema = z.object({
+  firstName: z.string().min(2).max(100).optional(),
+  lastName: z.string().min(2).max(100).optional(),
+  profileImage: z.string().url().optional(),
+  role: z.enum(["USER", "ADMIN", "MAIN_ADMIN"]).default("USER"),
+});
