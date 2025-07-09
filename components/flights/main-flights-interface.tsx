@@ -347,6 +347,7 @@ export default function MainFlightsInterface({
                         {flight.airlineName}
                       </span>
                     </div>
+                    <Button className="max-w-md">Book Flight</Button>
                   </div>
 
                   <div className="bg-accent rounded-lg p-2 mx-2 mb-2 lg:mx-0 lg:mb-0 lg:mr-2 lg:my-2 lg:w-80 flex flex-col gap-2 sm:gap-4">
