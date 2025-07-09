@@ -33,6 +33,8 @@ export default function SignUpPage() {
   const { isLoaded, setActive, signUp } = useSignUp();
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordMismatch, setPasswordMismatch] = useState(false);
   const [pendingVerification, setPendingVerification] = useState(false);
   const [code, setCode] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -44,9 +46,7 @@ export default function SignUpPage() {
   const [codeLength, setCodeLength] = useState(6);
 
   const router = useRouter();
-
   const { userId } = useAuth();
-  console.log("userId:: ", userId);
 
   if (userId) {
     router.push("/saving-info");
@@ -73,6 +73,13 @@ export default function SignUpPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!isLoaded || isLoading) return;
+
+    if (password !== confirmPassword) {
+      setPasswordMismatch(true);
+      return;
+    } else {
+      setPasswordMismatch(false);
+    }
 
     try {
       setIsLoading(true);
@@ -150,9 +157,6 @@ export default function SignUpPage() {
           <CardContent>
             {!pendingVerification ? (
               <>
-                {/* <div className="space-y-6">
-                <SocialAuthButtons mode="sign-up" />
-              </div> */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
@@ -165,6 +169,7 @@ export default function SignUpPage() {
                       required
                     />
                   </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
                     <div className="relative">
@@ -190,6 +195,41 @@ export default function SignUpPage() {
                       </button>
                     </div>
                   </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="confirm-password">Confirm Password</Label>
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        id="confirm-password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        disabled={isLoading}
+                        required
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-4 top-1/2 -translate-y-1/2"
+                        onClick={() => setShowPassword(!showPassword)}
+                        disabled={isLoading}
+                      >
+                        {showPassword ? (
+                          <EyeOff className="size-5 text-foreground" />
+                        ) : (
+                          <Eye className="size-5 text-foreground" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {passwordMismatch && (
+                    <Alert>
+                      <AlertDescription>
+                        Passwords do not match.
+                      </AlertDescription>
+                    </Alert>
+                  )}
+
                   {errors && (
                     <Alert>
                       {errors.map((el, index) => (
@@ -199,8 +239,9 @@ export default function SignUpPage() {
                       ))}
                     </Alert>
                   )}
-                  {/* CAPTCHA Widget */}
+
                   <div id="clerk-captcha"></div>
+
                   <SubmitButton
                     isPending={isLoading}
                     className="w-full"
