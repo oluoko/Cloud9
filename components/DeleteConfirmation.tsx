@@ -19,7 +19,13 @@ import { deleteUserProfile } from "@/actions/users";
 interface ModelProps {
   id: string;
   title: string;
-  modelType: "banner" | "flight" | "testimonial" | "admin-testimonial" | "user";
+  modelType:
+    | "banner"
+    | "flight"
+    | "testimonial"
+    | "admin-testimonial"
+    | "user"
+    | "booking";
 }
 
 export default function DeleteConfirmation({

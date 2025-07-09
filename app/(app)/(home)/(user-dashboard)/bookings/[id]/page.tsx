@@ -30,6 +30,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import SendEmail from "@/components/send-email";
+import { SubmitButton } from "@/components/custom-button";
+import DeleteConfirmation from "@/components/DeleteConfirmation";
 
 interface BookingPageProps {
   params: {
@@ -226,39 +228,63 @@ export default async function BookingDetailsPage({ params }: BookingPageProps) {
         </Card>
 
         {/* Payment Summary Card */}
-        <Card className="h-fit shadow-sm">
-          <CardContent className="p-0">
-            <div className="border-b p-4">
-              <h3 className="font-semibold">Payment Summary</h3>
-            </div>
-            <div className="p-4 space-y-4">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Ticket Price</span>
-                <span>
-                  Ksh {(booking.totalAmount / booking.seatCount).toFixed(2)}
-                </span>
+        <div className="h-fit">
+          <Card className="shadow-sm">
+            <CardContent className="p-0">
+              <div className="border-b p-4">
+                <h3 className="font-semibold">Payment Summary</h3>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Passengers</span>
-                <span>{booking.seatCount}</span>
+              <div className="p-4 space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Ticket Price</span>
+                  <span>
+                    Ksh {(booking.totalAmount / booking.seatCount).toFixed(2)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Passengers</span>
+                  <span>{booking.seatCount}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Seat Type</span>
+                  <span>{capitalize(booking.seatType)} Class</span>
+                </div>
+                <div className="border-t pt-3 mt-3 flex justify-between font-semibold">
+                  <span>Total Amount</span>
+                  <span>Ksh {booking.totalAmount.toFixed(2)}</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs bg-primary/5 text-green-800 p-2 rounded-md">
+                  <CreditCard className="size-3" />
+                  <span>
+                    Payment completed via {booking.paymentMethod || "Card"}
+                  </span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Seat Type</span>
-                <span>{capitalize(booking.seatType)} Class</span>
-              </div>
-              <div className="border-t pt-3 mt-3 flex justify-between font-semibold">
-                <span>Total Amount</span>
-                <span>Ksh {booking.totalAmount.toFixed(2)}</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs bg-primary/5 text-green-800 p-2 rounded-md">
-                <CreditCard className="size-3" />
-                <span>
-                  Payment completed via {booking.paymentMethod || "Card"}
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+          <div className="flex flex-col sm:flex-row gap-3 my-2 md:my-4">
+            <SubmitButton
+              text="Update Booking"
+              loadingText="Updating Booking"
+              className="w-full sm:w-auto sm:flex-1"
+            />
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="destructive" className="w-full sm:w-auto">
+                  Delete Booking
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogTitle>Delete Booking</DialogTitle>
+                <DeleteConfirmation
+                  id={booking.id}
+                  title={booking.Flight?.airlineName || "Booking"}
+                  modelType="booking"
+                />
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
       </div>
 
       {/* Passenger Information Card */}
