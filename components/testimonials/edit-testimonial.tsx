@@ -147,15 +147,15 @@ export default function EditTestimonial({ data }: { data: Testimonial }) {
             </div>
           </CardContent>
 
-          <CardFooter className="flex flex-col md:flex-row justify-between items-center gap-2 w-full">
+          <CardFooter className="flex flex-col sm:flex-row gap-3">
             <SubmitButton
               text="Update Testimonial"
               loadingText="Updating Testimonial"
-              className="w-full md:w-max"
+              className="w-full sm:w-auto sm:flex-1"
             />
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="destructive" className="w-full md:w-max">
+                <Button variant="destructive" className="w-full sm:w-auto">
                   Delete Testimonial
                 </Button>
               </DialogTrigger>

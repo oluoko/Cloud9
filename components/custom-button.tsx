@@ -10,6 +10,7 @@ interface ButtonProps {
   loadingText?: string;
   isPending?: boolean;
   useFormStatus?: boolean;
+  form?: string;
   className?: string;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";

@@ -255,7 +255,10 @@ export function EditBannerForm({ data }: { data: Banner }) {
             </div>
           </CardContent>
           <CardFooter>
-            <SubmitButton text="Update This Banner" />
+            <SubmitButton
+              text="Update This Banner"
+              loadingText="Updating Banner"
+            />
           </CardFooter>
         </Card>
       </form>

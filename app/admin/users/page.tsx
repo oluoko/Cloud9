@@ -32,7 +32,7 @@ export default async function Users() {
               <UserCard user={user} />
               <Link
                 href={`/admin/users/${user.id}`}
-                className="absolute z-10 right-2 top-2 bg-background text-foreground p-2 rounded-lg border hover:bg-primary transition-colors"
+                className="absolute z-10 right-2 top-2 bg-background text-foreground px-2 rounded-lg border hover:bg-primary transition-colors"
               >
                 View {user.firstName}
               </Link>

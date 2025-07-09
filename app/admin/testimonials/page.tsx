@@ -23,7 +23,7 @@ export default async function Testimonials() {
               <TestimonialCard testimonial={testimonial} truncate />
               <Link
                 href={`/admin/testimonials/${testimonial.id}`}
-                className="absolute z-10 right-2 top-2 bg-background text-foreground px-4 py-2 rounded-md hover:bg-primary transition-colors"
+                className="absolute z-10 right-2 top-2 bg-background text-foreground px-2 border rounded-md hover:bg-primary transition-colors"
               >
                 View Testimonial
               </Link>

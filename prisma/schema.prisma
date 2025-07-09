@@ -71,9 +71,9 @@ model Booking {
   seatCount        Int    @default(1)
 
   // Relations
-  User     User?   @relation(fields: [userId], references: [id])
+  User     User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   String
-  Flight   Flight? @relation(fields: [flightId], references: [id])
+  Flight   Flight? @relation(fields: [flightId], references: [id], onDelete: Cascade)
   flightId String
 
   createdAt DateTime @default(now())

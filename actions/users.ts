@@ -12,7 +12,6 @@ export async function updateUserProfile(
   formData: FormData
 ) {
   const user = await getUserByClerkId();
-
   if (!user) {
     return redirect("/login");
   }
@@ -26,7 +25,9 @@ export async function updateUserProfile(
     if (!userExists) {
       return {
         status: "error" as const,
-        error: "User not found",
+        error: {
+          "": ["User not found"],
+        },
       };
     }
 
@@ -53,11 +54,14 @@ export async function updateUserProfile(
     revalidatePath("/admin/users");
     revalidatePath(`/admin/users/${userId}`);
     revalidatePath("/admin");
-    return redirect("/admin/users");
+
+    redirect("/admin/users");
   } else {
     return {
       status: "error" as const,
-      error: "Unauthorized access",
+      error: {
+        "": ["Unauthorized access"],
+      },
     };
   }
 }
@@ -71,28 +75,33 @@ export async function deleteUserProfile(userId: string) {
   if (user.role !== "MAIN_ADMIN") {
     return {
       status: "error" as const,
-      error: "Unauthorized access",
+      error: {
+        "": ["Unauthorized access"],
+      },
     };
   }
 
   const userExists = await prisma.user.findUnique({
-    where: { id: userId },
+    where: { clerkUserId: userId },
   });
 
   if (!userExists) {
     return {
       status: "error" as const,
-      error: "User not found",
+      error: {
+        "": ["User not found"],
+      },
     };
   }
 
   const clerk = await clerkClient();
   await prisma.user.delete({
-    where: { id: userId },
+    where: { clerkUserId: userId },
   });
   await clerk.users.deleteUser(userId);
 
   revalidatePath("/admin/users");
   revalidatePath("/admin");
-  return redirect("/admin/users");
+
+  redirect("/admin/users");
 }
