@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,8 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import LoadingDots from "./loading-dots";
 import { toast } from "sonner";
+import { SubmitButton } from "./custom-button";
 
 export default function ContactUsPage() {
   const [firstName, setFirstName] = useState("");
@@ -189,9 +188,13 @@ export default function ContactUsPage() {
                     </Link>
                   </div>
                 </div>
-                <Button className="mt-6 w-full" size="lg" disabled={isLoading}>
-                  {isLoading ? <LoadingDots text="Sending" /> : "Send Message"}
-                </Button>
+                <SubmitButton
+                  text="Send Message"
+                  loadingText="Sending Message"
+                  type="submit"
+                  className="mt-6 w-full"
+                  isPending={isLoading}
+                />
               </CardContent>
             </form>
           </Card>

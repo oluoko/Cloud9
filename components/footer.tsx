@@ -136,6 +136,10 @@ const Footer = () => {
             <Link href="/">
               <span className=" hover:text-primary">Home</span>
             </Link>
+            <Link href="/#contact-us">
+              <span className=" hover:text-primary">Talk to us</span>
+            </Link>
+
             <Link href="/terms-and-conditions">
               <span className=" hover:text-primary">Ts & Cs</span>
             </Link>

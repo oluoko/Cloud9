@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useMe } from "@/contexts/use-user";
-import LoadingDots from "@/components/loading-dots";
 import Loader from "@/components/loader";
 
 export default function AdminDashboardLayout({

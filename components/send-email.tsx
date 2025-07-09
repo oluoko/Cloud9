@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import LoadingDots from "@/components/loading-dots";
+import { SubmitButton } from "./custom-button";
 
 interface SendEmailProps {
   bookingId: string;
@@ -75,16 +75,13 @@ export default function SendEmail({ bookingId, initialEmail }: SendEmailProps) {
             >
               Discard Changes
             </Button>
-            <Button
-              onClick={() => handleChangeEmail(email)}
+            <SubmitButton
+              text="Save Email"
+              loadingText="Saving Email"
+              isPending={isLoading}
               disabled={!email || isLoading}
-            >
-              {isLoading ? (
-                <LoadingDots text="Saving New Email" />
-              ) : (
-                "Save New Email"
-              )}
-            </Button>
+              onClick={() => handleChangeEmail(email)}
+            />
           </div>
         </>
       ) : (
@@ -96,9 +93,13 @@ export default function SendEmail({ bookingId, initialEmail }: SendEmailProps) {
           >
             Change Email
           </Button>
-          <Button onClick={handleSendEmail} disabled={!email || isLoading}>
-            {isLoading ? <LoadingDots text="Sending Email" /> : "Send Email"}
-          </Button>
+          <SubmitButton
+            text="Send Email"
+            loadingText="Sending Email"
+            isPending={isLoading}
+            disabled={!email || isLoading}
+            onClick={handleSendEmail}
+          />
         </div>
       )}
     </div>
