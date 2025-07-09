@@ -63,18 +63,15 @@ export default function EditUser({ user }: { user: User }) {
       if (imageUrl !== defaultProfileImage()) {
         if (
           !confirm(
-            "Are you sure you want to delete your profile image? This action cannot be undone."
+            "Are you sure you want to delete the user's profile image? This action cannot be undone."
           )
         ) {
           return;
         }
-
         await axios.post("/api/uploadthing/delete", {
           imageKey: getImageKey(imageUrl),
         });
-      } else {
       }
-
       setProfileImage(undefined);
       toast.success("Profile image deleted successfully");
     } catch (error) {
@@ -85,134 +82,140 @@ export default function EditUser({ user }: { user: User }) {
 
   if (isLoading) {
     return (
-      <div className="p-4">
+      <div className="flex items-center justify-center p-8">
         <LoadingDots text="Loading your details" />
       </div>
     );
   }
 
-  // if (error) {
-  //   return <div className="p-4 text-red-500">{error}</div>;
-  // }
-
   return (
-    <Card>
-      <CardHeader>
+    <Card className="w-full max-w-2xl mx-auto">
+      <CardHeader className="text-center sm:text-left">
         <CardTitle className="text-2xl font-bold">Edit User</CardTitle>
-        <CardDescription className="text-muted-foreground">
-          Update user details and role.
-        </CardDescription>
+        <CardDescription>Update user details and role</CardDescription>
       </CardHeader>
-      <CardContent>
+
+      <CardContent className="space-y-6">
         <form id={form.id} onSubmit={form.onSubmit} action={action}>
           <input type="hidden" name="userId" value={user.id} />
-          <div className="flex justify-between space-x-4">
-            <div className="space-y-2">
-              <Label>Profile Image</Label>
-              <input
-                type="hidden"
-                value={profileImage}
-                key={fields.profileImage.key}
-                name={fields.profileImage.name}
-                defaultValue={fields.profileImage.initialValue as string}
-              />
-              {profileImage ? (
-                <div className="relative size-[60px] md:size-[100px] rounded-full hover:border hover:border-primary">
+          <div className="flex flex-col items-center space-y-4 pb-6">
+            <Label className="text-sm font-medium">Profile Image</Label>
+            <input
+              type="hidden"
+              value={profileImage}
+              key={fields.profileImage.key}
+              name={fields.profileImage.name}
+              defaultValue={fields.profileImage.initialValue as string}
+            />
+
+            {profileImage ? (
+              <div className="relative">
+                <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-muted hover:border-primary transition-colors">
                   <Image
                     src={profileImage}
                     alt="Profile Image"
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-full"
+                    fill
+                    className="object-cover"
                   />
-                  <button
-                    onClick={() => handleDeleteImage(profileImage)}
-                    type="button"
-                    className="absolute top-1 right-1 bg-red-500 p-1 rounded-lg text-white"
-                    title="Delete Image"
-                  >
-                    <XIcon className="size-4" />
-                  </button>
                 </div>
-              ) : (
-                <UploadButton
-                  endpoint="profileImageRoute"
-                  className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
-                  onClientUploadComplete={(res) => {
-                    setProfileImage(res[0].url);
-                    toast.success(
-                      "Profile image has been uploaded successfully"
-                    );
-                  }}
-                  onUploadError={(error: Error) => {
-                    toast.error(`Error! : ${error.message}`);
-                  }}
-                />
-              )}
-            </div>
-            <div className="flex-1 space-y-4">
-              <div className="grid md:flex gap-2">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input
-                    type="text"
-                    key={fields.firstName.key}
-                    name={fields.firstName.name}
-                    defaultValue={user.firstName || ""}
-                    placeholder="Change user's first name"
-                  />
-                  <p className="text-red-500">{fields.firstName.errors}</p>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input
-                    type="text"
-                    key={fields.lastName.key}
-                    name={fields.lastName.name}
-                    defaultValue={user.lastName || ""}
-                    placeholder="Change user's  last name"
-                  />
-                  <p className="text-red-500">{fields.lastName.errors}</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="role">Role</Label>
-                <Select
-                  key={fields.role.key}
-                  name={fields.role.name}
-                  defaultValue={user.role}
+                <button
+                  onClick={() => handleDeleteImage(profileImage)}
+                  type="button"
+                  className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 p-1.5 rounded-full text-white transition-colors"
+                  title="Delete Image"
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select user role" />
-                  </SelectTrigger>
-                  <SelectContent className="flex-1">
-                    {userRoles.map((role) => (
-                      <SelectItem key={role.id} value={role.value}>
-                        {role.title}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <p className="text-red-500">{fields.role.errors}</p>
+                  <XIcon className="w-3 h-3" />
+                </button>
               </div>
+            ) : (
+              <UploadButton
+                endpoint="profileImageRoute"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors"
+                onClientUploadComplete={(res) => {
+                  setProfileImage(res[0].url);
+                  toast.success("Profile image uploaded successfully");
+                }}
+                onUploadError={(error: Error) => {
+                  toast.error(`Upload failed: ${error.message}`);
+                }}
+              />
+            )}
+          </div>
+
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                  type="text"
+                  key={fields.firstName.key}
+                  name={fields.firstName.name}
+                  defaultValue={user.firstName || ""}
+                  placeholder="First name"
+                  className="w-full"
+                />
+                {fields.firstName.errors && (
+                  <p className="text-sm text-red-500">
+                    {fields.firstName.errors}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  type="text"
+                  key={fields.lastName.key}
+                  name={fields.lastName.name}
+                  defaultValue={user.lastName || ""}
+                  placeholder="Last name"
+                  className="w-full"
+                />
+                {fields.lastName.errors && (
+                  <p className="text-sm text-red-500">
+                    {fields.lastName.errors}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="role">Role</Label>
+              <Select
+                key={fields.role.key}
+                name={fields.role.name}
+                defaultValue={user.role}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select user role" />
+                </SelectTrigger>
+                <SelectContent>
+                  {userRoles.map((role) => (
+                    <SelectItem key={role.id} value={role.value}>
+                      {role.title}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {fields.role.errors && (
+                <p className="text-sm text-red-500">{fields.role.errors}</p>
+              )}
             </div>
           </div>
         </form>
       </CardContent>
 
-      <CardFooter className="flex flex-col md:flex-row justify-between items-center gap-2 w-full">
-        {/* <SubmitButton
-          
-          text="Update User"
-          loadingText="Updating User"
-          className="w-full md:w-max"
-        /> */}
-        <Button type="submit" form={form.id} className="w-full md:w-max">
+      <CardFooter className="flex flex-col sm:flex-row gap-3 ">
+        <Button
+          type="submit"
+          form={form.id}
+          className="w-full sm:w-auto sm:flex-1"
+        >
           Update User
         </Button>
+
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="destructive" className="w-full md:w-max">
+            <Button variant="destructive" className="w-full sm:w-auto">
               Delete User
             </Button>
           </DialogTrigger>
