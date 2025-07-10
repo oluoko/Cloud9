@@ -99,7 +99,7 @@ export const NavigationBot: React.FC = () => {
 
       {isOpen && (
         <div className="fixed bottom-[70px] md:bottom-[110px] right-4 md:right-6 w-80 h-96 bg-background rounded-lg shadow-xl border z-50 flex flex-col">
-          <div className="p-3 bg-primary rounded-t-lg">
+          <div className="p-3 bg-primary  rounded-t-lg">
             <h3 className="font-semibold text-black">CloudIA: Nav Agent</h3>
           </div>
 
@@ -111,7 +111,7 @@ export const NavigationBot: React.FC = () => {
               >
                 <div
                   className={`max-w-xs p-2 rounded-lg ${
-                    msg.isBot ? "bg-accent" : "bg-primary"
+                    msg.isBot ? "bg-accent" : "bg-primary text-background"
                   }`}
                 >
                   {msg.text}
@@ -121,7 +121,7 @@ export const NavigationBot: React.FC = () => {
                         <button
                           key={idx}
                           onClick={() => handleSuggestionClick(suggestion.path)}
-                          className="block w-full text-left p-2 bg-primary hover:bg-primary rounded text-sm border transition-colors"
+                          className="block w-full text-left p-2 text-background bg-primary hover:bg-primary rounded text-sm border transition-colors"
                         >
                           <div className="font-medium">{suggestion.label}</div>
                           <div className="text-xs text-gray-600">
@@ -149,7 +149,7 @@ export const NavigationBot: React.FC = () => {
               />
               <button
                 onClick={handleSend}
-                className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary transition-colors"
+                className="px-4 py-2 bg-primary text-background rounded-lg hover:bg-primary transition-colors"
               >
                 Send
               </button>
