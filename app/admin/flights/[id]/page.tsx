@@ -1,6 +1,6 @@
 import prisma from "@/utils/db";
-import { notFound } from "next/navigation";
 import { EditFlightForm } from "../../_components/edit-flight-form";
+import AppNotFoundPage from "@/app/not-found";
 
 export default async function EditFlight({
   params,
@@ -13,7 +13,7 @@ export default async function EditFlight({
     },
   });
 
-  if (!flight) return notFound();
+  if (!flight) return <AppNotFoundPage />;
 
   return <EditFlightForm data={flight} />;
 }

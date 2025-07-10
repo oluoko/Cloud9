@@ -84,7 +84,32 @@ export const flightSchema = z.object({
   arrivalAirport: z.string().min(1, "Arrival airport is required"),
 });
 
-export const bookingSchema = z.object({});
+export const bookingSchema = z.object({
+  flightId: z.string().min(1, "Flight selection is required"),
+  seatType: z.enum(["low", "middle", "executive"], {
+    errorMap: () => ({ message: "Please select a valid seat type" }),
+  }),
+  seatCount: z
+    .string()
+    .transform(Number)
+    .refine((val) => !isNaN(val), {
+      message: "Seat count must be a number",
+    })
+    .refine((val) => val >= 1, {
+      message: "Seat count must be at least 1",
+    })
+    .refine((val) => val <= 10, {
+      message: "Maximum 10 seats can be booked at once",
+    }),
+  paymentMethod: z.enum(["card", "mpesa", "bank_transfer"], {
+    errorMap: () => ({ message: "Please select a valid payment method" }),
+  }),
+  // Admin-only fields (optional for regular users)
+  paymentStatus: z
+    .enum(["pending", "completed", "failed", "refunded"])
+    .optional(),
+  bookingStatus: z.enum(["confirmed", "cancelled", "completed"]).optional(),
+});
 
 export const bannerSchema = z.object({
   title: z.string(),

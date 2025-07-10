@@ -55,7 +55,7 @@ export default async function AdminBookingPage({
   const bookingTime = formatISODateToTime(booking.createdAt);
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-6" id={`${params.id}`}>
       {/* Header */}
       <div className="flex items-center justify-between w-full mb-6">
         <Link
@@ -286,7 +286,7 @@ export default async function AdminBookingPage({
               </div>
               <div className="p-4 space-y-3">
                 <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                   <div className="flex-1">
                     <p className="text-sm font-medium">Created</p>
                     <p className="text-xs text-muted-foreground">
@@ -295,7 +295,7 @@ export default async function AdminBookingPage({
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                   <div className="flex-1">
                     <p className="text-sm font-medium">Status</p>
                     <p className="text-xs text-muted-foreground">

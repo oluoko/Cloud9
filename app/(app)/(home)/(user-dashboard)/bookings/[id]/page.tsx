@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import prisma from "@/utils/db";
@@ -34,6 +33,7 @@ import DeleteConfirmation from "@/components/DeleteConfirmation";
 import { getUserByClerkId } from "@/lib/auth";
 import ItemNotFound from "@/components/item-not-found";
 import EditBooking from "@/components/edit-booking";
+import AppNotFoundPage from "@/app/not-found";
 
 export default async function BookingDetailsPage({
   params,
@@ -58,7 +58,7 @@ export default async function BookingDetailsPage({
   });
 
   if (!booking) {
-    notFound();
+    return <AppNotFoundPage />;
   }
 
   if (!self || self.id !== booking.userId)
@@ -71,7 +71,7 @@ export default async function BookingDetailsPage({
   const bookingTime = formatISODateToTime(booking.createdAt);
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="p-4 md:p-8" id={`${params.id}`}>
       <div className="flex items-center justify-between w-full mb-4">
         <Link
           href="/bookings"

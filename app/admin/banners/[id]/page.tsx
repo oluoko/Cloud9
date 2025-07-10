@@ -1,6 +1,6 @@
 import prisma from "@/utils/db";
-import { notFound } from "next/navigation";
 import { EditBannerForm } from "../../_components/edit-banner-form";
+import AppNotFoundPage from "@/app/not-found";
 
 export default async function EditBanner({
   params,
@@ -13,7 +13,7 @@ export default async function EditBanner({
     },
   });
 
-  if (!banner) return notFound();
+  if (!banner) return <AppNotFoundPage />;
 
   return <EditBannerForm data={banner} />;
 }
