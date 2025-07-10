@@ -38,7 +38,10 @@ export async function createTestimonial(
 
   revalidatePath("/");
   revalidatePath("/testimonials");
+  revalidatePath("/admin/testimonials");
   revalidatePath("/profile");
+
+  return redirect("/profile");
 }
 
 export async function editTestimonial(prevState: unknown, formData: FormData) {
@@ -69,7 +72,10 @@ export async function editTestimonial(prevState: unknown, formData: FormData) {
 
   revalidatePath("/");
   revalidatePath("/testimonials");
+  revalidatePath("/admin/testimonials");
   revalidatePath("/profile");
+
+  return redirect("/profile");
 }
 
 export async function deleteTestimonial(testimonialId: string) {
