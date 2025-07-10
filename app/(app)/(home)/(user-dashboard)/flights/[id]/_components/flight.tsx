@@ -264,7 +264,7 @@ export default function FlightPage({
 
           <CardFooter className="grid gap-2">
             {totalPrice < 66 ? (
-              <div className="text-red-500 text-sm">
+              <div className="text-muted-foreground text-sm my-2 md:my-4">
                 A total price this low can only be paid using M-pesa. Exceed Ksh
                 66 to pay using stripe.
               </div>
