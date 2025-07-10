@@ -11,7 +11,7 @@ export default async function Flight({ params }: { params: { id: string } }) {
   });
   const user = await getUserByClerkId();
   return (
-    <div>
+    <div id={`${params.id}`}>
       {flight ? (
         <FlightPage flight={flight} user={user} />
       ) : (

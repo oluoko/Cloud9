@@ -15,5 +15,9 @@ export default async function EditFlight({
 
   if (!flight) return <AppNotFoundPage />;
 
-  return <EditFlightForm data={flight} />;
+  return (
+    <div id={`${params.id}`}>
+      <EditFlightForm data={flight} />
+    </div>
+  );
 }

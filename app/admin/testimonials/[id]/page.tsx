@@ -41,7 +41,7 @@ export default async function UserTestimonialPage({
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6" id={`${testimonial.id}`}>
       <Card className="hover:shadow-md transition-shadow">
         <CardHeader className="pb-4">
           <div className="flex items-center space-x-4">

@@ -15,5 +15,9 @@ export default async function EditBanner({
 
   if (!banner) return <AppNotFoundPage />;
 
-  return <EditBannerForm data={banner} />;
+  return (
+    <div id={`${params.id}`}>
+      <EditBannerForm data={banner} />
+    </div>
+  );
 }

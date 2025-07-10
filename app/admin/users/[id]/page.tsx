@@ -10,7 +10,7 @@ export default async function UserPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div>
+    <div id={`${params.id}`}>
       <EditUser user={user} />
     </div>
   );
