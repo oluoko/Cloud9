@@ -26,12 +26,10 @@ import {
   Users,
   CreditCard,
   CheckCircle2,
-  Clock,
   AlertCircle,
   MapPin,
   Settings,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import Separator from "@/components/custom-separator";
 
 export default function EditBooking({ booking }: { booking: Booking }) {
@@ -46,8 +44,6 @@ export default function EditBooking({ booking }: { booking: Booking }) {
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
-
-  const isAdmin = me?.role === "ADMIN" || me?.role === "MAIN_ADMIN";
 
   if (isLoading || isUserLoading) {
     return (
@@ -81,23 +77,6 @@ export default function EditBooking({ booking }: { booking: Booking }) {
     );
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "completed":
-        return "bg-green-100 text-green-800 border-green-200";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      case "failed":
-        return "bg-red-100 text-red-800 border-red-200";
-      case "confirmed":
-        return "bg-blue-100 text-blue-800 border-blue-200";
-      case "cancelled":
-        return "bg-gray-100 text-gray-800 border-gray-200";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
-    }
-  };
-
   const getSeatTypeIcon = (seatType: string) => {
     switch (seatType.toLowerCase()) {
       case "executive":
@@ -111,9 +90,8 @@ export default function EditBooking({ booking }: { booking: Booking }) {
 
   return (
     <div className="space-y-6 max-h-[80vh] overflow-y-auto overflow-x-hidden">
-      {/* Current Booking Overview */}
       <Card className="border-primary/20 bg-primary/5">
-        <CardHeader className="pb-3">
+        <CardHeader>
           <CardTitle className="flex items-center gap-2 text-lg">
             <CheckCircle2 className="h-5 w-5 text-primary" />
             Current Booking Details
@@ -133,19 +111,9 @@ export default function EditBooking({ booking }: { booking: Booking }) {
               </div>
             </div>
           </div>
-
-          <div className="flex flex-wrap gap-2 pt-2">
-            <Badge className={getStatusColor(booking.bookingStatus)}>
-              {booking.bookingStatus}
-            </Badge>
-            <Badge className={getStatusColor(booking.paymentStatus)}>
-              Payment: {booking.paymentStatus}
-            </Badge>
-          </div>
         </CardContent>
       </Card>
 
-      {/* Edit Form */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -162,7 +130,6 @@ export default function EditBooking({ booking }: { booking: Booking }) {
           >
             <input type="hidden" name="bookingId" value={booking.id} />
 
-            {/* Flight Selection */}
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Plane className="h-4 w-4 text-muted-foreground" />
@@ -206,9 +173,7 @@ export default function EditBooking({ booking }: { booking: Booking }) {
 
             <Separator />
 
-            {/* Seat Configuration */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Seat Type */}
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   {getSeatTypeIcon(booking.seatType)}
@@ -255,7 +220,6 @@ export default function EditBooking({ booking }: { booking: Booking }) {
                 )}
               </div>
 
-              {/* Seat Count */}
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
@@ -285,173 +249,8 @@ export default function EditBooking({ booking }: { booking: Booking }) {
               </div>
             </div>
 
-            {/* Payment Method */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <CreditCard className="h-4 w-4 text-muted-foreground" />
-                <Label
-                  htmlFor={fields.paymentMethod.name}
-                  className="text-sm font-medium"
-                >
-                  Payment Method
-                </Label>
-              </div>
-              <Select
-                name={fields.paymentMethod.name}
-                defaultValue={booking.paymentMethod}
-              >
-                <SelectTrigger className="h-11">
-                  <SelectValue placeholder="Select payment method" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="card">
-                    <div className="flex items-center gap-2">
-                      <CreditCard className="h-4 w-4" />
-                      Credit/Debit Card
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="mpesa">
-                    <div className="flex items-center gap-2">
-                      <CreditCard className="h-4 w-4" />
-                      M-Pesa
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="bank_transfer">
-                    <div className="flex items-center gap-2">
-                      <CreditCard className="h-4 w-4" />
-                      Bank Transfer
-                    </div>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              {fields.paymentMethod.errors && (
-                <p className="text-sm text-destructive flex items-center gap-1">
-                  <AlertCircle className="h-4 w-4" />
-                  {fields.paymentMethod.errors}
-                </p>
-              )}
-            </div>
-
-            {/* Admin-only fields */}
-            {isAdmin && (
-              <>
-                <Separator />
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Settings className="h-4 w-4 text-muted-foreground" />
-                    <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-                      Admin Controls
-                    </h3>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Payment Status */}
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-muted-foreground" />
-                        <Label
-                          htmlFor={fields.paymentStatus.name}
-                          className="text-sm font-medium"
-                        >
-                          Payment Status
-                        </Label>
-                      </div>
-                      <Select
-                        name={fields.paymentStatus.name}
-                        defaultValue={booking.paymentStatus}
-                      >
-                        <SelectTrigger className="h-11">
-                          <SelectValue placeholder="Select payment status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="pending">
-                            <div className="flex items-center gap-2">
-                              <Clock className="h-4 w-4 text-yellow-600" />
-                              Pending
-                            </div>
-                          </SelectItem>
-                          <SelectItem value="completed">
-                            <div className="flex items-center gap-2">
-                              <CheckCircle2 className="h-4 w-4 text-green-600" />
-                              Completed
-                            </div>
-                          </SelectItem>
-                          <SelectItem value="failed">
-                            <div className="flex items-center gap-2">
-                              <AlertCircle className="h-4 w-4 text-red-600" />
-                              Failed
-                            </div>
-                          </SelectItem>
-                          <SelectItem value="refunded">
-                            <div className="flex items-center gap-2">
-                              <CreditCard className="h-4 w-4 text-blue-600" />
-                              Refunded
-                            </div>
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {fields.paymentStatus.errors && (
-                        <p className="text-sm text-destructive flex items-center gap-1">
-                          <AlertCircle className="h-4 w-4" />
-                          {fields.paymentStatus.errors}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Booking Status */}
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
-                        <Label
-                          htmlFor={fields.bookingStatus.name}
-                          className="text-sm font-medium"
-                        >
-                          Booking Status
-                        </Label>
-                      </div>
-                      <Select
-                        name={fields.bookingStatus.name}
-                        defaultValue={booking.bookingStatus}
-                      >
-                        <SelectTrigger className="h-11">
-                          <SelectValue placeholder="Select booking status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="confirmed">
-                            <div className="flex items-center gap-2">
-                              <CheckCircle2 className="h-4 w-4 text-green-600" />
-                              Confirmed
-                            </div>
-                          </SelectItem>
-                          <SelectItem value="cancelled">
-                            <div className="flex items-center gap-2">
-                              <AlertCircle className="h-4 w-4 text-red-600" />
-                              Cancelled
-                            </div>
-                          </SelectItem>
-                          <SelectItem value="completed">
-                            <div className="flex items-center gap-2">
-                              <CheckCircle2 className="h-4 w-4 text-blue-600" />
-                              Completed
-                            </div>
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {fields.bookingStatus.errors && (
-                        <p className="text-sm text-destructive flex items-center gap-1">
-                          <AlertCircle className="h-4 w-4" />
-                          {fields.bookingStatus.errors}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-
             <Separator />
 
-            {/* Submit Button */}
             <div className="pt-4">
               <SubmitButton
                 text="Update Booking"

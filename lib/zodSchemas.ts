@@ -101,9 +101,11 @@ export const bookingSchema = z.object({
     .refine((val) => val <= 10, {
       message: "Maximum 10 seats can be booked at once",
     }),
-  paymentMethod: z.enum(["card", "mpesa", "bank_transfer"], {
-    errorMap: () => ({ message: "Please select a valid payment method" }),
-  }),
+  paymentMethod: z
+    .enum(["card", "mpesa", "bank_transfer"], {
+      errorMap: () => ({ message: "Please select a valid payment method" }),
+    })
+    .optional(),
   // Admin-only fields (optional for regular users)
   paymentStatus: z
     .enum(["pending", "completed", "failed", "refunded"])
