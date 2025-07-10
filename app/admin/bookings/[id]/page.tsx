@@ -261,7 +261,7 @@ export default async function AdminBookingPage({
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Class</span>
                   <span className="font-medium">
-                    {capitalize(booking.seatType)}
+                    {capitalize(booking.seatType)} Class
                   </span>
                 </div>
                 <div className="border-t pt-3 mt-3 flex justify-between font-semibold text-lg">
@@ -286,7 +286,7 @@ export default async function AdminBookingPage({
               </div>
               <div className="p-4 space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                   <div className="flex-1">
                     <p className="text-sm font-medium">Created</p>
                     <p className="text-xs text-muted-foreground">
@@ -295,7 +295,7 @@ export default async function AdminBookingPage({
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                   <div className="flex-1">
                     <p className="text-sm font-medium">Status</p>
                     <p className="text-xs text-muted-foreground">

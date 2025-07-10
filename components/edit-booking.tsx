@@ -37,20 +37,18 @@ export default function EditBooking({ booking }: { booking: Booking }) {
     return <div className="p-4 text-red-500">{error}</div>;
   }
 
+  if (!flights || flights.length === 0) {
+    return <ItemNotFound item="flights" />;
+  }
+
   return (
     <form id={form.id} onSubmit={form.onSubmit} action={action}>
       <input type="hidden" name="bookingId" value={booking.id} />
 
       <>
-        {flights && flights.length > 0 ? (
-          flights.map((flight) => (
-            <div key={flight.id} className="mb-4">
-              {flight.airlineName}
-            </div>
-          ))
-        ) : (
-          <ItemNotFound item="flights" />
-        )}
+        {flights.map((flight) => (
+          <div key={flight.id}></div>
+        ))}
       </>
       <SubmitButton
         text="Update Booking"
