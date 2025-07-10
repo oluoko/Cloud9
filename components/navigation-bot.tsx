@@ -26,7 +26,7 @@ export const NavigationBot: React.FC = () => {
     },
     {
       id: "2",
-      text: "I can help you navigate this site. What are you looking for? Feel free to ask me anything!",
+      text: "Feel free to ask me anything! I can help you to find your way around. What are you looking for?",
       isBot: true,
     },
   ]);
