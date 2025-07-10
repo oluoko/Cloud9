@@ -9,8 +9,6 @@ import { Input } from "@/components/ui/input";
 import { capitalize } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import LoadingDots from "@/components/loading-dots";
 import { deleteUserProfile } from "@/actions/users";
 import { deleteBooking } from "@/actions/bookings";
 
@@ -86,21 +84,7 @@ export default function DeleteConfirmation({
         <Button variant="outline" className="flex-1">
           Cancel
         </Button>
-        {isDeleting ? (
-          <Button disabled variant="destructive" className="flex-1">
-            <Loader2 className="animate-spin mr-2 size-4" />
-            <LoadingDots text={`Deleting ${entityName}`} />
-          </Button>
-        ) : (
-          <Button
-            variant="destructive"
-            className="flex-1"
-            disabled={!match || isDeleting}
-            onClick={handleDelete}
-          >
-            Delete {entityName}
-          </Button>
-        )}
+
         <DeleteButton
           text={`Delete ${entityName}`}
           loadingText={`Deleting ${entityName}`}
