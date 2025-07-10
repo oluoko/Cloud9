@@ -32,43 +32,37 @@ import {
 import SendEmail from "@/components/send-email";
 import { SubmitButton } from "@/components/custom-button";
 import DeleteConfirmation from "@/components/DeleteConfirmation";
+import { getUserByClerkId } from "@/lib/auth";
+import ItemNotFound from "@/components/item-not-found";
 
-interface BookingPageProps {
-  params: {
-    id: string;
-  };
-}
+export default async function BookingDetailsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const self = await getUserByClerkId();
 
-async function getBookingDetails(id: string) {
-  try {
-    const booking = await prisma.booking.findUnique({
-      where: { id },
-      include: {
-        Flight: true,
-        User: {
-          select: {
-            firstName: true,
-            lastName: true,
-            email: true,
-            phoneNumber: true,
-          },
+  const booking = await prisma.booking.findUnique({
+    where: { id: params.id },
+    include: {
+      Flight: true,
+      User: {
+        select: {
+          firstName: true,
+          lastName: true,
+          email: true,
+          phoneNumber: true,
         },
       },
-    });
-
-    return booking;
-  } catch (error) {
-    console.error("Error fetching booking:", error);
-    return null;
-  }
-}
-
-export default async function BookingDetailsPage({ params }: BookingPageProps) {
-  const booking = await getBookingDetails(params.id);
+    },
+  });
 
   if (!booking) {
     notFound();
   }
+
+  if (!self || self.id !== booking.userId)
+    return <ItemNotFound item="booking" />;
 
   const flightDate = formatDate(booking.Flight?.flightDate);
   const flightTime = formatTime(booking.Flight?.flightTime);

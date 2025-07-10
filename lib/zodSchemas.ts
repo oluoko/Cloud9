@@ -93,6 +93,8 @@ export const flightSchema = z.object({
   arrivalAirport: z.string().min(1, "Arrival airport is required"),
 });
 
+export const bookingSchema = z.object({});
+
 export const bannerSchema = z.object({
   title: z.string(),
   description: z.string().optional(),

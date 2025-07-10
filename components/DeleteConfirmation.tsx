@@ -2,10 +2,7 @@
 
 import { deleteBanner } from "@/actions/banners";
 import { deleteFlight } from "@/actions/flights";
-import {
-  deleteTestimonial,
-  adminDeleteTestimonial,
-} from "@/actions/testimonials";
+import { deleteTestimonial } from "@/actions/testimonials";
 import { DeleteButton } from "@/components/custom-button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,17 +12,12 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import LoadingDots from "@/components/loading-dots";
 import { deleteUserProfile } from "@/actions/users";
+import { deleteBooking } from "@/actions/bookings";
 
 interface ModelProps {
   id: string;
   title: string;
-  modelType:
-    | "banner"
-    | "flight"
-    | "testimonial"
-    | "admin-testimonial"
-    | "user"
-    | "booking";
+  modelType: "banner" | "flight" | "testimonial" | "user" | "booking";
 }
 
 export default function DeleteConfirmation({
@@ -51,12 +43,12 @@ export default function DeleteConfirmation({
           await deleteBanner(id);
         } else if (modelType === "flight") {
           await deleteFlight(id);
+        } else if (modelType === "booking") {
+          await deleteBooking(id);
         } else if (modelType === "testimonial") {
           await deleteTestimonial(id);
         } else if (modelType === "user") {
           await deleteUserProfile(id);
-        } else if (modelType === "admin-testimonial") {
-          await adminDeleteTestimonial(id);
         }
       } catch (error) {
         console.error(`Error deleting ${modelType}:`, error);
@@ -109,14 +101,14 @@ export default function DeleteConfirmation({
             Delete {entityName}
           </Button>
         )}
-        {/* <DeleteButton
+        <DeleteButton
           text={`Delete ${entityName}`}
           loadingText={`Deleting ${entityName}`}
           disabled={!match}
           isPending={isDeleting}
           onClick={handleDelete}
           className="flex-1"
-        /> */}
+        />
       </CardFooter>
     </Card>
   );

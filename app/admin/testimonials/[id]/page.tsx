@@ -1,5 +1,6 @@
 import DeleteConfirmation from "@/components/DeleteConfirmation";
 import { ErrorImage } from "@/components/error-image";
+import ItemNotFound from "@/components/item-not-found";
 import { StarRating } from "@/components/testimonials";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,53 +12,32 @@ import {
 } from "@/components/ui/dialog";
 import { defaultProfileImage, getFirstWords } from "@/lib/utils";
 import prisma from "@/utils/db";
-import { Calendar, User, Star, MessageSquare } from "lucide-react";
+import { Calendar, User, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-interface TestimonialPageProps {
-  params: {
-    id: string;
-  };
-}
-
-async function getTestimonialDetails(id: string) {
-  try {
-    const testimonial = await prisma.testimonial.findUnique({
-      where: { id },
-      include: {
-        user: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-            profileImage: true,
-          },
-        },
-      },
-    });
-    return testimonial;
-  } catch (error) {
-    console.error("Error fetching testimonial:", error);
-    return null;
-  }
-}
-
 export default async function UserTestimonialPage({
   params,
-}: TestimonialPageProps) {
-  const testimonial = await getTestimonialDetails(params.id);
+}: {
+  params: { id: string };
+}) {
+  const testimonial = await prisma.testimonial.findUnique({
+    where: { id: params.id },
+    include: {
+      user: {
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          email: true,
+          profileImage: true,
+        },
+      },
+    },
+  });
 
   if (!testimonial) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
-        <ErrorImage />
-        <p className="text-lg font-semibold text-muted-foreground">
-          Error fetching testimonial details
-        </p>
-      </div>
-    );
+    return <ItemNotFound item="testimonial" />;
   }
 
   return (
@@ -149,7 +129,7 @@ export default async function UserTestimonialPage({
                 <DeleteConfirmation
                   id={testimonial.id}
                   title={getFirstWords(testimonial.comment, 4)}
-                  modelType="admin-testimonial"
+                  modelType="testimonial"
                 />
               </DialogContent>
             </Dialog>

@@ -1,28 +1,9 @@
-import prisma from "@/utils/db";
 import EditUser from "./_components/edit-user";
 import ItemNotFound from "@/components/item-not-found";
+import { getUserById } from "@/lib/auth";
 
-interface UserPageProps {
-  params: {
-    id: string;
-  };
-}
-
-async function getUserDetails(id: string) {
-  try {
-    const user = await prisma.user.findUnique({
-      where: { id },
-    });
-
-    return user;
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    return null;
-  }
-}
-
-export default async function UserPage({ params }: UserPageProps) {
-  const user = await getUserDetails(params.id);
+export default async function UserPage({ params }: { params: { id: string } }) {
+  const user = await getUserById(params.id);
 
   if (!user) {
     return <ItemNotFound item="user" />;

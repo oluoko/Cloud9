@@ -5,14 +5,11 @@ import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import Link from "next/link";
 
-interface SuccessPageProps {
-  params: {
-    bookingId: string;
-    flightId: string;
-  };
-}
-
-export default function SuccessPage({ params }: SuccessPageProps) {
+export default function SuccessPage({
+  params,
+}: {
+  params: { bookingId: string; flightId: string };
+}) {
   const { bookingId, flightId } = params;
 
   return (

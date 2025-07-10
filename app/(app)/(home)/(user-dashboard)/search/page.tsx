@@ -3,15 +3,11 @@ import { Suspense } from "react";
 import SearchResults from "./_components/search-results";
 import { FlightInterfaceSkeleton } from "@/components/flights/main-flights-interface";
 
-interface SearchPageProps {
-  searchParams: {
-    arrival?: string;
-    departure?: string;
-    airline?: string;
-  };
-}
-
-export default function SearchPage({ searchParams }: SearchPageProps) {
+export default function SearchPage({
+  searchParams,
+}: {
+  searchParams: { arrival?: string; departure?: string; airline?: string };
+}) {
   if (
     !searchParams.arrival ||
     !searchParams.departure ||
