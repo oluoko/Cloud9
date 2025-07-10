@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { SubmitButton } from "./custom-button";
+import { SubmitButton } from "@/components/custom-button";
 
 interface SendEmailProps {
   bookingId: string;

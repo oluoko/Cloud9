@@ -8,7 +8,7 @@ import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
-import { SubmitButton } from "./custom-button";
+import { SubmitButton } from "@/components/custom-button";
 
 export default function ContactUsPage() {
   const [firstName, setFirstName] = useState("");

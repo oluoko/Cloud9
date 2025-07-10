@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Loader2, Cloud, MapPin } from "lucide-react";
 import { FaPlane, FaCloud } from "react-icons/fa";
-import LoadingDots from "./loading-dots";
+import LoadingDots from "@/components/loading-dots";
 
 interface AirlineLoaderProps {
   mainText?: string;

@@ -5,9 +5,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FlightImage } from "./flight-image";
-import { FlightDateTime } from "./flight-date-time";
-import { FlightRoute } from "./flight-route";
+import { FlightImage } from "@/components/flights/flight-image";
+import { FlightDateTime } from "@/components/flights/flight-date-time";
+import { FlightRoute } from "@/components/flights/flight-route";
 import Link from "next/link";
 import { Flight } from "@prisma/client";
 
@@ -32,7 +32,7 @@ export function FlightCard({ flight }: { flight: Flight }) {
         />
         <div className="mt-3 text-sm">
           <p>
-            From <span className="font-bold">Ksh {flight.economyPrice}</span>
+            From <span className="font-bold">Ksh {flight.lowPrice}</span>
           </p>
         </div>
       </CardContent>

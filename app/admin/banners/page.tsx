@@ -27,7 +27,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
-import DeleteConfirmation from "../../../components/DeleteConfirmation";
+import DeleteConfirmation from "@/components/DeleteConfirmation";
 
 async function getData() {
   const data = await prisma.banner.findMany({

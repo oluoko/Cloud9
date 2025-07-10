@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
 import { UserProvider } from "@/contexts/use-user";
+import { FlightsProvider } from "@/contexts/use-flights";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -16,10 +17,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
     >
       <ClerkProvider>
         <UserProvider>
-          <Toaster className="bg-primary" position="bottom-center" />
+          <FlightsProvider>
+            <Toaster className="bg-primary" position="bottom-center" />
 
-          <NextTopLoader color="#16A34A" showSpinner={false} />
-          {children}
+            <NextTopLoader color="#16A34A" showSpinner={false} />
+            {children}
+          </FlightsProvider>
         </UserProvider>
       </ClerkProvider>
     </ThemeProvider>

@@ -17,8 +17,8 @@ import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { useFormState } from "react-dom";
 import { useState } from "react";
-import { SubmitButton } from "../custom-button";
-import { Textarea } from "../ui/textarea";
+import { SubmitButton } from "@/components/custom-button";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function CreateTestimonial() {
   const [rating, setRating] = useState(0);

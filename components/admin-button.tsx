@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { isAdmin } from "@/lib/isAdmin";
 import { useUser } from "@clerk/nextjs";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useMe } from "@/contexts/use-user";
 

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
-import LoadingDots from "./loading-dots";
+import LoadingDots from "@/components/loading-dots";
 
 interface ButtonProps {
   text: string;

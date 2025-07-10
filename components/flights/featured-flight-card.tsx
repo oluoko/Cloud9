@@ -6,9 +6,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FlightDateTime } from "./flight-date-time";
-import { FlightRoute } from "./flight-route";
-import { FlightClassInfo } from "./flight-class-info";
+import { FlightDateTime } from "@/components/flights/flight-date-time";
+import { FlightRoute } from "@/components/flights/flight-route";
+import { FlightClassInfo } from "@/components/flights/flight-class-info";
 import Link from "next/link";
 import { Flight } from "@prisma/client";
 import Image from "next/image";

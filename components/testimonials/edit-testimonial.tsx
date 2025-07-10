@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/dialog";
 import DeleteConfirmation from "@/components/DeleteConfirmation";
 import { getFirstWords } from "@/lib/utils";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 export default function EditTestimonial({ data }: { data: Testimonial }) {
   const [rating, setRating] = useState(data?.rating);

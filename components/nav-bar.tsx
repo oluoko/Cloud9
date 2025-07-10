@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { BrandLogo } from "./brand-logo";
-import { ModeToggle } from "./dark-mode-toggle";
+import { BrandLogo } from "@/components/brand-logo";
+import { ModeToggle } from "@/components/dark-mode-toggle";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import CustomUserButton from "./custom-user-button";
+import CustomUserButton from "@/components/custom-user-button";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface NavBarProps {
