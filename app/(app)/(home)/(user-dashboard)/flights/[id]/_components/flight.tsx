@@ -263,23 +263,30 @@ export default function FlightPage({
           </CardContent>
 
           <CardFooter className="grid gap-2">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button className="flex items-center gap-2">
-                  <CreditCard className="mr-2 h-4 w-4" />
-                  Pay With Stripe
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogTitle>Pay Using Stripe</DialogTitle>
-                <PayWithStripe
-                  flightId={flight.id}
-                  seatType={selectedClass}
-                  seatCount={parseInt(numPassengers)}
-                  amount={totalPrice}
-                />
-              </DialogContent>
-            </Dialog>
+            {totalPrice < 66 ? (
+              <div className="text-red-500 text-sm">
+                A total price this low can only be paid using M-pesa. Exceed Ksh
+                66 to pay using stripe.
+              </div>
+            ) : (
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="flex items-center gap-2">
+                    <CreditCard className="mr-2 h-4 w-4" />
+                    Pay With Stripe
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogTitle>Pay Using Stripe</DialogTitle>
+                  <PayWithStripe
+                    flightId={flight.id}
+                    seatType={selectedClass}
+                    seatCount={parseInt(numPassengers)}
+                    amount={totalPrice}
+                  />
+                </DialogContent>
+              </Dialog>
+            )}
 
             <Dialog>
               <DialogTrigger asChild>
