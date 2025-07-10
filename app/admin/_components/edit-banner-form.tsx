@@ -13,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useToast } from "@/hooks/use-toast";
 import { bannerSchema } from "@/lib/zodSchemas";
 import { UploadButton } from "@/utils/uploadthing";
 import { getImageKey } from "@/lib/utils";
@@ -27,9 +26,9 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { Banner } from "@prisma/client";
 import { twMerge } from "tailwind-merge";
+import { toast } from "sonner";
 
 export function EditBannerForm({ data }: { data: Banner }) {
-  const { toast } = useToast();
   const [smallImage, setSmallImage] = useState<string | undefined>(
     data.smallImageUrl
   );
@@ -179,19 +178,12 @@ export function EditBannerForm({ data }: { data: Banner }) {
                       className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                       onClientUploadComplete={(res) => {
                         setLargeImage(res[0].url);
-                        toast({
-                          title: "Image Uploaded",
-                          variant: "success",
-                          description:
-                            "The selected image, for the large screen banner, has been uploaded successfully",
-                        });
+                        toast.success(
+                          "The selected image, for the large screen banner, has been uploaded successfully"
+                        );
                       }}
                       onUploadError={(error: Error) => {
-                        toast({
-                          variant: "destructive",
-                          title: "Error Uploading Banner Image",
-                          description: `Error! : ${error.message}`,
-                        });
+                        toast.error(`Error! : ${error.message}`);
                       }}
                     />
                   )}
@@ -233,19 +225,12 @@ export function EditBannerForm({ data }: { data: Banner }) {
                       className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                       onClientUploadComplete={(res) => {
                         setSmallImage(res[0].url);
-                        toast({
-                          title: "Image Uploaded",
-                          variant: "success",
-                          description:
-                            "The selected image, for the small screen banner, has been uploaded successfully",
-                        });
+                        toast.success(
+                          "The selected image, for the small screen banner, has been uploaded successfully"
+                        );
                       }}
                       onUploadError={(error: Error) => {
-                        toast({
-                          variant: "destructive",
-                          title: "Error Uploading Banner Image",
-                          description: `Error! : ${error.message}`,
-                        });
+                        toast.error(`Error! : ${error.message}`);
                       }}
                     />
                   )}

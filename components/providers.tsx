@@ -17,6 +17,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <ClerkProvider>
         <UserProvider>
           <Toaster className="bg-primary" position="bottom-center" />
+
           <NextTopLoader color="#16A34A" showSpinner={false} />
           {children}
         </UserProvider>

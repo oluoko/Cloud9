@@ -12,7 +12,6 @@ import { StarFilledIcon, StarIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createTestimonial } from "@/actions/testimonials";
-import { useToast } from "@/hooks/use-toast";
 import { testimonialSchema } from "@/lib/zodSchemas";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
@@ -22,7 +21,6 @@ import { SubmitButton } from "../custom-button";
 import { Textarea } from "../ui/textarea";
 
 export default function CreateTestimonial() {
-  const { toast } = useToast();
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
 

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { flightSchema } from "@/lib/zodSchemas";
 import { UploadButton } from "@/utils/uploadthing";
 import { useForm } from "@conform-to/react";
@@ -29,7 +29,6 @@ import { Flight } from "@prisma/client";
 import { twMerge } from "tailwind-merge";
 
 export function EditFlightForm({ data }: { data: Flight }) {
-  const { toast } = useToast();
   const [images, setImages] = useState<string[]>(data.flightImages);
   const [lastResult, action] = useFormState(editFlight, undefined);
   const [form, fields] = useForm({
@@ -257,19 +256,12 @@ export function EditFlightForm({ data }: { data: Flight }) {
                     className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                     onClientUploadComplete={(res) => {
                       setImages(res.map((r) => r.url));
-                      toast({
-                        title: "Image Uploaded",
-                        variant: "success",
-                        description:
-                          "The selected images, for the flight, have been uploaded successfully",
-                      });
+                      toast.success(
+                        "The selected images, for the flight, have been uploaded successfully"
+                      );
                     }}
                     onUploadError={(error: Error) => {
-                      toast({
-                        variant: "destructive",
-                        title: "Error Uploading Flight Images",
-                        description: `Error! : ${error.message}`,
-                      });
+                      toast.error(`Error! : ${error.message}`);
                     }}
                   />
                 )}

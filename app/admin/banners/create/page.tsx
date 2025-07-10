@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { bannerSchema } from "@/lib/zodSchemas";
 import { UploadButton } from "@/utils/uploadthing";
 import { useForm } from "@conform-to/react";
@@ -28,7 +28,6 @@ import { getImageKey } from "@/lib/utils";
 import { twMerge } from "tailwind-merge";
 
 export default function CreateBanner() {
-  const { toast } = useToast();
   const [smallImage, setSmallImage] = useState<string | undefined>(undefined);
   const [largeImage, setLargeImage] = useState<string | undefined>(undefined);
   const [lastResult, action] = useFormState(createBanner, undefined);
@@ -176,19 +175,12 @@ export default function CreateBanner() {
                       className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                       onClientUploadComplete={(res) => {
                         setLargeImage(res[0].url);
-                        toast({
-                          title: "Image Uploaded",
-                          variant: "success",
-                          description:
-                            "The selected image, for the large screen banner, has been uploaded successfully",
-                        });
+                        toast.success(
+                          "The selected image, for the large screen banner, has been uploaded successfully"
+                        );
                       }}
                       onUploadError={(error: Error) => {
-                        toast({
-                          variant: "destructive",
-                          title: "Error Uploading Banner Image",
-                          description: `Error! : ${error.message}`,
-                        });
+                        toast.error(`Error! : ${error.message}`);
                       }}
                     />
                   )}
@@ -230,19 +222,12 @@ export default function CreateBanner() {
                       className="bg-primary hover:bg-primary/70 rounded-lg mt-4  md:mt-8 text-background"
                       onClientUploadComplete={(res) => {
                         setSmallImage(res[0].url);
-                        toast({
-                          title: "Image Uploaded",
-                          variant: "success",
-                          description:
-                            "The selected image, for the small screen banner, has been uploaded successfully",
-                        });
+                        toast.success(
+                          "The selected image, for the small screen banner, has been uploaded successfully"
+                        );
                       }}
                       onUploadError={(error: Error) => {
-                        toast({
-                          variant: "destructive",
-                          title: "Error Uploading Banner Image",
-                          description: `Error! : ${error.message}`,
-                        });
+                        toast.error(`Error! : ${error.message}`);
                       }}
                     />
                   )}
