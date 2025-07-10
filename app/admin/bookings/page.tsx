@@ -69,7 +69,7 @@ export default async function Bookings() {
                         href={`/admin/bookings/${booking.id}`}
                         className="absolute top-2 right-2 z-10 bg-background text-  foreground px-2 py-1 text-xs rounded border hover:bg-primary/70 hover:border-primary/70 transition-colors"
                       >
-                        View
+                        View Booking
                       </Link>
 
                       <div className="pr-12">
