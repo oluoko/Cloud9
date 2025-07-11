@@ -59,7 +59,12 @@ export const NavigationBot: React.FC<NavigationBotProps> = ({
     ]);
   }, [botType, botConfig, context.isAuthenticated, me]);
 
-  const generateBotResponse = (query: string, analysisResult: any): string => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const generateBotResponse = async (
+    query: string,
+    analysisResult: any
+  ): Promise<string> => {
     const { suggestions, contextualResponse, requiresAuth, requiresAdmin } =
       analysisResult;
 
@@ -86,7 +91,34 @@ export const NavigationBot: React.FC<NavigationBotProps> = ({
       return adminResponse;
     }
 
-    // Handle suggestions
+    // Try to get AI response
+    try {
+      setIsLoading(true);
+      const response = await fetch("/api/chat/openai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query,
+          botType,
+          context,
+          suggestions,
+          userInfo: me,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.response;
+      }
+    } catch (error) {
+      console.error("AI response error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+
+    // Fallback responses
     if (suggestions.length > 0) {
       const responseIntros = {
         CloudIA: [
@@ -125,8 +157,8 @@ export const NavigationBot: React.FC<NavigationBotProps> = ({
     return responses[Math.floor(Math.random() * responses.length)];
   };
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -134,59 +166,75 @@ export const NavigationBot: React.FC<NavigationBotProps> = ({
       isBot: false,
     };
 
-    const analysisResult = analyzeIntent(input);
-    const { suggestions, contextualResponse, requiresAuth, requiresAdmin } =
-      analysisResult;
-
-    const botResponseText = generateBotResponse(input, analysisResult);
-
-    const botMessage: Message = {
-      id: (Date.now() + 1).toString(),
-      text: botResponseText,
-      isBot: true,
-      isContextual: !!contextualResponse,
-      requiresAuth,
-      requiresAdmin,
-      suggestions:
-        suggestions.length > 0
-          ? suggestions
-          : contextualResponse || requiresAuth || requiresAdmin
-            ? []
-            : [
-                {
-                  path: "/",
-                  label: "Home",
-                  confidence: 0.5,
-                  reason: "Main page",
-                },
-                {
-                  path: "/flights",
-                  label: "Browse Flights",
-                  confidence: 0.5,
-                  reason: "Popular section",
-                },
-                ...(context.isAuthenticated
-                  ? [
-                      {
-                        path: "/bookings",
-                        label: "My Bookings",
-                        confidence: 0.5,
-                        reason: "Your bookings",
-                      },
-                    ]
-                  : [
-                      {
-                        path: "/login",
-                        label: "Login",
-                        confidence: 0.5,
-                        reason: "Sign in to access more features",
-                      },
-                    ]),
-              ],
-    };
-
-    setMessages((prev) => [...prev, userMessage, botMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
+    setIsLoading(true);
+
+    try {
+      const analysisResult = analyzeIntent(input);
+      const { suggestions, contextualResponse, requiresAuth, requiresAdmin } =
+        analysisResult;
+
+      const botResponseText = await generateBotResponse(input, analysisResult);
+
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: botResponseText,
+        isBot: true,
+        isContextual: !!contextualResponse,
+        requiresAuth,
+        requiresAdmin,
+        suggestions:
+          suggestions.length > 0
+            ? suggestions
+            : contextualResponse || requiresAuth || requiresAdmin
+              ? []
+              : [
+                  {
+                    path: "/",
+                    label: "Home",
+                    confidence: 0.5,
+                    reason: "Main page",
+                  },
+                  {
+                    path: "/flights",
+                    label: "Browse Flights",
+                    confidence: 0.5,
+                    reason: "Popular section",
+                  },
+                  ...(context.isAuthenticated
+                    ? [
+                        {
+                          path: "/bookings",
+                          label: "My Bookings",
+                          confidence: 0.5,
+                          reason: "Your bookings",
+                        },
+                      ]
+                    : [
+                        {
+                          path: "/login",
+                          label: "Login",
+                          confidence: 0.5,
+                          reason: "Sign in to access more features",
+                        },
+                      ]),
+                ],
+      };
+
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      // Add error message
+      const errorMessage: Message = {
+        id: (Date.now() + 2).toString(),
+        text: "I'm having trouble responding right now. Please try again!",
+        isBot: true,
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSuggestionClick = (path: string, label: string) => {
@@ -238,6 +286,7 @@ export const NavigationBot: React.FC<NavigationBotProps> = ({
   ];
 
   const handleQuickAction = (query: string) => {
+    if (isLoading) return;
     setInput(query);
     // Auto-send the query
     setTimeout(() => handleSend(), 100);
@@ -247,11 +296,11 @@ export const NavigationBot: React.FC<NavigationBotProps> = ({
 
   return (
     <div className="fixed bottom-[90px] md:bottom-[110px] right-4 md:right-6 w-80 h-96 bg-background rounded-lg shadow-xl border z-50 flex flex-col">
-      <div className="p-3 bg-primary rounded-t-lg">
-        <h3 className="font-semibold text-black">
+      <div className="p-2 bg-primary rounded-t-lg">
+        <h3 className="font-medium text-sm text-black">
           {botConfig.name}: {botConfig.title}
         </h3>
-        <div className="text-xs text-gray-700 mt-1">
+        <div className="text-xs text-gray-700">
           {context.isAuthenticated ? (
             <span>✅ Logged in {context.isAdmin ? "• Admin" : ""}</span>
           ) : (
@@ -260,30 +309,32 @@ export const NavigationBot: React.FC<NavigationBotProps> = ({
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-3 space-y-3">
+      <div className="flex-1 overflow-y-auto p-2 space-y-2">
         {messages.map((msg) => (
           <div
             key={msg.id}
             className={`flex ${msg.isBot ? "justify-start" : "justify-end"}`}
           >
             <div
-              className={`max-w-xs p-2 rounded-lg ${
+              className={`max-w-xs p-2 rounded-lg text-sm ${
                 msg.isBot ? "bg-accent" : "bg-primary text-background"
               }`}
             >
-              {msg.text}
+              <div className="text-xs leading-relaxed">{msg.text}</div>
               {msg.suggestions && msg.suggestions.length > 0 && (
-                <div className="mt-2 space-y-1">
+                <div className="mt-1.5 space-y-1">
                   {msg.suggestions.map((suggestion, idx) => (
                     <button
                       key={idx}
                       onClick={() =>
                         handleSuggestionClick(suggestion.path, suggestion.label)
                       }
-                      className="block w-full text-left p-2 text-background bg-primary hover:bg-primary/80 rounded text-sm border transition-colors"
+                      className="block w-full text-left p-1.5 text-background bg-primary hover:bg-primary/80 rounded text-xs border transition-colors"
                     >
-                      <div className="font-medium">{suggestion.label}</div>
-                      <div className="text-xs text-gray-600">
+                      <div className="font-medium text-xs">
+                        {suggestion.label}
+                      </div>
+                      <div className="text-xs text-gray-600 opacity-80">
                         {suggestion.reason}
                       </div>
                     </button>
@@ -297,13 +348,13 @@ export const NavigationBot: React.FC<NavigationBotProps> = ({
       </div>
 
       {/* Quick Actions */}
-      <div className="px-3 py-2 border-t bg-gray-50">
+      <div className="px-2 py-1.5 border-t bg-gray-50">
         <div className="flex flex-wrap gap-1">
           {quickActions.map((action, idx) => (
             <button
               key={idx}
               onClick={() => handleQuickAction(action.query)}
-              className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded text-xs transition-colors"
+              className="px-1.5 py-0.5 bg-gray-200 hover:bg-gray-300 rounded text-xs transition-colors"
             >
               {action.label}
             </button>
@@ -311,21 +362,23 @@ export const NavigationBot: React.FC<NavigationBotProps> = ({
         </div>
       </div>
 
-      <div className="p-3 border-t">
+      <div className="p-2 border-t">
         <div className="flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && handleSend()}
+            onKeyPress={(e) => e.key === "Enter" && !isLoading && handleSend()}
             placeholder="What are you looking for?"
-            className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            disabled={isLoading}
+            className="flex-1 px-2 py-1.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm disabled:opacity-50"
           />
           <button
             onClick={handleSend}
-            className="px-4 py-2 bg-primary text-background rounded-lg hover:bg-primary/80 transition-colors"
+            disabled={isLoading}
+            className="px-3 py-1.5 bg-primary text-background rounded-lg hover:bg-primary/80 transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send
+            {isLoading ? "..." : "Send"}
           </button>
         </div>
       </div>
