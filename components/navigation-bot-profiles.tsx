@@ -116,7 +116,7 @@ export default function NavigationBotProfiles({
         />
       )}
 
-      <div className="fixed bottom-2 md:bottom-3 right-16 md:right-20 z-60">
+      <div className="fixed bottom-2 md:bottom-3 right-16 md:right-20 z-52">
         <div className="relative group">
           <button
             onClick={toggleActiveBot}

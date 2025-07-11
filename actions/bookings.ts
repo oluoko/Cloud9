@@ -6,12 +6,16 @@ import prisma from "@/utils/db";
 import { parseWithZod } from "@conform-to/zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import {
+  sendDeletedBookingDetailsEmail,
+  sendBookingUpdatedDetailsEmail,
+} from "@/lib/mail";
 
 export async function updateBooking(prevState: unknown, formData: FormData) {
   const user = await getUserByClerkId();
 
   if (!user) {
-    return redirect("/login");
+    redirect("/login");
   }
 
   const bookingId = formData.get("bookingId") as string;
@@ -49,7 +53,7 @@ export async function updateBooking(prevState: unknown, formData: FormData) {
     flightId,
     seatType,
     seatCount,
-    paymentMethod,
+
     paymentStatus,
     bookingStatus,
   } = submission.value;
@@ -107,7 +111,7 @@ export async function updateBooking(prevState: unknown, formData: FormData) {
     flightId,
     seatType,
     seatCount,
-    paymentMethod,
+
     totalAmount,
   };
 
@@ -123,15 +127,19 @@ export async function updateBooking(prevState: unknown, formData: FormData) {
       data: updateData,
     });
 
+    // Send email notification to user about booking update
+    await sendBookingUpdatedDetailsEmail(updatedBooking, user);
+    console.log("Booking updated successfully:", updatedBooking);
+
     revalidatePath("/bookings");
     revalidatePath("/admin/bookings");
 
     // Redirect based on user role
     if (user.role === "ADMIN" || user.role === "MAIN_ADMIN") {
-      return redirect("/admin/bookings");
+      redirect("/admin/bookings");
     }
 
-    return redirect("/bookings");
+    redirect("/bookings");
   } catch (error) {
     console.error("Error updating booking:", error);
     return {
@@ -148,6 +156,19 @@ export async function deleteBooking(bookingId: string) {
     return redirect("/login");
   }
 
+  const bookingToDelete = await prisma.booking.findUnique({
+    where: { id: bookingId },
+  });
+
+  if (!bookingToDelete) {
+    return {
+      status: "error" as const,
+      error: { bookingId: ["Booking not found."] },
+    };
+  }
+
+  await sendDeletedBookingDetailsEmail(bookingToDelete, user);
+
   await prisma.booking.delete({
     where: {
       id: bookingId,
@@ -158,8 +179,8 @@ export async function deleteBooking(bookingId: string) {
   revalidatePath("/admin/bookings");
 
   if (user.role === "ADMIN" || user.role === "MAIN_ADMIN") {
-    return redirect("/admin/bookings");
+    redirect("/admin/bookings");
   }
 
-  return redirect("/bookings");
+  redirect("/bookings");
 }

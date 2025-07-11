@@ -35,8 +35,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
               isOpen={isOpen}
               setIsOpen={setIsOpen}
             />
-
-            {/* Navigation Bot Chat Interface */}
             <NavigationBot
               botType={activeBot}
               isOpen={isOpen}
