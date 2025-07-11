@@ -119,6 +119,7 @@ export default function NavigationBotProfiles({
       <div className="fixed bottom-2 md:bottom-3 right-16 md:right-20 z-52">
         <div className="relative group">
           <button
+            title="Switch Bot"
             onClick={toggleActiveBot}
             className="relative p-2 rounded-full border transition-all duration-300 bg-background text-foreground border-gray-300 hover:border-primary hover:bg-primary hover:text-background shadow-md hover:shadow-lg cursor-pointer group-hover:scale-110 transform"
           >

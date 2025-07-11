@@ -78,7 +78,9 @@ export default function BannerCarousel({
 
   return (
     <div className="relative w-full h-screen">
-      <SearchFlights destinations={destinations} />
+      <div id="search-flights">
+        <SearchFlights destinations={destinations} />
+      </div>
       <div
         className="relative w-full h-full"
         onMouseEnter={() => setIsAutoPlaying(false)}
