@@ -66,16 +66,14 @@ export function EditFlightForm({ data }: { data: Flight }) {
             <ChevronLeft className="size-4 md:size-5" />
           </Link>
 
-          <h1 className="text-xl font-semibold tracking-tight">
-            Create New Flight
-          </h1>
+          <h1 className="text-xl font-semibold tracking-tight">Edit Flight</h1>
         </div>
         <Card>
           <CardHeader>
             <CardTitle>Flight Details</CardTitle>
             <CardDescription>
-              Create your a flight right here. You can upload upto 4 images for
-              one flight.
+              Edit your flight right here. You can upload upto 4 images for one
+              flight.
             </CardDescription>
           </CardHeader>
           <CardContent>
