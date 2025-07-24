@@ -47,6 +47,7 @@ import mpesaText from "@/public/assets/lipa na mpesa.png";
 import { Flight, User } from "@prisma/client";
 import PayWithStripe from "./pay-with-stripe";
 import Link from "next/link";
+import LipaNaMpesa from "./lipa-na-mpesa";
 
 type SeatClass = "low" | "middle" | "executive";
 
@@ -60,14 +61,12 @@ export default function FlightPage({
   const [selectedClass, setSelectedClass] = useState<SeatClass>("low");
   const [numPassengers, setNumPassengers] = useState("1");
 
-  // Determine available seats based on class
   const availableSeats = {
     low: flight?.lowSeats || 0,
     middle: flight?.middleSeats || 0,
     executive: flight?.executiveSeats || 0,
   };
 
-  // Determine price based on selected class
   const priceMap = {
     low: flight?.lowPrice || 0,
     middle: flight?.middlePrice || 0,
@@ -76,7 +75,6 @@ export default function FlightPage({
 
   const totalPrice = priceMap[selectedClass] * parseInt(numPassengers);
 
-  // Format date and time
   const formattedDate = new Date(flight?.flightDate).toLocaleDateString(
     "en-US",
     {
@@ -90,7 +88,6 @@ export default function FlightPage({
   return (
     <div className="px-4">
       <div className="grid md:grid-cols-3 gap-6">
-        {/* Flight Details Section */}
         <Card className="md:col-span-2">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -110,7 +107,6 @@ export default function FlightPage({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {/* Flight Route Visualization */}
             <div className="flex items-center justify-between my-6">
               <div className="text-center">
                 <p className="text-sm text-muted-foreground">From</p>
@@ -138,7 +134,6 @@ export default function FlightPage({
               </div>
             </div>
 
-            {/* Flight Images */}
             {flight?.flightImages && flight.flightImages.length > 0 && (
               <div className="mt-6">
                 <h3 className="text-lg font-semibold mb-2">
@@ -167,7 +162,6 @@ export default function FlightPage({
           </CardContent>
         </Card>
 
-        {/* Booking Section */}
         <Card>
           <CardHeader>
             <CardTitle>Book This Flight</CardTitle>
@@ -299,16 +293,13 @@ export default function FlightPage({
                 </Button>
               </DialogTrigger>
               <DialogContent>
-                {/* <LipaNaMpesa
-                    flightId={flight.id}
-                    seatType={selectedClass}
-                    seatCount={parseInt(numPassengers)}
-                    amount={totalPrice}
-                    user={user}
-                  /> */}
-                <DialogTitle className="text-muted-foreground">
-                  Under construction
-                </DialogTitle>
+                <LipaNaMpesa
+                  flightId={flight.id}
+                  seatType={selectedClass}
+                  seatCount={parseInt(numPassengers)}
+                  amount={totalPrice}
+                  user={user}
+                />
               </DialogContent>
             </Dialog>
           </CardFooter>
