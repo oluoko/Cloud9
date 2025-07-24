@@ -1,0 +1,999 @@
+ 1474  /bin/python3 /home/brian/.vscode/extensions/ms-python.python-2025.4.0-linux-x64/python_files/printEnvVariablesToFile.py /home/brian/.vscode/extensions/ms-python.python-2025.4.0-linux-x64/python_files/deactivate/zsh/envVars.txt
+ 1475  code Desktop/Neural-Networks
+ 1476  code Desktop/Neural-Networks/COM424E
+ 1477  cd Desktop/Projects/Blitz-tid_bits.
+ 1478  code Hyperplexed
+ 1479  code Blitz-tid_bits.
+ 1480  sudo apt uninstall pychess
+ 1483  git-commit "Updated next-js"
+ 1484  sudo add-apt-repository ppa:giuspen/ppa
+ 1485  sudo apt install cherrytree
+ 1486  git remote add origin https://github.com/oluoko/Hyperplexed.git
+ 1487  git push origin main --force\n
+ 1490  git pull origin main\n
+ 1491  git status
+ 1492  git add Award Winning Animation/script.js Award Winning Animation/style.css
+ 1493  git add Award\ Winning\ Animation/script.js Award\ Winning\ Animation/style.css
+ 1494  git commit -m "Hyperplexed: New Additions"
+ 1495  git push origin main
+ 1496  sudo apt install woeusb woeusb-frontend-wxgtk
+ 1498  pip install WoeUSB-ng
+ 1499  sudo apt-get update\nsudo apt-get install -y git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin parted dosfstools ntfs-3g libgtk-3-dev
+ 1500  sudo pip install WoeUSB-ng 
+ 1501  WoeUSB-ng
+ 1502  sudo apt install WoeUSB-ng
+ 1503  pip install WoeUSB-ng --user
+ 1504  ./balena-etcher
+ 1505  sudo pipx install WoeUSB-ng
+ 1506  sudo pipx install WoeUSB-ng --force
+ 1507  code Desktop/Projects/Hyperplexed
+ 1508  ls -ls
+ 1509  sudo gedit .zsh_history .zsh_history.backup
+ 1510  rm -rf .zsh_history.backup
+ 1511  sudo gedit updateall
+ 1512  git-commit "Optimal Header"
+ 1513  git-commit "Optimal Header: Fonts"
+ 1516  ls -la /usr/local/bin
+ 1517  sudo gedit /usr/local/bin/check-swap-usage
+ 1518  ls /usr/local/bin/
+ 1519  sudo cherrytree scid backend-deps-npm-install scidpgn touchscreen-toggle fruit
+ 1520  sudo cherrytree fruit
+ 1521  sudo gedit fruit
+ 1522  sudo rm -rf scid backend-deps-npm-install touchscreen-toggle 
+ 1523  ls 
+ 1524  rm -rf sc_remote scidlet scidpgn tcscid tkscid frontend-deps-npm-install pgnscid scmerge
+ 1525  sudo rm -rf sc_remote scidlet scidpgn tcscid tkscid frontend-deps-npm-install pgnscid scmerge
+ 1526  appservices
+ 1527  sudo rm -rf scidt
+ 1528  sudo apt install mpv
+ 1529  #!/bin/bash\n# Path to your fireworks GIF/PNG file\nfile_path="/home/brian/Videos/gifs/fireworks/2.gif"\n\n# Check if the file exists\nif [ ! -f "$file_path" ]; then\n    echo "Fireworks file not found: $file_path"\n    exit 1\nfi\n\n# Check if mpv is installed\nif ! command -v mpv &> /dev/null; then\n    echo "Error: mpv is not installed. Please install it first."\n    echo "Try: sudo apt-get install mpv"\n    exit 1\nfi\n\n# Display the animated GIF with transparent background\necho "Displaying fireworks animation..."\nmpv --loop=no --no-osc --no-border \\n    --geometry=50%x50% --ontop=yes \\n    --alpha=blend --force-window=yes \\n    "$file_path" &\n\n# Store the process ID for later termination\nmpv_pid=$!\n\n# Wait for 3 seconds\nsleep 3\n\n# Kill the mpv process if it's still running\nif ps -p $mpv_pid > /dev/null; then\n    kill $mpv_pid\n    echo "Celebration complete\nelse\n    echo "MPV already closed."\nfi
+ 1530  sudo gedit celebrate-come-on
+ 1531  celebrate-come-on
+ 1532  rm -rf celebrate-come-on
+ 1533  sudo rm -rf celebrate-come-on
+ 1534  git-commit "Twitch CSS Hover Effect: Competed"
+ 1535  code Desktop/Projects/Multi\ Stack\ Projects/LiveLy/next-js
+ 1536  cd Desktop/Projects/Multi\ Stack\ Projects/LiveLy/next-js
+ 1537  git-commit "Deleted Components\n"
+ 1538  npm i googleapis
+ 1539  pip3 install numpy scipy matplotlib pandas scikit-learn tensorflow torch
+ 1540  pip install numpy scipy matplotlib pandas scikit-learn tensorflow torch
+ 1541  sudo pip install numpy scipy matplotlib pandas scikit-learn tensorflow torch
+ 1542  sudo apt install python-torch
+ 1543  pip install pip-size
+ 1544  sudo apt install pythong-pip-size
+ 1545  sudo apt install python-pip-size
+ 1546  ￼
+ 1547  pip list \\nLANG=C pip list | tail -n +3 | awk '{print $1}' | xargs pip show | grep -E 'Location:|Name:' | cut -d ' ' -f 2 | paste -d ' ' - - | awk '{print $2 "/" tolower($1)}' | xargs du -sh 2> /dev/null | sort -hr
+ 1548  grep conda
+ 1549  cd Desktop/Projects/Web\ Dev\ Projects/cloud9
+ 1550  clear 
+ 1551  cd ~/
+ 1552  mv accounts.txt accounts.json
+ 1553  open accounts.json
+ 1554  apt-get install python3-demjson
+ 1555  sudo apt-get install python3-demjson
+ 1556  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz\nsudo rm -rf /opt/nvim\nsudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+ 1557  export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+ 1558  nvim
+ 1559  ls ~/.config/nvim
+ 1560  nvim ~/.config/nvim/init.lua
+ 1561  pipx install notebook jupyter
+ 1562  pipx install notebook jupyter --force
+ 1565  cd ls
+ 1566  source pgadmin4/bin/activate
+ 1567  pip list
+ 1568  cd hom
+ 1569  cd home
+ 1571  rm -rf pgadmin4
+ 1572  ./anaconda3
+ 1573  .Anaconda3.sh
+ 1574  Anaconda3.sh
+ 1575  ./Anaconda3.sh
+ 1576  sudo ./Anaconda3.sh
+ 1577  .Anaconda3.sh\n
+ 1578  sudo chmod +x Anaconda3.sh\n
+ 1579  conda config
+ 1580  cd anaconda
+ 1581  ./_conda
+ 1582  ./_conda init
+ 1583  install conda
+ 1585  ./Anaconda3
+ 1586  sudo .Anaconda3.sh\n
+ 1587  rm -rf nvim-linux-x86_64.tar.gz
+ 1588  ls anaconda
+ 1589  Anaconda3.sh\n
+ 1590  ./Anaconda3.sh\n
+ 1591  echo $SHELL
+ 1592  eval "$(/home/brian/anaconda3/bin/conda shell.zsh hook)"
+ 1593  sudo apt-get install execstack
+ 1594  anaconda --version
+ 1595  sudo ./Anaconda3.sh\n
+ 1598  rm -rf home
+ 1599  sudo rm -rf home
+ 1600  code Desktop/Projects/Web\ Dev\ Projects/cloud9
+ 1601  # Delete the remote master branch\ngit push origin --delete master\n\n# Prune tracking branches that no longer exist on the remote
+ 1602  git push origin --delete master
+ 1603  git remote prune origin
+ 1604  git-commit "Updated LipaNaMpesa component"
+ 1605  conda activate  --name COM424E
+ 1606  conda create --name COM424D
+ 1610  which python
+ 1611  ls /usr/bin/python
+ 1614  ls -la ~/.local/lib
+ 1615  ls -la ~/.config/pip
+ 1616  ls -la ~/.config/
+ 1617  sudo rm -rf  ~/.config/pychess
+ 1618  mkdir ~/python-backup
+ 1619  cp -r ~/.local/lib/python* ~/python-backup/\ncp -r ~/.config/pip ~/python-backup/ 2>/dev/null
+ 1620  pip freeze
+ 1621  pip freeze > ~/python-backup/requirements.txt\npip3 freeze > ~/python-backup/requirements3.txt
+ 1622  ls -la ~/
+ 1623  locate env
+ 1624  locate env > env-text.txt
+ 1625  gedit env-text.txt
+ 1626  dpkg -l | grep python3
+ 1627  dpkg -l | grep python3 | awk '{print $2}' > ~/python-backup/apt-python-packages.txt
+ 1628  gedit python-backup/apt-python-packages.txt
+ 1629  cp paste.txt ~/python-backup/python-apt-packages.txt
+ 1630  cat > ~/python-backup/reinstall-python-packages.sh << 'EOF'\n#!/bin/bash\n# Script to reinstall Python packages\nsudo apt update\nsudo apt install -y $(cat ~/python-backup/python-apt-packages.txt)\nEOF
+ 1631  gedit python-backup/reinstall-python-packages.sh
+ 1632  chmod +x ~/python-backup/reinstall-python-packages.sh
+ 1633  # First, remove any user-installed packages in ~/.local\nrm -rf ~/.local/lib/python*\nrm -rf ~/.local/bin/pip*\n\n# Remove any virtual environments you have created\nfind ~/ -type d -name "venv" -o -name ".venv" -o -name "env" -o -name ".env" | xargs rm -rf
+ 1634  python --version\npython3 --version\nupdate-alternatives --list python\nupdate-alternatives --list python3
+ 1635  pip freeze | xargs pip uninstall -y  # For Python 2\npip3 freeze | xargs pip3 uninstall -y  # For Python 3
+ 1636  sudo apt purge python* -y\nsudo apt autoremove -y\nsudo apt autoclean
+ 1637  sudo apt purge python
+ 1638  sudo apt purge python3
+ 1640  rm -rf anaconda
+ 1641  sudo rm -rf anaconda
+ 1642  sudo ./Anaconda.sh
+ 1643  ls ls
+ 1645  locate anaconda
+ 1650  conda help
+ 1651  conda env
+ 1652  conda env list
+ 1653  conda env remove COM424E
+ 1654  rm -rf anaconda3
+ 1656  sudo gedit .bashrc
+ 1657  python -m venv conda3
+ 1658  pipx install torch
+ 1661  ls -ls .local/venvs/notebook
+ 1662  pipx uninstall flask
+ 1663  pipx uninstall torch
+ 1664  pipx uninstall imutils
+ 1665  pipx uninstall jupyter jupyterlab notebook
+ 1666  pipx uninstall jupyter 
+ 1667  pipx uninstall jupyterlab
+ 1668  pipx uninstall notebook
+ 1669  pipx install jupyter-notebook
+ 1670  pipx install jupyter notebook
+ 1671  pipx install notebook jupyter 
+ 1672  ls -ls .local/share/pipx/venvs
+ 1674  pip install notebook jupyter
+ 1676  pgadmin4
+ 1677  git-commit "update"
+ 1678  exit
+ 1679  ls ~/usr/local/bin
+ 1680  sudo ls ~/usr/local/bin
+ 1681  sudo ls usr/local/bin
+ 1682  ls usr
+ 1683  ls local/bin
+ 1684  cd local
+ 1685  ls bin
+ 1686  check-swap-usage
+ 1687  locate check-swap-usage
+ 1690  cat Desktop/Projects/Web\ Dev\ Projects/RsMJ/.env
+ 1691  npm i stripe
+ 1692  stripe login
+ 1693  cd Desktop/Projects/Web\ Dev\ Projects/GitHub-Flavored-Markdow
+ 1695  npx shadcn@latest add dropdown-menu input table sonner label form button alert-dialog avatar badge calendar card command dialog input-otp pagination select sheet switch table 
+ 1696  git init\ngit add README.md\ngit commit -m "first commit"\ngit branch -M main\ngit remote add origin https://github.com/oluoko/tharsh-builders-admin.git\ngit push -u origin main
+ 1697  git-commit "first commit"
+ 1699  git-commit "Updated page.tsx"
+ 1700  cd Desktop/Neural-Networks
+ 1701  git-commit "Lab 3"
+ 1702  git remote add origin https://github.com/oluoko/tharsh-builders-admin.git
+ 1703  ls .git/refs/heads
+ 1704  git reflog
+ 1705  git init\ngit add README.md\ngit commit -m "Update"\ngit branch -M main\ngit remote add origin https://github.com/oluoko/tharsh-builders-admin.git\ngit push -u origin main
+ 1706  git pull origin main --allow-unrelated-histories\n
+ 1707  npx prisma schema
+ 1709  git-commit "Updated next.config.ts\n"
+ 1710  rm -rm tharsh-builders-admin
+ 1711  rm -rf tharsh-builders-admin
+ 1712  npm install --legacy-peer-deps\n
+ 1713  mv tharsh-builders-admin thrash-admin
+ 1714  cd tharsh-builders-admin
+ 1715  npm install
+ 1716  git init\ngit add .\ngit commit -m "Update"\ngit branch -M main\ngit remote add origin https://github.com/oluoko/tharsh-builders-admin.git\ngit push -u origin main
+ 1718  git push -u origin main --force\n
+ 1719  gedit .env .env.local .env.example .env.local.example
+ 1720  git-commit "Updated .env files"
+ 1721  git-commit "Updated package.json file"
+ 1724  npm install @clerk/nextjs
+ 1725  npx shadcn@latest init\n
+ 1726  npm install uploadthing @uploadthing/react\n
+ 1727  npx shadcn@latest add dropdown-menu input table sonner label form button alert-dialog avatar calendar card dialog pagination select sheet switch table 
+ 1728  cd Desktop/Projects/Hyperplexed
+ 1729  git-commit "Explosive Hover Effect"
+ 1730  cd Web\ Dev\ Projects/tharsh-builders-admin
+ 1731  npm i axios
+ 1732  npm i axios --legacy-peer-deps
+ 1735  cd Desktop/Projects/Web\ Dev\ Projects/tharsh-builders-admin
+ 1737  sudo dpkg -i code_1.100.2-1747260578_amd64.deb
+ 1738  npx shadcn@latest add alert
+ 1739  npm i input-otp --legacy-peer-deps
+ 1740  npx shadcn@latest add input-opt
+ 1741  npx shadcn@latest add input-otp
+ 1742  git-commit "Updated UI and Auth Logic"
+ 1743  cd Desktop/Projects/Web\ Dev\ Projects/
+ 1744  mv mood-journal tharsh-builders-02
+ 1745  code tharsh-builders-02
+ 1746  npx create-next@latest
+ 1747  npx create-next-app@latest
+ 1748  code lively
+ 1749  touch .env.local .env.example .env.local.example
+ 1750  npm i @clerk/nextjs @prisma/client @uploadthing/react axios @conform-to/react @conform-to/zod uploadthing zod
+ 1751  npx create-next-app@latest twitch-x-lively
+ 1753  npm i @clerk/nextjs @clerk/themes @livekit/components-react @prisma/client @tanstack-react-table @uploadthing/react class-variance-authority clsx jwt-decode livekit-client livekit-server-sdk next-themes query-string sharp sonner svix uploadthing uuid zustand usehooks-ts
+ 1754  npm i @clerk/nextjs @clerk/themes @livekit/components-react @prisma/client @tanstack/react-table @uploadthing/react class-variance-authority clsx jwt-decode livekit-client livekit-server-sdk next-themes query-string sharp sonner svix uploadthing uuid zustand usehooks-ts
+ 1755  npm i nextjs-toploader
+ 1756  git commit -m "first commit"
+ 1757  git remote add origin https://github.com/Twitch-X-LiveLy.git
+ 1759  git remote add origin https://github.com/oluoko/Twitch-X-LiveLy.git
+ 1760  git-commit "Updated UI\n"
+ 1761  git-commit "Authentication"
+ 1762  npx shadcn@latest add button
+ 1763  cd lively/components/custom-ui
+ 1764  cat providers.tsx
+ 1765  code 
+ 1766  sudo apt install mplayer
+ 1767  mplayer
+ 1768  sudo apt remove mplayer
+ 1769  sudo apt install smplayer
+ 1770  npx shadcn@latest add dropdown
+ 1771  npx prisma init
+ 1772  ngrok
+ 1773  ngrok http 3000
+ 1774  ngrok http --url=suitable-quagga-immortal.ngrok-free.app 80
+ 1775  ngrok http --url=suitable-quagga-immortal.ngrok-free.app 300
+ 1776  git-commit "lab_4_0"
+ 1777  git-commit "NavBar Completed"
+ 1778  npx shadcn@latest add tooltip
+ 1779  git-commit "SideBar"
+ 1780  git-commit "Container"
+ 1781  npx shadcn@latest add avatar skeleton
+ 1782  git-commit "Recommended UI Update"
+ 1783  git-commit "Recommended UI with skeletons"
+ 1784  git-commit "Using usehooks-ts to remove hydration errors"
+ 1785  git-commit "Last Hydration error:\nError: A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <HotReload assetPrefix="" globalError={[...]}>\n      <AppDevOverlay state={{nextId:1, ...}} globalError={[...]}>\n        <AppDevOverlayErrorBoundary globalError={[...]} onError={function bound dispatchSetState}>\n          <ReplaySsrOnlyErrors>\n          <DevRootHTTPAccessFallbackBoundary>\n            <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\n              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>\n                <RedirectBoundary>\n                  <RedirectErrorBoundary router={{...}}>\n                    <Head>\n                    <link>\n                    <script>\n                    <script>\n                    <script>\n                    <RootLayout>\n                      <html\n                        lang="en"\n-                       className="dark"\n-                       style={{color-scheme:"dark"}}\n                      >\n                    ...\n        ...\n\n    at createConsoleError (http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_8f19e6fb._.js:882:71)\n    at handleConsoleError (http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_8f19e6fb._.js:1058:54)\n    at console.error (http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_8f19e6fb._.js:1223:57)\n    at http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5153:25\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3073:74)\n    at emitPendingHydrationWarnings (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:5152:13)\n    at completeWork (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:8331:102)\n    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:3073:131)\n    at completeUnitOfWork (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10308:23)\n    at performUnitOfWork (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10245:28)\n    at workLoopConcurrentByScheduler (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10239:58)\n    at renderRootConcurrent (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10221:71)\n    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:9853:176)\n    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:10826:9)\n    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_2ce9398a._.js:1982:64)\n    at html (<anonymous>)\n    at RootLayout (rsc://React/Server/file:///home/brian/twitch-x-lively/.next/server/chunks/ssr/%5Broot-of-the-server%5D__344be964._.js?8:128:263)"
+ 1786  git-commit "Last Hydration error:\nError: A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <HotReload assetPrefix="" globalError={[...]}>\n      <AppDevOverlay state={{nextId:1, ...}} globalError={[...]}>\n        <AppDevOverlayErrorBoundary globalError={[...]} onError={function bound dispatchSetState}>\n          <ReplaySsrOnlyErrors>\n          <DevRootHTTPAccessFallbackBoundary>\n            <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\n              <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>\n                <RedirectBoundary>\n                  <RedirectErrorBoundary router={{...}}>\n                    <Head>\n                    <link>\n                    <script>\n                    <script>\n                    <script>\n                    <RootLayout>\n                      <html\n                        lang="en"\n-                       className="dark"\n-                       style={{color-scheme:"dark"}}\n                      "
+ 1787  git-commit "Last Hydration error:\nError: A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n"
+ 1788  git-commit "Updated Recommender system and root layout hydration error"
+ 1789  git-commit "Following a user functionality"
+ 1790  git-commit "Unfollowing a user functionality"
+ 1791  git-commit "Blocking functionality"
+ 1792  git-commit "Creator Dashboard Layout"
+ 1793  git-commit "Updated Following and Recommended UI"
+ 1794  cd tmp
+ 1795  mv Photostudy\ Physics\ test\ 10\ over\ 10_6506_autosave.blend ~/YouTube/Photostudy/Photostudy\ Physics\ test\ 10\ over\ 10.mp4
+ 1796  gedit Biblical\ Literature.text
+ 1797  git-commit "Creator Dashboard Layout Complete"
+ 1798  npx prisma migrate reset
+ 1800  git-commit "Stream Model"
+ 1801  npx shadcn@latest add switch 
+ 1802  git-commit "Chat Settings"
+ 1803  wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo tee /etc/apt/keyrings/sublimehq-pub.asc > /dev/null
+ 1804  echo -e 'Types: deb\nURIs: https://download.sublimetext.com/\nSuites: apt/dev/\nSigned-By: /etc/apt/keyrings/sublimehq-pub.asc' | sudo tee /etc/apt/sources.list.d/sublime-text.sources
+ 1805  sudo apt-get install sublime-text
+ 1806  npx shadcn@latest add dialog select alert
+ 1807  git-commit "Key Settings UI"
+ 1808  cd Learn
+ 1809  cd Neural-Networks
+ 1810  sudo gedit .zsh_history
+ 1811  cat .zsh_history
+ 1812  sudo gedit ~/.zsh_history 
+ 1813  git-commit "Creating an Ingress"
+ 1814  sudo apt install obs-studio
+ 1815  git-commit "Livekit webhook"
+ 1816  git-commit "lab 5"
+ 1817  git-commit "Showing the Live Stream in the app"
+ 1818  git-commit "Generating a token for streaming"
+ 1820  npx shadcn-ui@latest add slider
+ 1821  npx shadcn@latest add slider
+ 1822  git-commit "Video Component Complete"
+ 1823  npm i date-fns
+ 1824  npm i date-fns --legacy-peer-deps
+ 1825  git-commit "Chat Functionality in the Stream player component\n"
+ 1827  rm -rf node_modules package-lock.json
+ 1829  npm @conform-t0/react @conform-to/zod @prisma/client @stripe/react-stripe-js @stripe/stripe-js @t3-oss/env-nextjs @uploadthing/react axios next-themes react-day-picker nextjs-toploader recharts stripe uploadthing zod
+ 1830  npm @conform-to/react @conform-to/zod @prisma/client @stripe/react-stripe-js @stripe/stripe-js @t3-oss/env-nextjs @uploadthing/react axios next-themes react-day-picker nextjs-toploader recharts stripe uploadthing zod
+ 1831  npm i @conform-to/react @conform-to/zod @prisma/client @stripe/react-stripe-js @stripe/stripe-js @t3-oss/env-nextjs @uploadthing/react axios next-themes react-day-picker nextjs-toploader recharts stripe uploadthing zod
+ 1832  git-commit "Updated Auth Layout"
+ 1833  npx shadcn@latest add scroll-area
+ 1834  git-commit "Community UI and Logic complete"
+ 1840  npx shadcn@latest add alert alert-dialog avatar badge button calendar card carousel checkbox command dialog dropdown-menu input input-otp label pagination phone-input popover scroll-area select sheet switch table tabs textarea toast toaster
+ 1841  npx shadcn@latest add alert alert-dialog avatar badge button calendar card carousel checkbox command dialog dropdown-menu input input-otp label pagination phone-input popover scroll-area select sheet switch table tabs textarea 
+ 1842  npx shadcn@latest add alert alert-dialog avatar badge button calendar card carousel checkbox command dialog dropdown-menu input input-otp label pagination popover scroll-area select sheet switch table tabs textarea 
+ 1843  npm i lucide-react sonner
+ 1844  npm i lucide-react sonner --legacy-peer-deps
+ 1845  npm i react-icons --legacy-peer-deps
+ 1846  touch gerieaah/Crazy\ Stories/Crazy\ Story\ 1.docx
+ 1847  gedit gerieaah/Crazy\ Stories/Crazy\ Story\ 1.docx
+ 1848  mkdir gerieaah/Crazy\ Stories
+ 1849  touch /gerieaah/Crazy\ Stories/Crazy\ Story\ 1.docx
+ 1850  mkdir /gerieaah/Crazy\ Stories
+ 1851  gedit  Crazy\ Story\ 1.docx
+ 1852  open Crazy\ Story\ 1.docx
+ 1853  git-commit "Updatedlayout"
+ 1854  git-commit "Chat Skeletons"
+ 1858  git-commit "Multilayer Multineuron"
+ 1859  git-commit "Stream Player - Header\n"
+ 1860  cd lively/
+ 1862  updateall
+ 1865  cd lively
+ 1866  npm i @radix-ui/react-icons --legacy-peer-deps
+ 1867  rm -rf lively
+ 1868  git-commit "Header 
+ 1869  git-commit "Stream Player - Header and Actions Component"
+ 1870  npx create-next-app@latest light-in-the-darkness-bible
+ 1871  npm install -g npm@11.4.1
+ 1872  mv light-in-the-darkness-bible LitDB
+ 1873  cd LitDB
+ 1874  touch .env .env.local .env.example .env.local.example
+ 1875  gedit app/layout.tsx app/page.tsx
+ 1876  gedit package.json
+ 1877  cd Projects/LitDB
+ 1878  cd app/_fonts
+ 1880  mv LitDB L.i.t.D.B
+ 1881  code L.i.t.D.B
+ 1883  git commit -m "L.i.t.D.B: Inital Commit"
+ 1885  git remote add origin https://github.com/oluoko/L.i.t.D.B.git
+ 1887  git-commit "Updated eslint.config.mjs"
+ 1888  git-commit "Stream Player - Actions and Mode Toggle Components"
+ 1890  git-commit "Infor Card UI"
+ 1891  git-commit "Updated globals.css"
+ 1892  npx shadcn@latest add label
+ 1893  cd Documents/
+ 1894  cd My\ Journals
+ 1896  touch who\ am\ i.docx
+ 1897  libreoffice who\ am\ i.docx
+ 1898  npm update @clerk/nextjs
+ 1899  npm install @clerk/nextjs@latest
+ 1900  npm install @clerk/themes@latest
+ 1904  cd L.i.t.D.B
+ 1905  git-commit "Added Banner Image"
+ 1907  npm i nextjs-toploader @clerk/nextjs
+ 1908  git-commit "Spotlight Overlay"
+ 1909  git-commit "Updated loading-dots.tsx component"
+ 1910  git-commit "Spotlight Overlay:: Update"
+ 1911  git-commit "Update\(Banner Image, about page, \)"
+ 1914  git-commit "Completed Stream Player"
+ 1916  npm run cev
+ 1917  git-commit "Kicking a guest user"
+ 1919  sudo aircrack-ng -w /usr/share/wordlists/rockyou.txt capture-01.cap
+ 1920  find /usr -name "*rockyou*" 2>/dev/null
+ 1921  sudo aireplay-ng -0 2 -a 4A:51:B7:1D:FB:D7 wlan0mon
+ 1922  sudo aircrack-ng capture-01.cap -J capture\nhashcat -m 22000 capture.22000 /usr/share/wordlists/rockyou.txt
+ 1923  cat capture.hccap
+ 1924  sudo cat capture-01.cap capture-01.csv
+ 1925  sudo gedit capture-01.cap capture-01.csv
+ 1926  sudo wash -i wlan0mon
+ 1927  sudo reaver -i wlan0mon -b 4A:51:B7:1D:FB:D7 -vv
+ 1928  sudo airmon-ng check kill
+ 1929  sudo airmon-ng start wlan0
+ 1930  /usr/sbin/airmon-ng
+ 1931  sudo /usr/sbin/airmon-ng
+ 1932  sudo airmon-ng start wlan0mon
+ 1933  sudo airodump-ng wlan0mon
+ 1934  sudo airodump-ng -c 11 --bssid 4A:51:B7:1D:FB:D7 -w capture wlan0mon
+ 1935  cd Learn/Neural-Networks/
+ 1936  cd COM424E
+ 1937  gedit mon-jun-9.txt
+ 1938  ngrok http --url=suitable-quagga-immortal.ngrok-free.app 3000
+ 1939  git-commit "Search Page: Complete\n"
+ 1940  git-commit "Search Page: Complete"
+ 1941  npx shadcn@latest add table
+ 1942  npm i @tanstack/react-table
+ 1943  git-commit "Completed Module One"
+ 1944  git-commit "Updated Package.json\n"
+ 1946  npx shadcn@latest add dropdown-menu
+ 1947  npm uninstall react-day-picker\nnpx shadcn@latest add dropdown-menu
+ 1948  npm i @clerk/nextjs
+ 1949  npx shadcn@latest add skeleton
+ 1950  cd twitch-x-lively
+ 1951  code twitch-x-lively
+ 1952  gedit cloud9/app/globals.css
+ 1953  git-commit "Updated styling"
+ 1954  git-commit "Updated styling - Buttons"
+ 1956  gedit Projects/cloud9/app/globals.css
+ 1957  gedit Chess\ In\ Dholuo.docx
+ 1959  mkdir /Tube\ 2\ Text
+ 1961  \ngit init\ngit add README.md\ngit commit -m "first commit"\ngit branch -M main\ngit remote add origin https://github.com/oluoko/Tube-2-Text.git\ngit push -u origin main
+ 1964  touch README.md
+ 1965  \ngit init\ngit add .\ngit commit -m "first commit"\ngit branch -M main\ngit remote add origin https://github.com/oluoko/Tube-2-Text.git\ngit push -u origin main
+ 1966  git-commit "frontend file"
+ 1967  git-commit "frontend completed\n"
+ 1968  mkdir backend
+ 1969  cd backend
+ 1970  sudo apt-get update --fix-missing
+ 1971  # Add the missing Kali GPG key\nwget -q -O - https://archive.kali.org/archive-key.asc | sudo apt-key add -\n\n# Or use the more modern approach:\ncurl -fsSL https://archive.kali.org/archive-key.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/kali-archive-keyring.gpg
+ 1972  sudo apt-get update
+ 1973  sudo apt install python3-django -y
+ 1974  django-admin startproject tube-2-text
+ 1975  django-admin startproject tube-to-text
+ 1976  django-admin startproject tube_2_text
+ 1977  cd tube_2_text
+ 1978  python3 manage.py startapp blog_generator
+ 1979  git-commit "Initalized Django apps"
+ 1980  git-commit "Setting urls"
+ 1981  git-commit "Setting up frontend templates"
+ 1982  git-commit "Setting up the database"
+ 1985  code SaaS-Django
+ 1986  python manage.py runserver
+ 1989  rm Pipfile
+ 1990  source .venv/bin/activate
+ 1993  pip install requirements.txt
+ 1995  # Deactivate current venv\ndeactivate\n\n# Remove the existing venv\nrm -rf venv\n\n# Create a new virtual environment\npython3 -m venv venv\n\n# Activate it\nsource venv/bin/activate\n\n# Install requirements\npip install -r requirements.txt
+ 2000  pipenv shell
+ 2001  gedit .env
+ 2020  gedit .env .env.example
+ 2023  python -m django version 
+ 2024  django-admin --v
+ 2025  django-admin -v
+ 2030  python manage.py createsuperuser
+ 2034  python3 manage.py vendor_pull
+ 2035  python3 manage.py collectstatic
+ 2037  python3 manage.py migrate
+ 2041  git remote add origin https://github.com/oluoko/Saas-Django.git
+ 2042  git commit -m "Login with Github and Google via Django AllAuth"
+ 2048  git-commit "Updated Styling"
+ 2051  python manage.py startapp profiles
+ 2052  python3 manage.py runserver
+ 2053  git-commit "Updated UI Styling"
+ 2054  git-commit "Password Protected Pages with Django Sessions"
+ 2055  git-commit "User-required Pages via login_required Decorator"
+ 2056  python3 manage.py ls
+ 2059  python3 manage.py startapp subscriptions
+ 2060  git-commit "Staff User Required"
+ 2061  git-commit "User Profile View"
+ 2063  python3 manage.py shell
+ 2064  git-commit "User Permissions and has_perm"
+ 2065  git-commit "User Permissions in Django Templates"
+ 2067  code cloud9
+ 2068  /bin/python3 /home/brian/.vscode/extensions/ms-python.python-2025.6.1-linux-x64/python_files/printEnvVariablesToFile.py /home/brian/.vscode/extensions/ms-python.python-2025.6.1-linux-x64/python_files/deactivate/zsh/envVars.txt
+ 2069  npm install animated-backgrounds
+ 2070  npm uninstall animated-backgrounds
+ 2072  gedit .env .env.example .env.local.example .env.local
+ 2073  mv .env .env.example .env.local.example .env.local cloud9
+ 2075  npm i @clerk/nextjs @conform-to/react @conform-to/zod @prisma/client @stripe/react-stripe-js @stripe/stripe-js @t3-oss/env-nextjs @uploadthing/react axios embla-carousel-react framer-motion input-otp lucide-react next-themes next-toploader recharts sonner stripe uploadthing zod
+ 2077  rm -rf cloud9
+ 2078  npx create-next-app@latest cloud9
+ 2080  npx shadcn@latest init
+ 2081  npm i @clerk/nextjs @conform-to/react @conform-to/zod @prisma/client @stripe/react-stripe-js @stripe/stripe-js @t3-oss/env-nextjs @uploadthing/react axios embla-carousel-react framer-motion input-otp lucide-react next-themes nextjs-toploader recharts sonner stripe uploadthing zod
+ 2082  npx shadcn@latest add alert-dialog alert avatar badge button calendar card carousel checkbox command dialog dropdown-menu input-otp input label pagination popover scroll-area select sheet skeleton switch table tabs textarea
+ 2083  rm -rf app public
+ 2084  gedit .env .env.example .env.local.example .env.local eslint.config.mjs next.config.ts
+ 2086  gedit middleware.ts
+ 2088  cd Documents/My\ Journals
+ 2089  cd Concepts
+ 2090  touch How\ is\ faith\ in\ Jesus\ Christ,\ God,\ Holy\ Spirit\ and\ the\ overall\ true\ Christian\ faith\ intelligible.docx
+ 2092  libreoffice How\ is\ faith\ in\ Jesus\ Christ,\ God,\ Holy\ Spirit\ and\ the\ overall\ true\ Christian\ faith\ intelligible.docx
+ 2093  npm i --save-de @paystack/inline-js\n
+ 2094  npm i --save-dev @paystack/inline-js\n
+ 2095  npm i --save-dev @types/paystack__inline-js
+ 2096  npm i @paystack/inline-js
+ 2099  sudo gedit git-commit
+ 2103  sudo gedit git-commit-main git-commit-branch git-commit-branch-auto
+ 2104  sudo chmod +x git-commit-main git-commit-branch git-commit-branch-auto
+ 2105  rm -rf git-commit
+ 2106  sudo rm -rf git-commit
+ 2107  cd /usr/local/bin
+ 2109  mv git-commit-main git-commit-branch-auto git-commit
+ 2110  sudo mv git-commit-main git-commit-branch-auto git-commit
+ 2111  sudo mv git-commit-branch-auto git-commit
+ 2112  sudo apt install adb -y
+ 2113  snap install scrcpy
+ 2114  git clone https://github.com/Genymobile/scrcpy\nCloning into 'scrcpy'...\n...\nReceiving objects: 100% (32870/32870), 6.00 MiB | 680.00 KiB/s, done.\nResolving deltas: 100% (21715/21715), done.
+ 2115  cd scrcpy
+ 2116  ./install_release.sh
+ 2117  sudo apt install libavformat
+ 2120  python --version
+ 2121  pip install tensorflow==2.13.0
+ 2122  pip install tensorflow-cpu
+ 2123  pip3 install tensorflow
+ 2124  sudo apt update\nsudo apt install python3.11 python3.11-pip python3.11-venv
+ 2126  conda deactivate
+ 2127  conda3 deactivate
+ 2128  which python3
+ 2129  sudo apt install python3.11 python3.11-dev python3.11-venv
+ 2130  sudo apt install python3.11 python3.11-dev
+ 2131  sudo apt install python3-distutils python3-setuptools\nsudo apt install python3.11 python3.11-dev python3.11-venv
+ 2134  rm -rf tensorflow_env
+ 2135  sudo apt install make build-essential libssl-dev zlib1g-dev libbz2-dev \\nlibreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \\nxz-utils tk-dev libffi-dev liblzma-dev python3-openssl git
+ 2136  curl https://pyenv.run | bash
+ 2137  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc\necho 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc\necho 'eval "$(pyenv init -)"' >> ~/.bashrc
+ 2138  source ~/.bashrc
+ 2139  [200~pyenv install 3.11.7
+ 2140  pyenv global 3.11.7~
+ 2142  python3 -m venv tensorflow_env\nsource tensorflow_env/bin/activate\npip install --upgrade pip\npip install tensorflow
+ 2144  pipx install tensorflow
+ 2146  pipx install python@3.10\n
+ 2147  winget install python.python.3.11
+ 2150  cd t10k-images-idx3-ubyte
+ 2152  open t10k-images-idx3-ubyte
+ 2153  cd 
+ 2157  cd /home/brian/.cache/kagglehub/datasets/hojjatk/mnist-dataset/versions/1
+ 2158  ls train-images
+ 2159  ls train-images-idx3-ubyte
+ 2160  cd train-images-idx3-ubyte
+ 2162  rm oddrationale/mnist-in-csv
+ 2163  cd  oddrationale/mnist-in-csv
+ 2164  cd versions
+ 2165  cd 2
+ 2167  pwd
+ 2168  cd /home/brian/Projects/MNIST\ from\ scratch
+ 2172  git commit -m "MNIST From Scratch"
+ 2174  git remote add origin https://github.com/oluoko/MNIST-From-Scratch.git
+ 2176  git-commit "Updated init_params() function"
+ 2180  shutdown
+ 2183  sudo apt update\nsudo apt install git build-essential pkg-config libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+ 2184  sudo apt install komorebi
+ 2185  hidamari /home/brian/Videos/Live\ Wallpapers/into\ the\ spider\ verse_2.mp4
+ 2186  git clone https://github.com/jeffshee/hidamari.git
+ 2187  cd hidamari
+ 2188  make
+ 2189  sudo make install
+ 2190  sudo apt install mpv xwinwrap
+ 2194  npm i query-string
+ 2195  npm i query-string --legacy-peer-deps
+ 2196  code Projects/cloud9
+ 2198  git-commit "app-router Update\n"
+ 2199  npm i react-phone-number-input 
+ 2200  npm i react-phone-number-input  --legacy-peer-deps
+ 2201  git-commit "UI Updated"
+ 2202  npm i prisma @prisma/client -D
+ 2203  npm i prisma @prisma/client -D --legacy-peer-deps
+ 2204  npm update prisma @prisma/client -D --legacy-peer-deps
+ 2210  git-commit "Updated Success Page URL parameters"
+ 2211  git-commit "Updated Admin/(home) route"
+ 2212  cd Projects
+ 2213  mkdir netflix-clone
+ 2214  cd netflix-clone
+ 2215  gedit README.md
+ 2220  git remote add origin https://github.com/oluoko/netflix-clone.git
+ 2222  django-admin startproject django
+ 2223  django-admin startproject django-app
+ 2224  django-admin startproject django_app
+ 2225  cd django_app
+ 2226  mv django_app app
+ 2227  mv app main
+ 2228  python3 -m venv venv
+ 2229  touch requirements.txt .gitignore
+ 2231  mv main src
+ 2232  git-commit "Created a Django app"
+ 2233  mv django_app django
+ 2234  cd django
+ 2240  cd Projects/Web\ Dev\ Projects/Saas-Django
+ 2241  ls src
+ 2242  cd Saas-Django
+ 2243  cat .gitignore
+ 2244  cd src
+ 2249  git-commit "Django app"
+ 2250  code arrays.py
+ 2251  touch binary_search.py linear_search.py recursive_binary_search.py
+ 2252  python
+ 2253  python3
+ 2254  python3 
+ 2257  python -i linked_list.py
+ 2260  cd Projects/Multi\ Stack\ Projects/LiveLy
+ 2262  cd next-js
+ 2263  gedit .env.local
+ 2269  npm i resend
+ 2270  npm i resend --legacy-peer-deps
+ 2279  git-commit "Updated .env.local"
+ 2280  git-commit "Updated middleware.ts file"
+ 2281  git-commit "Updated testimonials.tsx"
+ 2283  git-commit "Updated - mail.ts, Ts & Cs, middleware.ts, footer.tsx"
+ 2284  git-commit "Updated sso-callback/page.tsx"
+ 2285  git-commit "Updated footer.tsx"
+ 2288  git-commit "updated Contact us logic"
+ 2289  gedit public/Cloud9\ Black-Text\ Logo.svg
+ 2290  git-commit "Sending an email"
+ 2292  cd Projects/cloud9/app
+ 2295  cd bookings
+ 2299  git-commit "updated bookings/page.tsx\n"
+ 2300  cd Projects/cloud9/app/
+ 2301  cd \(app\)
+ 2302  cd \(home\)
+ 2303  ls _components
+ 2304  cd flights
+ 2305  cd [id
+ 2306  cd \[id\]
+ 2307  cd _components
+ 2308  gedit pay-with-stripe.tsx
+ 2309  git-commit "updated pay-with-stripe.tsx"
+ 2310  cd app/\(app\)/\(home\)/payments/success/\[bookingId\]/\[flightId\]
+ 2312  gedit page.tsx
+ 2314  git-commit "updated success page"
+ 2315  cd Projects/cloud9/lib
+ 2317  gedit mail.ts
+ 2319  git-commit "Updated mail.ts"
+ 2326  pip install tensorflow==2.15.0
+ 2327  pip install tensorflow==2.18.0
+ 2328  python3 -m pip install 'tensorflow[and-cuda]'
+ 2330  python -m venv venv
+ 2331  source venv/bin/activate
+ 2332  pip install tensorflow==2.10
+ 2335  cd brian
+ 2337  rm -rf venv
+ 2342  conda create --name COM424E
+ 2344  conda install pytorch
+ 2345  conda install tensor-flow
+ 2346  conda install tensoflow
+ 2347  conda install tensorflow
+ 2348  pip install tensorflow
+ 2349  conda install scikit-learn jupyter notebook
+ 2350  conda install pandas 
+ 2351  conda install numpy
+ 2352  conda install matplotlib
+ 2353  conda install datasets
+ 2355  conda install nnfs spiral_data
+ 2356  conda install nnfs 
+ 2357  conda install spiral_data
+ 2359  git-commit "lab_7_0"
+ 2362  git remote remove origin
+ 2366  git commit -m "re_init"
+ 2368  git remote add origin https://github.com/oluoko/Cloud9.git
+ 2371  git pull origin main --allow-unrelated-histories\n# resolve any conflicts if they appear\ngit add .\ngit commit -m "Merge remote main into local main"\ngit push -u origin main\n
+ 2373  git remote -v
+ 2374  git branch -a
+ 2375  git branch -D remotes/origin/main
+ 2376  git branch -D remotes/origin/app-router
+ 2379  git-commit "Added flight components"
+ 2380  git fsck --full
+ 2382  git-commit "Updated UI - search-flight.tsx, banner-carousel.tsx"
+ 2392  pip install graphviz
+ 2393  pip install pytorch
+ 2394  pip install torch torchvision torchaudio
+ 2396  sudo dpkg -i code_1.101.1-1750254731_amd64.deb
+ 2399  git-commit "Updated profile/page.tsx"
+ 2400  git-commit "Updated UI - main-flight-interface, bookings pages, contact-us-page, flights pages..."
+ 2403  sudo dpkg -i --force-overwrite /tmp/apt-dpkg-install-1K406c/12-python3.13-minimal_3.13.3-2_amd64.deb\nsudo dpkg -i --force-overwrite /tmp/apt-dpkg-install-1K406c/13-libpython3.13-minimal_3.13.3-2_amd64.deb\nsudo apt --fix-broken install
+ 2404  # Remove the conflicting packages\nsudo apt remove python3.13 python3.13-minimal libpython3.13-minimal libpython3.13-stdlib\n\n# Clean the package cache\nsudo apt clean\nsudo apt autoclean\n\n# Update package lists\nsudo apt update\n\n# Reinstall Python 3.13\nsudo apt install python3.13 python3.13-minimal python3.13-dev python3.13-venv
+ 2405  sudo apt clean\nsudo apt autoclean
+ 2406  sudo apt clean\nsudo apt update
+ 2407  sudo apt remove python3.13 python3.13-minimal libpython3.13-minimal libpython3.13-stdlib\n
+ 2408  sudo dpkg -i --force-overwrite /var/cache/apt/archives/python3.13-minimal_3.13.3-2_amd64.deb\nsudo dpkg -i --force-overwrite /var/cache/apt/archives/libpython3.13-minimal_3.13.3-2_amd64.deb
+ 2409  sudo apt download python3.13-minimal libpython3.13-minimal
+ 2410  dpkg -l | grep python3.13\napt policy python3.13
+ 2411  sudo dpkg --remove --force-depends python3.13 libpython3.13-stdlib
+ 2412  sudo dpkg -i --force-overwrite python3.13-minimal_*.deb\nsudo dpkg -i --force-overwrite libpython3.13-minimal_*.deb
+ 2413  sudo apt -o Dpkg::Options::="--force-overwrite" --fix-broken install
+ 2414  sudo apt download python3.13 libpython3.13-stdlib\nsudo dpkg -i --force-overwrite python3.13_*.deb libpython3.13-stdlib_*.deb
+ 2416  sudo gedit /etc/apt/preferences.d/python-kali-priority
+ 2417  sudo updateall
+ 2418  sudo gedit /usr/local/bin/updateall
+ 2419  git-commit "Updated Testimonial Schema\n"
+ 2421  npx shadcn@latest add textarea
+ 2422  git-commit "Creating a testimonial"
+ 2423  git-commit "Editing a testimonial"
+ 2424  git-commit "Updated contact-us-page.tsx"
+ 2428  npm rund ev
+ 2430  sudo apt install audacity
+ 2434  git pull
+ 2441  git-commit "Updated testimonials page"
+ 2442  git-commit "Updated 'Send Us A Message' logic"
+ 2444  git-commit "Updated Flights UI"
+ 2445  git-commit "Search logic and UI"
+ 2446  git-commit "Search UI"
+ 2449  pip install jupyter-notebook
+ 2453  python -m venv COM424E
+ 2455  sudo apt update\nsudo apt install python3 python3-pip python3-venv
+ 2456  sudo apt install python3-minimal python3-setuptools
+ 2457  # Update package lists\nsudo apt update\n\n# Try to upgrade the conflicting packages together\nsudo apt install python3-pkg-resources python3-wheel python3-setuptools
+ 2458  sudo apt remove python3-setuptools python3-pkg-resources python3-wheel
+ 2459  sudo apt autoremove
+ 2462  find /usr -name "python3*" -type f 2>/dev/null
+ 2466  python3 install pip
+ 2467  sudo dpkg --configure -a\nsudo apt --fix-broken install
+ 2468  rm -rf COM424 COM424E
+ 2470  python3 -m venv COM424E
+ 2471  ls -la
+ 2472  ls la
+ 2474  rm -rf COM424E
+ 2475  sudo apt install python3-venv python3-ensurepip\n
+ 2476  (brian\M-c\M-\tbriaN)-[~]\n$ python3 -m venv COM424E \nError: Command '['/home/brian/COM424E/bin/python3', '-m', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1.
+ 2477  sudo apt install python3-venv
+ 2478  ls /usr/bin/python3*
+ 2479  sudo apt update\nsudo apt install python3.13
+ 2480  sudo apt install python3.13-dev python3.13-distutils
+ 2483  pip install jupyter notebook
+ 2484  deactivate
+ 2485  ./Anaconda.sh
+ 2490  git-commit "Updated main-flights-interface.tsx\n"
+ 2493  cd Learn/Neural-Networks
+ 2494  git-commit "Updated lab_8_0"
+ 2496  conda install scapy
+ 2500  sudo apt update\nsudo apt install --reinstall python3.13 python3.13-venv\n
+ 2501  sudo dpkg --configure -a\n
+ 2502  sudo dpkg --remove --force-remove-reinstreq python3.13-venv
+ 2503  # 1. Remove broken Python 3.13 packages\nsudo dpkg --remove --force-remove-reinstreq python3.13-venv\n\n# 2. Remove the dependent broken package\nsudo apt remove --purge python3-venv\n\n# 3. Clean up\nsudo apt autoremove\nsudo apt autoclean\n\n# 4. Reinstall the correct venv for your default Python version (e.g. 3.11)\nsudo apt install python3-venv\n
+ 2504  sudo dpkg --purge --force-all python3-venv\n
+ 2505  sudo dpkg --purge --force-all python3.13-venv\n
+ 2506  sudo apt autoremove\nsudo apt autoclean\n
+ 2507  sudo apt install python3-venv\n
+ 2508  sudo dpkg --purge --force-all python3.13-venv\nsudo dpkg --purge --force-all python3-venv\n
+ 2509  sudo apt autoremove --purge\nsudo apt autoclean\nsudo rm -rf /var/lib/dpkg/info/python3.13-venv.*\n
+ 2510  echo "python3.13-venv hold" | sudo dpkg --set-selections\n
+ 2511  sudo apt update\nsudo apt install python3-distutils\n
+ 2512  python setup.py install
+ 2513  sudo apt install python3
+ 2514  sudo apt install -f   # fixes any missing dependencies\n
+ 2515  sudo apt install python3.11-venv\n
+ 2516  wget https://archive.ubuntu.com/ubuntu/pool/main/p/python3-stdlib-extensions/python3-distutils_3.6.5-3_all.deb
+ 2517  sudo dpkg -i python3-distutils_3.6.5-3_all.deb
+ 2518  wget http://archive.ubuntu.com/ubuntu/pool/main/p/python3-stdlib-extensions/python3-distutils_3.11.4-1_all.deb\n
+ 2519  wget http://archive.ubuntu.com/ubuntu/pool/main/p/python3-stdlib-extensions/python3-distutils_3.10.8-1~22.04_all.deb\nsudo dpkg -i python3-distutils_3.10.8-1~22.04_all.deb\nsudo apt --fix-broken install\n
+ 2520  sudo add-apt-repository ppa:deadsnakes/ppa\nsudo apt update\n
+ 2521  sudo apt install python3.11-full\n
+ 2522  python3 --version\n
+ 2523  sudo apt update\nsudo apt install python3.12-venv python3.12-distutils python3-lib2to3\n
+ 2524  sudo apt install python3-venv python3-distutils\n
+ 2525  apt search venv | grep python3\napt search distutils | grep python3\n
+ 2526  cd /tmp\nwget https://www.python.org/ftp/python/3.12.7/Python-3.12.7.tgz\ntar -xzf Python-3.12.7.tgz\ncd Python-3.12.7\n
+ 2527  sudo cp -r Lib/distutils /usr/lib/python3.12/\n
+ 2528  python3 -c "import distutils; print(distutils.__file__)"\n
+ 2529  # Create a dummy directory to simulate distutils\nsudo mkdir -p /usr/lib/python3.12/distutils\n\n# Symlink the working _distutils from Anaconda\nsudo ln -s /home/brian/anaconda3/lib/python3.12/site-packages/setuptools/_distutils/* /usr/lib/python3.12/distutils/\n
+ 2530  cd /tmp/Python-3.12.7\n./configure --prefix=$HOME/python3.12\nmake -j4\nmake install\n
+ 2531  ~/python3.12/bin/python3 -m ensurepip\n~/python3.12/bin/python3 -m pip install virtualenv\n
+ 2532  /home/brian/python3.12/bin/python3 -m pip install --upgrade pip\n
+ 2534  sudo apt --fix-broken install
+ 2538  sudo dpkg --configure -a
+ 2539  sudo updateall 
+ 2542  source conda3/bin/activate
+ 2543  pip install jupyter
+ 2544  pip install --upgrade pip
+ 2545  pip install pgadmin4
+ 2546  conda install torch
+ 2547  pip install torch
+ 2550  clar
+ 2556  grep profile
+ 2557  find profile
+ 2558  find / -iname profile
+ 2559  find ~/Projects/Web\ Dev\ Projects/cloud9
+ 2560  find ~/Projects/Web\ Dev\ Projects/cloud9 profile
+ 2561  cd ~/Learn/Neural-Networks
+ 2563  gedit .gitignore
+ 2564  git-commit "lab_9 and lab_10"
+ 2568  git-commit "Update profile"
+ 2570  git-commit "Update custom-button.tsx"
+ 2571  git-commit "Updating a profile"
+ 2572  git-commit "Uppdating a profile"
+ 2573  npx prisma activate
+ 2576  git-commit "Completing a profile"
+ 2577  git-commit "Updated create profile"
+ 2580  npx prisma db push --force-reset
+ 2582  git-commit "Updated update-profile"
+ 2584  git-commit "Updated saving-info"
+ 2586  git-commit "Updating and deleting a profile"
+ 2587  git-commit "Migrated from using firstClass, business and economy to low, middle and executive"
+ 2588  sudo apt install obs-studio -y
+ 2589  obs
+ 2590  sudo apt uninstall obs-studio 
+ 2591  sudo dpkg purge obs-studio 
+ 2592  sudo apt remove obs-studio
+ 2594  chmod +x FreeYourMusic.AppImage
+ 2596  git-commit "Updated Complete profile\n"
+ 2598  git-commit "Updated env files"
+ 2600  git-commit "Updated Complete profile"
+ 2601  git-commit "Updated error.tsx"
+ 2602  git-commit "Optimization"
+ 2605  git-commit "Update update-profile.tsx"
+ 2606  git-commit "Updated AdminFallback.tsx"
+ 2607  git-commit "Updated bookings/page.tsx"
+ 2608  git-commit "Optimized fetching the user into a context"
+ 2610  git-commit "Updated UI and Complete-profile logic"
+ 2611  git-commit "Updated complete-profile"
+ 2612  git-commit "Updated testimonials actions"
+ 2613  cd Documents/My\ Journals/Concepts
+ 2614  cd skits
+ 2615  touch why\ dont\ aliens\ ever\ land\ in\ africa.docx if\ i
+ 2616  mv if\ i what\ i\ would\ do\ if\ i\ ever\ accidentally\ watch\ the\ killer\ video\ from\ "The\ Ring".docx
+ 2618  cp what\ i\ would\ do\ if\ i\ ever\ accidentally\ watch\ the\ killer\ video\ from\ The\\\ Ring.docx what\ i\ would\ do\ if\ i\ ever\ accidentally\ watch\ the\ killer\ video\ from\ The\\\ Ring\ |\ Part\ 2.docx
+ 2619  cd Projects/Web\ Dev\ Projects/cloud9
+ 2622  cd cloud9
+ 2623  gedit .env.local .env.local.example
+ 2624  CLEAR
+ 2626  cd Projects/Cloud9
+ 2628  npm install @google/generative-ai
+ 2629  npm install @google/generative-ai --legacy-peer-deps
+ 2631  npm i ai ai-sdk@openai --legacy-peer-deps
+ 2632  npm i ai @ai-sdk@openai --legacy-peer-deps
+ 2633  npm i ai @ai-sdk/openai --legacy-peer-deps
+ 2635  conda activate COM424E
+ 2636  jupyter notebook
+ 2643  git-commit "Updated admin home page"
+ 2645  git-commit 
+ 2646  git-commit "Updated class names"
+ 2647  git-commit "Updated Images"
+ 2648  git-commit
+ 2652  git-commit "Updated Profile Page"
+ 2653  conda init --reverse --all
+ 2654  rm -rf anaconda3 Anaconda.sh
+ 2655  conda init
+ 2656  clear
+ 2657  git-commit "Updated Flight Page"
+ 2658  git-commit "Updated profile page"
+ 2659  git-commit "Updated HomePageLayout"
+ 2660  git-commit "Updated featured-flight-card.tsx"
+ 2661  sudo apt install rclone
+ 2662  rclone
+ 2663  rclone init
+ 2664  rclone config
+ 2666  git-commit "Removing duplicate values in the search-flights.tsx"
+ 2667  git-commit "Updated fetching user during payment"
+ 2668  git-commit "Added Error Image"
+ 2669  git-commit "Updated BookingDetailsPage"
+ 2670  git-commit "UI Update"
+ 2673  git-commit "Updated testimonial in admin page"
+ 2674  npm i recharts --legacy-peer-deps
+ 2675  git-commit "Update Admin page"
+ 2680  npx primsa studio
+ 2682  git-commit "Updated Testimonials page"
+ 2684  git-commit "Updating a User"
+ 2686  npx prisma db push
+ 2688  git-commit "Update UI-buttons"
+ 2689  git-commit "Confirm Password in the register form"
+ 2691  git-commit "Updated Bookings UI"
+ 2692  git-commit "Update admin/bookings/page.tsx"
+ 2693  git-commit "Updated UI"
+ 2694  git-commit "\nUpdated main-flights-interface.tsx"
+ 2695  git-commit "Updated testimonials.ts actions file"
+ 2696  git-commit "Updated TestimonialCard"
+ 2697  git-commit "Updated DeleteConfirmation.tsx"
+ 2698  git-commit "Updated booking amount contraints"
+ 2699  git-commit "Updated admin booking page"
+ 2700  git-commit "Updated flight.tsx"
+ 2703  npm run lint
+ 2705  git-commit "Updated Routes"
+ 2707  npx shadcn@latest add separator --legacy-peer-deps
+ 2708  npx shadcn@latest add separator
+ 2710  git-commit "Updating a booking"
+ 2711  git-commit "Adding ids to components"
+ 2713  git-commit "Updating 'Update booking'"
+ 2714  git-commit "Custom Navigation Agent"
+ 2718  cd Desktop
+ 2721  sudo dpkg i opera-stable.deb
+ 2723  sudo dpkg -i opera-stable.deb
+ 2725  cd app
+ 2727  ls -r
+ 2728  ls -R
+ 2733  npm i openai --legacy-peer-deps
+ 2734  npm install -g npm@11.4.2
+ 2736  git-commit "Updated Custom Navigation Agent"
+ 2738  npm i docsify-cli -g
+ 2739  docsify init ./docs
+ 2740  gedit Projects/cloud9/.env.local
+ 2742  cp Projects/cloud9/.env.local Documents/School/Computer\ Science/4.2/COM\ 431/Kenya\ Airways\ Submission/zip\ folder/code
+ 2743  cp Projects/cloud9/.env Documents/School/Computer\ Science/4.2/COM\ 431/Kenya\ Airways\ Submission/zip\ folder/code
+ 2744  cd Projects/cloud9
+ 2745  gedit .env.local .env
+ 2747  sudo apt install python3-cairo-dev
+ 2748  pychesssudo apt install python3-gi-cairo
+ 2749  sudo apt install python3-gi-cairo
+ 2750  sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0
+ 2753  # Install system dependencies\nsudo apt install libcairo2-dev pkg-config python3-dev\n\n# Install pycairo via pip\npip3 install pycairo
+ 2755  gedit PLANET\ HOLLYWOOD\ -\ Marty\ &\ Wordsplayed.txt LaNell\ Grant\ -\ BARMAGEDDON.txt Lecrae\ -\ On\ The\ Radar.txt
+ 2756  gedit PLANET\ HOLLYWOOD\ -\ Marty\ \&\ Wordsplayed.txt LaNell\ Grant\ -\ BARMAGEDDON.txt Lecrae\ -\ On\ The\ Radar.txt
+ 2757  sudo apt remove pychess
+ 2758  python -version
+ 2759  python3 --version
+ 2763  sudo apt update\nsudo apt install python3.13 python3.13-dev
+ 2764  # Install pip if not already installed\nsudo apt install python3-pip\n\n# Install pipx via pip\npip3 install --user pipx\n\n# Add to PATH\necho 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc\nsource ~/.bashrc
+ 2765  # Get serial number\nsudo dmidecode -s system-serial-number\n\n# Get product name\nsudo dmidecode -s system-product-name\n\n# Get product number/model\nsudo dmidecode -s baseboard-product-name\n\n# Get all system information at once\nsudo dmidecode -t system
+ 2766  sudo dmidecode -s system-serial-number
+ 2767  sudo dmidecode -s system-product-name 
+ 2768  sudo dmidecode -s baseboard-product-name 
+ 2770  gedit Computer\ Information.txt
+ 2771  sudo dmidecode -t system
+ 2772  sudo dmidecode -t memory
+ 2774  sudo apt update
+ 2775  sudo apt upgrade
+ 2776  sudo apt --audit
+ 2777  history
+ 2778  sudo apt update\nsudo apt install --reinstall python3.13
+ 2779  sudo apt clean\nsudo apt autoclean\nsudo apt --fix-broken install
+ 2780  which python3.13\npython3.13 --version\nls -la /usr/bin/python3.13
+ 2781  sudo apt install python3.13 python3.13-dev\n
+ 2782  sudo apt install python-cairo
+ 2783  sudo apt install python3-cairo
+ 2784  sudo apt install pychess
+ 2785  pychess
+ 2786  sudo apt install pipx
+ 2787  pipx install python-cairo
+ 2788  reboot
+ 2791  sudo chmod +x FreeYourMusic.AppImage
+ 2792  ./FreeYourMusic.AppImage
+ 2793  touch Exam\ Study\ Guide.docx
+ 2794  libreoffice Exam\ Study\ Guide.docx
+ 2797  cd Music/Liked\ Songs
+ 2798  ls >> liked\ song.txt
+ 2799  gedit liked\ song.txt 
+ 2800  sudo wipefs -a /dev/sdb
+ 2801  sudo dd if=/dev/zero of=/dev/sdb bs=1M status=progress\n
+ 2802  lsblk
+ 2803  sudo dd if=/dev/zero of=/dev/sdc bs=1M status=progress\n
+ 2804  touch COM\ 421\ -\ Exam\ Study\ Guide.docx
+ 2805  libreoffice  COM\ 421\ -\ Exam\ Study\ Guide.docx
+ 2806  cd ~
+ 2807  source ENVIRONMENT/bin/activate
+ 2808  cd Desktop/TopGun-Infinite-Game-main/TopGun-Infinite-Game-main
+ 2809  pip install -r requirements.txt
+ 2810  python main.py
+ 2812  python game.py
+ 2813  history >> history.txt
+ 2814  gedit history.txt
+ 2815  sudo dmidecode -t memory | grep "Maximum Capacity"
+ 2816  cd Projects/twitch-x-lively
+ 2818  npx prisma studio
+ 2819  git-commit "Updated thumbnail.tsx"
+ 2821  git-commit "Updated /keys/page.tsx"
+ 2822  npm i @livekit/components-react livekit-client livekit-server-sdk
+ 2823  npm i @livekit/components-react livekit-client livekit-server-sdk --legacy-peer-deps
+ 2825  npx prisma generate
+ 2826  rm -rf package-lock.json node_modules
+ 2827  npm i --legacy-peer-deps
+ 2829  npm i jsonwebtoken @types/jsonwebtoken --legacy-peer-deps
+ 2831  git-commit "Updated Streaming method"
+ 2833  git-commit "Chat Update"
+ 2834  cd Projects/
+ 2835  cd Web\ Dev\ Projects
+ 2836  git clone https://github.com/kunaal438/mern-blogging-website.git
+ 2837  mv mern-blogging-website blogger
+ 2838  cd blogger
+ 2839  ls
+ 2840  code .
+ 2841  cd server
+ 2847  git-
+ 2849  git remote add origin https://github.com/oluoko/blogger.git
+ 2851  rm -rf .git
+ 2852  npm i 
+ 2854  npm i
+ 2856  git-commit "Setting up the routes\n"
+ 2857  cd client
+ 2858  npm i clsx tailwind-merge
+ 2860  git-commit "User Auth. Form(UI)"
+ 2861  touch Broken\ Calculator\ Skit.docx
+ 2862  libreoffice Broken\ Calculator\ Skit.docx
+ 2866  sudo apt update brave-browser
+ 2867  sudo apt install brave-browser
+ 2868  cd Projects/Web\ Dev\ Projects
+ 2869  npx create-next-app@latest next-blogger
+ 2870  code next-blogger
+ 2871  git init
+ 2872  git add .
+ 2873  git commit -m "init"
+ 2874  git branch -M main
+ 2875  git remote add origin https://github.com/oluoko/webdev-newz.git
+ 2876  git push -u origin main
+ 2877  npm i nextjs-toploader 
+ 2878  git-commit "NavBar Component"
+ 2880  cd ..
+ 2881  mv next-blogger webdev-newz
+ 2884  git-commit "Header Component"
+ 2885  git-commit "contact and other UI"
+ 2886  touch COM\ 431\ -\ Exam\ Study\ Guide.docx
+ 2887  libreoffice COM\ 431\ -\ Exam\ Study\ Guide.docx\nsudo gedit /home/brian/.zsh_history
+ 2888  code Projects/twitch-x-lively
+ 2889  code Projects/Web\ Dev\ Projects/webdev-newz
+ 2890  code Projects/Web\ Dev\ Projects/blogger
+ 2892  sudo gedit /home/brian/.zsh_history
+ 2893  cd Downloads
+ 2894  sudo dpkg -i code_amd64.deb
+ 2895  rm Projects/webdev-newz-backup
+ 2896  rm -rf  Projects/webdev-newz-backup
+ 2897  code Projects/Web\ Dev\ Projects/cloud9
+ 2898  npm run dev
+ 2899  git-commit "Updates"
