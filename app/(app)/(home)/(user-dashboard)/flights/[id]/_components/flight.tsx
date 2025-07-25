@@ -298,7 +298,6 @@ export default function FlightPage({
                   seatType={selectedClass}
                   seatCount={parseInt(numPassengers)}
                   amount={totalPrice}
-                  user={user}
                 />
               </DialogContent>
             </Dialog>
